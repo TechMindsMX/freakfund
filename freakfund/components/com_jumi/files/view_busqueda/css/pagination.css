@@ -1,0 +1,122 @@
+/* new clearfix */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+    }
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+.pagination {
+	
+}
+.pagination a {
+	text-decoration: none;
+	color: #666;	
+	font-size:16px;
+}
+.pagination a,.pagination span {
+	display: block;
+	float: left;
+	padding: 0.3em 0.5em;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.pagination .currento {
+	color: #e1001a;
+	text-decoration: underline;
+}
+.pagination .currento.prev,.pagination .currento.next {
+	color: #666;
+	font-weight:bold;
+	font-size:16px;
+	text-decoration: none;
+	}
+.ancho {
+	width: 33%;
+}
+.inner {
+	margin: 1em;
+}
+
+div.proyecto > .inner {
+ 	margin: 0 5px 0 1em; 	
+	border-radius: 7px;
+	box-shadow: 5px 3px 16px #999292;
+	background: #fff;
+	padding-top:7px;
+	padding-bottom:7px;
+}
+.proyecto {
+	float: left;
+	margin-bottom: 1em;
+}
+.titulo{
+	color:fff;
+	content: "\f0d7";
+}
+.tituloProy a, .catSubCat, .productor a, .descripcion {
+	color:#000 !important;
+	font-weight:bold;
+}
+.tituloProy a{
+  font-size: 171%;
+}
+.catSubCat {
+  font-size: 129%;
+	text-transform: uppercase;
+}
+.descripcion {
+  font-size: 114%;
+}
+.statusP{
+}
+.titulo span, .descripcion span {
+	display: block;
+	line-height: 1.5em;
+}
+.avatar {
+	overflow: hidden;
+}
+.avatar:before {
+	font-size: 30px;
+	content: "\f0d7";
+	font-family: FontAwesome;
+	position: absolute;
+	margin: -8px 0 0 20px;
+	z-index: 1;
+	color:#fff;
+	text-shadow: 0 0 0;
+}
+.avatar img {
+	width: 100%;
+}
+.descText {
+	margin: 2em 0 1em;
+	line-height: 1.5em;
+	height:55px !important;
+	overflow:hidden;
+}
+.proyecto .readmore {
+	text-align: right;
+}
+.imgPerfil{
+	float:left;
+	width:127px;
+	height:100px;
+	overflow:hidden;
+}
+.datosPerfil{
+	float:left;
+	padding-left:5px;
+}
+@media screen and (min-width: 721px) and (max-width: 1216px) {
+	.ancho {width: 50%;}
+}
+@media screen and (max-width: 976px) {
+	.ancho {width: 100%;}
+}
+

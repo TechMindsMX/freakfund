@@ -1,0 +1,53 @@
+/**
+ * @version   $Id: style.less 9763 2013-04-26 15:58:12Z arifin $
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+ * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+ */
+
+// RTL
+.rtl {
+	// Template Styling
+	.rokajaxsearch {
+		.inputbox {
+			background-position: 4% -65px;
+		}
+	}
+	.sprocket-tabs-nav {
+		li {
+			float: right;
+		}
+		> li:first-child > .sprocket-tabs-inner {
+			border-radius: 0 3px 0 0;
+		}
+	}
+	.sprocket-strips-container > li {
+		float: right;
+	}
+	.sprocket-lists-title.padding {
+		padding-right: 50px;
+	}
+	.sprocket-lists-title .indicator {
+		right: 15px;
+	}
+	.sprocket-lists-arrows {
+		float: left;
+		.arrow {
+			float: left;
+			&.prev:before, &.next:before {
+				left: 11px;
+			}
+		}
+	}
+	[class^="box"] .rt-square-icon, [class*=" box"] .rt-square-icon {
+		right: 8px;
+	}
+	#gantry-totop {
+		float: left;
+	}
+
+	// Demo
+	.fp-utility .readon {
+		float: left;
+	}
+}

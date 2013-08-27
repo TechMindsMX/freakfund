@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$('#do').click(function() {
+  $('#three').val($('#one').val());
+});
+
+$('#four').keyup(function() {
+  $('#six').val($('#four').val());
+});
+
+$('#seven').blur(function() {
+  $('#nine').val($('#seven').val());
+});</script>
+</head>
+
+<body>
+<h1>Button Click</h1>
+<form id="form1">
+  <input id='one' type='text' />
+  <input id='two' type='text' />
+</form>
+
+<form id="form2">
+  <input id='three' type='text' />
+</form>
+
+<input type='button' id="do" value="Copy" />
+
+<h1>Insta-Copy(TM)</h1>
+<form id="form1">
+  <input id='four' type='text' />
+  <input id='five' type='text' />
+</form>
+
+<form id="form2">
+  <input id='six' type='text' />
+</form>
+
+
+
+<h1>On Blur</h1>
+<form id="form1">
+  <input id='seven' type='text' />
+  <input id='eight' type='text' />
+</form>
+
+<form id="form2">
+  <input id='nine' type='text' />
+</form>
+</body>
+</html>

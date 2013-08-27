@@ -1,0 +1,98 @@
+/**
+ * @version   $Id: top-section.less 8768 2013-03-24 03:18:41Z arifin $
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+ * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+ */
+
+@import "jui/less/mixins.less";
+
+// Core Variables and Mixins
+@import "variables.less";
+@import "mixins/index.less";
+
+// Template MainBody Variables
+@import "mainbody-@{main-body-overlay}.less";
+
+// Header Section
+#rt-top-surround {
+	// Buttons
+	.section-button(@main-accent, @main-accent2);
+	// Module Suffixes
+	.mod-box1();
+	.mod-box2();
+	.mod-box3();
+	.mod-box4();
+	.mod-box5();
+	.mod-box6(@header-overlay);
+	.mod-title1();
+	.mod-title2();
+	.mod-title3();
+	.mod-title4();	
+}	
+
+// Navigation
+#rt-top-surround .gf-menu, .gf-menu {
+	.section-button(@dark-grey, @main-accent2);
+}
+
+// MainBody, Drawer, and Debug Sections
+#rt-mainbody-surround, #rt-drawer, #rt-debug {
+	// Buttons
+	.section-button(@main-accent, darken(@body-title, 10%));
+	// Module Suffixes
+	.mod-box1();
+	.mod-box2();
+	.mod-box3();
+	.mod-box4();
+	.mod-box5();
+	.mod-box6(@main-body-overlay);
+	.mod-title1();
+	.mod-title2();
+	.mod-title3();
+	.mod-title4();		
+}
+#rt-mainbody-surround {
+   margin-bottom: 20px;
+   margin-top: 20px;
+}
+// Footer Section
+#rt-footer-surround {
+	// Buttons
+	.section-button(@main-accent, @main-accent2);
+	// Module Suffixes
+	.mod-box1();
+	.mod-box2();
+	.mod-box3();
+	.mod-box4();
+	.mod-box5();
+	.mod-box6(@footer-overlay);	
+	.mod-title1();
+	.mod-title2();
+	.mod-title3();
+	.mod-title4();
+}	
+
+// Popup and Login Module Features
+#rt-popup, #rt-popuplogin {
+	// Buttons
+	.section-button(@main-accent, @main-accent2);
+}
+
+// Panel Buttons
+.style-panel-container {
+	// Buttons
+	.section-button(@main-accent, @main-accent2);
+}
+
+// Component Body
+.component-body {
+	// Buttons
+	.section-button(@main-accent, @main-accent2);	
+}
+
+// RokAjaxSearch
+#roksearch_results {
+	// Buttons
+	.section-button(@dark-grey, @main-accent2);	
+}

@@ -1,0 +1,169 @@
+@charset "utf-8";
+/* CSS Document */
+
+#contenedor{
+        background-color:#FFFFFF;
+		max-width:600px;
+}
+/*
+form    {
+
+margin:auto;
+position:relative;
+width:600px;
+height:auto;
+font-family: Tahoma, Geneva, sans-serif;
+font-size: 13px;
+font-style: italic;
+line-height: 24px;
+font-weight: bold;
+color: #09C;
+text-decoration: none;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding:10px;
+border: 1px solid #999;
+border: inset 1px solid #333;
+-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+input    {
+border: 1px solid #999;;
+-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}*/
+#nombre{
+	
+		clear:both;
+		border-bottom-style:solid;
+		border-bottom-width:1px;
+		border-bottom-color:#09c;
+}
+#noFisica{
+	width:100%;
+	
+	}
+
+._25 {
+    width: 21%;
+    float: left;
+	display: inline;
+    margin-left: 2%;
+    margin-right: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+._50 {
+    width: 46%;
+    float: left;
+	display: inline;
+    margin-left: 2%;
+    margin-right: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+._75 {
+    width: 71%;
+    float: left;
+	display: inline;
+    margin-left: 2%;
+    margin-right: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+._100 {
+    width: 96%;
+    float: left;
+	display: inline;
+    margin-left: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-right: 2px;
+}
+
+._100mail {
+    width: 98%;
+    float: left;
+	display: inline;
+    margin-left: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+._100mail label {
+	width: 20%;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+._100mail input[type = text] {
+	border: 1px solid #B3B3B3;
+	width: 74%;
+	height: 18px;
+}
+
+label {
+    width: 100%;
+    margin-bottom: 0px; 
+}
+todo{
+	
+    width: 100%;
+}
+input[type=text] {
+    border: 1px solid #B3B3B3;
+    width: 100%;
+    -moz-border-radius: 3px;
+    height: 18px;
+}
+input[type=file] {
+    border: 1px solid #B3B3B3;
+    width: 100%;
+    -moz-border-radius: 3px;
+    padding: 0 6px;
+}
+
+textarea {
+    border: 1px solid #B3B3B3;
+    width: 96%;
+    -moz-border-radius: 3px;
+	
+    margin-left: 2%;
+    margin-right: 2%;
+}
+select {
+    border: 1px solid #B3B3B3;
+    width: 100%;
+    -moz-border-radius: 3px;
+}
+.pru{
+	width:550px;
+}
+
+
+._pru input{
+	width: 20%;
+	float:left;
+    margin-left: 2%;
+    margin-right: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	height: 22px;
+
+	
+	}
+	._pru select{
+	width: 20%;
+	float:left;
+    margin-left: 4%;
+    margin-right: 2%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	height: 27px;
+	}
+	
+

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="file" version="1.7" method="upgrade">
+	<name>Spanish(Spain) Language Pack for JomSocial</name>
+	<version>2.6.2</version>
+	<url>www.github.com/ivanramosnet/JomSocial-Language</url>
+	<packager>Iván Ramos Jiménez</packager>
+	<packagerurl>ivan.ramos.name</packagerurl>
+	<author>Iván Ramos Jiménez</author>
+	<authorEmail>info@ivan.ramos.name</authorEmail>
+	<authorUrl>ivan.ramos.name</authorUrl>
+	<creationDate>June 8, 2012</creationDate>
+	<copyright>Copyright (C) 2012 Iván Ramos Jiménez. All rights reserved.</copyright>
+    	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<description>Spanish (Spain) language pack for JomSocial 2.6.2</description>
+	<fileset>		
+		<files folder="admin" target="administrator/language/es-ES">
+			<filename>es-ES.com_community.ini</filename>
+			<filename>es-ES.com_community.menu.ini</filename>
+			<filename>es-ES.com_community.sys.ini</filename>
+			<filename>es-ES.community.sys.ini</filename>
+			<filename>es-ES.plg_community_events.ini</filename>
+			<filename>es-ES.plg_community_events.sys.ini</filename>
+			<filename>es-ES.plg_community_feeds.ini</filename>
+			<filename>es-ES.plg_community_feeds.sys.ini</filename>
+			<filename>es-ES.plg_community_friendslocation.ini</filename>
+			<filename>es-ES.plg_community_friendslocation.sys.ini</filename>
+			<filename>es-ES.plg_community_input.ini</filename>
+			<filename>es-ES.plg_community_input.sys.ini</filename>
+			<filename>es-ES.plg_community_invite.ini</filename>
+			<filename>es-ES.plg_community_invite.sys.ini</filename>
+			<filename>es-ES.plg_community_kunena.ini</filename>
+			<filename>es-ES.plg_community_kunena.sys.ini</filename>
+			<filename>es-ES.plg_community_latestphoto.ini</filename>
+			<filename>es-ES.plg_community_latestphoto.sys.ini</filename>
+			<filename>es-ES.plg_community_log.ini</filename>
+			<filename>es-ES.plg_community_log.sys.ini</filename>
+			<filename>es-ES.plg_community_myarticles.ini</filename>
+			<filename>es-ES.plg_community_myarticles.sys.ini</filename>
+			<filename>es-ES.plg_community_myblog.ini</filename>
+			<filename>es-ES.plg_community_myblog.sys.ini</filename>
+			<filename>es-ES.plg_community_myblogtoolbar.ini</filename>
+			<filename>es-ES.plg_community_myblogtoolbar.sys.ini</filename>
+			<filename>es-ES.plg_community_mycontacts.ini</filename>
+			<filename>es-ES.plg_community_mycontacts.sys.ini</filename>
+			<filename>es-ES.plg_community_mygoogleads.ini</filename>
+			<filename>es-ES.plg_community_mygoogleads.sys.ini</filename>
+			<filename>es-ES.plg_community_mytaggedvideos.ini</filename>
+			<filename>es-ES.plg_community_mytaggedvideos.sys.ini</filename>
+			<filename>es-ES.plg_community_myvideos.ini</filename>
+			<filename>es-ES.plg_community_myvideos.sys.ini</filename>
+			<filename>es-ES.plg_community_twitter.ini</filename>
+			<filename>es-ES.plg_community_twitter.sys.ini</filename>
+			<filename>es-ES.plg_community_walls.ini</filename>
+			<filename>es-ES.plg_community_walls.sys.ini</filename>
+			<filename>es-ES.plg_community_wordfilter.ini</filename>
+			<filename>es-ES.plg_community_wordfilter.sys.ini</filename>
+			<filename>es-ES.plg_system_jomsocialconnect.ini</filename>
+			<filename>es-ES.plg_system_jomsocialconnect.sys.ini</filename>
+			<filename>es-ES.plg_system_jomsocialredirect.ini</filename>
+			<filename>es-ES.plg_system_jomsocialupdate.ini</filename>
+			<filename>es-ES.plg_system_jomsocialupdate.sys.ini</filename>
+			<filename>es-ES.plg_user_jomsocialuser.ini</filename>
+			<filename>es-ES.plg_user_jomsocialuser.sys.ini</filename>
+		</files>
+		<files folder="site" target="language/es-ES">
+			<filename>es-ES.com_community.ini</filename>
+			<filename>es-ES.mod_activegroups.ini</filename>
+			<filename>es-ES.mod_datingsearch.ini</filename>
+			<filename>es-ES.mod_hellome.ini</filename>
+			<filename>es-ES.mod_latestdiscussion.ini</filename>
+			<filename>es-ES.mod_latestgrouppost.ini</filename>
+			<filename>es-ES.mod_latestgrouppost.sys.ini</filename>
+			<filename>es-ES.mod_latestmembers.ini</filename>
+			<filename>es-ES.mod_notify.ini</filename>
+			<filename>es-ES.mod_onlineusers.ini</filename>
+			<filename>es-ES.mod_photocomments.ini</filename>
+			<filename>es-ES.mod_statistics.ini</filename>
+			<filename>es-ES.mod_topmembers.ini</filename>
+			<filename>es-ES.mod_videocomments.ini</filename>
+		</files>
+	</fileset>
+</extension>

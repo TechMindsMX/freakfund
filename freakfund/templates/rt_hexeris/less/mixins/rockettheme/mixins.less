@@ -1,0 +1,363 @@
+/**
+* @version   $Id: mixins.less 9740 2013-04-26 04:00:45Z arifin $
+* @author    RocketTheme http://www.rockettheme.com
+* @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+* @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+*/
+
+@import "utilities.less";
+@import "dropdowns.less";
+@import "popover.less";
+@import "buttons.less";
+
+/* Ellipsis */
+.ellipsis() {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-moz-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+}
+
+/* Gradient */
+#rt-gradient {
+	.horizontal-three-colors(@startColor: #00b3ee, @midColor: #7a43b6, @colorStop: 50%, @endColor: #c3325f) {
+		background-color: mix(@midColor, @endColor, 80%);
+		background-image: -webkit-gradient(linear, left top, right top, 0 0, 0 100%, from(@startColor), color-stop(@colorStop, @midColor), to(@endColor));
+		background-image: -webkit-linear-gradient(left, @startColor, @midColor @colorStop, @endColor);
+		background-image: -moz-linear-gradient(left, @startColor, @midColor @colorStop, @endColor);
+		background-image: -ms-linear-gradient(left, @startColor, @midColor @colorStop, @endColor);
+		background-image: -o-linear-gradient(left, @startColor, @midColor @colorStop, @endColor);
+		background-image: linear-gradient(left, @startColor, @midColor @colorStop, @endColor);
+		background-repeat: no-repeat;
+		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",@startColor,@endColor)); // IE9 and down, gets no color-stop at all for proper fallback
+	}
+}
+#rt-button-gradient {
+	.diagonal-colors(@angle: 17deg, @startColor: #7eb347, @endColor: #81cde7) {
+		background-color: mix(@startColor, @endColor, 80%);
+		background: -moz-linear-gradient(@angle, @startColor 50%, @endColor 50%);
+		background: -webkit-linear-gradient(@angle + 55, @startColor 50%, @endColor 50%);
+		background: -o-linear-gradient(@angle, @startColor 50%, @endColor 50%);
+		background: linear-gradient(@angle, @startColor 50%, @endColor 50%);	
+	}
+}
+#rt-topbar {
+	.color-set (@color1, @color2, @color3, @color4, @color5) {
+	    background: repeating-linear-gradient(to right, 
+	        @color1      , @color1 50px, 
+	        @color2  50px, @color2 100px, 
+	        @color3 100px, @color3 150px, 
+	        @color4 150px, @color4 200px, 
+	        @color5 200px, @color5 250px
+	    );	
+	    background: -moz-repeating-linear-gradient(to right, 
+	        @color1      , @color1 50px, 
+	        @color2  50px, @color2 100px, 
+	        @color3 100px, @color3 150px, 
+	        @color4 150px, @color4 200px, 
+	        @color5 200px, @color5 250px
+	    );	
+	    background: -webkit-repeating-linear-gradient(right, 
+	        @color1      , @color1 50px, 
+	        @color2  50px, @color2 100px, 
+	        @color3 100px, @color3 150px, 
+	        @color4 150px, @color4 200px, 
+	        @color5 200px, @color5 250px
+	    );	
+	    background: -o-repeating-linear-gradient(to right, 
+	        @color1      , @color1 50px, 
+	        @color2  50px, @color2 100px, 
+	        @color3 100px, @color3 150px, 
+	        @color4 150px, @color4 200px, 
+	        @color5 200px, @color5 250px
+	    );		    	    	    	
+	}
+}
+
+/* CSS Arrows */
+#CSSArrow {
+  .top(@arrowWidth: 5px, @arrowColor: @black, @arrowOffset: 0, @arrowPosition: 50%) {
+	bottom: @arrowOffset;
+	left: @arrowPosition;
+	margin-left: -@arrowWidth;
+	border-left: @arrowWidth solid transparent;
+	border-right: @arrowWidth solid transparent;
+	border-top: @arrowWidth solid @arrowColor;
+  }
+  .left(@arrowWidth: 5px, @arrowColor: @black, @arrowOffset: 0, @arrowPosition: 50%) {
+	top: @arrowPosition;
+	right: @arrowOffset;
+	margin-top: -@arrowWidth;
+	border-top: @arrowWidth solid transparent;
+	border-bottom: @arrowWidth solid transparent;
+	border-left: @arrowWidth solid @arrowColor;
+  }
+  .bottom(@arrowWidth: 5px, @arrowColor: @black, @arrowOffset: 0, @arrowPosition: 50%) {
+	top: -@arrowOffset;
+	left: @arrowPosition;
+	margin-left: -@arrowWidth - 1;
+	border-left: @arrowWidth solid transparent;
+	border-right: @arrowWidth solid transparent;
+	border-bottom: @arrowWidth solid @arrowColor;
+  }
+  .right(@arrowWidth: 5px, @arrowColor: @black, @arrowOffset: 0, @arrowPosition: 50%) {
+	top: @arrowPosition;
+	left: @arrowOffset;
+	margin-top: -@arrowWidth;
+	border-top: @arrowWidth solid transparent;
+	border-bottom: @arrowWidth solid transparent;
+	border-right: @arrowWidth solid @arrowColor;
+  }
+}
+
+// Background Pattern
+.background-pattern(@pattern) when not (isnumber(@pattern)) {
+	background-image: url(../images/patterns/@{pattern}.png);
+}
+
+// Overlay
+.overlay(@style) {
+	background-image: url(../images/overlays/@{style}.png);
+}
+
+// Buttons and Inputs
+.section-button(@accent, @hoverColor) {
+	.readon,
+	.sprocket-readmore, .sprocket-mosaic-loadmore {
+		color: @white;
+		#rt-button-gradient > .diagonal-colors(17deg, darken(@accent, 3%), @accent);
+		text-shadow: 1px -1px 0 rgba(0, 0, 0, 0.3);
+		.box-shadow(0 2px 0 rgba(0, 0, 0, 0.1));
+		&:hover, &:active, &:focus {
+			color: @white;
+			#rt-button-gradient > .diagonal-colors(17deg, darken(@hoverColor, 3%), @hoverColor);
+		}
+	}
+	.button, button.validate, p.readmore a, #member-profile a, #member-registration a, .formelm-buttons button, .controls .btn, .logout-button .btn, #gantry-totop, .rt-popupmodule-button button,
+	.sprocket-mosaic-header li.active, &.roksearch_results a.clr {
+		color: @white;
+		background: @accent;
+		text-shadow: 1px -1px 0 rgba(0, 0, 0, 0.3);
+		border: 0;
+		.box-shadow(0 2px 0 rgba(0, 0, 0, 0.1));
+		.transition(all 0.1s ease-in);
+		&:hover, &:active, &:focus {
+			color: @white;
+			background: @hoverColor;
+		}
+	}	
+}
+
+// Module and Title Variations
+.mod-box1() {
+	.box1 {
+		color: @white;
+		background: @white2;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+		.title, h1, h2, h3, h4, h5, h6 {
+			color: darken(@main-accent, 40%);
+			text-shadow: none;
+		}
+		a {
+			color: darken(@main-accent, 30%);
+			text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+			&:hover {
+				color: darken(@main-accent, 40%);
+			}
+		}
+		.section-button(@blue, @light-blue);
+	}
+}	
+.mod-box2() {
+	.box2 {
+		color: @white;
+		background: @main-accent2;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+		.title, h1, h2, h3, h4, h5, h6 {
+			color: darken(@main-accent2, 40%);
+			text-shadow: none;
+		}
+		a {
+			color: darken(@main-accent2, 30%);
+			text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+			&:hover {
+				color: darken(@main-accent2, 40%);
+			}
+		}
+		.section-button(darken(#484848, 10%), @main-accent);
+	}
+}	
+.mod-box3() {
+	.box3 {
+		color: @white;
+		background: @light-brown;
+		text-shadow: none;
+		.title, h1, h2, h3, h4, h5, h6 {
+			color: @grey;
+			text-shadow: none;
+		}
+		a {
+			color: @white;
+			text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+			&:hover {
+				color: @light-blue;
+			}
+		}
+		.section-button(@blue, @light-blue);
+	}
+}		
+.mod-box4() {
+	.box4 {
+		color: @white;
+		background: @topbar-color2;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+		.title, h1, h2, h3, h4, h5, h6 {
+			color: darken(@topbar-color2, 30%);
+			text-shadow: none;
+		}
+		a {
+			color: darken(@topbar-color2, 20%);
+			text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+			&:hover {
+				color: darken(@topbar-color2, 30%);
+			}
+		}
+		.section-button(@main-accent, @main-accent2);
+	}
+}	
+.mod-box5() {
+	.box5 {
+		color: @body-text;
+		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+		.box-shadow(~"0 3px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08)");
+		text-shadow: @body-text-shadow;
+		.title, h1, h2, h3, h4, h5, h6 {
+			color: @body-text;
+			text-shadow: none;
+		}		
+		.background-pattern(@main-pattern);
+	}
+}	
+.mod-box6(@accent) {
+	.box6 {
+		background-image: url(../images/overlays/@{accent}.png);
+		.box-shadow(~"0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08)");
+	}
+}	
+
+.mod-title1() {
+	.title1 {
+		.module-title {
+			background: @white;
+			border-radius: 3px;
+			&:before {
+				color: @white2;
+				text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+			}
+			.title {
+				color: @black;
+				text-shadow: none;
+			}
+		}	
+		&.rt-title-arrow {
+			.module-title:after {
+				color: @main-accent;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+			}
+		}	
+	}
+}
+.mod-title2() {
+	.title2 {
+		.module-title {
+			background: @main-accent2;
+			border-radius: 3px;
+			&:before {
+				color: @main-accent2;
+				text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+			}			
+			.title {
+				color: @white;
+				text-shadow: none;
+			}
+		}	
+		&.rt-title-arrow {
+			.module-title:after {
+				color: @main-accent2;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+			}
+		}			
+	}
+}
+.mod-title3() {
+	.title3 {
+		.module-title {
+			background: @white;
+			border-radius: 3px;
+			&:before {
+				color: @white;
+				text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+			}			
+			.title {
+				color: @grey;
+				text-shadow: none;
+			}
+		}		
+		&.rt-title-arrow {
+			.module-title:after {
+				color: @white;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+			}
+		}		
+	}
+}
+.mod-title4() {
+	.title4 {
+		.module-title {
+			background: @topbar-color2;
+			border-radius: 3px;
+			&:before {
+				color: @topbar-color2;
+				text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+			}			
+			.title {
+				color: @white;
+				text-shadow: none;
+			}
+		}		
+		&.rt-title-arrow {
+			.module-title:after {
+				color: @topbar-color2;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+			}
+		}		
+	}
+}
+
+// System Messages
+.sys-msg () {
+	color: #0055BB;
+	background: #BFD3E6;
+	border: 1px solid #84A7DB;
+}
+
+.sys-msg (error) {
+	color: #cc0000;
+	background: #EBC8C9;
+	border: 1px solid #DE7A7B;
+}
+
+.sys-msg (notice) {
+	color: #A08B4C;
+	background: #F5ECC1;
+	border: 1px solid #B8A871;
+}
+
+.sys-msg (success) {
+	color: #468847;
+	background: #dff0d8;
+	border: 1px solid #93BC8F;
+}

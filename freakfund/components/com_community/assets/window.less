@@ -1,0 +1,273 @@
+@import "../templates/default/less/00-mixins.less";
+
+/*= cWindows frame styling;
+-------------------------------------------------------------- */
+
+@windowsHeader		: 40px;
+
+
+#cWindowContentOuter 
+{
+	width: 500px;
+	height: 130px;
+}
+#cwin_close_btn 
+{
+	background: url(window/window-x.png) center no-repeat !important;
+	height: @windowsHeader;
+	width: @windowsHeader;
+	text-indent: -9999px;
+	margin: 0;
+	
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1000;
+}
+#cwin_logo 
+{
+	color: #fff;
+	font-weight:bold;
+	font-size: 12px;
+	text-shadow: 0 1px 0 #444;
+	height: @windowsHeader;
+	line-height: @windowsHeader;
+	margin-left: 8px;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+
+/** 
+ * We use CSS Sprite for images
+ * less request, save bandwidth :)
+ */
+#cwin_tl,
+#cwin_tr,
+#cwin_bl,
+#cwin_br,
+#cwin_tm,
+#cwin_bm,
+#cwin_ml,
+#cwin_mr
+{
+	display: none;
+}
+
+
+
+
+
+
+
+
+#cWindow #cwin-wait 
+{
+	width: 43px;
+	height: 11px;
+	background: transparent url(window/wait.gif) no-repeat;
+	display: none;
+}
+#cWindowContentOuter 
+{
+	border: 1px solid #444;
+	.box-shadow( 0 0 5px rgba(0, 0, 0, 0.8) );
+
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+#cWindowContentTop 
+{
+	height: @windowsHeader;
+	background: #555;
+	background: rgba( 85, 85, 85, 0.9 );
+	border-bottom: 1px solid #222;
+	overflow: hidden;
+}
+#cWindowContentWrap 
+{
+	overflow: auto;
+	background:	#fff;
+	position: relative;
+}
+#cWindowContentWrap.resizing 
+{
+	overflow: hidden;
+}
+#cWindowContent.resizing 
+{
+	overflow: hidden;
+	position: absolute;
+}
+#cWindowContent 
+{
+	padding: 10px 10px;
+	text-align: inherit;
+}
+// #cWindowContent .success {
+// 	color: green;	
+// }
+// #cWindowContent .failed {
+// 	color: red;
+// }
+#cWindowContentWrap.loading 
+{
+	background-image: url(window/wait.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#cWindowAction 
+{
+	/* window/wait.gif (43px x 11px) */
+	background: #ccc url(window/wait.gif) no-repeat -43px -11px;
+	border-top: 1px solid #999;
+	font-size: 0;
+	height: 49px;
+	/* bottom: 0; */
+	text-align: right;
+	position: absolute;
+	width: 100%;
+	left: 0;
+}
+
+#cWindowAction.loading 
+{
+	background-position: 10px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #cWindowContent dl {
+// 	margin: 0;
+// 	padding: 0;
+// }
+// #cWindowContent .col-left {
+// 	width: 23%;
+// 	line-height: 25px;
+// 	text-indent: 10px;
+// 	font-size: 11px;
+// 	font-weight: 700;
+// 	color: #666;
+// 	margin: 0 0 5px;
+// 	float: left;
+// 	display: block;
+// 	clear: both;
+// 	padding: 0;
+// }
+// #cWindowContent .col-right {
+// 	float: left;
+// 	display: block;
+// 	width: 70%;
+// 	line-height: 22px;
+// 	margin: 0 0 5px;
+// 	padding: 0;
+// }
+// #cWindowContent .col-right .text {
+// 	width: 100%;
+// }
+// #cWindowContent .composeForm {
+// 	padding: 20px 10px;
+// }
+
+// #cWindow.dialog {}
+// #cWindow.dialog #cwin_close_btn:link,
+// #cWindow.dialog #cwin_close_btn:visited {
+// 	background-position: -60px -40px;
+// 	background-color: #333333;
+// }
+// #cWindow.dialog #cwin_close_btn:hover {
+// 	background-position: -60px -69px;
+// }
+
+// /* Warning Styles */
+// #cWindow.warning {}
+// #cWindow.warning #cWindowContentTop {
+// 	height: 30px;
+// 	background: #993;
+// 	border-bottom: solid 1px #660;
+// }
+// #cWindow.warning #cwin_logo {
+// 	height: 30px;
+// 	margin: 0 0 0 3px;
+// 	padding: 0 0 0 32px;
+
+// 	font-size: 16px;
+// 	font-weight: bold;
+// 	line-height: 30px;
+// 	color: #fff;
+	
+// 	background-position: -60px -161px;
+// }
+// #cWindow.warning #cwin_close_btn:link,
+// #cWindow.warning #cwin_close_btn:visited {
+// 	background-color: #993;
+// 	background-position: -120px -39px;
+// }
+// #cWindow.warning #cwin_close_btn:hover {
+// 	background-position: -120px -68px;
+// }
+
+// /* Error Styles */
+// #cWindow.error {}
+// #cWindow.error #cWindowContentTop {
+// 	height: 30px;
+// 	background: #930;
+// 	border-bottom: solid 1px #600;
+// }
+// #cWindow.error #cwin_logo {
+// 	height: 30px;
+// 	margin: 0 0 0 3px;
+// 	padding: 0 0 0 32px;
+
+// 	font-size: 16px;
+// 	font-weight: bold;
+// 	line-height: 30px;
+// 	color: #fff;
+	
+// 	background-position: -60px -132px;
+// }
+// #cWindow.error #cwin_close_btn:link,
+// #cWindow.error #cwin_close_btn:visited {
+// 	background-color: #930;
+// 	background-position: -90px -39px;
+// }
+// #cWindow.error #cwin_close_btn:hover {
+// 	background-position: -90px -68px;
+// }
+
+// /* Blank Styles*/
+// #cWindow.blank {}
+// #cWindow.blank #cWindowContent {
+// 	padding: 0;
+// }
+// #cWindow.blank #cwin_close_btn:link,
+// #cWindow.blank #cwin_close_btn:visited {
+// 	background-position: -60px -40px;
+// 	background-color: #333333;
+// }
+// #cWindow.blank #cwin_close_btn:hover {
+// 	background-position: -60px -69px;
+// }

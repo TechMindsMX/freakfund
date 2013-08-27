@@ -1,0 +1,707 @@
+/**
+* @version   $Id: demo-styles.less 8017 2013-03-01 07:26:21Z josh $
+* @author    RocketTheme http://www.rockettheme.com
+* @copyright Copyright (C) 2007 - 2013 RocketTheme, LLC
+* @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+*/
+
+// Demo Background Image
+#rt-top-surround {
+	.header-type-preset1 & {
+		background-image: none;
+	}
+	.header-type-preset2 & {
+		background-image: url(../images/backgrounds/img2.jpg);
+	}	
+	.header-type-preset3 & {
+		background-image: url(../images/backgrounds/img3.jpg);
+	}	
+	.header-type-preset4 & {
+		background-image: url(../images/backgrounds/img4.jpg);
+	}	
+	.header-type-preset5 & {
+		background-image: url(../images/backgrounds/img5.jpg);
+	}
+	.header-type-preset6 & {
+		background-image: url(../images/backgrounds/img6.jpg);
+	}
+	.header-type-preset7 & {
+		background-image: url(../images/backgrounds/img7.jpg);
+	}	
+	.header-type-preset8 & {
+		background-image: url(../images/backgrounds/img8.jpg);
+	}						
+}
+#rt-footer-surround {
+	.footer-type-preset1 & {
+		// background-image: url(../images/backgrounds/img1.jpg);
+		background-image: none;
+	}
+	.footer-type-preset2 & {
+		background-image: url(../images/backgrounds/img2.jpg);
+	}	
+	.footer-type-preset3 & {
+		background-image: url(../images/backgrounds/img3.jpg);
+	}	
+	.footer-type-preset4 & {
+		background-image: url(../images/backgrounds/img4.jpg);
+	}	
+	.footer-type-preset5 & {
+		background-image: url(../images/backgrounds/img5.jpg);
+	}
+	.footer-type-preset6 & {
+		background-image: url(../images/backgrounds/img6.jpg);
+	}
+	.footer-type-preset7 & {
+		background-image: url(../images/backgrounds/img7.jpg);
+	}	
+	.footer-type-preset8 & {
+		background-image: url(../images/backgrounds/img8.jpg);
+	}						
+}
+
+.sprocket-features-index-1 .sprocket-features-img-container img {
+	.header-type-preset1 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase1.png);
+	}
+	.header-type-preset2 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase2.png);
+	}	
+	.header-type-preset3 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase3.png);
+	}	
+	.header-type-preset4 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase4.png);
+	}	
+	.header-type-preset5 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase5.png);
+	}
+	.header-type-preset6 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase6.png);
+	}
+	.header-type-preset7 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase7.png);
+	}	
+	.header-type-preset8 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase8.png);
+	}
+}
+.sprocket-features-index-2 .sprocket-features-img-container img {
+	.header-type-preset1 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase2.png);
+	}
+	.header-type-preset2 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase3.png);
+	}	
+	.header-type-preset3 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase4.png);
+	}	
+	.header-type-preset4 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase5.png);
+	}	
+	.header-type-preset5 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase6.png);
+	}
+	.header-type-preset6 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase7.png);
+	}
+	.header-type-preset7 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase8.png);
+	}	
+	.header-type-preset8 & {
+		background-image: url(../../../images/rocketlauncher/frontpage/roksprocket-showcase/showcase1.png);
+	}
+}
+
+// General Demo Image
+.rt-image {
+	position: relative;
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+// RokAjaxSearch {
+.fp-rokajaxsearch {
+	&.rt-block {
+		margin-top: 0;
+	}
+}
+
+// RokSprocket Showcase
+.fp-roksprocket-showcase {
+	.sprocket-features-img-container img {
+		width: 427px;
+		height: 345px;		
+		background-size: 100% auto;
+		background-repeat: no-repeat;
+	}
+	.layout-showcase .sprocket-features-title {
+		margin-top: 70px;
+	}
+}
+
+// RokSprocket Mosaic
+.rt-flush-icon {
+    display: block;
+    margin: 0 -20px 15px;
+    text-align: center;
+    .item-page & {
+    	margin: 0 -15px 15px;
+    	clear: both;
+    	.rt-square-icon {
+    		display: none !important;
+    	}
+    }
+}
+.rt-square-icon {
+	color: @white;
+    background: rgba(0, 0, 0, 0.7);
+    display: block !important;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    font-size: @base-font-size - 1;
+    padding: 8px;
+    text-shadow: none;
+    [class^="box"] &, [class*=" box"] & {
+    	position: absolute !important;
+    	top: 20px;
+    	left: 20px;
+    }
+}
+.rt-big-icon {
+	display: block;
+	font-size: 130px;
+	padding: 50px 0 40px 0;
+}
+
+// RokSprocket Tabs
+.fp-roksprocket-tabs {
+	.layout-left .sprocket-tabs-nav, .layout-right.sprocket-tabs-nav {
+		height: 450px;
+	}	
+}
+
+// RokSprocket Strips
+.fp-roksprocket-strips {
+	.sprocket-strips-content {
+		padding: 0 15px;
+		&:hover {
+			.rt-strips-description {
+				opacity: 1;
+			}
+		}
+	}
+}
+.rt-strips-icon {
+    display: block;
+    margin: 0 -20px;
+    text-align: center;
+    border-radius: 4px;
+    .rt-big-icon {
+    	font-size: 80px;
+    	padding: 50px 0;
+    }
+    .item-page & {
+    	margin: 0 -15px 15px;
+    	border-radius: 0;
+    }    
+}
+.rt-strips-description {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	opacity: 0;
+	margin: 0 -20px;
+	padding: 20px;
+	border-radius: 4px;
+	.transition(opacity 0.1s ease-out 0s);
+	.rt-strips-desc-title {
+	    display: block;
+	    font-size: 150%;
+	    margin-bottom: 5px;
+	}	
+	.rt-strips-desc-tag {
+	    color: rgba(0, 0, 0, 0.5);
+	    display: block;
+	    font-size: 90%;
+	    margin-bottom: 15px;
+	}	
+}
+
+.rt-tag {
+    font-size: 12px;
+    .rt-dark & {
+    	color: rgba(255, 255, 255, 0.5);
+    }
+    .rt-light & {
+    	color: rgba(0, 0, 0, 0.5);
+    }    
+}
+
+// FP Utility
+.fp-utility {
+	&.rt-block {
+		margin: 0 70px 30px 70px;
+	}
+	.module-content {
+		font-size: @base-font-size + 10;
+	}
+	span {
+		display: inline-block;
+		padding: 10px 0 0 15px;
+	}
+	.readon {
+	    float: right;
+	    font-size: @base-font-size + 10;
+	    margin: -11px;
+	    padding: 10px 25px;	
+	    &:after {
+	    	font-family: FontAwesome;
+	    	content: "\f054";
+	    	margin-left: 20px;
+	    	vertical-align: middle;
+	    }
+	}
+}
+
+.rt-med-icon {
+	border-radius: 3px;
+	display: inline-block;
+	margin-top: 14px;
+	span {
+	    display: block;
+	    font-size: @base-font-size + 12;	
+	    padding: 16px;	    
+	}
+}
+
+.rt-separator {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 15px -15px;	
+}
+
+.rt-subtitle {
+	display: block;
+	font-size: @base-font-size + 4;
+	font-family: @hexeris-font-regular;
+	font-weight: normal;	
+    .rt-dark & {
+    	color: rgba(255, 255, 255, 0.5);
+    }
+    .rt-light & {
+    	color: rgba(0, 0, 0, 0.5);
+    }
+    .box1 &, .box2 &, .box4 &, .box6 & {
+    	color: @white;
+    }
+}
+
+// Footer Logo
+.rt-footer-logo {
+	background: url(../images/logo/logo.png) 0 0 no-repeat;
+	width: 160px;
+	height: 58px;
+	margin: 0 0 15px 35px;
+	display: block;	
+}
+
+.fp-footer-icon {
+	.gantry-width-spacer {
+		margin: 8px;
+	}
+	.rt-med-icon {
+		margin-top: 0;
+		span {
+			color: lighten(@black, 20%);
+		    font-size: @base-font-size + 20;	
+		    padding: 20px;	
+		    text-shadow: none;	
+		}
+	}	
+}
+
+// Demo Typography
+.promo1 {
+	font-size: 3.5em;
+	line-height: 1.5em;
+}
+.promo2 {
+	font-size: 1.8em;
+	line-height: 1.3em;
+}
+
+.rt-large-button {
+    font-size: @base-font-size + 10;
+    margin: 20px 0;
+    padding: 10px 30px;
+}
+
+// Demo Module Layout
+.rt-mbsb-table {
+	.rt-sb-table-col {
+		height: 38px;
+		vertical-align: middle;
+	}
+	.rt-mb-table-col {
+		height: 75px;
+		vertical-align: middle;
+	}
+}
+
+// Standard Inline Structural Adjustments
+body {
+	.rt-center {
+		text-align: center;
+	}
+	.rt-noborder {
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+	.rt-floatleft {
+		float: left;
+		margin-right: 15px;
+		margin-left: 0;
+	}
+	.rt-floatright {
+		float: right;
+		margin-left: 15px;
+		margin-right: 0;
+	}
+	.rt-uppercase {
+		text-transform: uppercase;
+	}
+	.rt-lowercase {
+		text-transform: lowercase;
+	}	
+	.normalfont, .normalfont li {
+		font-size: 100% !important;
+		line-height: inherit !important;
+	}
+	.boldfont {
+		font-weight: bold !important;
+	}
+	.noitalic {
+		font-style: normal !important;
+	}
+	.nobold, .nobold a, .nobold li {
+		font-weight: normal !important;
+	}
+	.rt-displayinline {
+		display: inline !important;
+	}
+	.nomarginall, .rt-block.nomarginall, ul.nomarginall, li.nomarginall {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
+	.nopaddingall, .rt-block.nopaddingall, ul.nopaddingall, li.nopaddingall {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+	.nomargintop, .rt-block.nomargintop, ul.nomargintop, li.nomargintop {
+		margin-top: 0 !important;
+	}
+	.nomarginbottom, .rt-block.nomarginbottom, ul.nomarginbottom, li.nomarginbottom {
+		margin-bottom: 0 !important;
+	}
+	.nomarginleft, .rt-block.nomarginleft, ul.nomarginleft, li.nomarginleft {
+		margin-left: 0 !important;
+	}
+	.nomarginright, .rt-block.nomarginright, ul.nomarginright, li.nomarginright {
+		margin-right: 0 !important;
+	}
+	.nopaddingtop, .rt-block.nopaddingtop, ul.nopaddingtop, li.nopaddingtop {
+		padding-top: 0 !important;
+	}
+	.nopaddingbottom, .rt-block.nopaddingbottom, ul.nopaddingbottom, li.nopaddingbottom {
+		padding-bottom: 0 !important;
+	}
+	.nopaddingleft, .rt-block.nopaddingleft, ul.nopaddingleft, li.nopaddingleft {
+		padding-left: 0 !important;
+	}
+	.nopaddingright, .rt-block.nopaddingright, ul.nopaddingright, li.nopaddingright {
+		padding-right: 0 !important;
+	}
+	.smallmarginbottom {
+		margin-bottom: 5px !important;
+	}
+	.smallmargintop {
+		margin-top: 5px !important;
+	}
+	.smallmarginleft {
+		margin-left: 5px !important;
+	}
+	.smallmarginright {
+		margin-right: 5px !important;
+	}
+	.smallmarginall {
+		margin: 5px !important;
+	}	
+	.medmarginbottom {
+		margin-bottom: 10px !important;
+	}
+	.medmargintop {
+		margin-top: 10px !important;
+	}
+	.medmarginleft {
+		margin-left: 10px !important;
+	}
+	.medmarginright {
+		margin-right: 10px !important;
+	}
+	.medmarginall {
+		margin: 10px !important;
+	}
+	.largemarginbottom {
+		margin-bottom: 15px !important;
+	}
+	.largemargintop {
+		margin-top: 15px !important;
+	}
+	.largemarginleft {
+		margin-left: 15px !important;
+	}
+	.largemarginright {
+		margin-right: 15px !important;
+	}
+	.largemarginall {
+		margin: 15px !important;
+	}
+	.smallpaddingbottom {
+		padding-bottom: 5px !important;
+	}
+	.smallpaddingtop {
+		padding-top: 5px !important;
+	}
+	.smallpaddingleft {
+		padding-left: 5px !important;
+	}
+	.smallpaddingright {
+		padding-right: 5px !important;
+	}
+	.smallpaddingall {
+		padding: 5px !important;
+	}
+	.medpaddingbottom {
+		padding-bottom: 10px !important;
+	}
+	.medpaddingtop {
+		padding-top: 10px !important;
+	}
+	.medpaddingleft {
+		padding-left: 10px !important;
+	}
+	.medpaddingright {
+		padding-right: 10px !important;
+	}
+	.medpaddingall {
+		padding: 10px !important;
+	}
+	.largepaddingbottom {
+		padding-bottom: 15px !important;
+	}
+	.largepaddingtop {
+		padding-top: 15px !important;
+	}
+	.largepaddingleft {
+		padding-left: 15px !important;
+	}
+	.largepaddingright {
+		padding-right: 15px !important;
+	}
+	.largepaddingall {
+		padding: 15px !important;
+	}
+	.subsmallmarginbottom {
+		margin-bottom: -5px !important;
+	}
+	.subsmallmargintop {
+		margin-top: -5px !important;
+	}
+	.subsmallmarginleft {
+		margin-left: -5px !important;
+	}
+	.subsmallmarginright {
+		margin-right: -5px !important;
+	}
+	.subsmallmarginall {
+		margin: -5px !important;
+	}	
+	.submedmarginbottom {
+		margin-bottom: -10px !important;
+	}
+	.submedmargintop {
+		margin-top: -10px !important;
+	}
+	.submedmarginleft {
+		margin-left: -10px !important;
+	}
+	.submedmarginright {
+		margin-right: -10px !important;
+	}
+	.submedmarginall {
+		margin: -10px !important;
+	}
+	.sublargemarginbottom {
+		margin-bottom: -15px !important;
+	}
+	.sublargemargintop {
+		margin-top: -15px !important;
+	}
+	.sublargemarginleft {
+		margin-left: -15px !important;
+	}
+	.sublargemarginright {
+		margin-right: -15px !important;
+	}
+	.sublargemarginall {
+		margin: -15px !important;
+	}	
+	.rt-relative {
+		position: relative;
+	}
+	[class^="custom"] {  
+		&.largepaddingright, 
+		&.largepaddingleft, 
+		&.largepaddingtop, 
+		&.largepaddingbottom, 
+		&.largepaddingall,
+		&.medpaddingright, 
+		&.medpaddingleft, 
+		&.medpaddingtop, 
+		&.medpaddingbottom,
+		&.medpaddingall, 
+		&.smallpaddingright, 
+		&.smallpaddingleft, 
+		&.smallpaddingtop, 
+		&.smallpaddingbottom, 
+		&.smallpaddingall,
+		&.largemarginright, 
+		&.largemarginleft, 
+		&.largemargintop, 
+		&.largemarginbottom,
+		&.largemarginall,
+		&.medmarginright, 
+		&.medmarginleft, 
+		&.medmargintop, 
+		&.medmarginbottom, 
+		&.medmarginall,
+		&.smallmarginright, 
+		&.smallmarginleft, 
+		&.smallmargintop, 
+		&.smallmarginbottom,
+		&.smallmarginall,		
+		&.sublargemarginright, 
+		&.sublargemarginleft, 
+		&.sublargemargintop, 
+		&.sublargemarginbottom,
+		&.sublargemarginall,
+		&.submedmarginright, 
+		&.submedmarginleft, 
+		&.submedmargintop, 
+		&.submedmarginbottom, 
+		&.submedmarginall,
+		&.subsmallmarginright, 
+		&.subsmallmarginleft, 
+		&.subsmallmargintop, 
+		&.subsmallmarginbottom,
+		&.subsmallmarginall {
+			padding: 0 0 0 0 !important;margin: 0 0 0 0 !important;
+		}                
+		&.rt-floatleft, &.rt-floatright {
+			float: none;
+			margin: 0 0 0 0 !important;
+		}                   
+	}
+}    
+
+// RTL Stuff
+body.rtl {
+	.rt-floatleft {
+		float: right;
+		margin-right: 0;
+		margin-left: 15px;
+	}
+	.rt-floatright {
+		float: left;
+		margin-left: 0;
+		margin-right: 15px;
+	}
+	.nomarginleft, .rt-block.nomarginleft, ul.nomarginleft, li.nomarginleft {
+		margin-right: 0;
+	}
+	.nomarginright, .rt-block.nomarginright, ul.nomarginright, li.nomarginright {
+		margin-left: 0;
+	}
+	.nopaddingleft, .rt-block.nopaddingleft, ul.nopaddingleft, li.nopaddingleft {
+		padding-right: 0;
+	}
+	.nopaddingright, .rt-block.nopaddingright, ul.nopaddingright, li.nopaddingright {
+		padding-left: 0;
+	}
+	.smallmarginleft {
+		margin-right: 5px;
+	}
+	.smallmarginright {
+		margin-left: 5px;
+	}
+	.medmarginleft {
+		margin-right: 10px;
+	}
+	.medmarginright {
+		margin-left: 10px;
+	}
+	.largemarginleft {
+		margin-right: 15px;
+	}
+	.largemarginright {
+		margin-left: 15px;
+	}
+	.smallpaddingleft {
+		padding-right: 5px;
+	}
+	.smallpaddingright {
+		padding-left: 5px;
+	}
+	.medpaddingleft {
+		padding-right: 10px;
+	}
+	.medpaddingright {
+		padding-left: 10px;
+	}
+	.largepaddingleft {
+		padding-right: 15px;
+	}
+	.largepaddingright {
+		padding-left: 15px;
+	}
+    .subsmallmarginleft {
+		margin-right: -5px;
+	}
+	.subsmallmarginright {
+		margin-left: -5px;
+	}
+	.submedmarginleft {
+		margin-right: -10px;
+	}
+	.submedmarginright {
+		margin-left: -10px;
+	}
+	.sublargemarginleft {
+		margin-right: -15px;
+	}
+	.sublargemarginright {
+		margin-left: -15px;
+	}
+	.rt-demo-block {
+		float: right;
+	}
+}

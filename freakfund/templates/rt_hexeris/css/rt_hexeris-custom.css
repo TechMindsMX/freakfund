@@ -1,0 +1,147 @@
+.esconder {
+	position: absolute;
+	left: 3000px;
+}
+
+/*** com_users registration ***/
+#terminos a:link, #terminos a:visited, #terminos a:hover {
+	padding: 5px 10px;
+}
+.enRokbox {
+	min-width: 420px;
+}
+#terminos label { 
+	width: 80%; 
+	display: inline;
+}
+#terminos {
+	margin: 0 0 2em;
+}
+#GremiosoInstituciones {
+	text-align: center;
+	margin-bottom: 15px;
+}
+/*** fin com_users registration ***/
+
+/*** Descripcion producto y proyecto ****/
+.flotado { float: left; }
+
+
+/*** Fin Descripcion producto y proyecto ****/
+
+/*** Modulos compactos class sufix ****/
+div.compacto {
+	padding: 18px;
+}
+.compacto p {
+	margin: 0;
+}
+.compacto a {
+	color:#fff;
+	font-weight:bold;
+	font-size:18px;
+	text-shadow: 2px 1px 2px #666;
+	
+}
+.bienvenidaUsuario{
+	color:#2c9ad9;
+	margin-left:14px;
+	font-size:16px;
+	font-weight:bold;	
+	margin-bottom:10px;
+	position:absolute;
+}
+.videoHead{
+	height: 458px;
+	width: 720px;
+	float: left;
+}
+.tituloHead{
+	float: left;
+	font-weight: bolder;
+	font-size: 50px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	margin-top: 50px;
+	line-height: 50px;
+}
+.subTituloHead{
+	float: left;
+	font-weight: bolder;
+	font-size: 25px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	margin-top: 15px;
+	line-height: 30px;
+}
+.textoHead{
+	float: left;
+	font-size: 25px;
+	max-width: 300px;
+	text-shadow: 2px 1px #000000;
+	margin-left: 20px;
+	line-height: 35px;
+	margin-top: 20px;
+}
+@media screen and (max-width: 1024px)  {
+	  .videoHead{
+	  	height: 458px;
+		width: 520px;
+		float: left;
+	}
+}
+@media screen and (max-width: 767px)  {
+	.videoHead{
+	  	height: 300px;
+		width: 360px;
+		float: left;
+	}
+}
+@media screen and (max-width: 600px)  {
+	.videoHead{
+	  	height: 210px;
+		width: 282px;
+		float: left;
+		
+	}
+	.tituloHead{
+		float: left;
+		font-weight: bolder;
+		font-size: 20px;
+		max-width: 300px;
+		text-shadow: 2px 1px #000000;
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+	.subTituloHead{
+		float: left;
+		font-weight: bolder;
+		font-size: 14px;
+		max-width: 300px;
+		text-shadow: 2px 1px #000000;
+		margin-left: 20px;
+		margin-top: 5px;
+	}
+	.textoHead{
+		float: left;
+		font-size: 14px;
+		max-width: 300px;
+		text-shadow: 2px 1px #000000;
+		margin-left: 20px;
+		margin-top: 5px;
+	}
+	.sprocket-headlines-navigation .prev {
+		left: 10px; top:20px;
+	}
+	.sprocket-headlines-navigation .next {
+		right: 10px; top:20px;
+	}	
+}
+
+input[type=checkbox] {
+		margin-top:-2px !important;
+		box-shadow: 1px 1px 4px #666;
+}
+/*** fin Modulos compactos class sufix ****/

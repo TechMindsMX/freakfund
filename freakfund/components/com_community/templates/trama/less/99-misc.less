@@ -1,0 +1,139 @@
+#community-wrap #taggingAutocompleteContainer
+{
+	height: 38px !important;
+	min-height: 38px !important;
+
+	input#photoTagQuery
+	{
+		height: 30px !important;
+		padding: 0 6px;
+		margin: 3px !important;
+	}
+}
+body div.autocomplete-w1
+{
+	background: none;
+	border: 0;
+	padding: 0;
+	margin-left: -4px !important;
+	margin-top: 0 !important;
+
+	.autocomplete
+	{
+		background: #fff;
+		border: 1px solid #222;
+		border-top: 0;
+		padding-top: 5px;
+		width: 200px !important;
+
+		> div 
+		{
+			
+			width: auto;
+			padding: 5px;
+			cursor: pointer;
+			font-size: 12px;
+
+			&:hover
+			{
+				background: #ffc;
+			}
+
+			img 
+			{
+				float: left;
+				height: 30px; 
+				width: 30px;
+			}
+			span 
+			{
+				color: #555;
+				display: block;
+				height: 30px; 
+				line-height: 30px;  
+				margin: 0 0 0 35px;
+				overflow: hidden; 
+				white-space: nowrap; 
+				text-align: left;
+				text-overflow: ellipsis;
+
+				strong { color: #095197;}
+			}
+		}
+	}
+}
+
+
+
+/*----- FIX CALENDAR FORM DISPLAY -----*/
+
+.calendar td.button
+{
+	display: table-cell;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/** Ajax **/
+body #community-wrap div.ajax-wait {
+	background-image: url(../images/wait.gif);
+	width: 16px;
+	height: 16px;
+}
+
+
+
+
+/* Register view */
+#community-wrap .jsPasswordStrength {
+	margin-left: 10px;
+	padding: 2px 5px;
+	display: inline-block;
+	color: #000;
+}
+#community-wrap .jsPasswordStrength_1 {
+	background-color: #FCB6B1;
+}
+#community-wrap .jsPasswordStrength_2 {
+	background-color: #FCCAB1;
+}
+#community-wrap .jsPasswordStrength_3 {
+	background-color: #FCFBB1;
+}
+#community-wrap .jsPasswordStrength_4 {
+	background-color: #DAFCB1;
+}
+#community-wrap .jsPasswordStrength_5 {
+	background-color: #BCFCB1;
+}
+
+body .qtip small {
+	font-size: 11px !important;
+}
+body .qtip hr {
+	height: 1px
+}
+
+/* prevents FB button from missing on hover */
+body #community-wrap a.fb_button_medium:hover {
+	background: url("http://static.ak.fbcdn.net/rsrc.php/v1/zL/r/FGFbc80dUKj.png") no-repeat scroll 0 -188px #29447E !important;
+}
+
+
+/* Tipsy library */
+.tipsy{padding:5px; font-size:10px; opacity:0.8; filter:alpha(opacity=80); background-repeat:no-repeat; background-image:url(../images/tipsy.gif);}
+.tipsy-inner{padding:5px 8px 4px 8px; background-color:black; color:white; max-width:200px; text-align:center}
+.tipsy-inner{-moz-border-radius:3px; -webkit-border-radius:3px}
+.tipsy-north{background-position:top center}
+.tipsy-south{background-position:bottom center}
+.tipsy-east{background-position:right center}
+.tipsy-west{background-position:left center}

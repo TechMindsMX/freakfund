@@ -1,0 +1,20 @@
+/**
+* @version   $Id: master-ie9.css 9821 2013-04-29 16:39:49Z arifin $
+* @author    RocketTheme http://www.rockettheme.com
+* @copyright Copyright (C) 2007 - 2012 RocketTheme, LLC
+* @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+*/
+
+.readon, .rt-block {
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false) !important;
+}
+
+ul.menu li.active.current > a:before, ul.menu li.active.current > .item:before, ul.menu li.active.current > .separator:before,
+ul.menu #current.active > a:before, ul.menu #current.active > .item:before, ul.menu #current.active > .separator:before {font-size: 15px;}
+
+body [class^='title'].rt-block .module-title::before, body [class*=' title'].rt-block .module-title::before {top: 51px;}
+body .rt-title-arrow[class^="title"] .module-title:after, body .rt-title-arrow[class*=" title"] .module-title:after {top: 24px;}
+body [class^="title"][class^="box"] .module-title::before, body [class^="title"][class*=" box"] .module-title::before, body [class*=" title"][class^="box"] .module-title::before, body [class*=" title"][class*=" box"] .module-title::before {top: 47px;}
+
+/* Joomla Core */
+.pagination ul li a {filter: none !important; background: none !important;}

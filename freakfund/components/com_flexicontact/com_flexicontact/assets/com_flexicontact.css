@@ -1,0 +1,27 @@
+.flexicontact { }
+.fc_form { }
+.fc_table {border:none !important; padding: 2px; width:100% }
+.fc_table tr {border:none  !important; }
+.fc_table td {border:none  !important; padding: 3px 0 3px 0;}
+.fc_table td.fc_prompt {text-align:right; vertical-align:top; width:20%; padding-right:10px;}
+.fc_table td.fc_field  {text-align:left; }
+.fc_error {font-size:small; color:red;}
+.fc_table td.fc_images { }
+.fc_table td.fc_button {padding-top:10px; padding-left:20px;}
+
+.fc_image_inner {text-align: center;}
+.fc_inactive {border:2px solid transparent;}
+.fc_active   {border:2px solid red;}
+
+/* force textarea to be variable width */
+
+.fc_form input, .fc_form textarea {width: auto !important;}
+
+/* the send button */
+
+.fc_form td.fc_button input {background:url('fc_button.png') repeat-x left center;
+	border:1px solid #8B9DB8; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+	min-height:2em; min-width:65px; margin:2px 2px 2px 5px;
+	font-size:1em; font-weight:bold; line-height:0.9; color:#36465f; cursor:pointer; }
+.fc_form td.fc_button input:hover    {background: url('fc_button_hover.png') repeat-x left center; }
+.fc_form td.fc_button input:disabled {background: url('fc_button.png') repeat-x left center; color:#cecdcd; cursor:default;}

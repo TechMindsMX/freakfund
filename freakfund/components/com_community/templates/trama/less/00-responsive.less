@@ -1,0 +1,61 @@
+.no-float()
+{
+	float: none !important;
+	display: block !important;
+	width: auto !important;
+}
+.no-margin()
+{
+	margin: 0;
+}
+.hidden()
+{
+	display: none;
+}
+
+
+
+
+body #community-wrap
+{
+	.no-float();
+
+	.cResponsive
+	{
+		.no-float();
+	}
+
+	&.cFrontpage
+	{
+		.cSidebar
+		{
+			.hidden();
+		}
+		.cMain
+		{
+			margin: 0;
+		}
+	}
+
+	.cGuest-Intro
+	{
+		.hidden();
+	}
+	.cGuest-Access
+	{
+		.no-float();
+	}
+
+	.cProfile
+	{
+		.cSidebar
+		{
+			display: none;
+		}
+
+		.cMain
+		{
+			.no-margin();
+		}
+	}
+}

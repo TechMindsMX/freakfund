@@ -1,0 +1,78 @@
+label {
+	float: left;
+	width: 200px;
+}
+
+input {
+	width: 180px;
+	margin-bottom: 5px;
+}
+
+input[type = 'file'] {
+	max-width: 200px;
+	width: 100% !important;
+}
+
+
+#descProy, #elenco{
+	width: 405px;
+	height: 110px;
+}
+
+.boxes {
+	width: 1em;
+}
+
+#submitbutton {
+	margin-left: 100px;
+	margin-top: 5px;
+	width: 90px;
+}
+.ligacomentarios{
+	display: block;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+br {
+	clear: left;
+}
+
+.divcontent {
+	display: none;
+	height: auto;
+	min-height: 70px;
+}
+
+.field_set{
+	border: 1px;
+	padding: 7px;
+	margin: 0;
+    border-color:#7eb347;
+    border-style: solid;
+}
+
+@media screen and (max-width:770px) {
+	#descProy, #elenco{
+		width: 205px;
+	}
+}
+
+
+.fieldset {
+    border-radius: 10px;
+    background: #eee;
+    border: 2px groove threedface;
+    max-width:450px;
+    padding: 5px
+}
+
+.legend {
+	background: #fff;
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 10px;
+    max-width: 200px;
+    height:30px;
+}

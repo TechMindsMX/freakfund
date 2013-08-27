@@ -1,0 +1,82 @@
+// Colors ----------------------
+@white:							#ffffff;
+@white2:						#fdfdfd;
+@black: 						#000000;
+@dark-grey: 					#484848;
+@grey: 							#606060;
+@light-grey:					#cccccc;
+@light-brown:					#998675;
+@light-blue:					#33ccff;
+@blue:							#2C9AD9;
+
+// Fonts -----------------------
+@base-font-size:				14px;
+@base-line-height:				20px;
+
+@font-face {
+	font-family: 'Barna';
+	src: url('../fonts/barnaregular.eot');
+	src: url('../fonts/barnaregular.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/barnaregular.woff') format('woff'),
+	url('../fonts/barnaregular.ttf') format('truetype'),
+	url('../fonts/barnaregular.svg#EauSansBold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+  font-family: 'BarnaBold';
+  src: url('../fonts/barnabold.eot');
+  src: url('../fonts/barnabold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/barnabold.woff') format('woff'),
+  url('../fonts/barnabold.ttf') format('truetype'),
+  url('../fonts/barnabold.svg#EauSansBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@hexeris-font-regular:    		'Barna', Geneva, Verdana, Helvetica, Arial, sans-serif;
+@hexeris-font-bold:    			'BarnaBold', Geneva, Verdana, Helvetica, Arial, sans-serif;
+
+// Menu ------------------------
+@menu-font-family:				@hexeris-font-bold;
+@menu-font-size:				@base-font-size;
+@menu-line-height:				@base-line-height;
+@menu-item-radius:				4px;
+
+@menu-text-color:				#ffffff;
+@menu-text-shadow:				rgba(0, 0, 0, 0.3);
+@menu-text-hover:				@menu-hover-color;
+@menu-subtext-color:			fadeout(@menu-text-color, 30%);
+@menu-arrow-color:				fadeout(@menu-text-color, 30%);
+@menu-mobile-gradient:			lighten(@menu-drop-back,10%);
+@menu-mobile-back:				@menu-drop-back;
+@menu-border: 					#cbcbcb;
+@menu-drop-back:				@blue;
+@menu-drop-shadow:				0px 2px 2px rgba(0, 0, 0, 0.1);
+@menu-inset-shadow:				~"inset 0px 1px 0px #cbcbcb, inset 0px 2px 0px #ffffff";
+@menu-full-shadow:				~"2px 4px 0 rgba(0, 0, 0, 0.1)";
+@menu-flyout-shadow:			~"2px 4px 0 rgba(0, 0, 0, 0.1), -2px 0 2px rgba(0, 0, 0, 0.1) ";
+@menu-active-border:			rgba(0, 0, 0, 0.1);
+@menu-active-back:				@blue;  
+@menu-active-shadow:			~"inset 0 0 1px rgba(0, 0, 0, 0.3)";
+@submenu-active-back: 			#33CCFF;
+@submenu-active-shadow: 		~"inset 0 0 1px rgba(0, 0, 0, 0.3)";
+@module-header-color:			@menu-text-color;
+@module-text-color:				lighten(@menu-text-color, 10%);
+@module-link-color:				darken(@header-accent, 35%);
+
+// Form Feedbacks --------------
+@warning-text:             		#c09853;
+@warning-background:       		#fcf8e3;
+@warning-border:           		darken(spin(@warning-background, -10), 3%);
+
+@error-text:               		#b94a48;
+@error-background:         		#f2dede;
+@error-border:             		darken(spin(@error-background, -10), 3%);
+
+@success-text:             		#468847;
+@success-background:       		#dff0d8;
+@success-border:           		darken(spin(@success-background, -10), 5%);
+
+@info-text:                		#3a87ad;
+@info-background:          		#d9edf7;
+@info-border:              		darken(spin(@info-background, -10), 7%);
