@@ -65,9 +65,3 @@ class JConfig {
 	public $cookie_path = '';
 }
 
-define("MIDDLE", "http://192.168.0.122");
-define("PUERTO", ":7070");
-define("AVATAR", "/avatar");
-define("BANNER", "/banner");
-define("BCASE", "/businesscase");
-define("PHOTO", "/photo");

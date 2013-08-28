@@ -29,3 +29,10 @@ define('JPATH_INSTALLATION',	JPATH_ROOT . '/installation');
 define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_BASE . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
+
+define("MIDDLE", "http://192.168.0.122");
+define("PUERTO", ":7070");
+define("AVATAR", "/avatar");
+define("BANNER", "/banner");
+define("BCASE", "/businesscase");
+define("PHOTO", "/photo");
