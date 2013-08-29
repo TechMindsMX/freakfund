@@ -6,25 +6,19 @@ class getDatosObj {
 		$query = $db->getQuery(true);
 		
 		$query
-			->select('users_id')
+			->select('*')
 			->from('perfil_persona')
 			->where('users_id = '.$idUsuario);
 		
 		$db->setQuery( $query );
-		
+				
 		$resultado = $db->loadObjectList();
 		
-		if (isset($resultado[0])) {
-			$existe = 1;
-		} else {
-			$existe = 0;
-		}
-		
-		return $existe;
+		return empty($resultado)?false:true;
 		
 	}
 	
-	function datosGenerales($idUsuario, $tipoContacto){
+	function datosGenerales($idUsuario) {
 	
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -32,7 +26,7 @@ class getDatosObj {
 		$query
 			->select('*')
 			->from('perfil_persona')
-			->where('users_id = '.$idUsuario.' && perfil_tipoContacto_idtipoContacto = ' .$tipoContacto);
+			->where('users_id = '.$idUsuario);
 			
 		$db->setQuery( $query );
 	
@@ -41,7 +35,7 @@ class getDatosObj {
 	
 	}
 	
-	function domicilio($idPersona, $tipoDireccion){
+	function domicilio($idPersona){
 	
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -49,7 +43,7 @@ class getDatosObj {
 		$query
 		->select('*')
 		->from('perfil_direccion')
-		->where('perfil_persona_idpersona = '.$idPersona.' && perfil_tipoDireccion_idtipoDireccion = ' .$tipoDireccion);
+		->where('perfil_persona_idpersona = '.$idPersona);
 	
 		$db->setQuery( $query );
 	
@@ -132,25 +126,31 @@ class getDatosObj {
 	}
 	
 	function insertFields($tabladb, $col, $val){
-		$db =& JFactory::getDBO();
-		$query = $db->getQuery(true);
+		$db 	= JFactory::getDBO();
+		$query 	= $db->getQuery(true);
+		
 		$query
 			->insert($db->quoteName($tabladb))
 			->columns($db->quoteName($col))
 			->values(implode(',', $val));
+		
 		//echo $query.'<br />';
+		
 		$db->setQuery( $query );
 		$db->query();
 	}
 	
 	function updateFields($tabladb, $fields, $conditions){
-		$db =& JFactory::getDBO();
-		$query = $db->getQuery(true);
+		$db 	= JFactory::getDBO();
+		$query 	= $db->getQuery(true);
+		
 		$query
 			->update($db->quoteName($tabladb))
 			->set($fields)
 			->where($conditions);
-		//echo $query.'<br />';
+		
+		echo $query.'<br />';
+		
 		$db->setQuery( $query );
 		$db->query();
 	}
