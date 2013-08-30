@@ -1,6 +1,42 @@
 <?php
 defined('_JEXEC') OR die( "Direct Access Is Not Allowed" );
+jimport('trama.class');
 $pathJumi = 'components/com_jumi/files/carrusel';
+
+/*Cambiar el servicio en la libreria jtrama*/
+$allProjects = JTrama::allProjects();
+
+/*Quitar cuando el servicio este listo*/
+$allProjects[0]->recaudado = 50000;
+$allProjects[1]->recaudado = 50000;
+$allProjects[2]->recaudado = 50000;
+$allProjects[3]->recaudado = 50000;
+$allProjects[4]->recaudado = 50000;
+$allProjects[5]->recaudado = 50000;
+$allProjects[6]->recaudado = 50000;
+$allProjects[7]->recaudado = 50000;
+$allProjects[8]->recaudado = 50000;
+$allProjects[9]->recaudado = 50000;
+$allProjects[10]->recaudado = 50000;
+$allProjects[11]->recaudado = 50000;
+/*******************************************/
+
+function diferenciaEntreFechas($fecha_principal, $fecha_secundaria, $obtener = 'DIAS', $redondear = true){
+   $f0 = strtotime($fecha_principal);
+   $f1 = strtotime($fecha_secundaria);
+   $resultado = ($f0 - $f1);
+   switch ($obtener) {
+       default: break;
+       case "MINUTOS"   :   $resultado = $resultado / 60;   break;
+       case "HORAS"     :   $resultado = $resultado / 60 / 60;   break;
+       case "DIAS"      :   $resultado = $resultado / 60 / 60 / 24;   break;
+       case "SEMANAS"   :   $resultado = $resultado / 60 / 60 / 24 / 7;   break;
+   }
+   if($redondear) $resultado = round($resultado);
+   return $resultado;
+}
+
+
 ?>
 
 <link href="<?php echo $pathJumi;?>/css/style.css" rel="stylesheet" type="text/css" />
@@ -32,23 +68,33 @@ $pathJumi = 'components/com_jumi/files/carrusel';
 	    jQuery('#mycarousel').jcarousel({
 	        auto: 5,
 	        wrap: 'last',
-	        initCallback: mycarousel_initCallback
+	        initCallback: mycarousel_initCallback,
+	        scroll: 4
 	    });
 	});
 
 </script>
 
 <div id="wrap">
-  <ul id="mycarousel" class="jcarousel-skin-tango">
-    <li><img src="http://static.flickr.com/66/199481236_dc98b5abb3_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/75/199481072_b4a0d09597_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/57/199481087_33ae73a8de_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/77/199481108_4359e6b971_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/58/199481143_3c148d9dd3_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/72/199481203_ad4cdcf109_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/58/199481218_264ce20da0_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/69/199481255_fdfe885f87_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/60/199480111_87d4cb3e38_s.jpg" width="125" height="125" alt="" /></li>
-    <li><img src="http://static.flickr.com/70/229228324_08223b70fa_s.jpg" width="125" height="125" alt="" /></li>
+	<ul id="mycarousel" class="jcarousel-skin-tango">
+  	<?php 
+  		$noProyectos = count($allProjects);
+  		for ($i = 0; $i < $noProyectos && $i < 12; $i++) {
+			echo '<li>
+    				<div class="contenedor" style="background:url('.MIDDLE.AVATAR.'/'.$allProjects[$i]->projectAvatar->name.'); background-size: 100%;">
+    					<div class="info-proyecto" >
+    						<span>'.$allProjects[$i]->name.'</span><br/>
+    						<span>'.JText::_('PORCENTAJE_RECAUDADO').' '.$allProjects[$i]->recaudado.'</span><br/>
+   							<span>'.JText::_('PUNTO_EQUILIBRIO').' '.$allProjects[$i]->breakeven.'</span><br/>
+							<span>'.JText::_('DIAS_RESTANTES').' '.diferenciaEntreFechas($allProjects[$i]->fundEndDate, date("Y-m-d")).'</span><br/>
+   							<span>
+   								<a class="button" href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$allProjects[$i]->id.'">
+	    							'.JText::_('INVERTIR_PROYECTO').'</a>
+    						</span>
+    					</div>
+    				</div>
+    			</li>';
+		}
+  	?>
   </ul>
 </div>

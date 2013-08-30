@@ -188,5 +188,14 @@ class JTrama
 		
 		return $token;
 	}
+	
+	public static function allProjects(){
+		
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		$jsonAllProjects = file_get_contents($url);
+		$json = json_decode($jsonAllProjects);
+		
+		return $json;
+	}
 }
 ?>
