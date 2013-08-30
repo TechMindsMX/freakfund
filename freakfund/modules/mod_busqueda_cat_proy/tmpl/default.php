@@ -4,7 +4,7 @@ $document = JFactory::getDocument();
 
 $document->addScript('modules/mod_busqueda_cat_proy/js/jquery.chained.js');
 $scriptJS = 'jQuery(function() {
-	jQuery("#selectSubCat").chained("#selectCat");	
+	jQuery("#selectProySubCat").chained("#selectProyCat");	
 });';
 $document->addScriptDeclaration($scriptJS);
 
@@ -17,7 +17,7 @@ $opcionesSubCat = '';
 
 ?>
 <form action="<?php echo $accion; ?>" method="post"> 
-	<select id="selectCat" name="categoria">
+	<select id="selectProyCat" name="categoria">
 		<option value="">Seleccione una categoría</option>
 	<?php		
 	foreach ( $categoria as $key => $value ) {
@@ -27,7 +27,7 @@ $opcionesSubCat = '';
 	?>
 	</select>
 	
-	<select id="selectSubCat" name="subcategoria">
+	<select id="selectProySubCat" name="subcategoria">
 			<option value="all">Todas</option>
 	<?php
 	foreach ( $opcionesPadre as $valor ) {

@@ -233,10 +233,27 @@ function pageselectCallback (page_index, jq) {
 	var ancho = Math.floor(100/columnas);
 	var countCol = 0;
 
+	/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
+	members[5].breakeven = 100000;
+	members[5].recaudado = 80000;
+	members[5].fundEnd = '12/12/2013';
+	members[5].roiFinanciadores = 40;
+	members[5].roiInversionistas = 30;
+	members[5].premierEnd = '12/01/2014';
+	/**************************************************************************************/
+
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
-		
+		/*Cambiar los atributos del objeto segun el JSON*/
+		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
+		var recaudado = members[i].recaudado != null ? members[i].recaudado : " ";
+		var porcentajeRecaudado = members[i].recaudado != null ? (members[i].recaudado/members[i].breakeven)*100 : 0;
+		var cierreFinanciamiento = members[i].fundEnd != null ? members[i].fundEnd : " "; 
+		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores : " ";
+		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas : " ";
+		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";
+		/************************************************************************************/
 		countCol++;
 		if (countCol == columnas) {
 			countCol = countCol - columnas;
@@ -259,9 +276,18 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '<div class="avatar">';
 		newcontent += '<a href="' + link + '">';
-		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a></div>';
+		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a>';
+		if(members[i].type == "PROJECT"){
+		newcontent += '<div class="progress-bar" style="background: red; width: '+ porcentajeRecaudado +'%; text-align:center;">'+ recaudado +'</div>';
+		newcontent += '<div style="width: 50%;">'+ breakeven +'</div><div style="width: 50%;">'+ cierreFinanciamiento +'</div>';
+		}
+		if(members[i].type == "PRODUCT"){
+		newcontent += '<div style="width: 50%;">'+ roiFinanciadores +'</div><div style="width: 50%;">'+ roiInversionistas +'</div>';
+		newcontent += '<div style="width: 100%;">'+ cierrePresentacion +'</div>';
+		}
+		newcontent += '</div>';
 		newcontent += '<div class="descripcion">';
-		newcontent += '<div class="inner">';			
+		newcontent += '<div class="inner">';		
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
 		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '<p class="readmore">';

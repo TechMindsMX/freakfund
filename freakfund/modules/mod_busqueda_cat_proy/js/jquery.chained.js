@@ -61,7 +61,7 @@
                 }
 	    
                 /* Force updating the children. */
-                $(this).trigger("change");             
+                $(this).trigger("change");
 
             });
         });
