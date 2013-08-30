@@ -80,7 +80,6 @@ echo '<script src="'.$pathJumi.'/perfil_x/minified/jquery.tree.min.js"></script>
 ?>
 <script type="text/javascript">
 function habilita(campo) {
-	console.log(campo.name);
 	if (campo.checked) {
 		
 	} else {
