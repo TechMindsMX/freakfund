@@ -46,23 +46,33 @@ div.dropdown .item, input {
   font-weight: 600;
   font-size: 16px;
 }
-
-.barra-top {
-  float:left;
-  width:100%;
-}
 .productor {
   text-transform: capitalize;
 }
-
-
+@link-color: #000;
   .barra-top {
+    float:left;
     margin: 0;
     width:100%;
     font-weight: bold;
     color:black;
+    > div, > span {
+      float: left;
+      margin: 0 2px 2px 0;
+      background: #b3b3b3;
+      height: 28px;
+      padding: 5px 9px 0px 13px;
+      text-shadow: none;
+      text-transform: capitalize;
+      a {
+          color: @link-color;
+           &:hover {
+             color: @link-color;
+           } 
+        }
+      }
   }
-  #ligasprod{
+    #ligasprod{
     padding: 5px 0px 5px 17px;
     margin-left: -4px;
     font-weight:bold;
@@ -83,15 +93,6 @@ div.dropdown .item, input {
       background: transparent !important;
       color: #000 !important;
     }
-  }
-  .barra-top > div {
-    float: left;
-    margin: 0 2px 2px 0;
-    background: #b3b3b3;
-    height: 28px;
-    padding: 5px 9px 0px 13px;
-    text-shadow: none;
-
   }
   #contador span{
     color:#000;

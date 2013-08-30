@@ -11,39 +11,41 @@ $pathJumi = Juri::base().'components/com_jumi/files';
 $busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
 $ligasPP = '';
 
-$tipoPP = isset($_GET['typeId']) ? $_GET['typeId'] : 0;
-$categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
-$subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : 'all';
+$input = JFactory::getApplication()->input;
+$tipoPP = $input->get('typeId', 1, 'INT');
+
+$params = new stdClass;
+$params->categoria = $input->get('categoria', '', 'STR');
+$params->subcategoria = $input->get('subcategoria', 'all', 'STR');
+// $params->estatus = $input->get('status', '', 'STR');
+$params->estatus = '0,2,9';
+$params->tags = $input->get('tags', null, "STR");
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
-			   '<div id="filtrar" style="float:left;">Filtrar por: </div>'.
+			   '<div id="filtrar" style="float:left;">'.JText::_('FILTRAR').'</div>'.
 			   '<div id="triangle"> </div>'.
-			   '<div class="barraProy">Proyectos <input  type="checkbox" id="proyecto" /></div>'.
-			   '<div class="barraProd">Productos <input type="checkbox" id="producto" /></div>'.
-			   '<div class="barraRep">Repertorios <input type="checkbox" id="repertorio" /></div>'.
-			   '<div class="botonLimpio"><input type="button" value="Limpiar Filtro" /></div>'.
+			   '<div class="barraProy">'.JText::_('LABEL_PROYECTOS').' <input  type="checkbox" id="proyecto" /></div>'.
+			   '<div class="barraProd">'.JText::_('LABEL_PRODUCTOS').' <input type="checkbox" id="producto" /></div>'.
+			   '<div class="barraRep">'.JText::_('LABEL_REPERTORIOS').' <input type="checkbox" id="repertorio" /></div>'.
+			   '<div class="botonLimpio"><input type="button" value="'.JText::_('LIMPIAR_FILTRO').'" /></div>'.
 			   '<div class="clearfix" id="contador"></div>'.
 			   '</div>';
 }
 
-function prodProy ($tipo) {
+function prodProy ($tipo, $params) {
 	if( !empty($_POST) ) {
-		if (isset($_POST['tags'])) {
-			$tagLimpia = array_shift(tagLimpia($_POST['tags']));
+		if (!is_null($params->tags)) {
+			$tagLimpia = array_shift(tagLimpia($params->tags));
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
 		}
-		elseif ( ($tipo == 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
+		elseif ( ($tipo == 'all' ) && ($params->categoria == "") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos y Proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/all/'.$_POST['categoria'];
-		} elseif ( ($tipo == 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos y proyectos por subcategoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/all/'.$_POST['subcategoria'];
-		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] == "all") ) {//Productos o proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$_POST['categoria'];
-		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] != "") && ($_POST['subcategoria'] != "all") ) {//Productos o proyectos por Subcategoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$_POST['subcategoria'];
-		} elseif ( ($tipo != 'all' ) && ($_POST['categoria'] == "") && ($_POST['subcategoria'] == "all") ) {//nose
+		} elseif ( ($params->categoria != "") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$params->categoria.'/'.$params->estatus;
+		} elseif ( ($params->categoria != "") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
+		} elseif ( ($tipo != 'all' ) && ($params->categoria == "") && ($params->subcategoria == "all") ) {//nose
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 		}	
 	} else {
@@ -60,7 +62,7 @@ function prodProy ($tipo) {
 	return $json0;
 }
 
-$json = json_decode(prodProy($busquedaPor[$tipoPP]));
+$json = json_decode(prodProy($busquedaPor[$tipoPP], $params));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 jimport('trama.class');
