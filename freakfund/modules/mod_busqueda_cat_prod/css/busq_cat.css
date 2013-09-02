@@ -1,0 +1,26 @@
+
+.busq_cat select {
+	width: 35%;
+	display: inline-block;
+}
+
+.busq_cat input[type="submit"] {
+    background: #2C9AD9 !important;
+    border: 0 none;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    color: #FFFFFF !important;
+    text-shadow: 1px -1px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease-in 0s;
+    cursor: pointer;
+   	border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    font-family: 'BarnaBold',Geneva,Verdana,Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.7em;
+    padding: 5px 15px;
+    vertical-align: middle;   
+}
+.busq_cat input[type="submit"]:hover {
+	background: #474747 !important;
+}

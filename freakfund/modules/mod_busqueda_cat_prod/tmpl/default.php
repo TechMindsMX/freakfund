@@ -2,7 +2,9 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $document = JFactory::getDocument();
 
+$document->addScript('templates/rt_hexeris/js/jquery-1.9.1.js');
 $document->addScript('modules/mod_busqueda_cat_prod/js/jquery.chained.js');
+$document->addStyleSheet('modules/mod_busqueda_cat_prod/css/busq_cat.css');
 $scriptJS = 'jQuery(function() {
 	jQuery("#selectSubCat").chained("#selectCat");	
 });';
@@ -16,6 +18,7 @@ $accion= 'index.php?option=com_jumi&view=application&fileid=8&typeId='.$tipoPP.'
 $opcionesSubCat = '';
 
 ?>
+<div class="busq_cat">
 <form action="<?php echo $accion; ?>" method="post"> 
 	<select id="selectCat" name="categoria">
 		<option value="">Seleccione una categoría</option>
@@ -43,4 +46,4 @@ $opcionesSubCat = '';
 	
 	<input type="submit" value="Buscar" >
 </form>
-		
+</div>
