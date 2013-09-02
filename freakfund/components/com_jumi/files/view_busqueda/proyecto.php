@@ -12,13 +12,13 @@ $busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY
 $ligasPP = '';
 
 $input = JFactory::getApplication()->input;
-$tipoPP = $input->get('typeId', 1, 'INT');
+$tipoPP = $input->get('typeId', 0, 'INT');
 
 $params = new stdClass;
-$params->categoria = $input->get('categoria', '', 'STR');
+$params->categoria = $input->get('categoria', 'all', 'STR');
 $params->subcategoria = $input->get('subcategoria', 'all', 'STR');
-// $params->estatus = $input->get('status', '', 'STR');
-$params->estatus = '0,2,9';
+$params->estatus = $input->get('status', '', 'STR');
+
 $params->tags = $input->get('tags', null, "STR");
 
 if ( !$tipoPP ) {
@@ -39,22 +39,19 @@ function prodProy ($tipo, $params) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
 		}
-		elseif ( ($tipo == 'all' ) && ($params->categoria == "") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
+		elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		} elseif ( ($params->categoria != "") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
+		} elseif ( ($params->categoria != "all") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$params->categoria.'/'.$params->estatus;
-		} elseif ( ($params->categoria != "") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
+		} elseif ( ($params->categoria != "all") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
-		} elseif ( ($tipo != 'all' ) && ($params->categoria == "") && ($params->subcategoria == "all") ) {//nose
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 		}	
 	} else {
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 	}
 
 	$json0 = @file_get_contents($url);
-
-	if ( $json0 === false ) {
+	if ( !json_decode($json0) ) {
 		$app =& JFactory::getApplication();
 		$app->redirect(JURI::base(), JText::_('BUSQUEDA_SIN_RESULTADOS'), 'notice');
 	}
@@ -131,13 +128,14 @@ function tagLimpia ($data) {
   
   return $datolimpio;
 }
+
 ?>
 
 <script type="text/javascript">
 var members = <?php echo $jsonJS; ?>;
 
 $(document).ready(function(){
-	jQuery('#contador').html("<span>RESULTADOS: </span>"+members.length);
+	jQuery('#contador').html("<span><?php echo JText::_('RESULTADOS'); ?>:</span>"+members.length);
 	initPagination();
 	
 	jQuery("#ligasprod input").click(function () {		
@@ -151,20 +149,20 @@ $(document).ready(function(){
 				<?php 
 				if (isset($proyectos)) {
 					echo 'members = '.$proyectos.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 				}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert('.JText::_('NO_RESULTADOS').');'.
 						 'jQuery("#ligasprod in/home/lutek/workspaceput").prop("checked",false);';
 				} ?>
 			}else if (producto && !proyecto && !repertorio) {
 				<?php 
 				if (isset($productos)) {
 					echo 'members = '.$productos.';
-					jQuery("#contador").html("<span>RESULTADOS: </span>"+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').': </span>"+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert('.JText::_('NO_RESULTADOS').');'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				} 
 			 	?>
@@ -172,10 +170,10 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorio)) {
 					echo 'members = '.$repertorio.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert('.JText::_('NO_RESULTADOS').');'.
 						 'jQuery("#ligasprod input").prop("checked",false);';;
 				}
 				?>
@@ -183,10 +181,10 @@ $(document).ready(function(){
 				<?php
 				if (isset($prodProy)) {
 					echo 'members = '.$prodProy.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert('.JText::_('NO_RESULTADOS').');'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}
 				?>
@@ -194,7 +192,7 @@ $(document).ready(function(){
 				<?php
 				if (isset($repertorioProduc)) {
 					echo 'members = '.$repertorioProduc.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
 					echo 'alert("No hay Resultados con este filtro");'.
@@ -203,23 +201,23 @@ $(document).ready(function(){
 			}else if(!producto && proyecto && repertorio) {
 				<?php if (isset($repertProy)) {
 					echo 'members = '.$repertProy.';
-					jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}
 			 	else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert('.JText::_('NO_RESULTADOS').');'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}?>
 			 	
 			}else if( (repertorio && proyecto && producto) || (!repertorio && !proyecto && !producto) ){
 				members = <?php echo $jsonJS; ?>;
-				jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+				jQuery("#contador").html("<span><?php echo JText::_('RESULTADOS'); ?>:</span> "+members.length);
 				initPagination();
 			}
 		}else{
 			jQuery('#ligasprod input').prop('checked',false);
 			members = <?php echo $jsonJS; ?>;
-			jQuery("#contador").html("<span>RESULTADOS:</span> "+members.length);
+			jQuery("#contador").html("<span><?php echo JText::_('RESULTADOS'); ?>:</span> "+members.length);
 			initPagination();
 		}
 	});
@@ -233,17 +231,18 @@ function pageselectCallback (page_index, jq) {
 	var ancho = Math.floor(100/columnas);
 	var countCol = 0;
 
-	/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
-	members[5].breakeven = 100000;
-	members[5].recaudado = 80000;
-	members[5].fundEnd = '12/12/2013';
-	members[5].roiFinanciadores = 40;
-	members[5].roiInversionistas = 30;
-	members[5].premierEnd = '12/01/2014';
-	/**************************************************************************************/
+	
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
+		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
+		members[i].recaudado = 400000;
+		members[i].fundEnd = '12/12/2013';
+		members[i].roiFinanciadores = 40;
+		members[i].roiInversionistas = 30;
+		members[i].premierEnd = '12/01/2014';
+		/**************************************************************************************/
+		
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
@@ -278,12 +277,12 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<a href="' + link + '">';
 		newcontent += '<img src="<?php echo $path; ?>' + members[i].projectAvatar.name + '" alt="Avatar" /></a>';
 		if(members[i].type == "PROJECT"){
-		newcontent += '<div class="progress-bar" style="background: red; width: '+ porcentajeRecaudado +'%; text-align:center;">'+ recaudado +'</div>';
-		newcontent += '<div style="width: 50%;">'+ breakeven +'</div><div style="width: 50%;">'+ cierreFinanciamiento +'</div>';
+		newcontent += '<div class="progress-bar" style="background: red; width: '+ porcentajeRecaudado +'%; text-align:center;">Recaudado: '+ recaudado +'</div>';
+		newcontent += '<div style="width: 50%;">Breakeven:'+ breakeven +'</div><div style="width: 50%;">Fecha cierre: '+ cierreFinanciamiento +'</div>';
 		}
 		if(members[i].type == "PRODUCT"){
-		newcontent += '<div style="width: 50%;">'+ roiFinanciadores +'</div><div style="width: 50%;">'+ roiInversionistas +'</div>';
-		newcontent += '<div style="width: 100%;">'+ cierrePresentacion +'</div>';
+		newcontent += '<div style="width: 50%;">ROI Inversionista: '+ roiFinanciadores +'</div><div style="width: 50%;">ROI Presentacion: '+ roiInversionistas +'</div>';
+		newcontent += '<div style="width: 100%;">Fecha cierre: '+ cierrePresentacion +'</div>';
 		}
 		newcontent += '</div>';
 		newcontent += '<div class="descripcion">';
