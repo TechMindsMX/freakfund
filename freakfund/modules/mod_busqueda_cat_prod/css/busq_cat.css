@@ -2,6 +2,7 @@
 .busq_cat select {
 	width: 35%;
 	display: inline-block;
+	margin: 0 15px 0 0;
 }
 
 .busq_cat input[type="submit"] {
