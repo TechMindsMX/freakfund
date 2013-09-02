@@ -162,7 +162,7 @@
             <div class="_25">
                	<label for="doFi_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
                	<select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
-               		<option value="México" selected="selected">M&eacute;xico</option>
+               		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
 			</div>
 			

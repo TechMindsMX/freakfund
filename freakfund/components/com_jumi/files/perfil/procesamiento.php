@@ -75,6 +75,13 @@ class procesamiento extends manejoImagenes {
 			}
 		}
 		
+		//Guarda la imagen de perfil en el perfil de Jomsocial.
+		if ($tabladb == 'perfil_persona'){
+			$campos = ' avatar = "'.$dataFinal['Foto'].'", thumb = "'.$dataFinal['Foto'].'"';
+			$conditions = ' userid = '.$usuario->id;
+			$getDatosGuardados->updateFields('c3rn2_community_users', $campos, $conditions);
+		}
+		
 		if(!$exitenDatos){
 			//Inserta los datos en caso de que no existan elementos
 			$getDatosGuardados->insertFields($tabladb, $col, $val);
