@@ -16,7 +16,7 @@ $opcionesSubCat = '';
 
 ?>
 <div class="busq_cat">
-<form action="<?php echo $accion; ?>" method="post"> 
+<form target="_parent" action="<?php echo $accion; ?>" method="post"> 
 	<select id="selectProyCat" name="categoria">
 		<option value=""><?php echo JText::_('SELECCIONE').JText::_('CATEGORIA'); ?></option>
 	<?php		
