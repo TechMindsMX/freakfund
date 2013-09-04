@@ -4,7 +4,7 @@ function datosxCP() {
 	jQuery('input[name$="perfil_codigoPostal_idcodigoPostal"]').change(function () {
 					
 		var request = $.ajax({
-			url:"components/com_jumi/files/busqueda/ajax.php",
+			url:"libraries/trama/js/ajax.php",
 			data: {
 				"cp": this.value,
 				"fun": '2'

@@ -214,7 +214,7 @@ $promedio = $objuserdata->scoreUser($userid);
 			jQuery('#calif').raty({
 				click: function (score) {
 					var request = $.ajax({
-		     			url:"components/com_jumi/files/busqueda/ajax.php",
+		     			url:"libraries/trama/js/ajax.php",
 		 				data: {
 		  					"score": score,
 		  					"calificador": <?php echo $usuario->id; ?>,

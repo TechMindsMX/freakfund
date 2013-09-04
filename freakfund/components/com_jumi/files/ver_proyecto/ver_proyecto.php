@@ -609,7 +609,7 @@ function codeAddress() {
 			
 			$('.shareButton').click(function() {
 				var respuesta = $.ajax({
-	     			url:"components/com_jumi/files/busqueda/ajax.php",
+	     			url:"libraries/trama/js/ajax.php",
 	 				data: {
 	  					"userId": <?php echo $usuario->id; ?>,
 	  					"projectId": <?php echo $json->id; ?>,
