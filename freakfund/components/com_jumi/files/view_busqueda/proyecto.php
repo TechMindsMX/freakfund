@@ -152,7 +152,7 @@ $(document).ready(function(){
 					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 				}else {
-					echo 'alert('.JText::_('NO_RESULTADOS').');'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod in/home/lutek/workspaceput").prop("checked",false);';
 				} ?>
 			}else if (producto && !proyecto && !repertorio) {
@@ -162,7 +162,7 @@ $(document).ready(function(){
 					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').': </span>"+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert('.JText::_('NO_RESULTADOS').');'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				} 
 			 	?>
@@ -173,7 +173,7 @@ $(document).ready(function(){
 					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert('.JText::_('NO_RESULTADOS').');'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';;
 				}
 				?>
@@ -184,7 +184,7 @@ $(document).ready(function(){
 					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert('.JText::_('NO_RESULTADOS').');'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}
 				?>
@@ -195,7 +195,7 @@ $(document).ready(function(){
 					jQuery("#contador").html("<span>'.JText::_('RESULTADOS').':</span> "+members.length);
 					initPagination();';
 			 	}else {
-					echo 'alert("No hay Resultados con este filtro");'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}?>	
 			}else if(!producto && proyecto && repertorio) {
@@ -205,7 +205,7 @@ $(document).ready(function(){
 					initPagination();';
 			 	}
 			 	else {
-					echo 'alert('.JText::_('NO_RESULTADOS').');'.
+					echo 'alert("'.JText::_('NO_RESULTADOS').'");'.
 						 'jQuery("#ligasprod input").prop("checked",false);';
 				}?>
 			 	

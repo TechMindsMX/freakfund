@@ -15,6 +15,7 @@ switch ($fun) {
 		
 		if( ($resultado->num_rows == 0) AND ($calificador != $calificado)) {
 			$query_insert = 'INSERT INTO perfil_rating_usuario VALUES (NULL, '.$calificador.','.$calificado.' , '.$score.')';
+			$bd->query("SET NAMES 'utf8'");
 			$bd->query($query_insert);
 			
 			$query_promedio = 'SELECT avg(rating) as score FROM perfil_rating_usuario WHERE idUserCalificado = '.$calificado;
@@ -75,6 +76,7 @@ switch ($fun) {
 			$query_proy .= '(`id`, `actor`, `target`, `title`, `content`, `app`, `verb`, `cid`, `groupid`, `eventid`, `group_access`, `event_access`, `created`, `access`, `params`, `points`, `archived`, `location`, `latitude`, `longitude`, `comment_id`, `comment_type`, `like_id`, `like_type`, `actors`, `proyId`)';
 			$query_proy .= 'VALUES ("NULL", "'.$userId.'", "'.$userId.'", "'.$frase.'", "", "profile", "", "'.$userId.'", "0", "0", "0", "0", "'.$fecha.'", "20", "", "1", "0", "", "255", "255", "'.$objMaxId->id.'", "profile.status", "'.$objMaxId->id.'", "profile.status", "", "'.$projectId.'")';
 			
+			$bd->query("SET NAMES 'utf8'");
 			$bd->query($query_proy);
 			
 			$respuesta['shared'] = false;
