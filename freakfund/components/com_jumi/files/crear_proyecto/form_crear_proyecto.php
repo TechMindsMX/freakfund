@@ -22,7 +22,7 @@ $subCategorias = JTrama::getAllSubCats();
 JHtml::_('behavior.modal');
 //si proyid no esta vacio traigo los datos del proyecto del servicio del middleware
 $token = JTrama::token();
-$objDatosProyecto = JTrama::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
+$objDatosProyecto = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null, $subCategorias);
 
 //definicion de los valores de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';

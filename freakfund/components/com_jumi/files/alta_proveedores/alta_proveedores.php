@@ -23,7 +23,7 @@ class AltaProveedores {
 		}
 
 		$proyId = $app -> input -> get('proyid', '', 'INT');
-		$this -> objDatos = JTrama::getDatos('project', (!empty($proyId)) ? $proyId : null);
+		$this -> objDatos = JTrama::getDatos( (!empty($proyId)) ? $proyId : null);
 
 		$this -> getMoreData();
 		$this -> getEditable();

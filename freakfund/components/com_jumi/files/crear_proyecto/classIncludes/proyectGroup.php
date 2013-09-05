@@ -6,7 +6,7 @@ require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP
 
 $subCategorias = JTrama::getAllSubCats();
 
-$objDatosProyecto = JTrama::getDatos('project', (!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
+$objDatosProyecto = JTrama::getDatos( (!empty($_GET['projectId']))?$_GET['projectId']:null, $subCategorias);
 
 $grupoExistente = JTrama::searchGroup($objDatosProyecto->id);
 

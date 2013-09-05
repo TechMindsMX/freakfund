@@ -19,7 +19,7 @@ $subCategorias = JTrama::getAllSubCats();
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
-$objDatosRepertorio = JTrama::getDatos('project', (!empty($_GET['proyid']))?$_GET['proyid']:null);
+$objDatosRepertorio = JTrama::getDatos( (!empty($_GET['proyid']))?$_GET['proyid']:null);
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/create';

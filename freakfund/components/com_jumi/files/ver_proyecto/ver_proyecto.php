@@ -36,12 +36,17 @@
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+<script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
 
 <?php
-$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$proyecto;
-$json = json_decode(file_get_contents($url));
+$json = JTrama::getDatos($proyecto);
 $json->etiquetaTipo = tipoProyProd($json);
 $json->acceso = JTramaSocial::checkUserGroup($proyecto, $usuario->id);
+
+if($json->name) {
+	$mydoc =& JFactory::getDocument();
+	$mydoc->setTitle($json->name);
+}
 
 function tipoProyProd($data) {
 	$tipo = $data->type;
@@ -194,16 +199,16 @@ function avatar($data) {
 function finanzas ($data) {
 	$html = '';
 	
-	$html = '<div id="finanzas_general">'.
-			'<p><span>'.JText::_('BUDGET').'</span>'.$data->budget.'</p>'.
-			'<p><span>'.JText::_('BREAKEVEN').'</span>'.$data->breakeven.'</p>'.
-			'<p><span>'.JText::_('REVE_POTENTIAL').'</span>'.$data->revenuePotential.'</p>'.
-			'</div>';
+	$html = '<ul id="finanzas_general">'.
+			'<li><span>'.JText::_('BUDGET').'</span> <span class="number">'.$data->budget.'</span></li>'.
+			'<li><span>'.JText::_('BREAKEVEN').'</span> <span class="number">'.$data->breakeven.'</span></li>'.
+			'<li><span>'.JText::_('REVE_POTENTIAL').'</span> <span class="number">'.$data->revenuePotential.'</span></li>'.
+			'</ul>';
 	return $html;
 }
 
 function tablaFinanzas($data) {
-	$html = '<table id="tabla_finanzas">'.
+	$html = '<table class="table table-striped">'.
 			'<tr><th>'.
 			JText::_('SECCION').'</th><th>'.
 			JText::_('PRECIO').'</th><th>'.
@@ -211,10 +216,10 @@ function tablaFinanzas($data) {
 	$opentag = '<td>';
 	$closetag = '</td>';
 	foreach ($data->projectUnitSales as $key => $value) {
-		$html .= '<tr class="row">';
+		$html .= '<tr>';
 		$html .= $opentag.$value->section.$closetag;
-		$html .= $opentag.$value->unitSale.$closetag;
-		$html .= $opentag.$value->capacity.$closetag;
+		$html .= $opentag.'<span class="number">'.$value->unitSale.'</span>'.$closetag;
+		$html .= $opentag.'<span class="number">'.$value->capacity.'</span>'.$closetag;
 		$html .= '</tr>';
 	}
 	$html .= '</table>';
@@ -256,12 +261,13 @@ function rating($data) {
 
 function encabezado($data) {
 	$fechacreacion = $data->timeCreated/1000;
-	$html = '<h2>'.$data->name.'</h2>'.
-		'<h4>'.JTrama::getSubCatName($data->subcategory).'</h4>'.
-		'<span class="tipo_proy_prod"> - '.JTrama::getStatusName($data->status).'</span>'.
-		'<span class="tipo_proy_prod">'.$data->etiquetaTipo.'</span>'.
-		'<p>'.JTrama::getProducerProfile($data->userId).'</p>'.
-		'<span class="fechacreacion"> Creado '.date('d/M/Y', $fechacreacion).'</span>';
+	$html = '<div class="encabezado">'.
+		'<h1>'.$data->name.'</h2>'.
+		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
+		'<p id="productor">'.JTrama::getProducerProfile($data->userId).'</p>'.
+		'<p class="fechacreacion"> Creado '.date('d/M/Y', $fechacreacion).'</p>'.
+		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
+		'</div>';
 	
 	return $html;
 }
@@ -312,13 +318,13 @@ function informacionTmpl($data, $params) {
 	}
 
 
-	$html = '<div id="izquierdaDesc" class="gantry-width-33 gantry-width-block">'.
-			'<div class="gantry-width-spacer">'.
+	$html = '<div id="izquierdaDesc" class="ancho-col gantry-width-block">'.
+			'<div>'.
 			$izquierda.
 			'</div>'.
 			'</div>'.
-			'<div id="derechaDesc" class="gantry-width-66 gantry-width-block">'.
-			'<div class="gantry-width-spacer">'.
+			'<div id="derechaDesc" class="ancho-col gantry-width-block">'.
+			'<div>'.
 			encabezado($data).
 			'</div>'.
 			'<div id="contenido-detalle">'.
@@ -331,15 +337,15 @@ function informacionTmpl($data, $params) {
 }
 
 function fechas($data) {
-	$html = '<div id="fechas)">';
+	$html = '<ul id="fechas">';
 	if ($data->type == 'PROJECT') {
-			$html .= '<p><span>'.JText::_($data->type.'_FUND_START').'</span>'.$data->fundStartDate.'</p>'.
-					'<p><span>'.JText::_($data->type.'_FUND_END').'</span>'.$data->fundEndDate.'</p>'.
-					'<p><span>'.JText::_($data->type.'_PRODUCTION_START').'</span>'.$data->productionStartDate.'</p>';
+			$html .= '<li><span>'.JText::_($data->type.'_FUND_START').'</span>'.$data->fundStartDate.'</li>'.
+					'<li><span>'.JText::_($data->type.'_FUND_END').'</span>'.$data->fundEndDate.'</li>'.
+					'<li><span>'.JText::_($data->type.'_PRODUCTION_START').'</span>'.$data->productionStartDate.'</li>';
 	}
-	$html .= '<p><span>'.JText::_($data->type.'_PREMIERE_START').'</span>'.$data->premiereStartDate.'</p>'.
-			'<p><span>'.JText::_($data->type.'_PREMIERE_END').'</span>'.$data->premiereEndDate.'</p>'.
-			'</div>';
+	$html .= '<li><span>'.JText::_($data->type.'_PREMIERE_START').'</span>'.$data->premiereStartDate.'</li>'.
+			'<li><span>'.JText::_($data->type.'_PREMIERE_END').'</span>'.$data->premiereEndDate.'</li>'.
+			'</ul>';
 
 	return $html;
 }
@@ -363,6 +369,50 @@ function userName($data) {
 	
 	return $result;
 }
+
+function statusbar($data) {
+// |  5 | Autorizado    |  Financiamiento
+// |  6 | Produccion    |  Produccion
+// |  7 | Presentacion  |  Presentacion
+	switch ($data->status) { 
+		case '5':
+$data->balance = 5000000000;
+			$labelTopLeft = $data->fundStartDate;
+			$labelTopRight = $data->fundEndDate;
+			$labelBottomLeft = JText::_('RECUADADO').' = <span class="number">'.$data->balance.'</span>';
+			$labelBottomRight = JText::_('PUNTO_EQUILIBRIO').' = <span class="number">'.$data->breakeven.'</span>';
+			$labelInside = null;
+			$data->balancePercentage = (($data->balance * 100) / $data->breakeven);
+			$data->statusbarPorcentaje = $data->balancePercentage;
+			break;
+		case '6':
+$ahora =  '1394284000000'; // (time() * 1000);
+			$labelTopLeft = $data->fundStartDate;
+			$labelTopRight = $data->fundEndDate;
+			$labelBottomLeft = JText::_('');
+			$labelBottomRight = JText::_('');
+			$labelInside = null;
+			$difMax = $data->premiereStartDateCode - $data->productionStartDateCode;
+			$difToday = $data->premiereStartDateCode - $ahora;
+			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
+			break;
+		case '7':
+$ahora =  '1407918800000'; // (time() * 1000);
+			$labelTopLeft = $data->fundStartDate;
+			$labelTopRight = $data->fundEndDate;
+			$labelBottomLeft = JText::_('');
+			$labelBottomRight = JText::_('');
+			$labelInside = null;
+			$difMax = $data->premiereEndDateCode - $data->premiereStartDateCode;
+			$difToday = $data->premiereEndDateCode - $ahora;
+			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
+			break;
+	}
+	$tmpl = '<div id="animacionbg"></div>'.'<span>'.$labelTopLeft.'</span><span>'.$labelBottomLeft.'</span><span>'.$labelTopRight.
+			'</span><span>'.$labelBottomRight.'</span><span>'.$labelInside.'</span>';
+	return $tmpl;
+}
+
 ?>
 	<script type="text/javascript">
 	function scrollwrapper(){
@@ -370,6 +420,7 @@ function userName($data) {
 	}
 
 	jQuery(document).ready(function(){
+		
 		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
@@ -412,6 +463,11 @@ function userName($data) {
 		<div id="content">
 			<?php echo buttons($json, $usuario); ?>
 		</div>
+			<div id="statusbar">
+				<?php echo statusbar($json); ?>
+<?php // echo var_dump($json); ?>
+
+			</div>
 			<div id="banner" class="ver_proyecto">
 				<div class="info-banner">
 					<div class="rt-inner">
@@ -474,9 +530,7 @@ function userName($data) {
 			<div id="finanzas" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
-				?>
-				<h3>Finanzas</h3>
-				<?php 
+					echo '<h1 class="mayusc">'.JText::_('FINANZAS').'</h1>';
 					echo informacionTmpl($json, "finanzas"); 
 				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
 					echo JText::_('CONTENIDO_PRIVADO');
@@ -489,7 +543,7 @@ function userName($data) {
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
 				?>
-				<h3>Informacion</h3>
+				<h1 class="mayusc">>Informacion</h1>
 				
 				<div class="detalleDescripcion">
 					<?php 
@@ -632,12 +686,24 @@ function codeAddress() {
 					}
 				});
 			});
+			
+			
+			jQuery('span.number').number( true, 0, ',','.' )
+
 		});
 		
 	    $(window).load(function() {
         	$('#slider').nivoSlider();
 		});
     </script>
+
+	<script>
+			setTimeout(function () {
+				jQuery("#animacionbg").animate({
+					width: [ "<?php echo (100-($json->statusbarPorcentaje)).'%'; ?>", "swing" ]
+				}, 2000);
+			}, 1000);
+	</script>
 
 <?php
 //var_dump($json);

@@ -165,22 +165,6 @@ class JTrama
 		
 	}
 	
-	public static function getDatos ( $tipo, $id ) {
-		
-		if( isset($id) ) {	
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
-			$json = file_get_contents($url);
-			$jsonDecode = json_decode($json); 
-			
-			$respuesta = $jsonDecode;
-		} else {
-				
-			$respuesta = null;
-		}
-
-		return $respuesta;
-	}
-	
 	public static function token(){
 		
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
@@ -195,7 +179,61 @@ class JTrama
 		$jsonAllProjects = file_get_contents($url);
 		$json = json_decode($jsonAllProjects);
 		
+		foreach ($json as $key => $value) {
+			JTrama::formatDatosProy($value);
+		}
+		
 		return $json;
 	}
+
+	public static function getDatos ( $id ) {
+		
+		if( isset($id) ) {	
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+			$json = file_get_contents($url);
+			$respuesta = json_decode($json); 
+						
+			JTrama::formatDatosProy($respuesta);
+			
+		} else {
+				
+			$respuesta = null;
+		}
+
+		return $respuesta;
+	}
+	
+	public static function formatDatosProy ($value)
+	{
+		$value->fundStartDate = 1370284000000; // SIMULADOS
+		$value->fundEndDate = 1377284000000; // SIMULADOS
+		$value->productionStartDateCode = 1378003651000;
+		$value->premiereStartDateCode = 1381003651000;
+		$value->premiereEndDateCode = $value->premiereEndDate;
+		
+		$value->fundStartDateCode = $value->fundStartDate;
+		$value->fundEndDateCode = $value->fundEndDate;
+		$value->productionStartDateCode = $value->productionStartDate;
+		$value->premiereStartDateCode = $value->premiereStartDate;
+		$value->premiereEndDateCode = $value->premiereEndDate;
+
+		if (isset($value->fundStartDate)) {
+			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
+		}
+		if (isset($value->fundEndDate)) {
+			$value->fundEndDate = date('d-m-Y', ($value->fundEndDate/1000) );
+		}
+		if (isset($value->productionStartDate)) {
+			$value->productionStartDate = date('d-m-Y', ($value->productionStartDate/1000) );
+		}
+		if (isset($value->premiereStartDate)) {
+			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDate/1000) );
+		}
+		if (isset($value->premiereEndDate)) {
+			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
+		}
+	}
+
+
 }
 ?>
