@@ -219,7 +219,7 @@ function tablaFinanzas($data) {
 		$html .= '<tr>';
 		$html .= $opentag.$value->section.$closetag;
 		$html .= $opentag.'<span class="number">'.$value->unitSale.'</span>'.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->capacity.'</span>'.$closetag;
+		$html .= $opentag.'<span class="number">'.$value->unit.'</span>'.$closetag;
 		$html .= '</tr>';
 	}
 	$html .= '</table>';
@@ -374,16 +374,25 @@ function statusbar($data) {
 // |  5 | Autorizado    |  Financiamiento
 // |  6 | Produccion    |  Produccion
 // |  7 | Presentacion  |  Presentacion
+	$labelTopLeft = '';
+	$labelBottomLeft = '';
+	$labelTopRight = '';
+	$labelBottomRight = '';
+	$labelInside = '';
+	$style = '';
+
 	switch ($data->status) { 
 		case '5':
+$ahora = '1374284000000'; // (time() * 1000);
 $data->balance = 5000000000;
 			$labelTopLeft = $data->fundStartDate;
 			$labelTopRight = $data->fundEndDate;
 			$labelBottomLeft = JText::_('RECUADADO').' = <span class="number">'.$data->balance.'</span>';
 			$labelBottomRight = JText::_('PUNTO_EQUILIBRIO').' = <span class="number">'.$data->breakeven.'</span>';
 			$labelInside = null;
-			$data->balancePercentage = (($data->balance * 100) / $data->breakeven);
-			$data->statusbarPorcentaje = $data->balancePercentage;
+			$data->difToday = $data->fundEndDateCode - $ahora ;
+			$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
+			$data->statusbarPorcentaje = $data->balancePorcentaje;
 			break;
 		case '6':
 $ahora =  '1394284000000'; // (time() * 1000);
@@ -407,9 +416,51 @@ $ahora =  '1407918800000'; // (time() * 1000);
 			$difToday = $data->premiereEndDateCode - $ahora;
 			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
 			break;
+		default:
+			$style = ' style="display: none" ';
 	}
-	$tmpl = '<div id="animacionbg"></div>'.'<span>'.$labelTopLeft.'</span><span>'.$labelBottomLeft.'</span><span>'.$labelTopRight.
-			'</span><span>'.$labelBottomRight.'</span><span>'.$labelInside.'</span>';
+	if (!$style) {
+	$data->animacion = 	'<script>
+						setTimeout(function () {
+							jQuery("#animacionbg").animate({
+								width: [ "'.(100-($data->statusbarPorcentaje)).'%", "swing" ]
+							}, 2000);
+						}, 1000);
+					</script>';
+	}
+	
+	$tmpl = '<div id="statusbar"'.$style.'><div id="animacionbg"></div>'.
+			'<span>'.$labelTopLeft.'</span><span>'.$labelBottomLeft.'</span><span>'.$labelTopRight.
+			'</span><span>'.$labelBottomRight.'</span><span>'.$labelInside.'</span>'.
+			'</div>';
+
+	return $tmpl;
+}
+
+function grafico($data) {
+	if ($data->status == '5') {
+		$diasRestan = floor($data->difToday / 86400000);
+		
+		$tmpl = '<div><h3>'.JText::_('RECAUDADO').' = '.$data->balance.'</h3></div>'.
+				'<div><h3>'.JText::_('RECAUDADO_PORCEN').' = '.round($data->balancePorcentaje, 2).'%</h3></div>'.
+				'<div><h3>'.JText::_('DIAS_RESTAN').' = '.$diasRestan.'</h3></div>';
+	
+		return $tmpl;
+	}
+}
+
+function botonFinanciar($data) {
+	switch ($data->status) { 
+		case '5':
+			$string = 'LABEL_FINANCIAR';
+			break;
+		default:
+			$string = 'LABEL_COMPRAR';
+			break;
+	}
+	$url = '';
+	$tmpl = '<div><a class="button" href="'.$url.'">'.JText::_($string).'</a></div>';
+	
 	return $tmpl;
 }
 
@@ -463,11 +514,11 @@ $ahora =  '1407918800000'; // (time() * 1000);
 		<div id="content">
 			<?php echo buttons($json, $usuario); ?>
 		</div>
-			<div id="statusbar">
 				<?php echo statusbar($json); ?>
-<?php // echo var_dump($json); ?>
-
+			<div id="grafico">
+				<?php echo grafico($json); ?>
 			</div>
+			<?php echo botonFinanciar($json); ?>
 			<div id="banner" class="ver_proyecto">
 				<div class="info-banner">
 					<div class="rt-inner">
@@ -475,7 +526,7 @@ $ahora =  '1407918800000'; // (time() * 1000);
 					</div>
 				</div>
 				<div class="content-banner">
-					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name ?>" />
+					<img src="<?php echo MIDDLE.BANNER.'/'.$json->projectBanner->name; ?>" />
 				</div>
 			</div>
 			<div id="video" class="ver_proyecto">
@@ -697,14 +748,9 @@ function codeAddress() {
 		});
     </script>
 
-	<script>
-			setTimeout(function () {
-				jQuery("#animacionbg").animate({
-					width: [ "<?php echo (100-($json->statusbarPorcentaje)).'%'; ?>", "swing" ]
-				}, 2000);
-			}, 1000);
-	</script>
 
 <?php
+	echo $json->animacion;
+
 //var_dump($json);
  ?>
