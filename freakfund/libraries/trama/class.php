@@ -203,6 +203,21 @@ class JTrama
 		return $respuesta;
 	}
 	
+	public static function getUserBalance ( $usuario ) {
+	
+		if( isset($usuario) ) {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$usuario;
+			$json = file_get_contents($url);
+			$respuesta = json_decode($json);
+				
+		} else {
+	
+			$respuesta = null;
+		}
+	
+		return $respuesta;
+	}
+	
 	public static function formatDatosProy ($value)
 	{
 		$value->fundStartDate = 1370284000000; // SIMULADOS

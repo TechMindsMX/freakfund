@@ -458,7 +458,7 @@ function botonFinanciar($data) {
 			$string = 'LABEL_COMPRAR';
 			break;
 	}
-	$url = '';
+	$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$data->id;
 	$tmpl = '<div><a class="button" href="'.$url.'">'.JText::_($string).'</a></div>';
 	
 	return $tmpl;
@@ -670,10 +670,10 @@ function codeAddress() {
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({
-						url:"http://192.168.0.122:7070/trama-middleware/rest/project/rate",
+						url:<?php echo MIDDLE.PUERTO;?>"/trama-middleware/rest/project/rate",
 						data: {
 							"score": score,
-							"projectId": "<?php echo $_GET['proyid']; ?>",
+							"projectId": "<?php echo $proyecto ?>",
 							"token": "<?php echo $token; ?>",
 							"userId": <?php echo $usuario->id; ?>
 						},
@@ -750,7 +750,8 @@ function codeAddress() {
 
 
 <?php
+if (isset($json->animacion)) {
 	echo $json->animacion;
-
+}
 //var_dump($json);
  ?>
