@@ -5,7 +5,10 @@ $document = JFactory::getDocument();
 $document->addScript('libraries/trama/js/jquery.number.min.js');
 $document->addStyleSheet('modules/mod_proyectos/css/mod_proyectos.css');
 
-// <script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
+$scripjs = '	jQuery(document).ready(function() {
+		jQuery("span.number").number( true, 0, ",","." )
+	});';
+$document->addScriptDeclaration($scripjs);
 
 	foreach ($datos as $key => $value) {
 		$nombre = $value->name;
@@ -50,8 +53,3 @@ $document->addStyleSheet('modules/mod_proyectos/css/mod_proyectos.css');
 
 ?>
 
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery('span.number').number( true, 0, ',','.' )
-	});
-</script>

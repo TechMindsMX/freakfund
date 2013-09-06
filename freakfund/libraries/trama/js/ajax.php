@@ -1,9 +1,11 @@
 <?php
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
 
-include('../../../../configuration.php');
+include('../../../configuration.php');
 $configuracion = new JConfig;
 $bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
+
+date_default_timezone_set('America/Mexico_City');
 
 switch ($fun) {
 	case 1:

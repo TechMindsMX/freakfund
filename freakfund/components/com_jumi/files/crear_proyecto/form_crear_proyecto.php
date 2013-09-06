@@ -671,7 +671,7 @@ if ( isset ($objDatosProyecto) ) {
 	       
 	<br> 
 	
-	<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE')?>*:</label> 
+	<label for="premiereEndDate"><?php echo JText::_('FECHA_CIERRE_OBLIG')?>*:</label> 
 	<input 
 		type = "text" 
 		id = "premiereEndDate" 
