@@ -3,30 +3,53 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
 $urls = new JTrama;
+$providers = $this -> items -> providers;
+$presupuesto = $this->items -> budget;
 
-foreach($this->items as $i => $item):
-	if ( $item->type != 'REPERTORY' ) {
-		$user_revision = $item->logs;
-				
-		if (!empty($user_revision)) {
-			$fecha = date('d/M/Y',$user_revision[0]->timestamp/1000);
-		} else {
-			$fecha = '';
-		}
-		
-		$item->producerName = JFactory::getUser($item->userId)->name;
-		
-		$html = '<a href="index.php?option=com_tramaproyectos&view=detalleproyecto&id='.$item->id.'">'.$item->name.'</a>';
- ?>
-        <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
-	        <td>
-	    		<?php echo $html; ?>
-	        </td>
-	        <td>
-	        	<?php echo $item->producerName; ?>
-	        </td>
-        </tr>
-<?php 
-	}
-endforeach; 
+foreach ($providers as $key => $value) {
 ?>
+	<tr>
+		<td>
+			<?php echo $value->advanceDate; ?>
+		</td>
+		
+		<td>
+			$<span class="number"><?php echo $value->advanceQuantity; ?></span>
+		</td>
+		
+		<td align="absmiddle">
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" onClick="alert('pagado');" />
+		</td>
+		
+		<td>
+			<?php echo $value->settlementDate; ?>
+		</td>
+		
+		<td>
+			$<span class="number"><?php echo $value->settlementQuantity; ?></span>
+		</td>
+		
+		<td>
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" onClick="alert('pagado');" />
+		</td>
+		
+		<td>
+			<?php echo JFactory::getUser($value->providerId)->name; ?>
+		</td>
+		
+		<td>
+			$<span class="number"><?php echo $value->advanceQuantity+$value->settlementQuantity; ?></span>
+		</td>
+		
+		<td align="center">
+			<input type="checkbox" value="1">
+		</td>
+	</tr>
+<?php
+}
+?>
+<tr>
+	<td colspan="7" align="right">Persupuesto </td>
+	<td>$<span class="number"><?php echo $presupuesto; ?></span></td>
+	<td></td>
+</tr>
