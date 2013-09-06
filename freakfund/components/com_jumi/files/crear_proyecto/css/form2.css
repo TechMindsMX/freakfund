@@ -2,7 +2,9 @@ label {
 	float: left;
 	width: 200px;
 }
-
+.input_compra{
+	width:30px;
+}
 input {
 	width: 180px;
 	margin-bottom: 5px;

@@ -34,15 +34,25 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 </script>
 <h3><?php echo JText::_('INVENTARIO_COMPRA');  ?></h3>
 <div>
-	<?php 	
-	var_dump($pro->projectUnitSales,$datosUsuario);
-	foreach ($pro->projectUnitSales as $key => $value){
-		echo $value ->section;
+	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
+	
+		<?php 	
 		
-	}
+		$boton = '<label>Cantidad a comprar:</label><input class="input_compra" type="text" id="nomProy"	name="compra" /> <input type="button" class="button" value="Invertir" />';
+		
+		foreach ($pro->projectUnitSales as $key => $value){
 	
+			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';
+			echo '<div>'.JText::_('PRECIO_UNIDAD').':'. $value ->unitSale.'</div>';
+			echo '<div>'.JText::_('INVENTARIOPP').':'. $value ->unit .'</div>';
+			echo $boton;
+		}
+		
+		echo '<div>'.JText::_('SALDO_FF').':'. $datosUsuario->balance .'</div>';
+		
+		?>
+		<br />
+		<div><input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> </div>
+	</form>
 	
-	
-	?>
-
 </div>
