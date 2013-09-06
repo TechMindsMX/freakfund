@@ -11,7 +11,7 @@ foreach($this->items as $i => $item):
 		if ( empty($item->providers) ) {
 			$html = 'Sin Proveedores';
 		} else {
-			$html = '<a href="index.php?option=com_freakfund&view=proveedores&id='.$item->id.'">Mostrar Proveedores</a>';
+			$html = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">Mostrar Proveedores</a>';
 		}
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">

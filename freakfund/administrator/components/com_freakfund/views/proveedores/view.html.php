@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla view library
 jimport('joomla.application.component.view');
 
-class freakfundViewproveedores extends JView
+class proveedoresViewproveedores extends JView
 {
 	function display($tpl = null) {
 	        // Get data from the model

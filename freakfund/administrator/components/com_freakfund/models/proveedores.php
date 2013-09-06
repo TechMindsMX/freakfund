@@ -2,7 +2,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modellist');
 
-class freakfundModelproveedores extends JModelList
+class proveedoresModelproveedores extends JModelList
 {		
 		public function getproveedores(){
 			$temporal = JFactory::getApplication()->input;

@@ -28,6 +28,7 @@
                         <filename>controller.php</filename>
                         <folder>models</folder>
                         <folder>views</folder>
+                        <folder>controllers</folder>
                         <folder>language</folder>
                 </files>                
         </administration>
