@@ -1,7 +1,6 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
-jimport('trama.class');
 ?>
 <tr>
     <th colspan="3" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid;" >

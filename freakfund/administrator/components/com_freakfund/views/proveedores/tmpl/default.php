@@ -1,6 +1,8 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+
+jimport('trama.class');
  
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
@@ -11,6 +13,24 @@ $document->addScript('../libraries/trama/js/jquery.number.min.js');
 <script language="JavaScript">
 	jQuery(document).ready(function (){
 		 jQuery('span.number').number( true, 2, '.',',' );
+		 
+		 jQuery('.pagar').click(function () {
+		 	var request = $.ajax({
+				url:"<?php echo MIDDLE.PUERTO ?>/trama-middleware/rest/project/rate",
+				data: {
+					"providerId": jQuery(this).next().next().val(),
+					"type": jQuery(this).next().val(),
+					"token": "<?php echo $token; ?>"
+				},
+				type: 'post'
+			});
+			
+			request.done(function(result){
+				var obj = eval('(' + result + ')');
+				
+				console.log(obj);
+			});
+		 });
 	});
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_tramaproyectos'); ?>" method="post" name="adminForm">

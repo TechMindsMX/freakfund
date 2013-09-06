@@ -5,7 +5,7 @@ jimport('trama.class');
 $urls = new JTrama;
 $providers = $this -> items -> providers;
 $presupuesto = $this->items -> budget;
-
+var_dump($providers);
 foreach ($providers as $key => $value) {
 ?>
 	<tr>
@@ -18,7 +18,9 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td align="absmiddle">
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" onClick="alert('pagado');" />
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" />
+			<input type="hidden" value="0" name="pagoAnticipo" />
+			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 		</td>
 		
 		<td>
@@ -30,7 +32,7 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td>
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" onClick="alert('pagado');" />
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" id="<?php echo $value->providerId; ?> />
 		</td>
 		
 		<td>
