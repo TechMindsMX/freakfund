@@ -233,7 +233,23 @@ class JTrama
 			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
 		}
 	}
+	
+	public static function getProdClosestEnd()
+	{
+		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEnd'));
+		foreach ($data as $key => $value) {
+			$value = JTrama::formatDatosProy($value);
+		}
+		
+		return $data;
+	}
 
+	public static function fundPercentage($data)
+	{
+		$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
+		
+		return $data;
+	}
 
 }
 ?>

@@ -1,0 +1,17 @@
+
+.mod-pro {
+	padding: 0 15px 10px 0;
+	color:#474747;
+}
+.mod-pro img {
+	width: 20%;
+	min-width: 60px;
+	float: left;
+	margin-right: 10px;
+}
+.mod-pro:after, .mod-pro img {
+	clear: both;
+}
+.derecha {
+	float: right;
+}
