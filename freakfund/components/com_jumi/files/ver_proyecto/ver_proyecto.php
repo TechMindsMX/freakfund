@@ -670,7 +670,7 @@ function codeAddress() {
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({
-						url:<?php echo MIDDLE.PUERTO;?>"/trama-middleware/rest/project/rate",
+						url:"<?php echo MIDDLE.PUERTO;?>/trama-middleware/rest/project/rate",
 						data: {
 							"score": score,
 							"projectId": "<?php echo $proyecto ?>",
