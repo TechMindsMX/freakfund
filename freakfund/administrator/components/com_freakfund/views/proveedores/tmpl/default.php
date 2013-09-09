@@ -9,6 +9,7 @@ JHtml::_('behavior.tooltip');
 $document = JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document->addScript('../libraries/trama/js/jquery.number.min.js');
+$token = JTrama::token();
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function (){
@@ -16,19 +17,20 @@ $document->addScript('../libraries/trama/js/jquery.number.min.js');
 		 
 		 jQuery('.pagar').click(function () {
 		 	var request = $.ajax({
-				url:"<?php echo MIDDLE.PUERTO ?>/trama-middleware/rest/project/rate",
+				url:"<?php echo MIDDLE.PUERTO ?>/trama-middleware/rest/project/saveProviderPayment",
 				data: {
 					"providerId": jQuery(this).next().next().val(),
 					"type": jQuery(this).next().val(),
+					"projectId" : jQuery(this).next().next().next().val(),
 					"token": "<?php echo $token; ?>"
 				},
 				type: 'post'
 			});
 			
 			request.done(function(result){
-				var obj = eval('(' + result + ')');
+				// var obj = eval('(' + result + ')');
 				
-				console.log(obj);
+				console.log(result);
 			});
 		 });
 	});
