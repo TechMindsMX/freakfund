@@ -581,7 +581,7 @@ function botonFinanciar($data) {
 			<div id="finanzas" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
-					echo '<h1 class="mayusc">'.JText::_('FINANZAS').'</h1>';
+					echo '<h1 class="mayusc">'.JText::_('LABEL_FINANZAS').'</h1>';
 					echo informacionTmpl($json, "finanzas"); 
 				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
 					echo JText::_('CONTENIDO_PRIVADO');
@@ -593,8 +593,8 @@ function botonFinanciar($data) {
 			<div id="info" class="ver_proyecto">
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->infoPublic == 1) || ($json->userId == $usuario->id) ){
+					echo '<h1 class="mayusc">'.JText::_('LABEL_INFO').'</h1>';
 				?>
-				<h1 class="mayusc">>Informacion</h1>
 				
 				<div class="detalleDescripcion">
 					<?php 
