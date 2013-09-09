@@ -30,7 +30,35 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 <script>
 	jQuery(document).ready(function(){
 		
-	}	
+		jQuery(':input').change(function(){
+			console.log("hola")
+			var limite = parseInt(jQuery(this).prev().prev().prev().val());
+			if ( jQuery(this).val()>limite){
+				jQuery(this).val(0);
+				jQuery(this).next().children().text(0);
+				
+				var total = 0 ;				
+				jQuery("#form_compra").find("span#resultados").each(function() {
+					total += parseFloat(jQuery(this).text()) || 0;
+				
+				jQuery("#resultadoglobal").text(total);
+				});
+			}else{
+			
+				var resultado = jQuery(this).prev().prev().val() * jQuery(this).val();
+				jQuery(this).next().children().text(resultado);
+				
+				var total = 0 ;
+				jQuery("#form_compra").find("span#resultados").each(function() {
+					total += parseFloat(jQuery(this).text()) || 0;
+				
+				jQuery("#resultadoglobal").text(total);
+				});
+				
+			}
+			});	
+		
+	});
 </script>
 <h3><?php echo JText::_('INVENTARIO_COMPRA');  ?></h3>
 <div>
@@ -38,20 +66,27 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 	
 		<?php 	
 		
-		$boton = '<label>Cantidad a comprar:</label><input class="input_compra" type="text" id="nomProy"	name="compra" /> <input type="button" class="button" value="Invertir" />';
+		$campo = '<label>Cantidad a comprar:</label><input class="input_compra" type="text" id="cantidad"	name="compra" /> ';
 		
 		foreach ($pro->projectUnitSales as $key => $value){
 	
-			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';
+			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';			
 			echo '<div>'.JText::_('PRECIO_UNIDAD').':'. $value ->unitSale.'</div>';
 			echo '<div>'.JText::_('INVENTARIOPP').':'. $value ->unit .'</div>';
-			echo $boton;
+			echo '<input type="hidden" value="'.$value ->unit.'"/>';
+			echo '<input type="hidden" value="'.$value ->unitSale.'"/>';
+			echo $campo;
+			echo '<div>'.JText::_('TOTAL_SECCION').':'.'<span id="resultados"></span></div><br /><br />';
+			
 		}
 		
 		echo '<div>'.JText::_('SALDO_FF').':'. $datosUsuario->balance .'</div>';
+		echo '<div>'.JText::_('TOTAL_PAGAR').':<span id="resultadoglobal"></span></div>';
 		
 		?>
-		<br />
+		<div style="margin: 10px;">
+		<input type="button" class="button" value="Invertir" />
+		</div>
 		<div><input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> </div>
 	</form>
 	
