@@ -265,7 +265,7 @@ function encabezado($data) {
 		'<h1>'.$data->name.'</h2>'.
 		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
 		'<p id="productor">'.JTrama::getProducerProfile($data->userId).'</p>'.
-		'<p class="fechacreacion"> Creado '.date('d/M/Y', $fechacreacion).'</p>'.
+		'<p class="fechacreacion"> Creado '.date('d-M-Y', $fechacreacion).'</p>'.
 		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
 		'</div>';
 	
