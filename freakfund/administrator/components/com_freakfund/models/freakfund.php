@@ -8,7 +8,7 @@ class freakfundModelfreakfund extends JModelList
 {
         public function getDatos()
         {
-        	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/PRODUCT'));
+        	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/5,6'));
 			
 			return $query;
         }
