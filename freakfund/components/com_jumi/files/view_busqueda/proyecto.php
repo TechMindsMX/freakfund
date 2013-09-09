@@ -41,6 +41,8 @@ function prodProy ($tipo, $params) {
 		}
 		elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		} elseif ( ($params->categoria == '') && ($params->subcategoria == "all") && ($params->estatus != "")) {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
 		} elseif ( ($params->categoria != "all") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$params->categoria.'/'.$params->estatus;
 		} elseif ( ($params->categoria != "all") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
@@ -237,10 +239,10 @@ function pageselectCallback (page_index, jq) {
 
 		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
 		members[i].recaudado = 400000;
-		members[i].fundEnd = '12/12/2013';
+		members[i].fundEnd = '12-12-2013';
 		members[i].roiFinanciadores = 40;
 		members[i].roiInversionistas = 30;
-		members[i].premierEnd = '12/01/2014';
+		members[i].premierEnd = '12-01-2014';
 		/**************************************************************************************/
 		
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;

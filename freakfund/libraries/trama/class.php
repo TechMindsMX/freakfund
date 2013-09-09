@@ -227,31 +227,31 @@ class JTrama
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
-			$value->fundStartDate = date('d/m/Y', ($value->fundStartDateCode/1000) );
+			$value->fundStartDate = date('d-m-Y', ($value->fundStartDateCode/1000) );
 		}
 		if (isset($value->fundEndDate)) {
 			$value->fundEndDateCode = $value->fundEndDate;
-			$value->fundEndDate = date('d/m/Y', ($value->fundEndDate/1000) );
+			$value->fundEndDate = date('d-m-Y', ($value->fundEndDate/1000) );
 		}
 		if (isset($value->productionStartDate)) {
 			$value->productionStartDateCode = $value->productionStartDate;
-			$value->productionStartDate = date('d/m/Y', ($value->productionStartDate/1000) );
+			$value->productionStartDate = date('d-m-Y', ($value->productionStartDate/1000) );
 		}
 		if (isset($value->premiereStartDate)) {
 			$value->premiereStartDateCode = $value->premiereStartDate;
-			$value->premiereStartDate = date('d/m/Y', ($value->premiereStartDate/1000) );
+			$value->premiereStartDate = date('d-m-Y', ($value->premiereStartDate/1000) );
 		}
 		if (isset($value->premiereEndDate)) {
 			$value->premiereEndDateCode = $value->premiereEndDate;
-			$value->premiereEndDate = date('d/m/Y', ($value->premiereEndDate/1000) );
+			$value->premiereEndDate = date('d-m-Y', ($value->premiereEndDate/1000) );
 		}
 		if(isset($value->advanceDate)) {
 			$value->advanceDateCode = $value->advanceDate;
-			$value->advanceDate = date('d/m/Y', ($value->advanceDate/1000) );
+			$value->advanceDate = date('d-m-Y', ($value->advanceDate/1000) );
 		}
 		if(isset($value->settlementDate)) {
 			$value->settlementDateCode = $value->settlementDate;
-			$value->settlementDate = date('d/m/Y', ($value->settlementDate/1000) );
+			$value->settlementDate = date('d-m-Y', ($value->settlementDate/1000) );
 		}
 	}
 	
