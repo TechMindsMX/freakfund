@@ -7,6 +7,17 @@ $presupuesto = $this->items -> budget;
 
 foreach ($providers as $key => $value) {
 	JTrama::formatDatosProy($value);
+	if($value->advancePaidDate) {
+		$deshabilitarAnticipo = 'disabled';
+	}
+	else{
+		$$deshabilitarAnticipo = '';
+	}
+	if($value->settlementPaidDate) {
+		$deshabilitaFiniquito = 'disabled';
+	}else{
+		$deshabilitaFiniquito = '';
+	}
 ?>
 	<tr>
 		<td align="absmiddle">
@@ -18,7 +29,7 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td align="absmiddle">
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" />
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitarAnticipo; ?> />
 			<input type="hidden" value="0" name="pagoAnticipo" />
 			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 			<input type="hidden" value="<?php echo $value->projectId; ?>" name="projectId" />
@@ -33,7 +44,7 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td align="absmiddle">
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" />
+			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitaFiniquito ?>/>
 			<input type="hidden" value="1" name="pagoAnticipo" />
 			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 			<input type="hidden" value="<?php echo $value->projectId; ?>" name="projectId" />
