@@ -21,6 +21,15 @@ class proveedoresViewproveedores extends JView
 	        $this->items = $items;
 			
 	        // Display the template
+	        $this->addToolBar();
+			
 	        parent::display($tpl);
 	}
+    protected function addToolBar()	{
+            JToolBarHelper::title(JText::_('COM_FREAKFUND'));
+            JToolBarHelper::preferences('com_freakfund');
+			JToolBarHelper::back();
+			
+	}
+
 }

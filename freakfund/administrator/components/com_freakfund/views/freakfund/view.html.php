@@ -4,10 +4,7 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla view library
 jimport('joomla.application.component.view');
- 
-/**
- *  View
- */
+
 class freakfundViewfreakfund extends JView
 {
         function display($tpl = null) {
@@ -24,6 +21,15 @@ class freakfundViewfreakfund extends JView
                 $this->items = $items;
 				
                 // Display the template
+                $this->addToolbar();
+				
                 parent::display($tpl);
         }
+
+        protected function addToolBar() {
+                JToolBarHelper::title(JText::_('COM_FREAKFUND'));
+                JToolBarHelper::preferences('com_freakfund');
+				
+		}
+
 }
