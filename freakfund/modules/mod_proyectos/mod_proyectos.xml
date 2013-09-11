@@ -19,8 +19,9 @@
 			<fieldset
 				name="advanced">
 				<field name="tipodepro" type="list" default="cerrar" label="Select an option" description="">
-				  <option value="cerrar">mas cercanos a cerrar</option>
-				  <option value="apoyados">mas apoyados</option>
+				  <option value="cerrar">más cercanos a cerrar</option>
+				  <option value="apoyados">más apoyados</option>
+				  <option value="rentables">más rentables</option>
 				</field>
 				<field
 					name="layout"

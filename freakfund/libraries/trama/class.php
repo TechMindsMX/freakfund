@@ -225,6 +225,7 @@ class JTrama
 		$value->fundEndDate = 1377284000000; 
 		$value->productionStartDateCode = 1378003651000;
 		$value->premiereStartDateCode = 1381003651000;
+		$value->balance = 50000000;
 		$value->tri = 32;
 		// FIN SIMULADOS
 		
@@ -270,7 +271,7 @@ class JTrama
 
 	public static function fundPercentage($data)
 	{
-		$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
+		$data->balancePorcentaje = round(($data->balance * 100) / $data->breakeven, 2);
 		
 		return $data;
 	}

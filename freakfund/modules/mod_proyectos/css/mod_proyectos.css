@@ -4,8 +4,7 @@
 	color:#474747;
 }
 .mod-pro img {
-	width: 20%;
-	min-width: 60px;
+	width: 75px;
 	float: left;
 	margin-right: 10px;
 }
@@ -14,4 +13,14 @@
 }
 .derecha {
 	float: right;
+}
+.mod-pro h1, 
+.mod-pro h2, 
+.mod-pro h3, 
+.mod-pro h4,
+.mod-pro p 
+{
+	padding: 0;
+	line-height: 100%;
+	margin: 0 0 0.3em 0;
 }

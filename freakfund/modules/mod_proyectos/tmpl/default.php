@@ -15,26 +15,14 @@ $document->addScriptDeclaration($scripjs);
 		$thumbnail = AVATAR.'/'.$value->projectAvatar->name;
 		$url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id;
 		
-		$ita = $value->balance;
-		$breakeven = $value->breakeven;
-		$fechaCierre = $value->fundEndDate;
-		$porcentajeBE = $value->balancePorcentaje;
+		$ita = isset($value->balance) ? $value->balance : null;
+		$breakeven = isset($value->breakeven) ? $value->breakeven : null;
+		$fechaCierre = isset($value->fundEndDate)? $value->fundEndDate : null;
+		$porcentajeBE = isset($value->balancePorcentaje) ? $value->balancePorcentaje : null;
+		$tri = isset($value->tri) ? $value->tri : null;
 		
 		switch ($params->get('tipodepro')) {
-			case 'apoyados':
-				$html = '<div class="mod-pro">
-							<a href="'.$url.'">
-							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
-							<h2>'.$nombre.'</a></h2>
-							<h4><span class="number derecha" >'.$ita.'</span></h4>
-							<div class="clear"></div>
-						</div>';
-		
-				echo $html;
-				
-				break;
-			
-			default:
+			case 'cerrar':
 				$html = '<div class="mod-pro">
 							<a href="'.$url.'">
 							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
@@ -48,7 +36,32 @@ $document->addScriptDeclaration($scripjs);
 				echo $html;
 				
 				break;
-		}
+
+			case 'apoyados':
+				$html = '<div class="mod-pro">
+							<a href="'.$url.'">
+							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
+							<h2>'.$nombre.'</a></h2>
+							<h4><span class="number derecha" >'.$ita.'</span></h4>
+							<div class="clear"></div>
+						</div>';
+		
+				echo $html;
+				
+				break;
+			
+			case 'rentables':
+				$html = '<div class="mod-pro">
+							<a href="'.$url.'">
+							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
+							<h2>'.$nombre.'</a></h2>
+							<h4><span class="derecha">'.$tri.' %</span></h4>
+							<div class="clear"></div>
+						</div>';
+		
+				echo $html;
+				
+				break;		}
 	}
 
 ?>
