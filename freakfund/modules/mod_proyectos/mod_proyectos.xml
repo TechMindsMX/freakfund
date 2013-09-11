@@ -23,6 +23,7 @@
 				  <option value="apoyados">más apoyados</option>
 				  <option value="rentables">más rentables</option>
 				</field>
+				<field name="cantidad" type="integer" default="5" label="Cantidad" description="" first="1" last="10" step="1" />
 				<field
 					name="layout"
 					type="modulelayout"

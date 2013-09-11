@@ -275,9 +275,10 @@ class JTrama
 		
 		return $data;
 	}
+	
 	public static function getMostProfitables()
 	{
-		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEnd')); // CAMBIAR POR DEFINITIVO
+		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/all')); // CAMBIAR POR DEFINITIVO
 		foreach ($data as $key => $value) {
 			$value = JTrama::formatDatosProy($value);
 		}
