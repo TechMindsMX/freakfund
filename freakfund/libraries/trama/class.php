@@ -220,10 +220,13 @@ class JTrama
 	
 	public static function formatDatosProy ($value)
 	{
-		$value->fundStartDate = 1370284000000; // SIMULADOS
-		$value->fundEndDate = 1377284000000; // SIMULADOS
+		// SIMULADOS
+		$value->fundStartDate = 1370284000000;
+		$value->fundEndDate = 1377284000000; 
 		$value->productionStartDateCode = 1378003651000;
 		$value->premiereStartDateCode = 1381003651000;
+		$value->tri = 32;
+		// FIN SIMULADOS
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
@@ -255,7 +258,7 @@ class JTrama
 		}
 	}
 	
-	public static function getProdClosestEnd()
+	public static function getClosestEnd()
 	{
 		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEnd'));
 		foreach ($data as $key => $value) {
@@ -268,6 +271,15 @@ class JTrama
 	public static function fundPercentage($data)
 	{
 		$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
+		
+		return $data;
+	}
+	public static function getMostProfitables()
+	{
+		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEnd')); // CAMBIAR POR DEFINITIVO
+		foreach ($data as $key => $value) {
+			$value = JTrama::formatDatosProy($value);
+		}
 		
 		return $data;
 	}
