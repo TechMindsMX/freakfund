@@ -23,7 +23,7 @@ $pro=JTrama::getDatos($proyid);
 $datosUsuario=JTrama::getUserBalance($usuario->id);
 
 //definicion de campos del formulario
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/';
+$action = '#';
 //$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
 
@@ -59,7 +59,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 		
 	});
 </script>
-<h3><?php echo JText::_('INVENTARIO_COMPRA');  ?></h3>
+<h3><?php echo JText::_('TRANSFERIR_DINERO');  ?></h3>
 <div>
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
 	
@@ -70,27 +70,16 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 			$saldo= $datosUsuario->balance;
 		}
 		
-		$campo = '<label>'.JText::_('CANTIDAD_COMPRAR').':</label><input class="input_compra" type="text" id="cantidad"	name="compra" /> ';
+		$campo = '<label>'.JText::_('CANTIDAD_TRASPASO').':</label><input class="input_transferencia" type="text" id="cantidad" name="cantidad" /> ';
 		
-		foreach ($pro->projectUnitSales as $key => $value){
-	
-			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';			
-			echo '<div>'.JText::_('PRECIO_UNIDAD').':'. $value ->unitSale.'</div>';
-			echo '<div>'.JText::_('INVENTARIOPP').':'. $value ->unit .'</div>';
-			echo '<input type="hidden" value="'.$value ->unit.'"/>';
-			echo '<input type="hidden" value="'.$value ->unitSale.'"/>';
-			echo $campo;
-			echo '<div>'.JText::_('TOTAL_SECCION').':'.'<span id="resultados"></span></div><br /><br />';
-			
-		}
-		
+		echo $campo;
 		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
-		echo '<div>'.JText::_('TOTAL_PAGAR').':<span id="resultadoglobal"></span></div>';
 		?>
+		
 		<div style="margin: 10px;">
-		<input type="button" class="button" value="Invertir" />
+			<input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> 
+			<input type="button" class="button" value="Transferir" />
 		</div>
-		<div><input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> </div>
 	</form>
 	
 </div>
