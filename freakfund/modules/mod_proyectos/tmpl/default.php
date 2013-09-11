@@ -28,7 +28,7 @@ $document->addScriptDeclaration($scripjs);
 							<div class="thumb-img">
 								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
 							</div>
-							<div class="desc">
+							<div class="descrip">
 								<h2>'.$nombre.'</a></h2>
 								<h4 class="porcentaje" >'.$porcentajeBE.'%
 								<span class="number derecha" >'.$breakeven.'</span></h4>
@@ -47,7 +47,7 @@ $document->addScriptDeclaration($scripjs);
 							<div class="thumb-img">
 								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
 							</div>
-							<div class="desc">
+							<div class="descrip">
 								<h2>'.$nombre.'</a></h2>
 								<h4><span class="number derecha" >'.$ita.'</span></h4>
 							</div>
@@ -64,7 +64,7 @@ $document->addScriptDeclaration($scripjs);
 							<div class="thumb-img">
 								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
 							</div>
-							<div class="desc">
+							<div class="descrip">
 								<h2>'.$nombre.'</a></h2>
 								<h4 class="statusbar"><div class="animacionbg" style="width: '.(100-$tri).'%;"></div></h4>
 								<span>'.$tri.' %</span>
