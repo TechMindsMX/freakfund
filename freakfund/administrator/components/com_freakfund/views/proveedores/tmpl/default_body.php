@@ -21,6 +21,14 @@ foreach ($providers as $key => $value) {
 ?>
 	<tr>
 		<td align="absmiddle">
+			<?php echo JFactory::getUser($value->providerId)->name; ?>
+		</td>
+		
+		<td>
+			$<span class="number"><?php echo $value->advanceQuantity+$value->settlementQuantity; ?></span>
+		</td>
+		
+		<td align="absmiddle">
 			<?php echo $value->advanceDate; ?>
 		</td>
 		
@@ -49,24 +57,12 @@ foreach ($providers as $key => $value) {
 			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 			<input type="hidden" value="<?php echo $value->projectId; ?>" name="projectId" />
 		</td>
-		
-		<td align="absmiddle">
-			<?php echo JFactory::getUser($value->providerId)->name; ?>
-		</td>
-		
-		<td>
-			$<span class="number"><?php echo $value->advanceQuantity+$value->settlementQuantity; ?></span>
-		</td>
-		
-		<td align="absmiddle">
-			<input type="checkbox" value="1">
-		</td>
 	</tr>
 <?php
 }
 ?>
 <tr>
-	<td colspan="7" align="right"><?php echo JText::_('COM_FREAKFUND_PROVIDERS_BODY_PRESUPUESTO');?> </td>
+	<td align="right"><?php echo JText::_('COM_FREAKFUND_PROVIDERS_BODY_PRESUPUESTO');?> </td>
 	<td>$<span class="number"><?php echo $presupuesto; ?></span></td>
-	<td></td>
+	<td colspan="6"></td>
 </tr>

@@ -9,20 +9,22 @@ foreach($this->items as $i => $item):
 		$item->producerName = JFactory::getUser($item->userId)->name;
 		
 		if ( empty($item->providers) ) {
-			$html = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
+			$htmlProveedores = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
 		} else {
-			$html = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
+			$htmlProveedores = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
 		}
+		
+		$htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$item->id.'" >'.$item->name.'</a>';
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 	        <td>
-	    		<?php echo $item->name; ?>
+	    		<?php echo $htmlProductor; ?>
 	        </td>
 	        <td>
-	        	<a href="index.php?option=com_freakfund&task=liquidacionprod&userId=<?php echo $item->userId; ?>" ><?php echo $item->producerName; ?></a>
+	        	<?php echo $item->producerName; ?>
 	        </td>
 	        <td>
-	        	<?php echo $html; ?>
+	        	<?php echo $htmlProveedores; ?>
 	        </td>
         </tr>
 <?php 

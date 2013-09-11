@@ -8,11 +8,11 @@ class liquidacionprodModelliquidacionprod extends JModelList
 {
         public function getDatosProductor() {
         	$temporal = JFactory::getApplication()->input;
-			$temporal = $temporal->get('userId');
+			$temporal = $temporal->get('id');
 			
-        	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$temporal));
-			$query->userId = $temporal;
-			$query->saldoProy = '4000000';
+        	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$temporal));
+			$query->CRE = '4000000';
+			$query->CPR = '2000000';
 			
 			return $query;
         }

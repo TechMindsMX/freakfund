@@ -39,3 +39,4 @@ $token = JTrama::token();
                 <tbody><?php echo $this->loadTemplate('body');?></tbody>
         </table>
 </form>
+<div style="font-family: Arial; font-size: 12px;"><?php var_dump($this->items); ?></div>

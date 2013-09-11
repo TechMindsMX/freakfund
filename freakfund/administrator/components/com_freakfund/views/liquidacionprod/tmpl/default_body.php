@@ -16,9 +16,15 @@ $datos = $this->items;
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SALDOPROY').': $<span class="number">'.$datos->saldoProy.'</span>'; ?>
+			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SALDOPROD').': $<span class="number">'.($datos->CRE-$datos->CPR).'</span>'; ?>
 		</td>
 	</tr>
+	<tr>
+		<td align="absmiddle">
+			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SALDOPROY').': $<span class="number">'.$datos->budget.'</span>'; ?>
+		</td>
+	</tr>
+	
 	<tr>
 		<td align="absmiddle">
 			<input type="button" value="<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SEND'); ?>" />
