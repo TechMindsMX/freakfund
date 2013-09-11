@@ -45,13 +45,3 @@
 	display: block;
 	float: right;
 }
-#rt-mainbody-surround .info-proyecto h1,
-#rt-mainbody-surround .info-proyecto h2,
-#rt-mainbody-surround .info-proyecto h3,
-#rt-mainbody-surround .info-proyecto h4,
-#rt-mainbody-surround .info-proyecto h5
- {
-	text-shadow: none;
-	color: #FFFFFF;
-	margin: 0;
-}
