@@ -5,12 +5,12 @@ jimport('trama.class');
 ?>
 <tr>
     <th>
-        <?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_GREETING'); ?>
+        <?php echo JText::_('COM_FREAKFUND_FREAKFUND_HEADING_NAMEPROD'); ?>
     </th>
     <th>
-    	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_NAMEPRODUCER');?>
+    	<?php echo JText::_('COM_FREAKFUND_FREAKFUND_HEADING_NAMEPRODUCER');?>
     </th>
     <th>
-    	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_PROVIDERS'); ?>
+    	<?php echo JText::_('COM_FREAKFUND_FREAKFUND_HEADING_PROVIDERS'); ?>
     </th>
 </tr>

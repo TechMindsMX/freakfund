@@ -29,7 +29,7 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td align="absmiddle">
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitarAnticipo; ?> />
+			<input type="button" value="<?php echo JText::_('COM_FREAKFUND_PROVIDERS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitarAnticipo; ?> />
 			<input type="hidden" value="0" name="pagoAnticipo" />
 			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 			<input type="hidden" value="<?php echo $value->projectId; ?>" name="projectId" />
@@ -44,7 +44,7 @@ foreach ($providers as $key => $value) {
 		</td>
 		
 		<td align="absmiddle">
-			<input type="button" value="<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitaFiniquito ?>/>
+			<input type="button" value="<?php echo JText::_('COM_FREAKFUND_PROVIDERS_BODY_PAGAR');?>" class="pagar" <?php echo $deshabilitaFiniquito ?>/>
 			<input type="hidden" value="1" name="pagoAnticipo" />
 			<input type="hidden" value="<?php echo $value->providerId; ?>" name="providerId" />
 			<input type="hidden" value="<?php echo $value->projectId; ?>" name="projectId" />
@@ -66,7 +66,7 @@ foreach ($providers as $key => $value) {
 }
 ?>
 <tr>
-	<td colspan="7" align="right">Persupuesto </td>
+	<td colspan="7" align="right"><?php echo JText::_('COM_FREAKFUND_PROVIDERS_BODY_PRESUPUESTO');?> </td>
 	<td>$<span class="number"><?php echo $presupuesto; ?></span></td>
 	<td></td>
 </tr>

@@ -4,10 +4,10 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <tr>
     <th colspan="3" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid;" >
-        <strong><?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_DATEANTICIPO'); ?></strong>
+        <strong><?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_DATEANTICIPO'); ?></strong>
     </th>
     <th colspan="3" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid;">
-    	<strong><?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_DATEFINIQUITO');?></strong>
+    	<strong><?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_DATEFINIQUITO');?></strong>
     </th>
     <th colspan="3">
     	
@@ -15,23 +15,11 @@ defined('_JEXEC') or die('Restricted Access');
 </tr>
 <tr>
 	<th>
-		<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_DATE');?>
+		<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_DATE');?>
 	</th>
 	
 	<th>
-		<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_MONTO');?>
-	</th>
-	
-	<th>
-		
-	</th>
-	
-	<th>
-		<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_DATE');?>
-	</th>
-	
-	<th>
-		<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_MONTO');?>
+		<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_MONTO');?>
 	</th>
 	
 	<th>
@@ -39,12 +27,24 @@ defined('_JEXEC') or die('Restricted Access');
 	</th>
 	
 	<th>
-    	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_NAMEPROVIDER');?>
+		<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_DATE');?>
+	</th>
+	
+	<th>
+		<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_MONTO');?>
+	</th>
+	
+	<th>
+		
+	</th>
+	
+	<th>
+    	<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_NAMEPROVIDER');?>
     </th>
     <th>
-    	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_MONTOTOTAL');?>
+    	<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_MONTOTOTAL');?>
     </th>
     <th>
-    	<?php echo JText::_('COM_TRAMAPROYECTOS_TRAMAPROYECTOS_HEADING_CHECKPAGADO');?>
+    	<?php echo JText::_('COM_FREAKFUND_PROVIDERS_HEADING_CHECKPAGADO');?>
     </th>
 </tr>

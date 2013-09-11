@@ -27,7 +27,7 @@ class freakfundViewfreakfund extends JView
         }
 
         protected function addToolBar() {
-                JToolBarHelper::title(JText::_('COM_FREAKFUND'));
+                JToolBarHelper::title(JText::_('COM_FREAKFUND_FREAKFUND_TITLE'));
                 JToolBarHelper::preferences('com_freakfund');
 				
 		}

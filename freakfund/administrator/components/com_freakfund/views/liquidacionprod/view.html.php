@@ -5,11 +5,11 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla view library
 jimport('joomla.application.component.view');
 
-class proveedoresViewproveedores extends JView
+class liquidacionprodViewliquidacionprod extends JView
 {
 	function display($tpl = null) {
 	        // Get data from the model
-	        $items = $this->get('proveedores');
+	        $items = $this->get('DatosProductor');
 
 	        // Check for errors.
 	        if (count($errors = $this->get('Errors'))) {
@@ -26,7 +26,7 @@ class proveedoresViewproveedores extends JView
 	        parent::display($tpl);
 	}
     protected function addToolBar()	{
-            JToolBarHelper::title(JText::_('COM_FREAKFUND_PROVIDERS_TITLE'));
+            JToolBarHelper::title(JText::_('COM_FREAKFUND_LIQUIDACIONPROD_TITLE'));
 			JToolBarHelper::back();
 			
 	}

@@ -9,9 +9,9 @@ foreach($this->items as $i => $item):
 		$item->producerName = JFactory::getUser($item->userId)->name;
 		
 		if ( empty($item->providers) ) {
-			$html = 'Sin Proveedores';
+			$html = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
 		} else {
-			$html = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">Mostrar Proveedores</a>';
+			$html = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
 		}
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
