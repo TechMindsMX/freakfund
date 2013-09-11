@@ -285,6 +285,16 @@ class JTrama
 		
 		return $data;
 	}
+	
+	public static function getROI($data)
+	{
+		$data->ROI = 20;		
+	}
+
+	public static function getROF($data)
+	{
+		$data->ROF = 40;		
+	}
 
 }
 ?>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+    <name>Modulo Carrete</name>
+    <author>Ricardo Lyon</author>
+    <version>1.0.0</version>
+    <creationDate>September 2013</creationDate>
+    <authorEmail>ricardolyon@gmail.com</authorEmail>
+    <description>Modulo carrete</description>
+    <files>
+        <filename>mod_carrete.xml</filename>
+        <filename module="mod_carrete">mod_carrete.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+        <folder>css</folder>
+    </files>
+    <config>
+		<fields name="params">
+			<fieldset
+				name="advanced">
+				<field name="tipodepro" type="list" default="cerrar" label="Select an option" description="">
+				  <option value="cerrar">más cercanos a cerrar</option>
+				  <option value="apoyados">más apoyados</option>
+				  <option value="ultimosROI">ultimos por más rentables</option>
+				</field>
+				<field name="cantidad" type="integer" default="12" label="Cantidad" description="12" first="4" last="20" step="4" />
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+    </config>
+</extension>

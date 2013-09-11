@@ -86,7 +86,7 @@ function diferenciaEntreFechas($fecha_principal, $fecha_secundaria, $obtener = '
     						<span>'.$allProjects[$i]->name.'</span><br/>
     						<span>'.JText::_('PORCENTAJE_RECAUDADO').' '.$allProjects[$i]->recaudado.'</span><br/>
    							<span>'.JText::_('PUNTO_EQUILIBRIO').' '.$allProjects[$i]->breakeven.'</span><br/>
-							<span>'.JText::_('DIAS_RESTANTES').' '.diferenciaEntreFechas($allProjects[$i]->fundEndDate, date("Y-m-d")).'</span><br/>
+							<span>'.JText::_('DIAS_RESTANTES').' '.diferenciaEntreFechas($allProjects[$i]->fundEndDate, date("d-m-Y")).'</span><br/>
    							<span>
    								<a class="button" href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$allProjects[$i]->id.'">
 	    							'.JText::_('INVERTIR_PROYECTO').'</a>
