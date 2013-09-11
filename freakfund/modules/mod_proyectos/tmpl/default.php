@@ -66,7 +66,8 @@ $document->addScriptDeclaration($scripjs);
 							</div>
 							<div class="desc">
 								<h2>'.$nombre.'</a></h2>
-								<h4 class="statusbar"><div class="animacionbg" style="width: '.(100-$tri).'%;"><span>'.$tri.' %</span></div></h4>
+								<h4 class="statusbar"><div class="animacionbg" style="width: '.(100-$tri).'%;"></div></h4>
+								<span>'.$tri.' %</span>
 							</div>
 							<div class="clear"></div>
 						</div>';
