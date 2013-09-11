@@ -19,7 +19,7 @@ foreach($this->items as $i => $item):
 	    		<?php echo $item->name; ?>
 	        </td>
 	        <td>
-	        	<?php echo $item->producerName; ?>
+	        	<a href="index.php?option=com_freakfund&task=liquidacionprod&userId=<?php echo $item->userId; ?>" ><?php echo $item->producerName; ?></a>
 	        </td>
 	        <td>
 	        	<?php echo $html; ?>
