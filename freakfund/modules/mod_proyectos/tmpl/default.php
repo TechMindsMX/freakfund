@@ -25,11 +25,15 @@ $document->addScriptDeclaration($scripjs);
 			case 'cerrar':
 				$html = '<div class="mod-pro">
 							<a href="'.$url.'">
-							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
-							<h2>'.$nombre.'</a></h2>
-							<h4 class="porcentaje" >'.$porcentajeBE.'%
-							<span class="number derecha" >'.$breakeven.'</span></h4>
-							<p>'.JText::_('FECHA_CIERRE').': '.$fechaCierre.'</p>
+							<div class="thumb-img">
+								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
+							</div>
+							<div class="desc">
+								<h2>'.$nombre.'</a></h2>
+								<h4 class="porcentaje" >'.$porcentajeBE.'%
+								<span class="number derecha" >'.$breakeven.'</span></h4>
+								<p>'.JText::_('FECHA_CIERRE').': '.$fechaCierre.'</p>
+							</div>
 							<div class="clear"></div>
 						</div>';
 		
@@ -40,9 +44,13 @@ $document->addScriptDeclaration($scripjs);
 			case 'apoyados':
 				$html = '<div class="mod-pro">
 							<a href="'.$url.'">
-							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
-							<h2>'.$nombre.'</a></h2>
-							<h4><span class="number derecha" >'.$ita.'</span></h4>
+							<div class="thumb-img">
+								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
+							</div>
+							<div class="desc">
+								<h2>'.$nombre.'</a></h2>
+								<h4><span class="number derecha" >'.$ita.'</span></h4>
+							</div>
 							<div class="clear"></div>
 						</div>';
 		
@@ -53,9 +61,13 @@ $document->addScriptDeclaration($scripjs);
 			case 'rentables':
 				$html = '<div class="mod-pro">
 							<a href="'.$url.'">
-							<img src="'.$thumbnail.'" alt="'.$nombre.'" />
-							<h2>'.$nombre.'</a></h2>
-							<h4><span class="derecha">'.$tri.' %</span></h4>
+							<div class="thumb-img">
+								<img src="'.$thumbnail.'" alt="'.$nombre.'" />
+							</div>
+							<div class="desc">
+								<h2>'.$nombre.'</a></h2>
+								<h4 class="statusbar"><div class="animacionbg" style="width: '.$tri.'%;"><span>'.$tri.' %</span></div></h4>
+							</div>
 							<div class="clear"></div>
 						</div>';
 		
