@@ -35,7 +35,7 @@ $pathJumi = 'components/com_jumi/files/carrusel';
 	
 	jQuery(document).ready(function() {
 	    jQuery('#mycarousel2').jcarousel({
-	        auto: 5,
+	        auto: 10,
 	        wrap: 'last',
 	        initCallback: mycarousel_initCallback,
 	        scroll: 4
@@ -51,9 +51,9 @@ $pathJumi = 'components/com_jumi/files/carrusel';
 			echo '<li>
     				<div class="contenedor" style="background:url('.MIDDLE.AVATAR.'/'.$value->projectAvatar->name.'); background-size: 100%;">
     					<div class="info-proyecto" >
-    						<div>'.$value->name.'</div><br />
-    						<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span><br />
-   							<span>'.JText::_('SUBCATEGORIA').' '.$value->subcategoryName.'</span><br />
+    						<div><h3>'.$value->name.'</h3></div>
+    						<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
+   							<span>'.$value->subcategoryName.'</span><br />
 							<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
 							<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
    							<span>
