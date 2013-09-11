@@ -65,6 +65,11 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
 	
 		<?php 	
+		if ($datosUsuario->balance == null ){
+			$saldo= "0";
+		}else{
+			$saldo= $datosUsuario->balance;
+		}
 		
 		$campo = '<label>Cantidad a comprar:</label><input class="input_compra" type="text" id="cantidad"	name="compra" /> ';
 		
@@ -80,9 +85,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 			
 		}
 		
-		echo '<div>'.JText::_('SALDO_FF').':'. $datosUsuario->balance .'</div>';
+		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
 		echo '<div>'.JText::_('TOTAL_PAGAR').':<span id="resultadoglobal"></span></div>';
-		
 		?>
 		<div style="margin: 10px;">
 		<input type="button" class="button" value="Invertir" />
