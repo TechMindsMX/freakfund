@@ -165,6 +165,24 @@ class JTrama
 		
 	}
 	
+	public static function searchFriends($id){
+	
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+	
+		$query
+		->select('friends')
+		->from('#__community_users')
+		->where('userid = '.$id);
+	
+		$db->setQuery( $query );
+	
+		$idGroup = $db->loadObject();
+		
+		return $idGroup;
+	
+	}
+	
 	public static function token(){
 		
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
