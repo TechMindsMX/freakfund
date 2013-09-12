@@ -145,3 +145,17 @@ input[type=checkbox] {
 		box-shadow: 1px 1px 4px #666;
 }
 /*** fin Modulos compactos class sufix ****/
+
+input[type="submit"], input[type="button"] {
+	margin-right: 1em;
+}
+
+input[disabled="disabled"] {
+	color: #B3B3B3 !important;
+	background: #DDDDDD !important;
+	text-shadow: none !important;
+}
+
+#slider {
+	min-height: 846px;
+}

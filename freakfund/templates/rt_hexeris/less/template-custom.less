@@ -50,81 +50,85 @@ div.dropdown .item, input {
   text-transform: capitalize;
 }
 @link-color: #000;
-  .barra-top {
-    float:left;
-    margin: 0;
-    width:100%;
-    font-weight: bold;
-    color:black;
-    > div, > span {
-      float: left;
-      margin: 0 2px 2px 0;
-      background: #b3b3b3;
-      height: 28px;
-      padding: 5px 9px 0px 13px;
-      text-shadow: none;
-      text-transform: capitalize;
-      a {
-          color: @link-color;
-           &:hover {
-             color: @link-color;
-           } 
-        }
-      }
-  }
-    #ligasprod{
-    padding: 5px 0px 5px 17px;
-    margin-left: -4px;
-    font-weight:bold;
-    text-shadow:none;
-    color:black;
-  }
-  .barra-top input[type="checkbox"], .barra-top input[type="button"] {
-  }
-  .barra-top input[type="button"] {
-    color: #000;
-    border: 0;
-    box-shadow: 0 0 0;
-    background: transparent;
-    font-weight: bold;
-    margin-top: -2px !important;
-    text-shadow:none;
-    &:hover {
-      background: transparent !important;
-      color: #000 !important;
-    }
-  }
-  #contador span{
-    color:#000;
-  }
-  #filtrar, #triangle {
-    margin-right: 0px;
-  }
-  #filtrar{
-    background: #2c9ad9;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    padding: 5px 5px 5px 17px;
-    height: 23px;
-    font-weight: bold;
-    color: #fff;
-  }
-  #triangle {
-    width: 0;
-    height: 0;
-    border-top: 17px solid transparent;
-    border-left: 11px solid #2c9ad9;
-    border-bottom: 16px solid transparent;
-    background-color:#b3b3b3;
-    padding: 0;
-  }
 
-  #contador{
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    color:#e1001a;
-    margin-bottom: 2em;
+.barra-top {
+  float:left;
+  margin: 0;
+  width:100%;
+  font-weight: bold;
+  color:black;
+  > div, > span, > li {
+    float: left;
+    margin: 0 2px 2px 0;
+    background: #b3b3b3;
+    height: 28px;
+    padding: 5px 9px 0px 13px;
+    text-shadow: none;
+    text-transform: capitalize;
+    a {
+      color: @link-color;
+        &:hover {
+           color: @link-color;
+        }
+        &:before {
+          content: "" !important;
+          margin: 0 !important;
+        }
+    }
+}
+#ligasprod{
+	padding: 5px 0px 5px 17px;
+	margin-left: -4px;
+	font-weight:bold;
+	text-shadow:none;
+	color:black;
+}
+.barra-top input[type="checkbox"], .barra-top input[type="button"] {
+}
+.barra-top input[type="button"] {
+  color: #000;
+  border: 0;
+  box-shadow: 0 0 0;
+  background: transparent;
+  font-weight: bold;
+  margin-top: -2px !important;
+  text-shadow:none;
+  &:hover {
+    background: transparent !important;
+    color: #000 !important;
   }
+}
+#contador span{
+  color:#000;
+}
+#filtrar, #triangle {
+  margin-right: 0px;
+}
+#filtrar{
+  background: #2c9ad9;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 5px 5px 5px 17px;
+  height: 23px;
+  font-weight: bold;
+  color: #fff;
+}
+#triangle {
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-left: 11px solid #2c9ad9;
+  border-bottom: 16px solid transparent;
+  background-color:#b3b3b3;
+  padding: 0;
+}
+
+#contador{
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color:#e1001a;
+  margin-bottom: 2em;
+}
 
 
 .centrado {
@@ -181,4 +185,13 @@ left: -30px;
   height: 22px;
   background-position: center top;
 }
-
+#productor, #productor a {
+  text-transform: capitalize;
+  font-size: @base-font-size + 2;
+}
+.component-content .ver_proyecto > h1 {
+  margin: 0 0 0.5em 0;
+}
+.mayusc {
+    text-transform: uppercase;
+}

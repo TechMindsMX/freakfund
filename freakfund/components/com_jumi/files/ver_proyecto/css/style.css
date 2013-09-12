@@ -5,12 +5,10 @@
 #content {
 	width: 100%;
 }
-
 #menu {
 	clear: both;
 	margin: 1em 0;
 }
-
 .menu-item {
 	width: 217px;
 	height: 151px;
@@ -19,7 +17,6 @@
 	margin-bottom: 1em;
 	margin-right:20px;
 }
-
 .menu-item:hover {
 	background-position-y: center;
 }
@@ -58,11 +55,20 @@
 	border: 1px solid #FFF;
 	background-position-y: -148px;
 }
-
 .cerrar {
 	position: absolute;
 	top: 30px;
 	right: 30px;
+	background: #b3b3b3;
+	padding: 3px 10px;
+	border-radius: 3px;
+	text-shadow: none;
+	font-size: 16px;
+	color:#fff !important;
+	cursor: pointer;
+}
+.cerrar a{
+	color: #FFF !important;
 }
 .avatar {
 	width: 100%;
@@ -102,18 +108,27 @@
 	max-width: 1165px;
 	width: 100%;
 }
-
 .info-banner {
 	position: absolute;
 	width: 100%;
 }
 .info-banner div.rt-inner {
 	margin: 3em;
+	padding: 0.5em 1em;
+	background: rgba( 80, 80, 80, 0.3 );
+	display: inline-block;
+	border-radius: 3px;
+}
+#banner .info-banner div.rt-inner h1,
+#banner .info-banner div.rt-inner h2,
+#banner .info-banner div.rt-inner h3
+{
+	color: #FFFFFF;
+	text-shadow: none;
 }
 .tipo_proy_prod {
 	margin-top: 1em !important;
 }
-
 #banner {
 	position: relative;
 }
@@ -197,6 +212,27 @@ div#banner div.rt-inner a {
 .encabezado {
  	margin-bottom: 1em;
 }    
+#productor a{
+	color:#666;
+}
+#rating{
+	float: left;
+	margin-top: 20px;
+	margin-left: 90px;
+	width: 100px;
+	cursor: pointer;
+}
+#texto{
+	float: left;
+	font-size: 20px;
+	position: relative;
+	margin-left: 30px;
+	top: 22px;
+}
+#map-wrapper {
+	height: 300px;
+	width: 455px;;
+}
 
 @media screen and (max-width:1200px) {
 	#menu-player {
@@ -256,6 +292,28 @@ div#banner div.rt-inner a {
 }
 #finanzas #contenido-detalle {
 	height: 355px;
+}
+@media screen and (max-width:500px) {
+	.img_avatar {
+	width: 253px;
+	}
+	#map-wrapper {
+		height: 250px;
+		width: 255px;;
+	}
+	#rating{
+		float: left;
+		margin-top: 20px;
+		margin-left: 45px;
+		width: 100px;
+		cursor: pointer;
+	}
+	#contenido-detalle {
+		margin-bottom: 10px;
+		width:270px;
+		height: 300px;
+		overflow-y: scroll;
+	}
 }
 #statusbar, #animacionbg {
 	position: relative;
