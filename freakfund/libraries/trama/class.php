@@ -205,20 +205,22 @@ class JTrama
 	}
 
 	public static function getDatos ( $id ) {
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+		$json = file_get_contents($url);
+		$respuesta = json_decode($json); 
 		
-		if( isset($id) ) {	
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
-			$json = file_get_contents($url);
-			$respuesta = json_decode($json); 
-						
-			JTrama::formatDatosProy($respuesta);
+		JTrama::checkValidId($respuesta);
+		JTrama::formatDatosProy($respuesta);
 			
-		} else {
-				
-			$respuesta = null;
-		}
-
 		return $respuesta;
+	}
+
+	public static function checkValidId($data) {
+		$app = JFactory::getApplication();
+		if(!isset($data->id)) {
+			$url = 'index.php';
+			$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'error');
+		}
 	}
 	
 	public static function getUserBalance ( $usuario ) {
