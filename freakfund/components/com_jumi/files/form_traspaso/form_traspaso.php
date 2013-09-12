@@ -1,3 +1,4 @@
+
 <?php 
 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
@@ -25,21 +26,38 @@ $arrayFriends=explode(',',$friends->friends);
 
 foreach($arrayFriends as $key => $value){
 	if($value!=378){
-	echo JFactory::getUser($value)->name.'<br />';}
+		$arregloAmigos[] = '"'.JFactory::getUser($value)->name.'"';
+	}
 }
+$amigosJs = implode(',' ,$arregloAmigos);
 //definicion de campos del formulario
 $action = '#';
 //$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
-
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script>
+  jQuery(function() {
+    var availableTags = [<?php echo $amigosJs;?>];
+    jQuery( "#tag" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form_traspaso").validationEngine();
-		
-		
+				
 	});
+	
 </script>
+
 <h3><?php echo JText::_('TRASPASO_DINERO');  ?></h3>
+<div class="ui-widget">
+  <label for="tag">Tags: </label>
+  <input id="tag" />
+</div>
 <div>
 	<form id="form_traspaso" action="<?php echo $action; ?>" method="POST">
 	
@@ -55,7 +73,6 @@ $action = '#';
 		echo $campo;
 		
 		?>
-		
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> 
 			<input type="button" class="button" value="Traspasar" />
