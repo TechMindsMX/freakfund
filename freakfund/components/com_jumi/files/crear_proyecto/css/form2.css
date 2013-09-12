@@ -5,6 +5,9 @@ label {
 .input_compra{
 	width:30px;
 }
+.input_monto{
+	width:70px;
+}
 input {
 	width: 180px;
 	margin-bottom: 5px;

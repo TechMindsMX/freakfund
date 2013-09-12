@@ -18,8 +18,6 @@ $token = JTrama::token();
 
 $input = JFactory::getApplication()->input;
 $usuario= JFactory::getUser();
-$proyid= $input->get("proyid",0,"int");
-$pro=JTrama::getDatos($proyid);
 $datosUsuario=JTrama::getUserBalance($usuario->id);
 
 //definicion de campos del formulario
@@ -29,39 +27,14 @@ $action = '#';
 
 <script>
 	jQuery(document).ready(function(){
+		jQuery("#form_cashout").validationEngine();
 		
-		jQuery(':input').change(function(){
-			var limite = parseInt(jQuery(this).prev().prev().prev().val());
-			if ( jQuery(this).val()>limite){
-				jQuery(this).val(0);
-				jQuery(this).next().children().text(0);
-				
-				var total = 0 ;				
-				jQuery("#form_compra").find("span#resultados").each(function() {
-					total += parseFloat(jQuery(this).text()) || 0;
-				
-				jQuery("#resultadoglobal").text(total);
-				});
-			}else{
-			
-				var resultado = jQuery(this).prev().prev().val() * jQuery(this).val();
-				jQuery(this).next().children().text(resultado);
-				
-				var total = 0 ;
-				jQuery("#form_compra").find("span#resultados").each(function() {
-					total += parseFloat(jQuery(this).text()) || 0;
-				
-				jQuery("#resultadoglobal").text(total);
-				});
-				
-			}
-			});	
 		
 	});
 </script>
 <h3><?php echo JText::_('TRANSFERIR_DINERO');  ?></h3>
 <div>
-	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
+	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">
 	
 		<?php 	
 		if ($datosUsuario->balance == null ){
@@ -69,11 +42,11 @@ $action = '#';
 		}else{
 			$saldo= $datosUsuario->balance;
 		}
-		
-		$campo = '<label>'.JText::_('CANTIDAD_TRASPASO').':</label><input class="input_transferencia" type="text" id="cantidad" name="cantidad" /> ';
+		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
+		$campo = '<label>'.JText::_('CANTIDAD_TRANSFERENCIA').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /> ';
 		
 		echo $campo;
-		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
+		
 		?>
 		
 		<div style="margin: 10px;">
