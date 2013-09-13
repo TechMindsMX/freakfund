@@ -241,7 +241,7 @@ $promedio = $objuserdata->scoreUser($userid);
 								foreach ($proyectos as $key => $value) {
 									if ($value->type == 'REPERTORY') {
 										echo '<tr>';
-										echo '	<td><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></td>';
+										echo '	<td><a href="'.$value->viewUrl.'">'.$value->name.'</a></td>';
 										echo '	<td><a class="button" href="'.$value->editUrl.'">Ir</a></td>';	
 										echo "</tr>";
 									}

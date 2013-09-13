@@ -3,10 +3,12 @@ defined('_JEXEC') or die('Restricted access');
 
 $doc = JFactory::getDocument();
 
+$doc -> addScript('templates/rt_hexeris/js/jquery-1.9.1.js');
 $doc -> addScript('modules/mod_busqueda_tags/js/lib.js');
 $doc -> addScript('components/com_jumi/files/perfil/js/jquery.validationEngine.js');
 $doc -> addScript('components/com_jumi/files/perfil/js/jquery.validationEngine-es.js');
-$doc -> addStyleSheet('components/com_jumi/files/perfil/css/validationEngine.jquery.css')
+$doc -> addStyleSheet('components/com_jumi/files/perfil/css/validationEngine.jquery.css');
+$doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css');
 
 ?>
 

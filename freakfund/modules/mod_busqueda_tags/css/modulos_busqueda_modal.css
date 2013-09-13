@@ -5,7 +5,7 @@
 	margin: 0 15px 0 0;
 }
 
-.busq_cat input[type="submit"] {
+#busqueda_tags input[type="submit"], .busq_cat input[type="submit"] {
     background: #2C9AD9 !important;
     border: 0 none;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
@@ -22,6 +22,9 @@
     padding: 5px 15px;
     vertical-align: middle;   
 }
-.busq_cat input[type="submit"]:hover {
+#busqueda_tags input[type="submit"]:hover,.busq_cat input[type="submit"]:hover {
 	background: #474747 !important;
+}
+#busqueda_tags input[type="text"] {
+	margin: 2px 9px 0 0;
 }
