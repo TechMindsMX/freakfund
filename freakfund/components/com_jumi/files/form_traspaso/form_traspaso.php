@@ -41,7 +41,6 @@ $action = '#';
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css" />
   <script>
   jQuery(function() {
     var availableTags = [<?php echo $amigosJs;?>];
@@ -62,7 +61,7 @@ $action = '#';
 </script>
 
 <h3><?php echo JText::_('TRASPASO_DINERO');  ?></h3>
-<div  class="ui-widget">
+<div >
   <label for="tag_traspaso">Nombre de amigo a traspasar dinero: </label>
   <input id="tag_traspaso" />
 </div>
