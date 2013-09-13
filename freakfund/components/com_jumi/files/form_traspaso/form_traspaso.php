@@ -45,7 +45,7 @@ $action = '#';
   <script>
   jQuery(function() {
     var availableTags = [<?php echo $amigosJs;?>];
-    jQuery( "#tag" ).autocomplete({
+    jQuery( "#tag_traspaso" ).autocomplete({
       source: availableTags
     });
   });
@@ -62,9 +62,9 @@ $action = '#';
 </script>
 
 <h3><?php echo JText::_('TRASPASO_DINERO');  ?></h3>
-<div class="ui-widget">
-  <label for="tag">Tags: </label>
-  <input id="tag" />
+<div  class="ui-widget">
+  <label for="tag_traspaso">Nombre de amigo a traspasar dinero: </label>
+  <input id="tag_traspaso" />
 </div>
 <div>
 	<form id="form_traspaso" action="<?php echo $action; ?>" method="POST">
@@ -75,7 +75,7 @@ $action = '#';
 		}else{
 			$saldo= $datosUsuario->balance;
 		}
-		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
+		echo '<div style="margin-top: 35px;">'.JText::_('SALDO_FF').':'. $saldo .'</div>';
 		$campo = '<label>'.JText::_('CANTIDAD_TRASPASO').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /> ';
 		
 		echo $campo;
