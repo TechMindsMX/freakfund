@@ -23,12 +23,17 @@ $datosUsuario=JTrama::getUserBalance($usuario->id);
 
 $friends=JTrama::searchFriends($usuario->id);
 $arrayFriends=explode(',',$friends->friends);
-
+$arregloEnvio='';
 foreach($arrayFriends as $key => $value){
 	if($value!=378){
+		$arregloEnvio .= 'arregloEnvio["'.JFactory::getUser($value)->name.'"] = '.$value.';';
 		$arregloAmigos[] = '"'.JFactory::getUser($value)->name.'"';
+	
 	}
 }
+
+
+
 $amigosJs = implode(',' ,$arregloAmigos);
 //definicion de campos del formulario
 $action = '#';
@@ -48,7 +53,10 @@ $action = '#';
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form_traspaso").validationEngine();
-				
+
+	var arregloEnvio = new Array();
+	<?php echo $arregloEnvio; ?>
+		console.log(arregloEnvio);
 	});
 	
 </script>
