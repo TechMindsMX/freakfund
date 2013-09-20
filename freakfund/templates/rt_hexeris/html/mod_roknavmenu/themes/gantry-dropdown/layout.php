@@ -368,12 +368,9 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
 ?>
 <div class="gf-menu-device-container"></div>
 <ul class="gf-menu l1 " <?php if (array_key_exists('tag_id',$this->args)): ?>id="<?php echo $this->args['tag_id'];?>"<?php endif;?>>
-	<?php $user = JFactory::getUser(); ?>
-    <?php foreach ($menu->getChildren() as $item) : ?>
-    	<?php if (!$user->guest && (($item->getTitle() == 'Inicio') || ($item->getTitle() == 'Servicios') || ($item->getTitle() == 'Acerca de'))) {?>
-        <?php  ?>
-        <?php } else { $this->renderItem($item, $menu);}?>
-    <?php endforeach; ?>
+	<?php foreach ($menu->getChildren() as $item) : ?>
+ 		<?php $this->renderItem($item, $menu); ?>
+	<?php endforeach; ?>
     <li>
     	<a id="trama-login" class="item" href="#" data-rokbox="" data-rokbox-element="#rt-popuplogin"> <span class="desc">Acceso</span> </a>
     </li>

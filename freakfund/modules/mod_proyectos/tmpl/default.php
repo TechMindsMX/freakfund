@@ -1,5 +1,8 @@
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
+
+if (!empty($datos)) {
+
 $document = JFactory::getDocument();
 
 $document->addScript('libraries/trama/js/jquery.number.min.js');
@@ -77,5 +80,6 @@ $document->addScriptDeclaration($scripjs);
 				break;		}
 	}
 
+}
 ?>
 
