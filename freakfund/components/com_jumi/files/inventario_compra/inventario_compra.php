@@ -59,7 +59,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 		
 	});
 </script>
-<h3><?php echo JText::_('INVENTARIO_COMPRA');  ?></h3>
+<h1><?php echo JText::_('INVENTARIO_COMPRA');  ?></h1>
 <div>
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
 	

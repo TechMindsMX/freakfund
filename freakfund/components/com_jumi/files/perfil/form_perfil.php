@@ -51,7 +51,7 @@ $existenDatos = $datos->existingUser($usuario->id);
 		<form action="<?php echo $accion; ?>" id="formID" method="post" name="formID" enctype="multipart/form-data">
 			<input type="hidden" name="daGr_Foto_guardada" id="daGr_Foto_guardada" value="" />
 			
-			<div id="nombre"><h3><?php echo JText::_('DATOS_GR'); ?></h3></div>            
+			<div id="nombre"><h1><?php echo JText::_('DATOS_GR'); ?></h1></div>            
 			
 			<div class="_50">
 				<label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
@@ -93,6 +93,8 @@ $existenDatos = $datos->existingUser($usuario->id);
 			</div>
 			
             <div>
+            <input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
             	<input name="Enviar" class="button" type="submit" value="<?php echo JText::_('ENVIAR'); ?>" />
             </div>  
         </form>

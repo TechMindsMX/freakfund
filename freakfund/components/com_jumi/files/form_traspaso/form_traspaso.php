@@ -60,7 +60,7 @@ $action = '#';
 	
 </script>
 
-<h3><?php echo JText::_('TRASPASO_DINERO');  ?></h3>
+<h1><?php echo JText::_('TRASPASO_DINERO');  ?></h1>
 <div >
   <label for="tag_traspaso">Nombre de amigo a traspasar dinero: </label>
   <input id="tag_traspaso" />
@@ -81,7 +81,8 @@ $action = '#';
 		
 		?>
 		<div style="margin: 10px;">
-			<input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> 
+			<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
 			<input type="button" class="button" value="Traspasar" />
 		</div>
 	</form>

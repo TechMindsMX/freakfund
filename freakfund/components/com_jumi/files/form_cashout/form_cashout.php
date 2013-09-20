@@ -32,7 +32,7 @@ $action = '#';
 		
 	});
 </script>
-<h3><?php echo JText::_('TRANSFERIR_DINERO');  ?></h3>
+<h1><?php echo JText::_('TRANSFERIR_DINERO');  ?></h1>
 <div>
 	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">
 	
@@ -50,7 +50,8 @@ $action = '#';
 		?>
 		
 		<div style="margin: 10px;">
-			<input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> 
+			<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
 			<input type="button" class="button" value="Transferir" />
 		</div>
 	</form>
