@@ -26,9 +26,9 @@ define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_ROOT . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
-define("MIDDLE", "http://192.168.0.122");
+define("MIDDLE", "http://162.209.56.86");
 define("PUERTO", ":7070");
-define("AVATAR", "/avatar");
-define("BANNER", "/banner");
-define("BCASE", "/businesscase");
-define("PHOTO", "/photo");
+define("AVATAR", "avatar");
+define("BANNER", "banner");
+define("BCASE", "businesscase");
+define("PHOTO", "photo");

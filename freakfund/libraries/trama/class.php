@@ -245,6 +245,11 @@ class JTrama
 	
 	public static function formatDatosProy ($value)
 	{
+		foreach ($value->projectFinancialData as $key => $valor) {
+			if($key != 'id'){	
+				$value->$key = $valor;
+			}
+		}
 		// SIMULADOS
 		$value->fundStartDate = 1370284000000;
 		$value->fundEndDate = 1377284000000; 
@@ -282,6 +287,7 @@ class JTrama
 			$value->settlementDateCode = $value->settlementDate;
 			$value->settlementDate = date('d-m-Y', ($value->settlementDate/1000) );
 		}
+		$value->projectFinancialData = null;
 	}
 	
 	public static function getClosestEnd()

@@ -14,7 +14,7 @@ if( !isset($proyeto->projectBusinessCase->name) ) {
 	$bussinesCase = '';
 } else {
 	$bussinesCase = '<div style="margin-bottom:10px">
-		<a href="'.MIDDLE.BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
+		<a href="'.JURI::base().BCASE.'/'.$proyeto->projectBusinessCase->name.'.xlsx" target="blank">
 			Business Case
 		</a>
 	</div>';

@@ -81,7 +81,7 @@ function diferenciaEntreFechas($fecha_principal, $fecha_secundaria, $obtener = '
   		$noProyectos = count($allProjects);
   		for ($i = 0; $i < $noProyectos && $i < 12; $i++) {
 			echo '<li>
-    				<div class="contenedor" style="background:url('.MIDDLE.AVATAR.'/'.$allProjects[$i]->projectAvatar->name.'); background-size: 100%;">
+    				<div class="contenedor" style="background: url(\''.'/'.AVATAR.'/'.$allProjects[$i]->projectAvatar->name.'\'); background-size: 100%;">
     					<div class="info-proyecto" >
     						<span>'.$allProjects[$i]->name.'</span><br/>
     						<span>'.JText::_('PORCENTAJE_RECAUDADO').' '.$allProjects[$i]->recaudado.'</span><br/>
