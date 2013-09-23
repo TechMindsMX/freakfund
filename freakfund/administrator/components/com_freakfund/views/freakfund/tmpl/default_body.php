@@ -14,14 +14,15 @@ foreach($this->items as $i => $item):
 			$htmlProveedores = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
 		}
 		
-		$htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$item->id.'" >'.$item->name.'</a>';
+		$htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$item->id.'" >'.$item->producerName.'</a>';
+		$htmlProducto = '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" >'.$item->name.'</a>';
  ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 	        <td>
-	    		<?php echo $htmlProductor; ?>
+	    		<?php echo $htmlProducto; ?>
 	        </td>
 	        <td>
-	        	<?php echo $item->producerName; ?>
+	        	<?php echo $htmlProductor; ?>
 	        </td>
 	        <td>
 	        	<?php echo $htmlProveedores; ?>
