@@ -49,7 +49,7 @@ $pathJumi = 'components/com_jumi/files/carrusel';
   	<?php 
   		foreach ($datos as $key => $value) {
 			echo '<li>
-    				<div class="contenedor" style="background:url(\''.'/'.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
+    				<div class="contenedor" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
     					<div class="info-proyecto" >
     						<div><h3>'.$value->name.'</h3></div>
     						<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
