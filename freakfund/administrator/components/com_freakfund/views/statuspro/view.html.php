@@ -9,7 +9,7 @@ class statusproViewstatuspro extends JView
 {
 	function display($tpl = null) {
 	        // Get data from the model
-	        $items = $this->get('getProducto');
+	        $items = $this->get('Prod');
 
 	        // Check for errors.
 	        if (count($errors = $this->get('Errors'))) {

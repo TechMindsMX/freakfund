@@ -6,10 +6,10 @@ jimport('joomla.application.component.modellist');
 
 class statusproModelstatuspro extends JModelList
 {
-	public function getProducto() {
+	public function getProd() {
 		$temporal = JFactory::getApplication()->input;
 		$temporal = $temporal->get('proyid');
-	
+		
 		$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$temporal));
 
 		return $query;

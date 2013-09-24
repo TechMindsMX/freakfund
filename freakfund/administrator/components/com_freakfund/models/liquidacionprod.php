@@ -12,9 +12,10 @@ class liquidacionprodModelliquidacionprod extends JModelList
 			$temporal = $temporal->get('id');
 			
 			$query = JTrama::getDatos($temporal);
-        	// $query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$temporal));
+
 			$query->token = JTrama::token();
 			$query->callback = JURI::base().'index.php?option=com_freakfund';
+			$query->errorCallback = JURI::base().'index.php?option=com_freakfund&task=errors';
 			$query->CPR = '2000000';
 			
 			return $query;

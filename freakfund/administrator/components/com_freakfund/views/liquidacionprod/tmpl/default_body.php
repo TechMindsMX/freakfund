@@ -12,9 +12,10 @@ $datos = $this->items;
 		<td align="absmiddle">
 			<label for="montoPago"><?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_MONTOPAGO'); ?></label>
 			<input type="hidden" name="token" id="token" value="<?php echo $datos->token; ?>" />
-			<input type="hidden" name="prodId" id="prodId" value="<?php echo $datos->id; ?>" />
-			<input type="hidden" name="userId" id="userId" value="<?php echo $datos->userId; ?>" />
+			<input type="hidden" name="projectId" id="projectId" value="<?php echo $datos->id; ?>" />
+			<input type="hidden" name="producerId" id="producerId" value="<?php echo $datos->userId; ?>" />
 			<input type="hidden" name="callback" id="callback" value="<?php echo $datos->callback; ?>" />
+			<input type="hidden" name="errorCallback" id="errorCallback" value="<?php echo $datos->errorCallback; ?>" />
 			<input type="text" name="payment" id="payment" />
 		</td>
 	</tr>
