@@ -71,6 +71,10 @@ $promedio = $objuserdata->scoreUser($userid);
         <a href="index.php?option=com_jumi&view=application&fileid=28">Cashout</a>
         &nbsp;
         <a href="index.php?option=com_jumi&view=application&fileid=29">Traspaso</a>
+        &nbsp;
+        <a href="index.php?option=com_jumi&view=application&fileid=31">Estado de cuenta</a>
+        &nbsp;
+        <a href="index.php?option=com_jumi&view=application&fileid=32">Redimir codigo</a>
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
       <div id="contenido">  

@@ -12,7 +12,6 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
-require_once 'components/com_jumi/files/crear_proyecto/classIncludes/libreriasPP.php';
 
 
 $token = JTrama::token();
