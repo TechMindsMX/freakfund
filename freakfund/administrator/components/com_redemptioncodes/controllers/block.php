@@ -56,7 +56,7 @@ class RedemptioncodesControllerBlock extends JControllerAdmin {
 			}
 		}
 
-		$this->setRedirect('index.php?option=com_redeptioncodes');
+		$this->setRedirect('index.php?option=com_redemptioncodes');
 	}
 	public function unBlock() {
 		// Check for request forgeries.
@@ -95,7 +95,7 @@ class RedemptioncodesControllerBlock extends JControllerAdmin {
 			}
 		}
 
-		$this->setRedirect('index.php?option=com_redeptioncodes');
+		$this->setRedirect('index.php?option=com_redemptioncodes');
 	}
 
 }

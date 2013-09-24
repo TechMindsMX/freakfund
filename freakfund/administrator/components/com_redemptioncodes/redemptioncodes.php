@@ -2,7 +2,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 // Access check: is this user allowed to access the backend of this component?
-if (!JFactory::getUser()->authorise('core.manage', 'com_redeptioncodes')) 
+if (!JFactory::getUser()->authorise('core.manage', 'com_redemptioncodes')) 
 {
         return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }

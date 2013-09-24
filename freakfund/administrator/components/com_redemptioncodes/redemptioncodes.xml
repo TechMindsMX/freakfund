@@ -24,7 +24,7 @@
                 <menu>Redemption codes</menu>
                 <files folder="admin">
                         <filename>index.html</filename>
-                        <filename>redeptioncodes.php</filename>
+                        <filename>redemptioncodes.php</filename>
                         <filename>controller.php</filename>
                         <folder>models</folder>
                         <folder>views</folder>
