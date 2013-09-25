@@ -8,7 +8,33 @@ class RedemptioncodesControllerUploadcodes extends JControllerAdmin
 	
 	public function fileupload()
 	{
-				$campos = 2; // Cantidad de campos permitidos en el csv
+		$url = 'http://localhost/post.php';
+		$data = $_POST;
+		$data = array('foo'=>'bar');
+		$optional_headers = null;
+		
+		$params = array('http' => array(
+					'method' => 'POST',
+					'content' => $data
+		));
+		if ($optional_headers !== null) {
+			$params['http']['header'] = $optional_headers;
+		}
+		$ctx = stream_context_create($params);
+		$fp = fopen($url, 'rb', false, $ctx);
+		if (!$fp) {
+			throw new Exception("Problem with $url, $php_errormsg");
+		}
+		$response = stream_get_contents($fp);
+		if ($response === false) {
+			throw new Exception("Problem reading data from $url, $php_errormsg");
+		}
+		var_dump($params, $ctx, $response);
+		return $response;
+
+
+/*
+		$campos = 2; // Cantidad de campos permitidos en el csv
 		$path = JPATH_ROOT.'/images/redemptcodes/';
 		$input = JFactory::getApplication()->input;
 		$proid = $input->get('projectid', 'INT');
@@ -54,6 +80,7 @@ class RedemptioncodesControllerUploadcodes extends JControllerAdmin
 		} else
 				echo 'Extensión incorrecta';
 		}
+*/
 	}
 
 	function savecsv($cachable = false, $urlparams = false) 

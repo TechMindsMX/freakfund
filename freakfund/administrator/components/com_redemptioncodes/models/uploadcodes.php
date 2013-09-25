@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
 
-class RedemptioncodesModelUploadcodes extends JModelList {
+class RedemptioncodesModelSavecsv extends JModelList {
 
-	public function getDatos() {
+	public function savefile() {
 		// 5 Autorizado = Financiamiento
 		// 6 Producción
 		$doc = JFactory::getApplication();
