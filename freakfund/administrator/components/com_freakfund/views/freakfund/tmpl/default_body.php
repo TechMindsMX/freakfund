@@ -15,11 +15,10 @@ foreach($this->items as $i => $item):
 		}
 		
 		$htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$item->id.'" >'.$item->producerName.'</a>';
-		$htmlProducto = '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" >'.$item->name.'</a>';
- ?>
+?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 	        <td>
-	    		<?php echo $htmlProducto; ?>
+	    		<?php echo $item->name; ?>
 	        </td>
 	        <td>
 	        	<?php echo $htmlProductor; ?>
