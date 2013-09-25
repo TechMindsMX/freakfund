@@ -6,10 +6,12 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 
 $formulario = '<p>'.JText::_('SIN_REDEMP_CSV').'</p>'.
-				'<input type="file" name="redemptionCsv" />';
+				'<input type="file" name="csv" />';
 
+$accion = JRoute::_('index.php?option=com_redemptioncodes');
+$accion = JPATH_ADMINISTRATOR.'com_redemptioncodes/controllers.upload.php';
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_redemptioncodes'); ?>" method="post" name="adminForm">
+<form action="<?php echo $accion; ?>" method="post" name="adminForm" enctype="multipart/form-data">
     <table class="adminlist">
     	<?php
     	'<h2>'.$this->items->name.'</h2>';
