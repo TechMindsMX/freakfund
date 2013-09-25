@@ -95,7 +95,31 @@ switch ($fun) {
 		break;
 		
 	case 4:
+		require_once('recaptchalib.php');
 		
+		$privatekey = "6LfC7OcSAAAAAHZd7gT6NBMQzjzUjtMhaSGl-DM6";
+		$codigo = array();
+		
+		$resp = recaptcha_check_answer ($privatekey,
+				$_SERVER["REMOTE_ADDR"],
+				$_POST["recaptcha_challenge_field"],
+				$_POST["recaptcha_response_field"]);
+
+		if (!$resp->is_valid) {
+			// What happens when the CAPTCHA was entered incorrectly
+			$codigo['error'] = 'no es lo que esta en la puta imagen.';
+			$codigo['mensaje'] = false;
+		} else {
+			// Your code here to handle a successful verification
+			$codigo['mensaje'] = true;
+			$codigo['error'] =  'nada';
+		}
+		
+		
+		echo json_encode($codigo);
+		break;
+		
+	case 5:
 		$codigo = array();
 		$codigo['mensaje'] = true;
 		$codigo['proyid'] =  3;

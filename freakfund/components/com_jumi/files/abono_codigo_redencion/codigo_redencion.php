@@ -31,10 +31,10 @@ $action = '#';
 		jQuery("#enviar").click(function(){
 			
 			var request = $.ajax({
-     			url:"libraries/trama/js/ajax2.php",
+     			url:"libraries/trama/js/ajax.php",
  				data: {
-  					"codigo": jQuery("#codigo").val(),
-  					"userId": <?php echo $usuario->id; ?>,
+  					"recaptcha_challenge_field": jQuery("#form_codigo input[name='recaptcha_challenge_field']").val(),
+  					"recaptcha_response_field": jQuery("#form_codigo input[name='recaptcha_response_field']").val(),
   					"fun": 4
  				},
  				type: 'post'
@@ -42,13 +42,32 @@ $action = '#';
 
 			request.done(function(result){
 	 			obj = eval('(' + result + ')');
-	 			
-	 			
-	 			
+
+	 			if(obj.mensaje) {
+	 				var request = $.ajax({
+	 	     			url:"libraries/trama/js/ajax.php",
+	 	 				data: {
+	 	  					"codigo": jQuery("#codigo").val(),
+	 	  					"userId": <?php echo $usuario->id; ?>,
+	 	  					"fun": 5
+	 	 				},
+	 	 				type: 'post'
+	 				});
+
+	 				request.done(function(result){
+	 		 			obj = eval('(' + result + ')');
+
+
+ 			 			
+	 				});
+		 		}else{
+					alert(obj.error);
+	 			}
 			});
 	
 			request.fail(function (jqXHR, textStatus) {
 	 			console.log('Error:' + jqXHR.status);
+	 			
 	    	});
 			
 
