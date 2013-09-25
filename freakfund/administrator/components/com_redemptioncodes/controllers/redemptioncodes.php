@@ -5,12 +5,19 @@ jimport('joomla.application.component.controlleradmin');
 
 class RedemptioncodesControllerRedemptioncodes extends JControllerAdmin {
 
-	public function __construct($config = array()) {
-		parent::__construct($config);
-
-		$this -> registerTask('block', 'changeBlock');
-		$this -> registerTask('unblock', 'changeBlock');
-	}
-
+        /**
+         * display task
+         *
+         * @return void
+         */
+        function display($cachable = false, $urlparams = false) 
+        {
+        	    // set default view if not set
+                $input = JFactory::getApplication()->input;
+				$input->set('view', $input->getCmd('view', 'redemptioncodes'));
+				
+                // call parent behavior
+                parent::display($cachable);
+        }
 
 }

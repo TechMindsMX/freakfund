@@ -38,6 +38,7 @@ class RedemptioncodesViewUploadcodes extends JView
         protected function addToolBar() 
         {
 			JToolBarHelper::title(JText::_('COM_REDEMPTIONCODES_UPLOAD_REDEMPTIONCODES'));
+			JToolBarHelper::custom('uploadcodes.fileupload', 'upload.png', 'extrahello_f2.png', 'File Upload', false);
 			JToolBarHelper::back();
 		}
 }
