@@ -9,20 +9,18 @@ JHtml::_('behavior.tooltip');
     <table class="adminlist">
         <thead>
 			<tr>
-				<th width="1%">
-				</th>
-		        <th width="5">
+		        <th>
 		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_ID'); ?>
 		        </th>
 		                         
 		        <th>
-		            <?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_GREETING'); ?>
-		        </th>
-		        <th>
-		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_TIPO');?>
+		            <?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_NAME'); ?>
 		        </th>
 		        <th>
 		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_STATUS'); ?>
+		        </th>
+		        <th>
+		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_CODES'); ?>
 		        </th>
 			</tr>
 		</thead>
@@ -30,26 +28,26 @@ JHtml::_('behavior.tooltip');
 			<?php 
 			
 			$front = str_replace('administrator/', '', JURI::base());
-			$link = $front.'index.php?option=com_jumi&view=application&fileid=17&Itemid=220&userid=';
+			$linkPro = $front.'index.php?option=com_jumi&view=application&fileid=11&proyid=';
+			
+			$linkCodes = 'index.php?option=com_redemptioncodes&view=uploadcodes&proyid=';
 			
 			// var_dump($this);
 			foreach($this->items as $i => $item):
 			 ?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<td>
-						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+						<?php echo $item->id; ?>
 					</td>
 					<td>
-						<?php echo $item->users_id; ?>
+						<?php echo $item->name; ?>
+						<a target="_blank" href="<?php echo $linkPro. $item->id; ?>"><?php echo JText::_('VER_PROY'); ?></a>
 					</td>
 					<td>
-						<a target="_blank" href="<?php echo $link. $item->users_id; ?>"><?php echo $item->nomNombre.' '.$item->nomNombre; ?></a>
+						<?php echo $item->statusName; ?>
 					</td>
 					<td>
-						<?php echo $item->nomNombreCategoria; ?>
-					</td>
-					<td>
-						<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'block.unblock', 'block.block'); ?>
+						<a href="<?php echo $linkCodes. $item->id; ?>"><?php echo JText::_('ADD_REDEMP_CODES'); ?></a>
 					</td>
 				</tr>
 			<?php 
