@@ -245,9 +245,11 @@ class JTrama
 	
 	public static function formatDatosProy ($value)
 	{
-		foreach ($value->projectFinancialData as $key => $valor) {
-			if($key != 'id'){	
-				$value->$key = $valor;
+		if(isset($value->projectFinancialData)) {
+			foreach ($value->projectFinancialData as $key => $valor) {
+				if($key != 'id'){	
+					$value->$key = $valor;
+				}
 			}
 		}
 		// SIMULADOS
@@ -304,7 +306,8 @@ class JTrama
 
 	public static function fundPercentage($data)
 	{
-		$data->balancePorcentaje = round(($data->balance * 100) / $data->breakeven, 2);
+		var_dump($data);
+		$data->balancePorcentaje = round(($data->balance * 100) / $data->projectFinancialData->breakeven, 2);
 		
 		return $data;
 	}
@@ -330,6 +333,28 @@ class JTrama
 	{
 		$data->ROF = 40;
 	}
+	
+	public static function getProyByStatus($params='')
+	{
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
+		
+		return $data;
+	}
+	
+	public static function getRedemptionCodes($value)
+	{
+		$con=mysql_connect("localhost","root","");
+		mysql_select_db('redempcodes', $con);
+		
+		$result = mysql_query("SELECT * FROM project_redemptioncodes WHERE projectid = ".$value->id);
+		
+		while($row=mysql_fetch_object($result)) {
+			$value->redemptionCodes[] = $row->redemptioncode;
+		}
 
+		return $value;
+	}
+	
+	
 }
 ?>
