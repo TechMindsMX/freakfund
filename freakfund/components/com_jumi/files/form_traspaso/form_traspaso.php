@@ -19,7 +19,6 @@ $token = JTrama::token();
 $input = JFactory::getApplication()->input;
 $usuario= JFactory::getUser();
 $datosUsuario=JTrama::getUserBalance($usuario->id);
-
 $friends=JTrama::searchFriends($usuario->id);
 $arrayFriends=explode(',',$friends->friends);
 $arregloEnvio='';
@@ -31,8 +30,8 @@ foreach($arrayFriends as $key => $value){
 	}
 }
 
-$callback = JURI::base().'index.php?option=com_jumi&view=appliction&fileid=11';
-$errorCallback = JURI::base().'index.php?option=com_jumi&view=appliction&fileid=12';
+$callback = JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
+$errorCallback = JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
 
 $amigosJs = implode(',' ,$arregloAmigos);
 //definicion de campos del formulario

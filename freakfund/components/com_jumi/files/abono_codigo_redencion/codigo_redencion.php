@@ -28,6 +28,7 @@ $action = '#';
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form_codigo").validationEngine();
+		jQuery("#form_codigo").validationEngine();
 		jQuery("#enviar").click(function(){
 			
 			var request = $.ajax({
@@ -57,8 +58,10 @@ $action = '#';
 	 				request.done(function(result){
 	 		 			obj = eval('(' + result + ')');
 
-
- 			 			
+						jQuery("#ajax_done").css("display","block");
+ 			 			jQuery("#producto").text(obj.nombreProy);
+ 			 			jQuery("#monto").text(obj.monto);
+ 			 			jQuery("#tasa").text(obj.tasa);
 	 				});
 		 		}else{
 					alert(obj.error);
@@ -67,6 +70,7 @@ $action = '#';
 	
 			request.fail(function (jqXHR, textStatus) {
 	 			console.log('Error:' + jqXHR.status);
+	 			
 	 			
 	    	});
 			
@@ -81,7 +85,7 @@ $action = '#';
 <div>
 	<form id="form_codigo" action="<?php echo $action; ?>" method="POST">
 	
-		<?php echo JText::_('CODIGO_PROMO');  ?> <input type="text" id="codigo"name="codigo">
+		<?php echo JText::_('CODIGO_PROMO');  ?> <input type="text" class="validate[required]" id="codigo"name="codigo">
 		
 		 <script type="text/javascript"
        src="http://www.google.com/recaptcha/api/challenge?k=6LfC7OcSAAAAAB9GjWlswYzG7UyuWR6lonUy1h85">
@@ -101,6 +105,13 @@ $action = '#';
 			<input type="button" class="button" id="enviar" value="Redimir" />
 		</div>
 		
+		<div id="ajax_done" style="display: none">
+		Producto invertido:	<span id="producto"></span><br>
+		Monto invertido:	<span id="monto"></span><br>
+		Tasa de retorno al momento:	<span id="tasa"></span>
+			
+		
+		</div>
 		
 	</form>
 	
