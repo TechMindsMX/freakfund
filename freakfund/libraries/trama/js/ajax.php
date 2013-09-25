@@ -93,7 +93,19 @@ switch ($fun) {
 
 		echo json_encode($respuesta);
 		break;
-	
+		
+	case 4:
+		
+		$codigo = array();
+		$codigo['mensaje'] = true;
+		$codigo['proyid'] =  3;
+		$codigo['monto'] = 70;
+		$codigo['tasa'] = '10%';
+		$codigo['nombreProy'] = 'Kill Bill';
+		
+		echo json_encode($codigo);
+		break;
+		
 	default:
 		echo 'error';
 		break;
