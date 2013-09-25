@@ -2,7 +2,7 @@
 $usuario = JFactory::getUser();
 $document = JFactory::getDocument();
 $base = JUri::base();
-$pathJumi = $base.'components/com_jumi/files/classIncludes/';
+$pathJumi = $base.'components/com_jumi/files/crear_pro/';
 
 $scriptselect = 'jQuery(function() {
 	jQuery("#subcategoria").chained("#selectCategoria");	
