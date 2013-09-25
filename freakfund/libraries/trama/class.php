@@ -306,7 +306,6 @@ class JTrama
 
 	public static function fundPercentage($data)
 	{
-		var_dump($data);
 		$data->balancePorcentaje = round(($data->balance * 100) / $data->projectFinancialData->breakeven, 2);
 		
 		return $data;

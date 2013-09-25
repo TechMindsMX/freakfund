@@ -11,6 +11,7 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
+require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
@@ -40,7 +41,7 @@ $action = '#';
 			  <option value="Febrero">Febrero</option>
 			  <option value="Marzo">Marzo</option>
 			  <option value="Abril">Abril</option>
-		</select><br>
+		</select>
 		
 		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input type="text" name="fechaini"><br>
   		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input type="text" name="fechafin"><br>
