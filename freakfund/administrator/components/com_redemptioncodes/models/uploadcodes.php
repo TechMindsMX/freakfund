@@ -5,9 +5,9 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
 
-class RedemptioncodesModelSavecsv extends JModelList {
+class RedemptioncodesModelUploadcodes extends JModelList {
 
-	public function savefile() {
+	public function getDatos() {
 		// 5 Autorizado = Financiamiento
 		// 6 Producción
 		$doc = JFactory::getApplication();
@@ -18,6 +18,10 @@ class RedemptioncodesModelSavecsv extends JModelList {
 		$proy = JTrama::getDatos($proId);
 		
 		$proy->redemptioncodes = JTrama::getRedemptionCodes($proy);
+		
+		$proy->token = JTrama::token();
+		$proy->callback = JURI::base().'index.php?option=com_redemptioncodes&task=success';
+		$proy->errorCallback = JURI::base().'index.php?option=com_redemptioncodes&task=errors&proyid='.$proId;
 		
 		$resultado = $proy;
 

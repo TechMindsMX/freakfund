@@ -1,20 +1,18 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
- 
+
+// var_dump($this);
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
 
-$formulario = '<p>'.JText::_('SIN_REDEMP_CSV').'</p>'.
-				'<input type="file" name="csv" value="" />'.
-				'<input type="hidden" name="projectid" value="'.$this->items->id.'" />'.
-				'<input type="submit" class="button" value="Subir" />';
 
 $accion = JRoute::_('index.php?option=com_redemptioncodes');
 $accion = 'components/com_redemptioncodes/controllers/upload.php';
 
 ?>
-<form action="" method="post" name="adminForm" enctype="multipart/form-data">
+
+<form action="<?php echo $accion; ?>" method="post" name="adminForm" enctype="multipart/form-data">
     <table class="adminlist">
     	<?php
     	'<h2>'.$this->items->name.'</h2>';
@@ -31,15 +29,19 @@ $accion = 'components/com_redemptioncodes/controllers/upload.php';
 				<?php
 			}
 		} else {
-			echo $formulario;
+			?>
+			<tr><th><?php echo JText::_('SIN_REDEMP_CSV'); ?></th></tr>
+			<tr><td>
+				<input type="file" name="csv" id="csv" />
+				<input type="hidden" name="projectid" value="<?php echo $this->items->id; ?>" />
+				<input type="hidden" name="token" value="<?php echo $this->items->token; ?>" />
+				<input type="hidden" name="callback" value="<?php echo $this->items->callback; ?>" />
+				<input type="hidden" name="errorCallback" value="<?php echo $this->items->errorCallback; ?>" />
+				<input type="submit" class="button" value="Subir" />
+			</td></tr>
+		<?php
 		}
     	?>
-				<div>
-					<input type="hidden" name="task" value="" />
-					<input type="hidden" name="boxchecked" value="0" />
-					<?php echo JHtml::_('form.token'); ?>
-				</div>
-
 		</tbody>
 
 	    <tfoot>
