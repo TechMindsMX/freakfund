@@ -100,11 +100,17 @@ console.log(variable);
 			  <option value="Marzo">Marzo</option>
 			  <option value="Abril">Abril</option>
 			  <option value="Mayo">Mayo</option>
-			 
+			  <option value="Mayo">Junio</option>
+			  <option value="Mayo">Julio</option>
+			  <option value="Mayo">Agosto</option>
+			  <option value="Mayo">Septiembre</option>
+			  <option value="Mayo">Octubre</option>
+			  <option value="Mayo">Noviembre</option>
+			  <option value="Mayo">Diciembre</option>	 
 		</select>
 					
-		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input type="text" name="fechaini">
-  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input type="text" name="fechafin">
+		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input placeholder="DD-MM-AAAA" type="text" name="fechaini">
+  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input placeholder="DD-MM-AAAA" type="text" name="fechafin">
 		
 		<input type="button" class="button" value="Consultar" />
 		
