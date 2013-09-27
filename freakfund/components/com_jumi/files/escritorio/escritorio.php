@@ -19,6 +19,7 @@ if ($usuario -> guest == 1) {
 jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
+$doc -> addScript( 'libraries/trama/js/jquery.number.min.js' );
 
 $userid = $input -> get("userid", 0, "int");
 
@@ -56,14 +57,26 @@ foreach ($proyectos as $key => $value) {
 $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgenerales->actualFundings + $datosgenerales->userBalance;
 
 ?>
-
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('span.number').number( true, 2, ',','.' );
+	});
+</script>
 <h1 class=""><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 
 <div>
-	<span><label><?php echo JText::_('SALDO_FF'); ?></label><h3><?php echo $datosgenerales->userBalance; ?></h3></span>
-	<span><label><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label><h3><?php echo $datosgenerales->actualInvestments; ?></h3></span>
-	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label><h3><?php echo $datosgenerales->actualFundings; ?></h3></span>
-	<span><label><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label><h3><?php echo $datosgenerales->portfolioValue; ?></h3></span>
+	<span><label><?php echo JText::_('SALDO_FF'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->userBalance; ?></span></h3>
+	</span>
+	<span><label><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->actualInvestments; ?></span></h3>
+	</span>
+	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->actualFundings; ?></span></h3>
+	</span>
+	<span><label><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
+	</span>
 </div>
 
 <a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
@@ -93,9 +106,9 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 								<span>' . $value -> imgAvatar . '</span>
 								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
 								</td>' . '<td>' . $value -> fundEndDate . '</td>
-								<td>' . $value -> breakeven . '</td>
+								<td><span class="number">' . $value -> breakeven . '</span></td>
 								<td>' . $value -> porcentajeRecaudado . '</td>
-								<td>' . $value -> investmentValue . '</td>
+								<td><span class="number">' . $value -> investmentValue . '</span></td>
 								</tr>';
 						}
 					}
@@ -124,8 +137,8 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 								<span>' . $value -> imgAvatar . '</span>
 								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
 								</td>
-								<td>' . $value -> investmentValue . '</td>
-								<td>' . $value -> roi . '</td>
+								<td><span class="number">' . $value -> investmentValue . '</span></td>
+								<td><span class="number">' . $value -> roi . '</span></td>
 								<td>' . $value -> tri . ' %</td>
 								</tr>';
 						}
