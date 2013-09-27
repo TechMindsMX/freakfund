@@ -107,7 +107,7 @@ switch ($fun) {
 
 		if (!$resp->is_valid) {
 			// What happens when the CAPTCHA was entered incorrectly
-			$codigo['error'] = 'no es lo que esta en la puta imagen.';
+			$codigo['error'] = 'El captcha es incorrecto.';
 			$codigo['mensaje'] = false;
 		} else {
 			// Your code here to handle a successful verification
