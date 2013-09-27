@@ -8,7 +8,8 @@ jimport('trama.class');
 JHtml::_('behavior.tooltip');
 $document = JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
-$document->addScript('../libraries/trama/js/jquery.number.min.js');
+require_once '../components/com_jumi/files/classIncludes/libreriasPP.php';
+
 ?>
 <form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/saveProducerPayment" method="post" name="adminForm">
         <table id="tablaGral" class="adminlist">

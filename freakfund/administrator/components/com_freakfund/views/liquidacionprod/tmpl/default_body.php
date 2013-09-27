@@ -16,7 +16,7 @@ $datos = $this->items;
 			<input type="hidden" name="producerId" id="producerId" value="<?php echo $datos->userId; ?>" />
 			<input type="hidden" name="callback" id="callback" value="<?php echo $datos->callback; ?>" />
 			<input type="hidden" name="errorCallback" id="errorCallback" value="<?php echo $datos->errorCallback; ?>" />
-			<input type="text" name="payment" id="payment" />
+			<input type="text" name="payment" id="payment" class="validate[required]"  />
 		</td>
 	</tr>
 	<tr>
