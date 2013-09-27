@@ -302,15 +302,14 @@ class JTrama
 			foreach ($data as $key => $value) {
 				$value = JTrama::formatDatosProy($value);
 			}
-		}
-		
+		} 
+
 		return $data;
 	}
 
 	public static function fundPercentage($data)
 	{
-		$data = JTrama::formatDatosProy($data);
-		$data->balancePorcentaje = round(($data->balance * 100) / $data->projectFinancialData->breakeven, 2);
+		$data->balancePorcentaje = round(($data->balance * 100) / $data->breakeven, 2);
 
 		return $data;
 	}

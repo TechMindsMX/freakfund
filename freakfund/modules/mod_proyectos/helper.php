@@ -7,14 +7,13 @@ class modProyectosHelper
 	
     public static function closestEnd() {
     	$datosTmp = JTrama::getClosestEnd();
-
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
-				$datos = modProyectosHelper::fundPercentage($value);
+				$datos[] = JTrama::fundPercentage($value);
 			}
 		}
 		else {
-			$datos = '';
+			$datos[] = '';
 		}
 		return $datos;
     }
@@ -32,11 +31,6 @@ class modProyectosHelper
 		
     }
 
-    public static function fundPercentage( $datos ) {
-		$datos = JTrama::fundPercentage($datos);
-
-		return $datos;
-    }
     
 }
 ?>
