@@ -36,7 +36,7 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 						if(confirm('¿Está seguro? ESTA ACCIÓN ES IRREVERSIBLE')) {
 							if(confirm('¿Seguro Seguro?')) {
 								if(confirm('¿Por tu mama?')) {
-									alert('Ya te chingaste');
+									alert('Estatus cambiado');
 								} else {
 									alert('Bien hecho');
 								}
