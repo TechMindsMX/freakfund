@@ -114,7 +114,7 @@ class JTrama
 		return $projectList;
 	}
 	
-	public function getEditUrl($value) {
+	public static function getEditUrl($value) {
 		$value->viewUrl = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id;
 		switch ($value->type) {
 			case 'PROJECT':
@@ -127,8 +127,7 @@ class JTrama
 				$value->editUrl = 'index.php?option=com_jumi&view=appliction&fileid=14&proyid='.$value->id;
 				break;
 			}
-		$this->proy = $value;
-		return $this->proy;
+		return $value;
 	}
 	
 	public static function tipoProyProd($data) {
@@ -247,7 +246,7 @@ class JTrama
 	{
 		if(isset($value->projectFinancialData)) {
 			foreach ($value->projectFinancialData as $key => $valor) {
-				if($key != 'id'){	
+				if($key != 'id'){
 					$value->$key = $valor;
 				}
 			}
@@ -257,8 +256,12 @@ class JTrama
 		$value->fundEndDate = 1377284000000; 
 		$value->productionStartDateCode = 1378003651000;
 		$value->premiereStartDateCode = 1381003651000;
-		$value->balance = 50000000;
-		$value->tri = 32;
+		if ($value->balance != 0) {
+			$value->porcentajeRecaudado = $value->balance / $value->breakeven;
+		} else {
+			$value->porcentajeRecaudado = 0; 
+		};
+		if (is_null($value->tri)) { $value->tri = 32; };
 		// FIN SIMULADOS
 		
 		if (isset($value->fundStartDate)) {
@@ -306,8 +309,9 @@ class JTrama
 
 	public static function fundPercentage($data)
 	{
+		$data = JTrama::formatDatosProy($data);
 		$data->balancePorcentaje = round(($data->balance * 100) / $data->projectFinancialData->breakeven, 2);
-		
+
 		return $data;
 	}
 	

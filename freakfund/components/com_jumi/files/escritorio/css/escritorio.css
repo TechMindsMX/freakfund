@@ -1,0 +1,18 @@
+@media all and (max-width: 720px){
+	.comentarios{
+		display:none;
+	}
+	.comentariosMedia{
+		display:inline;
+	}
+	.editTabla{
+		display:none;
+	}
+	.editMedia{
+		display:inline;
+	}
+}
+
+.cartera img {
+	max-width: 90px;
+}

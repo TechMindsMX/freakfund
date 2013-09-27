@@ -23,17 +23,12 @@ $userid = $input->get("userid",0,"int");
 $objuserdata = new UserData;
 $userid = ($userid==0)? $usuario->id: $userid ;
 
-
-
 $document = JFactory::getDocument();
 $base = JUri::base();
 $proyectos = JTrama::getProjectsByUser($userid);
 foreach ($proyectos as $key => $value) {
-	$entity = new JTrama;
-	
-	$entity->getEditUrl($value);
+	$value = JTrama::getEditUrl($value);
 }
-
 
 $pathJumi = $base.'components/com_jumi/files/perfil_usuario/';
 $document->addStyleSheet($pathJumi.'css/style.css');

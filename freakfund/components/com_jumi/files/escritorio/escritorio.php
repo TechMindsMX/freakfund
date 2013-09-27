@@ -1,327 +1,142 @@
 <?php
-defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 
 $count = 0;
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
-if ($usuario->guest == 1) {
-	$return = JURI::getInstance()->toString();
-	$url    = 'index.php?option=com_users&view=login';
-	$url   .= '&return='.base64_encode($return);
-	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+$doc = JFactory::getDocument();
+$base = JUri::base();
+$input = $app -> input;
+$jumiurl = 'index.php?option=com_jumi&view=application&fileid=';
+
+if ($usuario -> guest == 1) {
+	$return = JURI::getInstance() -> toString();
+	$url = 'index.php?option=com_users&view=login';
+	$url .= '&return=' . base64_encode($return);
+	$app -> redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
 
 jimport("trama.class");
 jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
-$input = JFactory::getApplication()->input;
-$userid = $input->get("userid",0,"int");
+
+$userid = $input -> get("userid", 0, "int");
+
+$userid = ($userid == 0) ? $usuario -> id : $userid;
+
+$doc -> addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
+$doc -> addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
 $objuserdata = new UserData;
-$userid = ($userid==0)? $usuario->id: $userid ;
-
-$document = JFactory::getDocument();
-$base = JUri::base();
-$proyectos = JTrama::getProjectsByUser($userid);
-foreach ($proyectos as $key => $value) {
-	$entity = new JTrama;
-	
-	$entity->getEditUrl($value);
-}
-
-
-$pathJumi = $base.'components/com_jumi/files/perfil_usuario/';
-$document->addStyleSheet($pathJumi.'css/style.css');
-
 $datosgenerales = $objuserdata::datosGr($userid);
 
-if(is_null($datosgenerales)){
-	$app->redirect('index.php', 'No hay datos de usuario','notice');
+if (is_null($datosgenerales)) {
+	$app -> redirect('index.php', 'No hay datos de usuario', 'notice');
 }
 
-$id_datos_generales = $datosgenerales->id;
+$datosgenerales -> userBalance = $objuserdata->getUserBalance($userid)->balance;
 
-$promedio = $objuserdata->scoreUser($userid);
+$promedio = $objuserdata -> scoreUser($userid);
+
+// $proyectos = JTrama::getProjectsByUser($userid);
+$proyectos = JTrama::allProjects();
+foreach ($proyectos as $key => $value) {
+	if ( ($value -> type != 'REPERTORY' && $value -> status != 4)) {
+		$value = JTrama::getEditUrl($value);
+		$value -> imgAvatar = '<img src="' . AVATAR . '/' . $value -> projectAvatar -> name . '" alt="' . $value -> name . '" />';
+		$value -> investmentValue = 1000;
+		$value -> roi = $value -> investmentValue * ($value -> tri / 100);
+		if ( $value->type == 'PRODUCT' ) {
+			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investmentValue;
+		} elseif ( $value->type == 'PROJECT' ) {
+			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investmentValue;
+		}
+	}
+}
+$datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgenerales->actualFundings + $datosgenerales->userBalance;
 
 ?>
-<style>
-.comentariosMedia{
-			display:none;
-		}
-.editMedia {
-	display:none;
-}
-		
-@media all and (max-width: 720px){
-	.comentarios{
-		display:none;
-	}
-	.comentariosMedia{
-		display:inline;
-	}
-	.editTabla{
-		display:none;
-	}
-	.editMedia{
-		display:inline;
-	}
-}
-</style>
-    <body>
-        <a href="index.php?option=com_jumi&view=application&fileid=28">Cashout</a>
-        &nbsp;
-        <a href="index.php?option=com_jumi&view=application&fileid=29">Traspaso</a>
-        &nbsp;
-        <a href="index.php?option=com_jumi&view=application&fileid=31">Estado de cuenta</a>
-        &nbsp;
-        <a href="index.php?option=com_jumi&view=application&fileid=32">Redimir codigo</a>
-      <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
-        
-      <div id="contenido">  
-			<section class="ac-container" style="max-width: 100%;">
-				<div>
-					<input id="ac-2a" name="accordion-2" type="radio" />
-					<label for="ac-2a">Proyectos</label>
-					<article class="ac-medium">
-						<table width="100%" frame="box" rules="all" style="text-align: center">
-							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
-								<th>Status</th>
-								<th>Grupo</th>
-								<th>
-									<span class="comentarios">Comentarios</span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
-								</th>
-								<th>
-									<span class="editTabla">Editar</span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
-								</th>
-							</tr>
-							<?php 
-								foreach ($proyectos as $key => $value ) {
-									if ($value->type == 'PROJECT' && $value->status!=4) {
-										$fecha = $value->timeCreated/1000;
-										$groupId = JTrama::searchGroup($value->id);
-										echo '<tr>';
-											
-											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-											echo '<td>'.date('d/M/Y',$fecha).'</td>';
-											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
-											echo '<td>
-													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
-														ir
-													</a>
-												  </td>';
-											echo '<td>';
-												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
-												}
-											echo '</td>';
-											echo '<td>';
-												if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button" href="'.$value->editUrl.'">Ir</a>';
-												}
-											echo '</td>';
-											
-										echo "</tr>";
-									}
-							?>							
-							<div class="divcontent" id="divContent<?php echo $count; ?>">
-							<?php
-									foreach ($value->logs as $indice => $valor) {
-										$fechacreacion = $valor->timestamp/1000;
-										echo '<div style="margin-bottom: 10px;">'.
-											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
-											 '</li>'.
-											 '</div>';
-										}
-									?>
-								</div>
-							<?php
-									$count = $count + 1;
-								}
-							?>
-						</table>
-					</article>
-				</div>
-				
-				<div>
-					<input id="ac-3a" name="accordion-2" type="radio" />
-					<label for="ac-3a">Productos</label>
-					<article class="ac-large">
-						<table width="100%" frame="box" rules="all" style="text-align: center;">
-							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
-								<th>Status</th>
-								<th>Grupo</th>
-								<th>
-									<span class="comentarios">Comentarios</span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
-								</th>
-								<th>
-									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
-								</th>
-							</tr>
-							<?php 
-								foreach ($proyectos as $key => $value ) {							
-									if ($value->type == 'PRODUCT' && $value->status != 4) {
-										$fecha = $value->timeCreated/1000;
-										$groupId = JTrama::searchGroup($value->id);
-										echo "<tr>";
-										
-											echo '<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-											echo '<td>'.date('d/M/Y',$fecha).'</td>';
-											echo '<td>'.JTrama::getStatusName($value->status).'</td>';
-											echo '<td>
-													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
-														ir
-													</a>
-												  </td>';
-											echo "<td>";
-												if ( !empty($value->logs) ) {
-													echo '<a class="button" data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
-												}
-											echo '</td>';
-											echo "<td>";
-												if($value->status == 0 || $value->status == 2) {
-													echo '<a class="button editar" href="'.$value->editUrl.'">Ir</a>';
-												}
-											echo "</td>";
 
-										echo "</tr>";
-									}
-							?>
-							<div class="divcontent" id="divContent<?php echo $count; ?>">
-									<?php
-									foreach ($value->logs as $indice => $valor) {
-										$fechacreacion = $valor->timestamp/1000;
-										echo '<div style="margin-bottom: 10px;">'.
-											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
-											 '</li>'.
-											 '</div>';
-										}
-									?>
-								</div>
-							<?php
-									$count = $count + 1;
-								}
-							?>	
-						</table>
-					</article>
-				</div>
-				
-				<div>
-					<input id="ac-4a" name="accordion-2" type="radio" />
-					<label for="ac-4a">Repertorio</label>
-					<article class="ac-small">
-						<table width="100%" frame="box" rules="all" style="text-align: center;">
-							<tr>
-								<th>Nombre</th>
-								<th>
-									<span class="editTabla"><?php echo JText::_('EDIT'); ?></span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
-								</th>
-							</tr>
-							<?php 
-								foreach ($proyectos as $key => $value) {
-									if ($value->type == 'REPERTORY') {
-										echo '<tr>';
-										echo '	<td><a href="'.$value->viewUrl.'">'.$value->name.'</a></td>';
-										echo '	<td><a class="button" href="'.$value->editUrl.'">Ir</a></td>';	
-										echo "</tr>";
-									}
-								}
-		       				?>
-		       			</table> 				
-					</article>
-                </div>
-                    
-               	<div>
-                    <input id="ac-5a" name="accordion-2" type="radio" />
-					<label for="ac-5a">Suspendidos</label>
-					<article class="ac-large">
-						<table width="100%" frame="box" rules="all" style="text-align: center;">
-							<tr>
-								<th>Nombre</th>
-								<th>Creación</th>
-								<th>Grupo</th>
-								<th>
-									<span class="comentarios">Comentarios</span>
-									<span class="comentariosMedia">
-										<img width="20" src="components/com_jumi/files/escritorio/img/comentarios.png" />
-									</span>
-								</th>
-								<th>
-									<span class="editTabla">Editar</span>
-									<span class="editMedia">
-								  		<img width="20" src="components/com_jumi/files/escritorio/img/editar.png" />
-	  							    </span>
-								</th>
-							</tr>
-							<?php 
-								foreach ($proyectos as $key => $value ) {							
-									if ($value->type != 'REPERTORY' && $value->status == 4) {
-										$groupId = JTrama::searchGroup($usuario->id, $value->id);
-										$fecha = $value->timeCreated/1000;
-										echo "<tr>";
-										echo '	<td><a href="'.$value->viewUrl.'" >'.$value->name.'</a></td>';
-										echo '	<td>'.date('d/M/Y',$fecha).'</td>';
-										echo '<td>
-													<a class="button" href="index.php?option=com_community&view=groups&task=viewgroup&groupid='.$groupId->id.'">
-														ir
-													</a>
-												  </td>';
-										echo '	<td>';
-													if ( !empty($value->logs) ) {
-														echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Ver</a>';
-													}
-										echo '	</td>';
-										echo '</tr>';
-									}
-							?>
-							<div class="divcontent" id="divContent<?php echo $count; ?>">
-									<?php
-									foreach ($value->logs as $indice => $valor) {
-										$fechacreacion = $valor->timestamp/1000;
-										echo '<div style="margin-bottom: 10px;">'.
-											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
-											 '</li>'.
-											 '</div>';
-										}
-									?>
-								</div>
-							<?php
-									$count = $count + 1;
-								}
-							?>							
-						</table>
-					</article>
-				</div>
-				
-			</section>
-        <div style="clear: both"></div>
-       </div>
-       
+<h1 class=""><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
+
+<div>
+	<span><label><?php echo JText::_('SALDO_FF'); ?></label><h3><?php echo $datosgenerales->userBalance; ?></h3></span>
+	<span><label><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label><h3><?php echo $datosgenerales->actualInvestments; ?></h3></span>
+	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label><h3><?php echo $datosgenerales->actualFundings; ?></h3></span>
+	<span><label><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label><h3><?php echo $datosgenerales->portfolioValue; ?></h3></span>
+</div>
+
+<a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
+<a class="button" href="<?php echo $jumiurl; ?>29"><?php echo JText::_('ESCRIT_TRASPASO'); ?></a>
+<a class="button" href="<?php echo $jumiurl; ?>31"><?php echo JText::_('ESCRIT_ESTADO_CUENTA'); ?></a>
+<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_REDIMIR'); ?></a>
+<script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+    
+<div id="contenido">
+	<section class="ac-container" style="max-width: 100%;">
+		<div>
+			<input id="ac-2a" name="accordion-2" type="radio" />
+			<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
+			<article class="ac-medium">
+				<table class="cartera" width="100%" frame="box" rules="all" style="text-align: center">
+					<tr>
+						<th><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+						<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
+						<th><?php echo JText::_('BREAKEVEN'); ?></th>
+						<th><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
+						<th><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
+					</tr>
+					<?php
+					foreach ($proyectos as $key => $value) {
+						if ($value -> type == 'PROJECT' && $value -> status != 4) {
+							echo '<tr><td>
+								<span>' . $value -> imgAvatar . '</span>
+								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
+								</td>' . '<td>' . $value -> fundEndDate . '</td>
+								<td>' . $value -> breakeven . '</td>
+								<td>' . $value -> porcentajeRecaudado . '</td>
+								<td>' . $value -> investmentValue . '</td>
+								</tr>';
+						}
+					}
+					?>							
+				</table>
+			</article>
+		</div>
+		
+		<div>
+			<input id="ac-3a" name="accordion-2" type="radio" />
+			<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
+			<article class="ac-large">
+				<table class="cartera" width="100%" frame="box" rules="all" style="text-align: center;">
+					<tr>
+						<th><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+						<th><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
+						<th><?php echo JText::_('ESCRIT_ROI'); ?></th>
+						<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
+					</tr>
+					<?php
+					foreach ($proyectos as $key => $value) {
+						if ($value -> type == 'PRODUCT' && $value -> status != 4) {
+
+							echo '<tr>
+								<td>
+								<span>' . $value -> imgAvatar . '</span>
+								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
+								</td>
+								<td>' . $value -> investmentValue . '</td>
+								<td>' . $value -> roi . '</td>
+								<td>' . $value -> tri . ' %</td>
+								</tr>';
+						}
+					}
+					?>	
+				</table>
+			</article>
+		</div>
+		
+	</section>
+<div style="clear: both"></div>
+</div>
+   
       

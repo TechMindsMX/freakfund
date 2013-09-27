@@ -14,7 +14,7 @@ switch ($params->get('tipodepro')) {
 		break;
 	
 	case 'apoyados':
-		$datos = modProyectosHelper::closestEnd();
+		$datos = modProyectosHelper::profitables($cantidad);
 		
 		break;
 

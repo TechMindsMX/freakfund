@@ -2,6 +2,10 @@
 
 class UserData {
 	
+	public function __construct() {
+		$this->actualInvestments = 0;
+	}
+	
 	public static function datosGr ($userid) {
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -59,7 +63,6 @@ class UserData {
 		}else{
 			$arrayRespuesta = "";
 		}
-		
 
 		return $arrayRespuesta;
 	}
@@ -114,6 +117,21 @@ class UserData {
 		return $results[0];
 	}
 
+	public function getUserBalance ( $userid ) {
+	
+		if( isset($userid) ) {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
+			$json = @file_get_contents($url);
+			$respuesta = json_decode($json);
+				
+		} else {
+	
+			$respuesta = null;
+		}
+	
+		return $respuesta;
+	}
+	
 
 }
 
