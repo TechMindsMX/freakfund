@@ -24,7 +24,7 @@ $action = '#';
 
 include_once ("objetote.php");
 
-$tableHtml = "<table id='edocta_table' border='1'>";
+$tableHtml = "<table class='table-striped' id='edocta_table' border='1'>";
 $tableHtml .= "<tr id='cabezera'>";
 $tableHtml .= "<th>Fecha<th />";
 $tableHtml .= "<th>Movimiento<th />";
@@ -118,7 +118,7 @@ console.log(variable);
 		<?php echo $selectTipo; ?>
 		<div>
 		
-			<table border="1">
+			<table class='table-striped' border="1">
 				<tr>
 					<td><?php echo JText::_('SOCIO');?></td>
 					<td><?php echo $usuario->name;?></td>
