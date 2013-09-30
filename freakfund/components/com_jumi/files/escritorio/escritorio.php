@@ -32,7 +32,7 @@ $objuserdata = new UserData;
 $datosgenerales = $objuserdata::datosGr($userid);
 
 if (is_null($datosgenerales)) {
-	$app -> redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice')
+	$app -> redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
 $datosgenerales -> userBalance = $objuserdata->getUserBalance($userid)->balance;
