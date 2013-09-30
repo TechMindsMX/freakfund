@@ -88,10 +88,10 @@ $action = '#';
 		<?php echo JText::_('CODIGO_PROMO');  ?> <input type="text" class="validate[required]" id="codigo"name="codigo">
 		
 		 <script type="text/javascript"
-       src="http://www.google.com/recaptcha/api/challenge?k=6LfC7OcSAAAAAB9GjWlswYzG7UyuWR6lonUy1h85">
+       src="http://www.google.com/recaptcha/api/challenge?k=6LeDLOgSAAAAAIfown4LiNrDQgkwPVZ9FOG6moog">
     </script>
     <noscript>
-       <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfC7OcSAAAAAB9GjWlswYzG7UyuWR6lonUy1h85"
+       <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LeDLOgSAAAAAIfown4LiNrDQgkwPVZ9FOG6moog"
            height="300" width="500" frameborder="0"></iframe><br>
        <textarea name="recaptcha_challenge_field" rows="3" cols="40">
        </textarea>

@@ -1,0 +1,185 @@
+label {
+	float: left;
+	width:155px;
+}
+
+input#nomProy, input#nameRecinto, input#searchTextField {
+	width: 100% !important;
+	margin-bottom: 5px;
+	max-width:550px;
+}
+
+input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
+	width: 100% !important;
+	max-width: 265px;
+}
+#datos_finanzas_proy input[type = 'file'],#datos_finanzas_proy input[type = 'number'],#datos_finanzas_proy input[type = 'text']{
+	width: 100% !important;
+	max-width: 430px;
+}
+.radios_public {
+	margin-left: 20px !important;
+
+}
+.label_public {
+	width: 200px !important;
+	text-transform:uppercase;
+}
+#titulo_form{
+	color:#666666 !important;
+	font-size:25px;
+	font-weight:bold;
+	margin-bottom:20px;
+}
+
+.datos_proy{
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #b3b3b3;
+	padding: 10px 0px;
+	max-width: 720px;
+	color: #666666;
+	font-size:14px;
+	padding-left:15px;
+}
+#datos_proy{
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #b3b3b3;
+	padding: 10px 0px;
+	max-width: 720px;
+	color: #666666;
+	font-size:14px;
+	padding-left:15px;
+}
+#datos_generales_proy{
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #b3b3b3;
+	padding: 10px 0px;
+	max-width: 720px;
+	color: #666666;
+	font-size:14px;
+	padding-left:15px;
+}
+#datos_finanzas_proy{
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #b3b3b3;
+	padding: 10px 0px;
+	max-width: 720px;
+	color: #666666;
+	font-size:14px;
+	padding-left:15px;
+}
+.datos_proy label{
+	color: #666666;
+	font-weight:bold;
+	font-size:14px;
+}
+#datos_generales_proy label{
+	color: #666666;
+	font-weight:bold;
+	font-size:14px;
+	width:140px;
+}
+#datos_finanzas_proy label{
+	color: #666666;
+	font-weight:bold;
+	font-size:14px;
+	width:270px;
+}
+
+#descProy, #elenco{
+	width: 405px;
+	height: 110px;
+}
+#tagsArea{
+	width:430px;
+}
+.boxes {
+	width: 1em;
+}
+
+#submitbutton {
+	margin-left: 100px;
+	margin-top: 5px;
+	width: 90px;
+}
+
+br {
+	clear: left;
+}
+
+.divcontent {
+	display: none;
+	height: auto;
+	min-height: 70px;
+}
+
+.field_set{
+	border: 1px;
+	padding: 7px;
+	margin: 0;
+    border-color:#7eb347;
+    border-style: solid;
+}
+
+.fieldset {
+    
+}
+
+.legend {
+	background: #fff;
+    font-weight: bold;
+    font-size: 10px;
+    max-width: 200px;
+    height:30px;
+    border: none !important;
+    margin-right: 20px;
+}
+#otras_ligas {
+	position: absolute;
+	top: 2em;
+	left: 50%;
+}
+#otras_ligas .liga {
+	display: block;
+}
+
+#form_costos label {
+	width: 222px;
+}
+
+
+@media screen and (max-width:770px) {
+	#descProy, #elenco{
+		width: 205px;
+	}
+	#otras_ligas {
+		position: relative;
+		top: 0;
+		left: 0;
+		margin-bottom: 1em;
+	}
+	.datos_proy{
+	
+	padding-left:0px;
+	}
+	#datos_generales_proy{
+		
+		padding-left:0px;
+	}
+	#datos_finanzas_proy{
+		
+		padding-left:0px;
+	}
+	#datos_finanzas_proy input[type = 'file'],#datos_finanzas_proy input[type = 'number'],#datos_finanzas_proy input[type = 'text']{
+		
+		width: 235px !important;
+	}
+	#tagsArea{
+		width:235px;
+	}
+
+}

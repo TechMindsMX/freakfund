@@ -97,7 +97,7 @@ switch ($fun) {
 	case 4:
 		require_once('recaptchalib.php');
 		
-		$privatekey = "6LfC7OcSAAAAAHZd7gT6NBMQzjzUjtMhaSGl-DM6";
+		$privatekey = "6LeDLOgSAAAAADUei7zA8aJPKbOyUVzDH5kMbJGh";
 		$codigo = array();
 		
 		$resp = recaptcha_check_answer ($privatekey,
