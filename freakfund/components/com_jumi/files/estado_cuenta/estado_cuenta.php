@@ -101,23 +101,23 @@ console.log(variable);
 			</tr>
 			<tr>
 				<td>Financiamientos</td>
-				<td>1,700</td>
+				<td><?php echo $sumaFinanciamientos;?></td>
 			</tr>
 			<tr>
 				<td>Inversiones</td>
-				<td>150</td>
+				<td><?php echo $sumaInversiones;?></td>
 			</tr>
 			<tr>
 				<td>Valor de cartera</td>
-				<td>1850</td>
+				<td><?php echo $valorCartera;?></td>
 			</tr>
 			<tr>
 				<td>Retornos acumulados</td>
-				<td>374</td>
+				<td><?php echo $sumaRetornos;?></td>
 			</tr>
 			<tr>
 				<td>Utilidad acumulada</td>
-				<td>161</td>
+				<td><?php echo $sumaUtilidad;?></td>
 			</tr>
 		</table>
 	</div>

@@ -362,6 +362,51 @@ $obj->saldo = '841.00';
 $obj->notas = '';
 $arregloobjetos[23] = $obj;
 
+$obj = new stdClass;
+$obj->fecha = '28-feb';
+$obj->movimiento = 'abono';
+$obj->tipo = 'utilidades';
+$obj->detalle = 'de financiamientos';
+$obj->referencia = '63546345';
+$obj->institucion = 'preferente';
+$obj->tasa = '';
+$obj->cantidad = '2';
+$obj->unitario = '175.00';
+$obj->subtotal = '350.00';
+$obj->saldo = '841.00';
+$obj->notas = '';
+$arregloobjetos[24] = $obj;
+
+$obj = new stdClass;
+$obj->fecha = '28-feb';
+$obj->movimiento = 'abono';
+$obj->tipo = 'financiamientos';
+$obj->detalle = 'de financiamientos';
+$obj->referencia = '63546345';
+$obj->institucion = 'preferente';
+$obj->tasa = '';
+$obj->cantidad = '2';
+$obj->unitario = '175.00';
+$obj->subtotal = '350.00';
+$obj->saldo = '841.00';
+$obj->notas = '';
+$arregloobjetos[25] = $obj;
+
+$obj = new stdClass;
+$obj->fecha = '28-feb';
+$obj->movimiento = 'abono';
+$obj->tipo = 'financiamientos';
+$obj->detalle = 'de financiamientos';
+$obj->referencia = '63546345';
+$obj->institucion = 'preferente';
+$obj->tasa = '';
+$obj->cantidad = '5';
+$obj->unitario = '100.00';
+$obj->subtotal = '500.00';
+$obj->saldo = '841.00';
+$obj->notas = '';
+$arregloobjetos[26] = $obj;
+
 
 
 $arregloCatalogo = Array();
@@ -405,6 +450,50 @@ $catalogoTipo = new stdClass;
 $catalogoTipo->id = 7;
 $catalogoTipo->name = 'Retiro';
 $arregloCatalogo[7] = $catalogoTipo;
+
+$catalogoTipo = new stdClass;
+$catalogoTipo->id = 8;
+$catalogoTipo->name = 'utilidades';
+$arregloCatalogo[8] = $catalogoTipo;
+
+$catalogoTipo = new stdClass;
+$catalogoTipo->id = 9;
+$catalogoTipo->name = 'financiamientos';
+$arregloCatalogo[9] = $catalogoTipo;
+
+$sumaUtilidad=0;
+
+foreach ($arregloobjetos as $key => $value){
+	if ($value->tipo == 'utilidades'){
+	$sumaUtilidad= $value->subtotal + $sumaUtilidad;
+	}
+}
+
+$sumaFinanciamientos=0;
+
+foreach ($arregloobjetos as $key => $value){
+	if ($value->tipo == 'financiamientos'){
+		$sumaFinanciamientos= $value->subtotal + $sumaFinanciamientos;
+	}
+}
+
+$sumaInversiones=0;
+
+foreach ($arregloobjetos as $key => $value){
+	if ($value->tipo == 'inversion'){
+		$sumaInversiones= $value->subtotal + $sumaInversiones;
+	}
+}
+
+$sumaRetornos=0;
+
+foreach ($arregloobjetos as $key => $value){
+	if ($value->tipo == 'retorno'){
+		$sumaRetornos= $value->subtotal + $sumaRetornos;
+	}
+}
+
+$valorCartera= $sumaFinanciamientos + $sumaInversiones;
 
 
 ?>
