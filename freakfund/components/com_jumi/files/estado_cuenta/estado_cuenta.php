@@ -153,6 +153,7 @@ console.log(variable);
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
 		</div>
-		
-	
+		<div class="espaciado">
+		<input type="button" class="button" value="<?php echo JText::_('REGRESAR');  ?>" onClick="javascript:window.history.back();">
+		</div>
 </div>

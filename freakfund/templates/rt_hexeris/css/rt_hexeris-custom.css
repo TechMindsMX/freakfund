@@ -43,6 +43,10 @@ div.compacto {
 	text-shadow: 2px 1px 2px #666;
 	
 }
+.espaciado{
+	margin-top:10px;
+	margin-bottom:10px;
+}
 .bienvenidaUsuario{
 	color:#2c9ad9;
 	margin-left:14px;
