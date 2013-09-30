@@ -109,8 +109,8 @@ console.log(variable);
 			  <option value="Mayo">Diciembre</option>	 
 		</select>
 					
-		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input placeholder="DD-MM-AAAA" type="text" name="fechaini">
-  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input placeholder="DD-MM-AAAA" type="text" name="fechafin">
+		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaini">
+  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechafin">
 		
 		<input type="button" class="button" value="Consultar" />
 		
