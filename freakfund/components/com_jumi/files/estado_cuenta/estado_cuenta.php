@@ -58,8 +58,6 @@ foreach ($arregloobjetos as $obj) {
 	$tableHtml .= "<td>" .$obj->saldo . "<td />";
 	$tableHtml .= "<td>" .$obj->notas . "<td />";
 	$tableHtml .= "</tr>";
-
-	
 }
 
 foreach ($arregloCatalogo as $obj) {
@@ -91,6 +89,39 @@ console.log(variable);
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
 <div>
+	<div>
+		<table class='table table-striped' id="datos_usuario">
+			<tr>
+				<td><?php echo JText::_('SOCIO');?></td>
+				<td><?php echo $usuario->name;?></td>
+			</tr>
+			<tr>
+				<td><?php echo JText::_('SALDO');?></td>
+				<td><?php echo $datosUsuario->balance;?></td>
+			</tr>
+			<tr>
+				<td>Financiamientos</td>
+				<td>1,700</td>
+			</tr>
+			<tr>
+				<td>Inversiones</td>
+				<td>150</td>
+			</tr>
+			<tr>
+				<td>Valor de cartera</td>
+				<td>1850</td>
+			</tr>
+			<tr>
+				<td>Retornos acumulados</td>
+				<td>374</td>
+			</tr>
+			<tr>
+				<td>Utilidad acumulada</td>
+				<td>161</td>
+			</tr>
+		</table>
+	</div>
+
 	<form id="form_cuenta" action="<?php echo $action; ?>" method="POST">
 	
 		<select name="fechas" >
@@ -115,39 +146,6 @@ console.log(variable);
 		
 	</form>
 		<?php echo $selectTipo; ?>
-		<div>
-		
-			<table class='table table-striped' id="datos_usuario">
-				<tr>
-					<td><?php echo JText::_('SOCIO');?></td>
-					<td><?php echo $usuario->name;?></td>
-				</tr>
-				<tr>
-					<td><?php echo JText::_('SALDO');?></td>
-					<td><?php echo $datosUsuario->balance;?></td>
-				</tr>
-				<tr>
-					<td>Financiamientos</td>
-					<td>1,700</td>
-				</tr>
-				<tr>
-					<td>Inversiones</td>
-					<td>150</td>
-				</tr>
-				<tr>
-					<td>Valor de cartera</td>
-					<td>1850</td>
-				</tr>
-				<tr>
-					<td>Retornos acumulados</td>
-					<td>374</td>
-				</tr>
-				<tr>
-					<td>Utilidad acumulada</td>
-					<td>161</td>
-				</tr>
-			</table>
-		</div>
 		
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
