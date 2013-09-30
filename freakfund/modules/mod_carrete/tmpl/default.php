@@ -5,6 +5,7 @@ $document = JFactory::getDocument();
 $document->addStyleSheet('modules/mod_carrete/css/mod_carrete.css');
 
 $pathJumi = 'components/com_jumi/files/carrusel';
+$url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 
 ?>
 
@@ -51,14 +52,14 @@ $pathJumi = 'components/com_jumi/files/carrusel';
 			echo '<li>
     				<div class="contenedor" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
     					<div class="info-proyecto" >
-    						<div><h3>'.$value->name.'</h3></div>
-    						<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
-   							<span>'.$value->subcategoryName.'</span><br />
+							<div><h3>'.$value->name.'</h3></div>
+							<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
+							<span>'.$value->subcategoryName.'</span><br />
 							<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
 							<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
-   							<span>
-   								<a class="button" href="index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$value->id.'">
-	    							'.JText::_('INVERTIR_PROYECTO').'</a>
+							<span>
+								<a class="button" href="'.$url.$value->id.'">
+									'.JText::_('INVERTIR_PROYECTO').'</a>
     						</span>
     					</div>
     				</div>

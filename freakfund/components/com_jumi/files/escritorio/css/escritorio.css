@@ -13,6 +13,14 @@
 	}
 }
 
+.cartera {
+	text-align: center;
+	width: 100%;
+}
 .cartera img {
 	max-width: 90px;
+}
+.infodiv span {
+	width: 24%;
+	display:inline-block;
 }

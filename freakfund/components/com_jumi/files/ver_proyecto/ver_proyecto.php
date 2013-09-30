@@ -35,7 +35,7 @@
 ?> 
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
-<script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+<script type="text/javascript" src="components/com_jumi/files/classIncludes/js/raty/jquery.raty.js"></script>
 <script type="text/javascript" src="libraries/trama/js/jquery.number.min.js"></script>
 
 <?php
@@ -384,7 +384,7 @@ function statusbar($data) {
 	switch ($data->status) { 
 		case '5':
 $ahora = '1374284000000'; // (time() * 1000);
-$data->balance = 5000000000;
+// $data->balance = 5000000000;
 			$labelTopLeft = $data->fundStartDate;
 			$labelTopRight = $data->fundEndDate;
 			$labelBottomLeft = JText::_('RECUADADO').' = <span class="number">'.$data->balance.'</span>';
@@ -613,7 +613,6 @@ function botonFinanciar($data) {
 					} ?>
 					
 					
-					<link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
     <script>
@@ -675,7 +674,7 @@ function codeAddress() {
 	 }
 	 
 		$(document).ready(function() {
-			var ruta = "components/com_jumi/files/crear_proyecto/js/raty/img/"
+			var ruta = "components/com_jumi/files/classIncludes/js/raty/img/"
 			$('#rating').raty({
 				click: function(score, evt) {
 					var request = $.ajax({

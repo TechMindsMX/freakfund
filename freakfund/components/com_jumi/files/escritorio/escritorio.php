@@ -62,9 +62,9 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 		jQuery('span.number').number( true, 2, ',','.' );
 	});
 </script>
-<h1 class=""><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
+<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 
-<div>
+<div class="infodiv">
 	<span><label><?php echo JText::_('SALDO_FF'); ?></label>
 		<h3><span class="number"><?php echo $datosgenerales->userBalance; ?></span></h3>
 	</span>
@@ -88,12 +88,12 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 <div id="contenido">
 	<section class="ac-container" style="max-width: 100%;">
 		<div>
-			<input id="ac-2a" name="accordion-2" type="radio" />
+			<input id="ac-2a" name="accordion-2" type="radio" checked />
 			<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
 			<article class="ac-medium">
-				<table class="cartera" width="100%" frame="box" rules="all" style="text-align: center">
+				<table class="table-striped cartera" >
 					<tr>
-						<th><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+						<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
 						<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
 						<th><?php echo JText::_('BREAKEVEN'); ?></th>
 						<th><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
@@ -101,13 +101,13 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 					</tr>
 					<?php
 					foreach ($proyectos as $key => $value) {
-						if ($value -> type == 'PROJECT' && $value -> status != 4) {
-							echo '<tr><td>
-								<span>' . $value -> imgAvatar . '</span>
-								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
-								</td>' . '<td>' . $value -> fundEndDate . '</td>
+						if ($value -> status == 5 || $value -> status == 6) {
+							echo '<tr>
+								<td><a href="' . $value -> viewUrl . '" >' . $value -> imgAvatar . '</a></td>
+								<td><a href="' . $value -> viewUrl . '" >' . $value -> name . '</a></td>'
+								. '<td>' . $value -> fundEndDate . '</td>
 								<td><span class="number">' . $value -> breakeven . '</span></td>
-								<td>' . $value -> porcentajeRecaudado . '</td>
+								<td>' . $value -> porcentajeRecaudado . ' %</td>
 								<td><span class="number">' . $value -> investmentValue . '</span></td>
 								</tr>';
 						}
@@ -121,22 +121,20 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 			<input id="ac-3a" name="accordion-2" type="radio" />
 			<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
 			<article class="ac-large">
-				<table class="cartera" width="100%" frame="box" rules="all" style="text-align: center;">
+				<table class="table-striped cartera"">
 					<tr>
-						<th><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+						<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
 						<th><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
 						<th><?php echo JText::_('ESCRIT_ROI'); ?></th>
 						<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
 					</tr>
 					<?php
 					foreach ($proyectos as $key => $value) {
-						if ($value -> type == 'PRODUCT' && $value -> status != 4) {
+						if ( $value -> status == 7 ) {
 
 							echo '<tr>
-								<td>
-								<span>' . $value -> imgAvatar . '</span>
-								<a href="' . $value -> viewUrl . '" >' . $value -> name . '</a>
-								</td>
+								<td><a href="' . $value -> viewUrl . '" >' . $value -> imgAvatar . '</a></td>
+								<td><a href="' . $value -> viewUrl . '" >' . $value -> name . '</a></td>
 								<td><span class="number">' . $value -> investmentValue . '</span></td>
 								<td><span class="number">' . $value -> roi . '</span></td>
 								<td>' . $value -> tri . ' %</td>
