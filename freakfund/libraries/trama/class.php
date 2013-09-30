@@ -256,6 +256,7 @@ class JTrama
 		$value->fundEndDate = 1377284000000; 
 		$value->productionStartDateCode = 1378003651000;
 		$value->premiereStartDateCode = 1381003651000;
+		
 		if ($value->balance != 0) {
 			$value->porcentajeRecaudado = $value->balance / $value->breakeven;
 		} else {
@@ -339,6 +340,11 @@ class JTrama
 	public static function getProyByStatus($params='')
 	{
 		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
+		
+		foreach ($data as $key => $value) {
+			JTrama::formatDatosProy($value);	
+		}
+		
 		
 		return $data;
 	}

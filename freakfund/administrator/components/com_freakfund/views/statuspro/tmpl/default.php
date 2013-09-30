@@ -35,11 +35,7 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 					if(confirm('¿Está seguro que desea finalizar el producto, dispersar los beneficios y notificar a los involucrados? ESTA ACCIÓN ES IRREVERSIBLE')) {
 						if(confirm('¿Está seguro? ESTA ACCIÓN ES IRREVERSIBLE')) {
 							if(confirm('¿Seguro Seguro?')) {
-								if(confirm('¿Por tu mama?')) {
-									alert('Estatus cambiado');
-								} else {
-									alert('Bien hecho');
-								}
+								alert('Estatus cambiado');
 							} else {
 								alert('Bien hecho');
 							}
@@ -56,7 +52,7 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 					break;
 
 				default:
-					alert('que presionaste');
+					alert('que presionaste????');
 					break;
 			}
 		});
