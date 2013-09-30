@@ -337,12 +337,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa84c', end
 }
 #statusbar > span, #animacionbg {
 	position: absolute;
-	padding: 0 10px;
 	z-index: 100;
 }
 #statusbar span {
 	/*background: rgba(255, 255, 255, 0.3);*/
 	text-shadow: 1px 1px 2px #ffffff;
+	padding: 0 10px;
 	font-weight: bold;
 	color: #000000;
 }
