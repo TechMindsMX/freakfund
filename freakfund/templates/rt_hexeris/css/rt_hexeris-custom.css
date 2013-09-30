@@ -163,3 +163,7 @@ input[disabled="disabled"] {
 #slider {
 	min-height: 846px;
 }
+
+#datos_usuario {
+	max-width: 500px;
+}

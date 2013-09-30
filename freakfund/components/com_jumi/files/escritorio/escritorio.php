@@ -81,8 +81,8 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 
 <a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
 <a class="button" href="<?php echo $jumiurl; ?>29"><?php echo JText::_('ESCRIT_TRASPASO'); ?></a>
-<a class="button" href="<?php echo $jumiurl; ?>31"><?php echo JText::_('ESCRIT_ESTADO_CUENTA'); ?></a>
-<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_REDIMIR'); ?></a>
+<a class="button" href="<?php echo $jumiurl; ?>30"><?php echo JText::_('ESCRIT_ESTADO_CUENTA'); ?></a>
+<a class="button" href="<?php echo $jumiurl; ?>31"><?php echo JText::_('ESCRIT_REDIMIR'); ?></a>
 <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
     
 <div id="contenido">
@@ -91,7 +91,7 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 			<input id="ac-2a" name="accordion-2" type="radio" checked />
 			<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
 			<article class="ac-medium">
-				<table class="table-striped cartera" >
+				<table class="table table-striped cartera" >
 					<tr>
 						<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
 						<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>

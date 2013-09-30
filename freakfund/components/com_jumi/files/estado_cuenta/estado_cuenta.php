@@ -24,7 +24,7 @@ $action = '#';
 
 include_once ("objetote.php");
 
-$tableHtml = "<table class='table-striped' id='edocta_table' border='1'>";
+$tableHtml = "<table class='table table-striped' id='edocta_table'>";
 $tableHtml .= "<tr id='cabezera'>";
 $tableHtml .= "<th>Fecha<th />";
 $tableHtml .= "<th>Movimiento<th />";
@@ -93,20 +93,19 @@ console.log(variable);
 <div>
 	<form id="form_cuenta" action="<?php echo $action; ?>" method="POST">
 	
-	
 		<select name="fechas" >
-			  <option value="Enero">Enero</option>
-			  <option value="Febrero">Febrero</option>
-			  <option value="Marzo">Marzo</option>
-			  <option value="Abril">Abril</option>
-			  <option value="Mayo">Mayo</option>
-			  <option value="Mayo">Junio</option>
-			  <option value="Mayo">Julio</option>
-			  <option value="Mayo">Agosto</option>
-			  <option value="Mayo">Septiembre</option>
-			  <option value="Mayo">Octubre</option>
-			  <option value="Mayo">Noviembre</option>
-			  <option value="Mayo">Diciembre</option>	 
+			  <option value="Enero"><?php echo JText::_('JANUARY'); ?></option>
+			  <option value="Febrero"><?php echo JText::_('FEBRUARY'); ?></option>
+			  <option value="Marzo"><?php echo JText::_('MARCH'); ?></option>
+			  <option value="Abril"><?php echo JText::_('APRIL'); ?></option>
+			  <option value="Mayo"><?php echo JText::_('MAY'); ?></option>
+			  <option value="Junio"><?php echo JText::_('JUNE'); ?></option>
+			  <option value="Julio"><?php echo JText::_('JULY'); ?></option>
+			  <option value="Agosto"><?php echo JText::_('AUGUST'); ?></option>
+			  <option value="Septiembre"><?php echo JText::_('SEPTEMBER'); ?></option>
+			  <option value="Octubre"><?php echo JText::_('OCTOBER'); ?></option>
+			  <option value="Noviembre"><?php echo JText::_('NVEMBER'); ?></option>
+			  <option value="Diciembre"><?php echo JText::_('DECEMBER'); ?></option>
 		</select>
 					
 		<?php echo JText::_('RANGO_FECHA_INICIO');  ?> <input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaini">
@@ -118,7 +117,7 @@ console.log(variable);
 		<?php echo $selectTipo; ?>
 		<div>
 		
-			<table class='table-striped' border="1">
+			<table class='table table-striped' id="datos_usuario">
 				<tr>
 					<td><?php echo JText::_('SOCIO');?></td>
 					<td><?php echo $usuario->name;?></td>
