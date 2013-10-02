@@ -161,30 +161,34 @@ function imagenes($data) {
 }
 
 function audios($data) {
+	$hostname = parse_url(JURI::base(), PHP_URL_HOST);
+	$localDomain = ( $hostname == 'localhost' || is_numeric(strpos($hostname, '192')) );
+
 	$html = '';
-	
 	$array = $data->projectSoundclouds;
-	if ($array == '') {
 	
-	require_once 'Services/Soundcloud.php';
-		
-	// create a client object with your app credentials
-	$client = new Services_Soundcloud('52bdfab59cb4719ea8d5ea626efae0da', '7688bd528138b2de5daf52edffc091c5');
-	$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
+	if (!empty($array) && $localDomain === false ) {
 	
-	foreach ($array as $key => $value) {
-		if (!empty($value->url)) {
-		// get a tracks oembed data
-	//	$track_url = str_replace('https', 'http', $value->url);
-		$track_url = $value->url;
-		$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
-		// render the html for the player widget
+		require_once 'Services/Soundcloud.php';
+			
+		// create a client object with your app credentials
+		$client = new Services_Soundcloud(SOUNDCLOUD_CLIENT_ID, SOUNDCLOUD_CLIENT_SECRET);
+		$client->setCurlOptions(array(CURLOPT_FOLLOWLOCATION => 1));
 		
-		$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
-		'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
+		foreach ($array as $key => $value) {
+			if (!empty($value->url)) {
+			// get a tracks oembed data
+		//	$track_url = str_replace('https', 'http', $value->url);
+			$track_url = $value->url;
+			$embed_info = json_decode($client->get('resolve', array('url' => $track_url)));
+			// render the html for the player widget
+			
+			$html .= '<iframe width="100%" height="100" scrolling="no" frameborder="no" src="'.
+			'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$embed_info->id.'"></iframe>';
+			}
 		}
-	}
-		$html = JText::_('NO_HAY_AUIDOS');
+	} else {
+		$html = ($localDomain === false) ? JText::_('NO_HAY_AUDIOS') : JText::_('SOLO_EN_DOMINIO');
 	}
 	return $html;
 }
