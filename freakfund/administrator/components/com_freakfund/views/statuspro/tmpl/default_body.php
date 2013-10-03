@@ -1,7 +1,17 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
-$datos = $this->items;
+$usuario 	= JFactory::getUser();
+$token		= JTrama::token();
+$callback	= JURI::base().'index.php?option=com_freakfund&task=projectlist';
+$datos 		= $this->items;
+$selectBaja = $datos->motivosBaja;
+
+$select = '<select name="reason" id="selectBajas">';
+foreach ($selectBaja as $key => $value) {
+	$select .=  '<option value="'.$value->id.'">'.JText::_('COM_FREAKFUND_STATUSPRO_BAJA_'.$value->id).'</option>';
+}
+$select .= '</select><br /><br />';
 ?>
 	<tr>
 		<td align="absmiddle">
@@ -26,22 +36,29 @@ $datos = $this->items;
 	
 	<tr>
 		<td align="absmiddle">
+			<input type="hidden" value="<?php echo $datos->id; ?>"  name="projectId" />
+			<input type="hidden" value="<?php echo $usuario->id; ?>"  name="userId" />
+			<input type="hidden" value="<?php echo $token; ?>"  name="token" />
+			<input type="hidden" value="<?php echo $callback; ?>"  name="callback" />
+			
 			<?php 
 			if($datos->statusVenta == 1) {
 			?>
-				Documentacion completa: <input type="checkbox" value="1" name="docComplete" id="docComplete" class="docComplete" />
+				<input type="hidden" value="6"  name="status" id="statusbaja" />
+				Documentacion completa: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
 				<br /><br />
+				
 				<input type="button" id="publishButton" disabled="true" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_PUBLISHBUTTON'); ?>" />
 				<br /><br />
-				<input type="button" id="incompletedoc" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_INCOMPLETEDOCUMENTATION'); ?>" />
 			<?php
 			} else {
 			?>
-				<input type="button" id="productnosend" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_PRODUCTNOSEND'); ?>" />
-				<br /><br />
-				<input type="button" id="finishButton" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_FINISH'); ?>Finalizado" />
+				<input type="hidden" value="8"  name="status" id="statusbaja" />
+				<input type="button" id="finishButton" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_FINISH'); ?>" />
 			<?php
 			}
 			?>
+				<?php echo $select; ?>
+				<input type="button" id="baja" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_DARDEBAJA'); ?>" />
 		</td>
 	</tr>

@@ -4,6 +4,9 @@ defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
 ?>
 <tr>
+	<th>
+        <?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_IDPORD'); ?>
+    </th>
     <th>
         <?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_NAMEPROD'); ?>
     </th>

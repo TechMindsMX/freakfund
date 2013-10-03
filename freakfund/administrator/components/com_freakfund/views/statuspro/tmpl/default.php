@@ -16,26 +16,34 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 		jQuery('#docComplete').change(function() {
 			if( jQuery(this).prop('checked') ) {
 				jQuery('#publishButton').prop('disabled', false);
+				jQuery('#baja').prop('disabled', true);
+				jQuery('#selectBajas').prop('disabled', true);
 			}else{
 				jQuery('#publishButton').prop('disabled', true);
+				jQuery('#baja').prop('disabled', false);
+				jQuery('#selectBajas').prop('disabled', false);
 			}
 		});
 
 		jQuery('#formstatus input[type="button"]').click(function() {
 			switch(this.id){
 				case 'publishButton':
-					alert('Publicar');
+					jQuery('#selectBajas').prop('name', '');
+					jQuery("#formstatus").submit();
 					break;
 
-				case 'incompletedoc':
-					alert('Documentacion ');
-					break;
+				case 'baja':
+				jQuery('#statusbaja').val(4);
+				
+				jQuery("#formstatus").submit();
+				break;
 
 				case 'finishButton':
 					if(confirm('¿Está seguro que desea finalizar el producto, dispersar los beneficios y notificar a los involucrados? ESTA ACCIÓN ES IRREVERSIBLE')) {
 						if(confirm('¿Está seguro? ESTA ACCIÓN ES IRREVERSIBLE')) {
 							if(confirm('¿Seguro Seguro?')) {
-								alert('Estatus cambiado');
+								jQuery('#selectBajas').prop('name', '');
+								jQuery("#formstatus").submit();
 							} else {
 								alert('Bien hecho');
 							}
@@ -47,10 +55,6 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 					}
 					break;
 				
-				case 'productnosend':
-					alert('Producto no entregado');
-					break;
-
 				default:
 					alert('que presionaste????');
 					break;
@@ -58,7 +62,9 @@ $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 		});
 	});
 </script>
-<form id="formstatus" action="<?php echo JRoute::_('index.php?option=com_freakfund'); ?>" method="post" name="adminForm">
+
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/project/changeStatus'; ?>" method="POST" enctype="application/x-www-form-urlencoded">
+	
         <table id="tablaGral" class="adminlist">
                 <thead><?php echo $this->loadTemplate('head');?></thead>
                 <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>

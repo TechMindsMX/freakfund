@@ -11,17 +11,18 @@ class statusproModelstatuspro extends JModelList
 		$temporal = JFactory::getApplication()->input;
 		$temporal = $temporal->get('proyid');
 		
-		//$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$temporal));
 		$query = JTrama::getDatos( $temporal );
 		$query->finantialCash = 20000;
 		$query->percentage = '20%';
 		
-		if($temporal == 6) {
+		if($temporal == 7) {
 			$query->statusVenta = 2;
 		} else {
 			$query->statusVenta = 1;
 		}
-
+		
+		$query->motivosBaja = JTrama::getMotivosDeBaja();
+		
 		return $query;
 	}
 }

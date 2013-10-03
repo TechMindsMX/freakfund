@@ -11,10 +11,13 @@ foreach($this->items as $i => $item):
 ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 	        <td>
+	    		<?php echo $item->id; ?>
+	        </td>
+	        <td>
 	    		<?php echo $item->name; ?>
 	        </td>
 	        <td>
-	        	<?php echo $item->fundEndDate; ?>
+	        	<?php echo $item->premiereEndDate; ?>
 	        </td>
 	        <td>
 	        	$<span class="number"><?php echo $item->breakeven; ?></span>
