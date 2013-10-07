@@ -175,18 +175,18 @@ $jquery 	= $datos->jquery;
 			switch(this.id){
 				case 'publishButton':
 					jQuery('#selectBajas').prop('name', '');
-					//jQuery("#formstatus").submit();
+					jQuery("#formstatus").submit();
 					break;
 
 				case 'baja':
 					jQuery('#statusbaja').val(4);
-					//jQuery("#formstatus").submit();
+					jQuery("#formstatus").submit();
 					break;
 
 				case 'finishButton':
 					if(confirm('¿Está seguro que desea finalizar el producto, dispersar los beneficios y notificar a los involucrados? ESTA ACCIÓN ES IRREVERSIBLE')) {
 						jQuery('#selectBajas').prop('name', '');
-						//jQuery("#formstatus").submit();
+						jQuery("#formstatus").submit();
 					} else {
 						alert('Bien hecho');
 					}
