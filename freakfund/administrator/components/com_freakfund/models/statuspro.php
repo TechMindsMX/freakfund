@@ -15,12 +15,6 @@ class statusproModelstatuspro extends JModelList
 		$query->finantialCash = 20000;
 		$query->percentage = '20%';
 		
-		if($temporal == 7) {
-			$query->statusVenta = 2;
-		} else {
-			$query->statusVenta = 1;
-		}
-		
 		$query->motivosBaja = JTrama::getMotivosDeBaja();
 		
 		return $query;

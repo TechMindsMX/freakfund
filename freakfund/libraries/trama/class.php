@@ -349,6 +349,12 @@ class JTrama
 		return $data;
 	}
 	
+	public function getMotivosDeBaja () {
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/catalog/closedReasons'));
+		
+		return $data;
+	}
+	
 	public static function getRedemptionCodes($value)
 	{
 		$con=mysql_connect("localhost","root","");

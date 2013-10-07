@@ -28,8 +28,8 @@ foreach($this->items as $i => $item):
 	        <td>
 	        	<?php echo JTrama::getStatusName($item->status); ?>
 	        </td>
-	        <td style="background-color: <?php echo $item->semaphore; ?>;">
-	        	&nbsp;
+	        <td align="absmiddle" style="background-color: <?php echo $item->semaphore; ?>; font-weight:bolder; color:BLACK;">
+	        	<?php echo $item->status; ?>
 	        </td>
 	        <td>
 	        	<?php echo $htmlChange; ?>

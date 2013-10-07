@@ -6,7 +6,7 @@ jimport('trama.class');
 class projectListModelprojectList extends JModelList
 {
 	public function getDatos() {
-		$data = JTrama::getProyByStatus('4,5,6,7,8,9,10');
+		$data = JTrama::getProyByStatus('4,5,6,7,8,10');
 		!empty($data)? $query = $this->agrupaObj($data):$query = null;
 		
 		$query[0]->vName = 'listproduct';
