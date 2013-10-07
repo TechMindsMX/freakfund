@@ -85,6 +85,34 @@ switch($datos->status){
 		$datos->bajaMotivos = '';
 		
 		break;
+	case '8':
+		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
+						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
+						 "jQuery('#finishButton').prop('disabled', true);".
+						 "jQuery('#docComplete').change(function() {".
+						 "		if( jQuery(this).prop('checked') ) {".
+						 "			jQuery('#statusbaja').val(11);".
+						 "			jQuery('#motivoBaja').val();".
+						 "			jQuery('#motivoBaja').prop('name', '');".
+						 "			jQuery('#finishButton').prop('disabled', false);".
+						 "		}else{".
+						 "			jQuery('#statusbaja').val(4);".
+						 "			jQuery('#motivoBaja').val(1);".
+						 "			jQuery('#motivoBaja').prop('name', 'reason');".
+						 "			jQuery('#finishButton').prop('disabled', true);".
+						 "		}".
+						 "});";
+						 
+		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
+						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
+							<div style="margin-bottom: 10px;">
+								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
+							</div>';
+		$datos->finalizacion = '';
+		
+		$datos->bajaMotivos = '';
+		
+		break;	
 	case '11':
 		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
 						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".

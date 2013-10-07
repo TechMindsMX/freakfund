@@ -7,7 +7,7 @@ $document->addScript('../libraries/trama/js/jquery.number.min.js');
 
 foreach($this->items as $i => $item):
 	if ( $item->type != 'REPERTORY' ) {
-		$htmlChange = '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>'
+		$htmlChange = $item->status != 4? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';
 ?>
         <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 	        <td>
