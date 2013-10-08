@@ -35,12 +35,12 @@ $datos 		= $this->items;
 			<input type="hidden" value="<?php echo $callback; ?>"  	 name="callback" />
 			
 			<div id="status5">
-				<div id="tituloDiv" style="font-weight: bolder; font-size: 18px; margin-bottom: 20px">Cambio de estatus por documentación</div>
-				
 				<?php echo $datos->inputs; ?>
 				
 				<div style="margin-bottom: 10px;">
-					<input type="button" id="publishButton" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_PUBLISHBUTTON'); ?>" />
+					<input type="button" id="status10" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONDOCPENDIENTE'); ?> 10" />
+					<input type="button" id="status6" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONPRODUCTION'); ?> 6" disabled/>
+					
 				</div>
 			</div>
 		</td>
