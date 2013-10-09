@@ -6,7 +6,7 @@ jimport('trama.class');
 class projectListModelprojectList extends JModelList
 {
 	public function getDatos() {
-		$data = JTrama::getProyByStatus('4,5,6,7,8,10');
+		$data = JTrama::getProyByStatus('4,5,6,7,8,10,11');
 		!empty($data)? $query = $this->agrupaObj($data):$query = null;
 		
 		$query[0]->vName = 'listproduct';
@@ -54,6 +54,9 @@ class projectListModelprojectList extends JModelList
 					break;
 				case '10':
 					$value->semaphore = 'YELLOW';
+					break;
+				case '11':
+					$value->semaphore = 'GREEN';
 					break;
 					
 				default:

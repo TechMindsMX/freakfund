@@ -73,46 +73,27 @@ switch($datos->status){
 								No <input type="radio" value="0" name="docComplete" id="docCompletefalse" class="docComplete" />
 							</div>';
 		break;
-	case '7':
-		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
-						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
-						 "jQuery('#docComplete').change(function() {".
-						 "		if( jQuery(this).prop('checked') ) {".
-						 "			jQuery('#statusbaja').val(11);".
-						 "			jQuery('#motivoBaja').val();".
-						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "		}else{".
-						 "			jQuery('#statusbaja').val(4);".
-						 "			jQuery('#motivoBaja').val(1);".
-						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "		}".
-						 "});";
+	case '7'://Presentacion, Se envia solamente al estatus 11(Cerrando)
+		$datos->jquery = "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_CERRANDO')."');\n".
+						 "jQuery('#status10').prop('id', 'closer');\n".
+						 "jQuery('#status6').prop('disabled', false);\n".
+						 "jQuery('#status6').prop('id', 'goback');\n".
+						 "jQuery('#goback').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_GOBACK')."');";
 						 
-		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
-						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
-							<div style="margin-bottom: 10px;">
-								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
-							</div>';
-		$datos->finalizacion = '';
-		
-		$datos->bajaMotivos = '';
-		
+		$datos->inputs = '<input type="hidden" name="status" value="11" id="statusbaja" />';
 		break;
 	case '8':
 		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
 						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
-						 "jQuery('#finishButton').prop('disabled', true);".
 						 "jQuery('#docComplete').change(function() {".
 						 "		if( jQuery(this).prop('checked') ) {".
 						 "			jQuery('#statusbaja').val(11);".
 						 "			jQuery('#motivoBaja').val();".
 						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "			jQuery('#finishButton').prop('disabled', false);".
 						 "		}else{".
 						 "			jQuery('#statusbaja').val(4);".
 						 "			jQuery('#motivoBaja').val(1);".
 						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "			jQuery('#finishButton').prop('disabled', true);".
 						 "		}".
 						 "});";
 						 
@@ -121,11 +102,29 @@ switch($datos->status){
 							<div style="margin-bottom: 10px;">
 								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
 							</div>';
+		break;	
+	case '10':
+		$datos->jquery = "jQuery('#docComplete').change(function() {".
+						 "		if( jQuery(this).prop('checked') ) {".
+						 "			jQuery('#statusbaja').val(6);".
+						 "			jQuery('#motivoBaja').val();".
+						 "			jQuery('#motivoBaja').prop('name', '');".
+						 "		}else{".
+						 "			jQuery('#statusbaja').val(4);".
+						 "			jQuery('#motivoBaja').val(0);".
+						 "			jQuery('#motivoBaja').prop('name', 'reason');".
+						 "		}".
+						 "});";
+						 
+		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
+						  <input type="hidden" name="reason" value="0" id="motivoBaja" />
+							<div style="margin-bottom: 10px;">
+								¿La documentacion esta completa?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
+							</div>';
 		$datos->finalizacion = '';
 		
 		$datos->bajaMotivos = '';
-		
-		break;	
+		break;
 	case '11':
 		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
 						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
@@ -145,28 +144,6 @@ switch($datos->status){
 						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
 							<div style="margin-bottom: 10px;">
 								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
-							</div>';
-		$datos->finalizacion = '';
-		
-		$datos->bajaMotivos = '';
-		break;
-	case '10':
-		$datos->jquery = "jQuery('#docComplete').change(function() {".
-						 "		if( jQuery(this).prop('checked') ) {".
-						 "			jQuery('#statusbaja').val(6);".
-						 "			jQuery('#motivoBaja').val();".
-						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "		}else{".
-						 "			jQuery('#statusbaja').val(4);".
-						 "			jQuery('#motivoBaja').val(0);".
-						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "		}".
-						 "});";
-						 
-		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
-						  <input type="hidden" name="reason" value="0" id="motivoBaja" />
-							<div style="margin-bottom: 10px;">
-								¿La documentacion esta completa?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
 							</div>';
 		$datos->finalizacion = '';
 		
@@ -195,7 +172,6 @@ $jquery 	= $datos->jquery;
 				case 'status10':
 					jQuery('#docCompletetrue').prop('name', '');
 					jQuery('#docCompletefalse').prop('name', '');
-					jQuery('#selectBajas').prop('name', '');
 					jQuery("#formstatus").submit();
 					break;
 				case 'status7':
@@ -210,7 +186,12 @@ $jquery 	= $datos->jquery;
 					jQuery('#selectBajas').prop('name', '');
 					jQuery("#formstatus").submit();
 					break;
-					
+				case 'closer':
+					jQuery("#formstatus").submit();
+					break;
+				case 'goback':
+					history.back();
+					break;
 					
 				case 'publishButton':
 					jQuery('#selectBajas').prop('name', '');
