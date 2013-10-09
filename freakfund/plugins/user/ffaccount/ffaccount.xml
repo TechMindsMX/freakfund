@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="user">
+	<name>plg_user_ffaccount</name>
+	<author>Ricardo Lyon</author>
+	<creationDate>November 2013</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail>ricardolyon@gmail.com</authorEmail>
+	<authorUrl>www.ricardolyon.com</authorUrl>
+	<version>2.5.0</version>
+	<description>PLG_FFACCOUNT_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="ffaccount">ffaccount.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="es-ES">es-ES.plg_user_ffaccount.ini</language>
+		<language tag="es-ES">es-ES.plg_user_ffaccount.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_user_ffaccount.ini</language>
+		<language tag="en-GB">en-GB.plg_user_ffaccount.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic">
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

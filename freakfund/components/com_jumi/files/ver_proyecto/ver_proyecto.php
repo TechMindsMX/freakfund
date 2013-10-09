@@ -467,7 +467,7 @@ function botonFinanciar($data) {
 			$string = 'LABEL_FINANCIAR';
 			break;
 		default:
-			$string = 'LABEL_COMPRAR';
+			$string = 'INVERTIR_PROYECTO';
 			break;
 	}
 	$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$data->id;
