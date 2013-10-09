@@ -19,9 +19,6 @@ foreach ($selectBaja as $key => $value) {
 $select .= '</select>';
 
 switch($datos->status){
-	case '4'://Rechazado, si entran directo de la url se redirecciona al listado y se informa el motivo
-		$errors = JFactory::getApplication();
-	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', $msg=JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG_4'), $msgType='error');
 	case '5': //Autorizado, cambia a estatus 6 (produccion si se tiene la documentacion completa), y estatus 10 Documentacion pendiente
 		$datos->jquery = "jQuery('#formstatus input[type=radio]').change(function() {".
 						 "		if( jQuery(this).val() == 1 ) {".
@@ -85,9 +82,6 @@ switch($datos->status){
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="11" id="statusbaja" />';
 		break;
-	case '8'://Finalizado, si entran directo de la url se redirecciona al listado y se informa el motivo
-		$errors = JFactory::getApplication();
-	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', $msg=JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG_8'), $msgType='error');
 	case '10'://Documentacion pendiente, cambia a estatus 6(produccion si la documentacion esta completa), y estatus 4 si no entrego la documentacion (enviar el motivo de la baja)
 		$datos->jquery = "jQuery('#status6').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_BAJA_PRODUCTO_1')."');\n".
 						 "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_EN_PRESENTACION')."');\n".
@@ -133,6 +127,10 @@ switch($datos->status){
 		$datos->bajaMotivos = '';
 		break;
 	default:
+		$errors = JFactory::getApplication();
+	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', 
+	    				   $msg = JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG').JTrama::getStatusName($datos->status),
+	    				   $msgType='error');
 		break;
 }
 ?>

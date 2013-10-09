@@ -16,10 +16,12 @@ class projectListModelprojectList extends JModelList
 
 
 	public function agrupaObj($data) {
+			
 		foreach($data as $obj){
-			$map[] = array($obj->premiereEndDate, $obj);
+			$map[] = array($obj->premiereEndDateCode, $obj);
 		}
-		rsort($map);
+		sort($map);
+		
 		
 		foreach ($map as $key) {
 			foreach ($key as $indice => $valor) {
