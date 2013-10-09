@@ -51,7 +51,6 @@ class projectListModelprojectList extends JModelList
 
 	public function agrupaObj($data, $fechaOrden) {
 		$sinCode = str_replace('Code', '', $fechaOrden);
-		var_dump($sinCode);
 		foreach($data as $obj){
 			$map[] = array($obj->$fechaOrden, $obj);
 		}
