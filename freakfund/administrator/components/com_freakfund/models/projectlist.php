@@ -6,22 +6,56 @@ jimport('trama.class');
 class projectListModelprojectList extends JModelList
 {
 	public function getDatos() {
-		$data = JTrama::getProyByStatus('4,5,6,7,8,10,11');
-		!empty($data)? $query = $this->agrupaObj($data):$query = null;
+		$data4 = JTrama::getProyByStatus('4');
+		$data5 = JTrama::getProyByStatus('5');
+		$data6 = JTrama::getProyByStatus('6');
+		$data7 = JTrama::getProyByStatus('7');
+		$data8 = JTrama::getProyByStatus('8');
+		$data10 = JTrama::getProyByStatus('10');
+		$data11 = JTrama::getProyByStatus('11');
+
+		if( !empty($data4) ){
+			$query[] =$this->agrupaObj($data4, 'premiereEndDateCode');
+		}
+		if( !empty($data5) ){
+			$query[] =$this->agrupaObj($data5, 'fundEndDateCode');
+		}
+		if( !empty($data6) ){
+			$query[] =$this->agrupaObj($data6, 'premiereEndDateCode');
+		}
+		if( !empty($data7) ){
+			$query[] =$this->agrupaObj($data7, 'premiereEndDateCode');
+		}
+		if( !empty($data10) ){
+			$query[] =$this->agrupaObj($data10, 'premiereEndDateCode');
+		}
+		if( !empty($data11) ){
+			$query[] =$this->agrupaObj($data11, 'premiereEndDateCode');
+		}
+		if( !empty($data8) ){
+			$query[] =$this->agrupaObj($data8, 'premiereEndDateCode');
+		}
 		
-		$query[0]->vName = 'listproduct';
 		
-		return $query;
+		foreach ($query as $key => $value) {
+			foreach ($value as $indice => $valor) {
+				$queryResp[] = $valor;
+			}
+		}
+		
+		$queryResp[0]->vName = 'listproduct';
+
+		return $queryResp;
 	}
 
 
-	public function agrupaObj($data) {
-			
+	public function agrupaObj($data, $fechaOrden) {
+		$sinCode = str_replace('Code', '', $fechaOrden);
+		var_dump($sinCode);
 		foreach($data as $obj){
-			$map[] = array($obj->premiereEndDateCode, $obj);
+			$map[] = array($obj->$fechaOrden, $obj);
 		}
 		sort($map);
-		
 		
 		foreach ($map as $key) {
 			foreach ($key as $indice => $valor) {
@@ -34,40 +68,60 @@ class projectListModelprojectList extends JModelList
 		foreach ($nuevo as $key => $value) {
 			$value->percentage 	= ($value->balance*100)/$value->breakeven;
 			$value->producerName = JFactory::getUser($value->userId)->name;
-		
+
 			switch ($value->status) {
 				case '4':
-					$value->semaphore = 'RED';
+					$value->semaphore = 'DarkRed';
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '5':
-					$value->semaphore = 'YELLOW';
+					$this->semaforo(15, $value->fundEndDate, $value);
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '6':
-					$value->semaphore = 'YELLOW';
+					$this->semaforo(15, $value->premiereStartDate, $value);
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '7':
-					$value->semaphore = 'GREEN';
+					$this->semaforo(15, $value->premiereEndDate, $value);
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '8':
-					$value->semaphore = 'GREEN';
-					break;
-				case '9':
-					$value->semaphore = 'RED';
+					$value->semaphore = 'DarkGreen';
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '10':
-					$value->semaphore = 'YELLOW';
+					$this->semaforo(15, $value->premiereStartDate, $value);
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '11':
-					$value->semaphore = 'GREEN';
+					$this->semaforo(5, $value->premiereEndDate, $value);
+					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 					
 				default:
 					
 					break;
 			}
+			
 			$query[] = $value;
 		}
 		
 		return $query;
+	}
+
+	public function semaforo($diasYellow, $fecha, $value) {
+		$fecha1 = new DateTime('13-09-2015');
+		$fecha2 =new DateTime($fecha);
+
+		$value->dateDiff = date_diff($fecha1,$fecha2);
+		
+		if( ($value->dateDiff->invert == 1) ) {
+			$value->semaphore = 'RED';
+		}elseif($value->dateDiff->invert == 0 && $value->dateDiff->days <= $diasYellow){
+			$value->semaphore = 'YELLOW';
+		}else{
+			$value->semaphore = 'GREEN';
+		}
 	}
 }

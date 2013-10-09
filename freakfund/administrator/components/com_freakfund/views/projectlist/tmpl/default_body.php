@@ -17,7 +17,7 @@ foreach($this->items as $i => $item):
 	    		<?php echo $item->name; ?>
 	        </td>
 	        <td>
-	        	<?php echo $item->premiereEndDate; ?>
+	        	<?php echo $item->FechaApintar; ?>
 	        </td>
 	        <td>
 	        	$<span class="number"><?php echo $item->breakeven; ?></span>
