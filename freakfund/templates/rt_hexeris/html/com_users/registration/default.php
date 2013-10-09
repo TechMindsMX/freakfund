@@ -83,6 +83,6 @@ jQuery(document).ready(function() {
 </div>
 	<div class="esconder">
 		<div class="aceptarTerminos">
-			<iframe src="<?php JURI::base(); ?>index.php?option=com_content&view=article&id=46&tmpl=component"></iframe>
+			<iframe src="<?php JURI::base(); ?>index.php?option=com_content&view=article&id=14&tmpl=component"></iframe>
 		</div> 
 	</div>
