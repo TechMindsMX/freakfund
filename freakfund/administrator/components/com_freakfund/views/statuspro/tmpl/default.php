@@ -19,6 +19,9 @@ foreach ($selectBaja as $key => $value) {
 $select .= '</select>';
 
 switch($datos->status){
+	case '4'://Rechazado, si entran directo de la url se redirecciona al listado y se informa el motivo
+		$errors = JFactory::getApplication();
+	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', $msg=JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG_4'), $msgType='error');
 	case '5': //Autorizado, cambia a estatus 6 (produccion si se tiene la documentacion completa), y estatus 10 Documentacion pendiente
 		$datos->jquery = "jQuery('#formstatus input[type=radio]').change(function() {".
 						 "		if( jQuery(this).val() == 1 ) {".
@@ -44,7 +47,7 @@ switch($datos->status){
 		
 		break;
 	case '6'://Producción, cambia a estatus 7 (presentacion si se confirma la entrega del producto), y estatus 4 si no se entrega el producto (enviando el motivo de baja)
-		$datos->jquery = "jQuery('#status6').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_BAJA_PRODUCTO')."');\n".
+		$datos->jquery = "jQuery('#status6').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_BAJA_PRODUCTO_0')."');\n".
 						 "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_EN_PRESENTACION')."');\n".
 						 "jQuery('#status6').prop('id', 'status7');\n".
 						 "jQuery('#status10').prop('id', 'status4');\n".
@@ -58,7 +61,7 @@ switch($datos->status){
 						 "			jQuery('#status7').prop('disabled', true);\n".
 						 "		}else{\n".
 						 "			jQuery('#statusbaja').val(4);\n".
-						 "			jQuery('#motivoBaja').val(1);\n".
+						 "			jQuery('#motivoBaja').val(0);\n".
 						 "			jQuery('#motivoBaja').prop('name', 'reason');\n".
 						 "			jQuery('#status4').prop('disabled', true);\n".
 						 "			jQuery('#status7').prop('disabled', false);\n".
@@ -82,69 +85,49 @@ switch($datos->status){
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="11" id="statusbaja" />';
 		break;
-	case '8':
-		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
-						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
-						 "jQuery('#docComplete').change(function() {".
-						 "		if( jQuery(this).prop('checked') ) {".
-						 "			jQuery('#statusbaja').val(11);".
-						 "			jQuery('#motivoBaja').val();".
-						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "		}else{".
-						 "			jQuery('#statusbaja').val(4);".
-						 "			jQuery('#motivoBaja').val(1);".
-						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "		}".
-						 "});";
+	case '8'://Finalizado, si entran directo de la url se redirecciona al listado y se informa el motivo
+		$errors = JFactory::getApplication();
+	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', $msg=JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG_8'), $msgType='error');
+	case '10'://Documentacion pendiente, cambia a estatus 6(produccion si la documentacion esta completa), y estatus 4 si no entrego la documentacion (enviar el motivo de la baja)
+		$datos->jquery = "jQuery('#status6').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_BAJA_PRODUCTO_1')."');\n".
+						 "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_EN_PRESENTACION')."');\n".
+						 "jQuery('#status6').prop('id', 'status4');\n".
+						 "jQuery('#status10').prop('id', 'status6');\n".
+						 "jQuery('#status6').prop('disabled', true);\n".
+						 "jQuery('#status4').prop('disabled', false);\n".
+						 
+						 "jQuery('#formstatus input[type=radio]').change(function() {\n".
+						 "		if( jQuery(this).val() == 0 ) {\n".
+						 "			jQuery('#statusbaja').val(6);\n".
+						 "			jQuery('#motivoBaja').val();\n".
+						 "			jQuery('#motivoBaja').prop('name', '');\n".
+						 "			jQuery('#status6').prop('disabled', false);\n".
+						 "			jQuery('#status4').prop('disabled', true);\n".
+						 "		}else{\n".
+						 "			jQuery('#statusbaja').val(4);\n".
+						 "			jQuery('#motivoBaja').val(1);\n".
+						 "			jQuery('#motivoBaja').prop('name', 'reason');\n".
+						 "			jQuery('#status6').prop('disabled', true);\n".
+						 "			jQuery('#status4').prop('disabled', false);\n".
+						 "		}\n".
+						 "});\n";
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
 						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
 							<div style="margin-bottom: 10px;">
-								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
+								'.JText::_('COM_FREAKFUND_STATUSPRO_DOCPENDIENTE').': 
+								Si <input type="radio" value="1" name="docComplete" id="docCompletetrue" class="docComplete" checked />
+								No <input type="radio" value="0" name="docComplete" id="docCompletefalse" class="docComplete" />
 							</div>';
-		break;	
-	case '10':
-		$datos->jquery = "jQuery('#docComplete').change(function() {".
-						 "		if( jQuery(this).prop('checked') ) {".
-						 "			jQuery('#statusbaja').val(6);".
-						 "			jQuery('#motivoBaja').val();".
-						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "		}else{".
-						 "			jQuery('#statusbaja').val(4);".
-						 "			jQuery('#motivoBaja').val(0);".
-						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "		}".
-						 "});";
-						 
-		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
-						  <input type="hidden" name="reason" value="0" id="motivoBaja" />
-							<div style="margin-bottom: 10px;">
-								¿La documentacion esta completa?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
-							</div>';
-		$datos->finalizacion = '';
-		
-		$datos->bajaMotivos = '';
 		break;
-	case '11':
-		$datos->jquery = "jQuery('#publishButton').prop('id', 'finishButton');".
-						 "jQuery('#finishButton').val('".JText::_("COM_FREAKFUND_STATUSPRO_FINISH")."');".
-						 "jQuery('#docComplete').change(function() {".
-						 "		if( jQuery(this).prop('checked') ) {".
-						 "			jQuery('#statusbaja').val(11);".
-						 "			jQuery('#motivoBaja').val();".
-						 "			jQuery('#motivoBaja').prop('name', '');".
-						 "		}else{".
-						 "			jQuery('#statusbaja').val(4);".
-						 "			jQuery('#motivoBaja').val(1);".
-						 "			jQuery('#motivoBaja').prop('name', 'reason');".
-						 "		}".
-						 "});";
+	case '11'://Cerrando, Cambia unicamente al estatus 8 (finalizado), y un boton para regresar al listado
+		$datos->jquery = "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_FINISH')."');\n".
+						 "jQuery('#status10').prop('id', 'finishButton');\n".
+						 "jQuery('#status6').prop('disabled', false);\n".
+						 "jQuery('#status6').prop('id', 'goback');\n".
+						 "jQuery('#goback').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_GOBACK')."');";
 						 
-		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
-						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
-							<div style="margin-bottom: 10px;">
-								¿Finalizar proyecto?: <input type="checkbox" value="1" id="docComplete" class="docComplete" />
-							</div>';
+		$datos->inputs = '<input type="hidden" name="status" value="8" id="statusbaja" />';
 		$datos->finalizacion = '';
 		
 		$datos->bajaMotivos = '';
@@ -152,13 +135,11 @@ switch($datos->status){
 	default:
 		break;
 }
-
-$jquery 	= $datos->jquery;
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		<?php
-			echo $jquery;
+			echo $datos->jquery;
 		?>
 
 		jQuery('#formstatus input[type="button"]').click(function() {
@@ -183,7 +164,6 @@ $jquery 	= $datos->jquery;
 				case 'status4':
 					jQuery('#docCompletetrue').prop('name', '');
 					jQuery('#docCompletefalse').prop('name', '');
-					jQuery('#selectBajas').prop('name', '');
 					jQuery("#formstatus").submit();
 					break;
 				case 'closer':
@@ -192,26 +172,13 @@ $jquery 	= $datos->jquery;
 				case 'goback':
 					history.back();
 					break;
-					
-				case 'publishButton':
-					jQuery('#selectBajas').prop('name', '');
-					jQuery("#formstatus").submit();
-					break;
-
-				case 'baja':
-					jQuery('#statusbaja').val(4);
-					jQuery("#formstatus").submit();
-					break;
-
 				case 'finishButton':
 					if(confirm('¿Está seguro que desea finalizar el producto, dispersar los beneficios y notificar a los involucrados? ESTA ACCIÓN ES IRREVERSIBLE')) {
-						jQuery('#selectBajas').prop('name', '');
 						jQuery("#formstatus").submit();
 					} else {
 						alert('Bien hecho');
 					}
 					break;
-				
 				default:
 					alert('que presionaste????');
 					break;
