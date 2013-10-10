@@ -12,7 +12,7 @@ class plgUserFFAccount extends JPlugin
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 		
-		$this->url = 'http://localhost/post.php';
+		$this->url = 'http://localhost/post.php'; // SIMULADO DEBE CAMBIAR POR SERVICIO
 		// $this->token = JTrama::token();
 	}
 
@@ -38,12 +38,16 @@ class plgUserFFAccount extends JPlugin
 		
 		$db->setQuery( $query );
 		$id = $db->loadResult();
-		
-		$respuesta = $this->sendToMiddle($id); // envia al middleware
-var_dump($user);echo $respuesta;exit;
-		if ($respuesta == "existe") {
+
+		// chequea que el usuario este activado y no este bloqueado y envia al middleware
+		$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($id) : "blocked"; 
+
+		if ($respuesta == 'existe') {
 			$mensaje = 'PLG_FFACCOUNT_ALREADY_CREATED';
 			$type = 'notice';
+		} elseif ($respuesta == 'blocked' ) {
+			$mensaje = 'PLG_FFACCOUNT_ERR_BLOCKED';
+			$type = 'message';
 		} elseif ($respuesta == 'true' ) {
 			$mensaje = 'PLG_FFACCOUNT_SUCCESS';
 			$type = 'message';
