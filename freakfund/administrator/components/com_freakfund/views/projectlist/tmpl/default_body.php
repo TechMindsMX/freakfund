@@ -9,7 +9,7 @@ foreach($this->items as $i => $item):
 	if ( $item->type != 'REPERTORY' ) {
 		$item->htmlChange = ($item->status != 4 && $item->status != 8)? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';
 ?>
-        <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
+        <tr class="row<?php echo $i % 2; ?>" id="<?php echo $item->status; ?>">
 	        <td>
 	    		<?php echo $item->id; ?>
 	        </td>

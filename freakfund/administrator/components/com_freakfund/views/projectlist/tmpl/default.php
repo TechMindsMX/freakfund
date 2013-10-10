@@ -18,7 +18,25 @@ JSubMenuHelper::addEntry(
 	'index.php?option=com_freakfund&task=statusPro',
 	$vName == 'listproduct');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_tramaproyectos'); ?>" method="post" name="adminForm">
+<script language="JavaScript">
+	jQuery(document).ready(function() {
+		jQuery('#statusFilter').change(function(){
+			var valor = this.value;
+			if(valor == 'all') {
+				jQuery('#tablaGral tr').show();
+			}else{
+				jQuery.each(jQuery('#tablaGral tr'),function(){
+					if(this.id == valor  || this.id == ''){
+						jQuery(this).show()
+					}else{
+						jQuery(this).hide()
+					}
+				});
+			}
+		});
+	});
+</script>
+<form action="<?php echo JRoute::_('index.php?option=com_tramaproyectos'); ?>" method="post" name="adminForm" id="idform">
         <table id="tablaGral" class="adminlist">
                 <thead><?php echo $this->loadTemplate('head');?></thead>
                 <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>

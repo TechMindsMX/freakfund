@@ -2,6 +2,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
+$datosSelect = $this->items[0]->statusList;
 ?>
 <tr>
 	<th>
@@ -21,6 +22,18 @@ jimport('trama.class');
     </th>
     <th>
     	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_STATUS'); ?>
+    	<div>
+    		<select id="statusFilter">
+    			<option value="all">Seleccione una opción</option>
+    			<?php
+				foreach ($datosSelect as $key => $value) {
+					if ( ($value->id >= 4) && ($value->id != 9) ) {
+						echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+					}
+				}
+    			?>
+    		</select>
+    	</div>
     </th>
     <th>
     	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_SEMAPHORE'); ?>

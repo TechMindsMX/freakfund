@@ -36,7 +36,6 @@ class projectListModelprojectList extends JModelList
 			$query[] =$this->agrupaObj($data8, 'premiereEndDateCode');
 		}
 		
-		
 		foreach ($query as $key => $value) {
 			foreach ($value as $indice => $valor) {
 				$queryResp[] = $valor;
@@ -44,6 +43,19 @@ class projectListModelprojectList extends JModelList
 		}
 		
 		$queryResp[0]->vName = 'listproduct';
+		$statusList = JTrama::getStatus();
+		
+		foreach ($statusList as $obj) {
+			if(($obj->id >= 4) && ($obj->id != 9))
+			$map[] = array($obj->name, $obj);
+		}	
+		sort($map);
+		
+		foreach ($map as $key => $value) {
+			$statusListFinal[] = $value[1];
+		}
+		
+		$queryResp[0]->statusList = $statusListFinal;
 
 		return $queryResp;
 	}
@@ -57,11 +69,7 @@ class projectListModelprojectList extends JModelList
 		sort($map);
 		
 		foreach ($map as $key) {
-			foreach ($key as $indice => $valor) {
-				if($indice != 0 ) {
-					$nuevo[] = $valor;
-				}
-			}			
+			$nuevo[] = $key[1];			
 		}
 		
 		foreach ($nuevo as $key => $value) {
@@ -74,7 +82,7 @@ class projectListModelprojectList extends JModelList
 					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '5':
-					$this->semaforo(15, $value->fundEndDate, $value);
+					$this->semaforo(5, $value->fundEndDate, $value);
 					$value->FechaApintar = $value->$sinCode.' '.JText::_('COM_FREAKFUND_PROJECTLIST_'.strtoupper($sinCode));
 					break;
 				case '6':
@@ -110,7 +118,8 @@ class projectListModelprojectList extends JModelList
 	}
 
 	public function semaforo($diasYellow, $fecha, $value) {
-		$fecha1 = new DateTime('13-09-2015');
+		$fecha1 = new DateTime();
+		
 		$fecha2 =new DateTime($fecha);
 
 		$value->dateDiff = date_diff($fecha1,$fecha2);
@@ -120,7 +129,7 @@ class projectListModelprojectList extends JModelList
 		}elseif($value->dateDiff->invert == 0 && $value->dateDiff->days <= $diasYellow){
 			$value->semaphore = 'YELLOW';
 		}else{
-			$value->semaphore = 'GREEN';
+			$value->semaphore = 'FORESTGREEN';
 		}
 	}
 }
