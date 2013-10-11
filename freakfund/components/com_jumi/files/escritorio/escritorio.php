@@ -6,55 +6,91 @@ $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 $base = JUri::base();
-$input = $app -> input;
+$input = $app->input;
 $jumiurl = 'index.php?option=com_jumi&view=application&fileid=';
 
-if ($usuario -> guest == 1) {
-	$return = JURI::getInstance() -> toString();
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
 	$url = 'index.php?option=com_users&view=login';
 	$url .= '&return=' . base64_encode($return);
-	$app -> redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
 
 jimport("trama.class");
-jimport("trama.jsocial");
+jimport("trama.jsocial"); 
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
-$doc -> addScript( 'libraries/trama/js/jquery.number.min.js' );
+$doc->addScript( 'libraries/trama/js/jquery.number.min.js' );
+$doc->addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
+$doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
-$userid = $input -> get("userid", 0, "int");
 
-$userid = ($userid == 0) ? $usuario -> id : $userid;
+$userid = $input->get("userid", 0, "int");
 
-$doc -> addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
-$doc -> addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
+$userid = ($userid == 0) ? $usuario->id : $userid;
 
 $objuserdata = new UserData;
 $datosgenerales = $objuserdata::datosGr($userid);
 
 if (is_null($datosgenerales)) {
-	$app -> redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
+	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
-$datosgenerales -> userBalance = $objuserdata->getUserBalance($userid)->balance;
+$datosgenerales->userBalance = $objuserdata->getUserBalance($userid)->balance;
 
-$promedio = $objuserdata -> scoreUser($userid);
+$promedio = $objuserdata->scoreUser($userid);
 
 // $proyectos = JTrama::getProjectsByUser($userid);
 $proyectos = JTrama::allProjects();
+$htmlInversionActual = '';
+$htmlFinanActual = '';
+
 foreach ($proyectos as $key => $value) {
-	if ( ($value -> type != 'REPERTORY' && $value -> status != 4)) {
-		$value = JTrama::getEditUrl($value);
-		$value -> imgAvatar = '<img src="' . AVATAR . '/' . $value -> projectAvatar -> name . '" alt="' . $value -> name . '" />';
-		$value -> investmentValue = 1000;
-		$value -> roi = $value -> investmentValue * ($value -> tri / 100);
-		if ( $value->type == 'PRODUCT' ) {
-			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investmentValue;
-		} elseif ( $value->type == 'PROJECT' ) {
-			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investmentValue;
-		}
+	if ($value->status == 5 || $value->status == 6) {
+		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
+	} elseif ( $value->status == 7 ) {
+		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
 	}
 }
-$datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgenerales->actualFundings + $datosgenerales->userBalance;
+
+function moreProData($value, $datosgenerales) {
+	if ($value->type != 'REPERTORY' && $value->status != 4) {
+		JTrama::getEditUrl($value);
+		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" />';
+		$value->investmentValue = 1000;
+		$value->roi = $value->investmentValue * ($value->tri / 100);
+		if ( $value->status  == 5 || $value->status == 6 ) {
+			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investmentValue;
+		} elseif ( $value->status == 7 ) {
+			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investmentValue;
+			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
+		}
+	}
+	$datosgenerales->portfolioValue = @$datosgenerales->actualInvestments + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
+}
+
+function htmlInversionActual($value, $datosgenerales) {
+	moreProData($value, $datosgenerales);
+	$htmlInversionActual = '<tr>
+							<td><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+							<td><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
+							<td>' . $value->fundEndDate . '</td>
+							<td><span class="number">' . $value->breakeven . '</span></td>
+							<td>' . $value->porcentajeRecaudado . ' %</td>
+							<td><span class="number">' . $value->investmentValue . '</span></td>
+								</tr>';
+	return $htmlInversionActual;
+}
+function htmlFinanActual($value, $datosgenerales){
+	moreProData($value, $datosgenerales);
+	$htmlFinanActual = '<tr>
+						<td><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+						<td><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
+						<td><span class="number">' . $value->investmentValue . '</span></td>
+						<td><span class="number">' . $value->roi . '</span></td>
+						<td>' . $value->tri . ' %</td>
+						</tr>';
+	return $htmlFinanActual;
+}
 
 ?>
 <script type="text/javascript">
@@ -65,14 +101,18 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 <h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 
 <div class="infodiv">
+	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->actualFundings; ?></span></h3>
+	</span>
+	<br />
 	<span><label><?php echo JText::_('SALDO_FF'); ?></label>
 		<h3><span class="number"><?php echo $datosgenerales->userBalance; ?></span></h3>
 	</span>
 	<span><label><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
 		<h3><span class="number"><?php echo $datosgenerales->actualInvestments; ?></span></h3>
 	</span>
-	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->actualFundings; ?></span></h3>
+	<span><label><?php echo JText::_('ESCRIT_TOTAL_ROI'); ?></label>
+		<h3><span class="number"><?php echo $datosgenerales->sumRoi; ?></span></h3>
 	</span>
 	<span><label><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
 		<h3><span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
@@ -106,18 +146,7 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 						<th><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
 					</tr>
 					<?php
-					foreach ($proyectos as $key => $value) {
-						if ($value -> status == 5 || $value -> status == 6) {
-							echo '<tr>
-								<td><a href="' . $value -> viewUrl . '" >' . $value -> imgAvatar . '</a></td>
-								<td><a href="' . $value -> viewUrl . '" >' . $value -> name . '</a></td>'
-								. '<td>' . $value -> fundEndDate . '</td>
-								<td><span class="number">' . $value -> breakeven . '</span></td>
-								<td>' . $value -> porcentajeRecaudado . ' %</td>
-								<td><span class="number">' . $value -> investmentValue . '</span></td>
-								</tr>';
-						}
-					}
+						echo $htmlInversionActual;
 					?>							
 				</table>
 			</article>
@@ -135,18 +164,7 @@ $datosgenerales->portfolioValue = $datosgenerales->actualInvestments + $datosgen
 						<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
 					</tr>
 					<?php
-					foreach ($proyectos as $key => $value) {
-						if ( $value -> status == 7 ) {
-
-							echo '<tr>
-								<td><a href="' . $value -> viewUrl . '" >' . $value -> imgAvatar . '</a></td>
-								<td><a href="' . $value -> viewUrl . '" >' . $value -> name . '</a></td>
-								<td><span class="number">' . $value -> investmentValue . '</span></td>
-								<td><span class="number">' . $value -> roi . '</span></td>
-								<td>' . $value -> tri . ' %</td>
-								</tr>';
-						}
-					}
+						echo $htmlFinanActual;
 					?>	
 				</table>
 			</article>
