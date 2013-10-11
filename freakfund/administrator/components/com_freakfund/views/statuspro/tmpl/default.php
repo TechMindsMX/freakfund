@@ -46,39 +46,40 @@ switch($datos->status){
 	case '6'://Producción, cambia a estatus 7 (presentacion si se confirma la entrega del producto), y estatus 4 si no se entrega el producto (enviando el motivo de baja)
 		$datos->jquery = "jQuery('#status6').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_BAJA_PRODUCTO_0')."');\n".
 						 "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_EN_PRESENTACION')."');\n".
-						 "jQuery('#status6').prop('id', 'status7');\n".
-						 "jQuery('#status10').prop('id', 'status4');\n".
+						 "jQuery('#status6').prop('id', 'status4');\n".
+						 "jQuery('#status10').prop('id', 'status7');\n".
+						 "jQuery('#status7').prop('disabled', true);\n".
+						 "jQuery('#status4').prop('disabled', false);\n".
 						 
 						 "jQuery('#formstatus input[type=radio]').change(function() {\n".
 						 "		if( jQuery(this).val() == 1 ) {\n".
 						 "			jQuery('#statusbaja').val(7);\n".
 						 "			jQuery('#motivoBaja').val();\n".
 						 "			jQuery('#motivoBaja').prop('name', '');\n".
-						 "			jQuery('#status4').prop('disabled', false);\n".
-						 "			jQuery('#status7').prop('disabled', true);\n".
+						 "			jQuery('#status7').prop('disabled', false);\n".
+						 "			jQuery('#status4').prop('disabled', true);\n".
 						 "		}else{\n".
 						 "			jQuery('#statusbaja').val(4);\n".
 						 "			jQuery('#motivoBaja').val(0);\n".
 						 "			jQuery('#motivoBaja').prop('name', 'reason');\n".
-						 "			jQuery('#status4').prop('disabled', true);\n".
-						 "			jQuery('#status7').prop('disabled', false);\n".
+						 "			jQuery('#status7').prop('disabled', true);\n".
+						 "			jQuery('#status4').prop('disabled', false);\n".
 						 "		}\n".
 						 "});\n";
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="4" id="statusbaja" />
-						  <input type="hidden" name="reason" value="1" id="motivoBaja" />
+						  <input type="hidden" name="reason" value="0" id="motivoBaja" />
 							<div style="margin-bottom: 10px;">
 								¿Se entrego el proyecto?: 
-								Si <input type="radio" value="1" name="docComplete" id="docCompletetrue" class="docComplete" checked />
-								No <input type="radio" value="0" name="docComplete" id="docCompletefalse" class="docComplete" />
+								Si <input type="radio" value="1" name="docComplete" id="docCompletetrue" class="docComplete" />
+								No <input type="radio" value="0" name="docComplete" id="docCompletefalse" class="docComplete" checked />
 							</div>';
 		break;
 	case '7'://Presentacion, Se envia solamente al estatus 11(Cerrando)
 		$datos->jquery = "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_CERRANDO')."');\n".
 						 "jQuery('#status10').prop('id', 'closer');\n".
 						 "jQuery('#status6').prop('disabled', false);\n".
-						 "jQuery('#status6').prop('id', 'goback');\n".
-						 "jQuery('#goback').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_GOBACK')."');";
+						 "jQuery('#status6').remove();\n";
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="11" id="statusbaja" />';
 		break;
@@ -118,8 +119,7 @@ switch($datos->status){
 		$datos->jquery = "jQuery('#status10').val('".JText::_('COM_FREAKFUND_STATUSPRO_FINISH')."');\n".
 						 "jQuery('#status10').prop('id', 'finishButton');\n".
 						 "jQuery('#status6').prop('disabled', false);\n".
-						 "jQuery('#status6').prop('id', 'goback');\n".
-						 "jQuery('#goback').val('".JText::_('COM_FREAKFUND_STATUSPRO_BUTTON_GOBACK')."');";
+						 "jQuery('#status6').remove();\n";
 						 
 		$datos->inputs = '<input type="hidden" name="status" value="8" id="statusbaja" />';
 		$datos->finalizacion = '';

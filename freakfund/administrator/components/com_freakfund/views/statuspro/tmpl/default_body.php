@@ -40,8 +40,8 @@ $datos 			= $this->items;
 				<?php echo $datos->inputs; ?>
 				
 				<div style="margin-bottom: 10px;">
-					<input type="button" id="status10" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONDOCPENDIENTE'); ?>" />
-					<input type="button" id="status6" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONPRODUCTION'); ?>" disabled/>
+					<input type="button" id="status10" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONDOCPENDIENTE'); ?> 10" name="10"/>
+					<input type="button" id="status6" value="<?php echo JText::_('COM_FREAKFUND_STATUSPRO_BUTTONPRODUCTION'); ?> 6" name="6" disabled/>
 				</div>
 			</div>
 		</td>
