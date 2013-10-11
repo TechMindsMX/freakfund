@@ -8,6 +8,8 @@ $doc = JFactory::getDocument();
 $base = JUri::base();
 $input = $app->input;
 $jumiurl = 'index.php?option=com_jumi&view=application&fileid=';
+$htmlInversionActual = '';
+$htmlFinanActual = '';
 
 if ($usuario->guest == 1) {
 	$return = JURI::getInstance()->toString();
@@ -23,12 +25,8 @@ $doc->addScript( 'libraries/trama/js/jquery.number.min.js' );
 $doc->addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
-
-$userid = $input->get("userid", 0, "int");
-
-$userid = ($userid == 0) ? $usuario->id : $userid;
-
 $objuserdata = new UserData;
+$userid = $usuario->id;
 $datosgenerales = $objuserdata::datosGr($userid);
 
 if (is_null($datosgenerales)) {
@@ -36,13 +34,10 @@ if (is_null($datosgenerales)) {
 }
 
 $datosgenerales->userBalance = $objuserdata->getUserBalance($userid)->balance;
-
 $promedio = $objuserdata->scoreUser($userid);
 
 // $proyectos = JTrama::getProjectsByUser($userid);
 $proyectos = JTrama::allProjects();
-$htmlInversionActual = '';
-$htmlFinanActual = '';
 
 foreach ($proyectos as $key => $value) {
 	if ($value->status == 5 || $value->status == 6) {
