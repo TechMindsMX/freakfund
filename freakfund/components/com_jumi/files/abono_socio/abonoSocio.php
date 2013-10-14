@@ -59,7 +59,7 @@ echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>'
 	</div>
 	<div>
 		<label for="amount"><?php echo JText::_('MONTO'); ?></label>
-		<input type="text" name="amount" id="amount" class="validate[required]" />
+		<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
 	</div>
 	<div>
 		<input type="button" class="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />

@@ -100,7 +100,7 @@
                 },
                 "number": {
                     // Number, including positive, negative, and floating decimal. credit: orefalo
-                    "regex": /^\d{1,3}(\.\d{0,2})?$/,
+                    "regex": /^\d{1,9}(\.\d{0,2})?$/,
                     "alertText": "* No es un valor decimal válido"
                 },
                 "date": {
