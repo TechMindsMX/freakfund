@@ -9,7 +9,7 @@ $datos 			= $this->items;
 ?>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_NAMEPROD').': '.$datos->name; ?>
+			<h3><?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_NAMEPROD').': '.$datos->name; ?></h3>
 		</td>
 	</tr>
 	<tr>
