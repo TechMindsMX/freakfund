@@ -1,6 +1,6 @@
 /** text/css **/
 
-input[type='button'] {
+input[type='button'], input[type='submit'] {
 	margin-right: 1em;
 	padding: 0.5em 1em;
 	color: #FFFFFF;
@@ -8,7 +8,7 @@ input[type='button'] {
 	font-size: 110%;
 	cursor: pointer;
 }
-input[type="button"]:disabled {
+input[type="button"]:disabled, input[type='submit']:disabled {
 	background:#D8D8D8;
 	cursor: default;
 }
