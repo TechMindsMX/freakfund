@@ -6,6 +6,7 @@ JHtml::_('behavior.tooltip');
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 $document = JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
+$document->addScript(JURI::base().'../libraries/trama/js/jquery.number.min.js');
 $vName = $this->items[0]->vName;
 
 JSubMenuHelper::addEntry(
@@ -19,6 +20,8 @@ JSubMenuHelper::addEntry(
 	$vName == 'listproduct');
 ?>
 <script language="JavaScript">
+	jQuery("span.number").number(true,2,',','.');
+	
 	jQuery(document).ready(function() {
 		jQuery('#statusFilter').change(function(){
 			var valor = this.value;
