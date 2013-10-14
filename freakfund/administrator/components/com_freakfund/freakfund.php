@@ -3,6 +3,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_slave'.DS.'tables');
+JFactory::getDocument()->addStyleSheet('components/com_freakfund/css/com_freakfund.css');
 
 $jinput = JFactory::getApplication()->input;
 $controllerName = $jinput->get('task', "freakfund", 'STR' );

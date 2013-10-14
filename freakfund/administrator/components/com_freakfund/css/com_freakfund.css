@@ -1,0 +1,14 @@
+/** text/css **/
+
+input[type='button'] {
+	margin-right: 1em;
+	padding: 0.5em 1em;
+	color: #FFFFFF;
+	background:#089108;
+	font-size: 110%;
+	cursor: pointer;
+}
+input[type="button"]:disabled {
+	background:#D8D8D8;
+	cursor: default;
+}
