@@ -10,6 +10,7 @@ if ($usuario->guest == 1) {
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 
+
 $token 			= JTrama::token();
 $base 			= JUri::base();
 $usuario 		= JFactory::getUser();
@@ -19,10 +20,59 @@ $errorCallback 	= $base.'index.php?option=com_jumi&view=application&fileid=29&pr
 $pathJumi 		= $base.'components/com_jumi/files/classIncludes/';
 $usuario->balance = JTrama::getUserBalance($usuario->id)->balance;
 
+//Datos simulados
+$html = '<div>
+		<h3>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR').'</h3>
+		
+		<p><'.$usuario->name.'</p>
+		
+		<p>
+			<span>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_BALANCE').'</span>
+			$<span class="number">'.$usuario->balance.'</span>
+		</p>
+		
+	</div>';
+//
+
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';
 echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
 echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
+
+if( !empty($_POST) ) {
+	$saldoActual 	= $usuario->balance + $_POST['amount'];
+	$fechaActual	= new DateTime();
+	$metodoPago = 'Paypal';
+	
+	$html = '<div style="margin-bottom: 10px; border: 1px solid; width: 30%; padding-left: 20px;">
+		<h3>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR').'</h3>
+		
+		<h4>Datos Capturados</h4>
+		
+		<p>
+			<span>Usuario: </span>
+			'.$usuario->name.'
+		</p>
+		
+		<p>
+			<span>Saldo Anterior</span>
+			$<span class="number">'.$usuario->balance.'</span>
+		</p>
+		
+		<p>
+			<span>Saldo Actual</span>
+			$<span class="number">'.$saldoActual.'</span>
+		</p>
+		
+		<p>
+			<span>Metodo de pago</span>
+			'.$metodoPago.'
+		</p>
+		
+	</div>';
+}
+
+
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
@@ -40,17 +90,10 @@ echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>'
 	});
 </script>
 <form action="#" id="formAbono" method="post">
-	<div>
-		<h3><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR'); ?></h3>
 		
-		<p><?php echo $usuario->name; ?></p>
-		
-		<p>
-			<span><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_BALANCE'); ?></span>
-			$<span class="number"><?php echo $usuario->balance; ?></span>
-		</p>
-		
-	</div>
+	<?php
+		echo $html; 
+	?>
 	<div id="hiddens">
 		<input type="hidden" name="callback" id="callback" value="<?php echo $callback; ?>" />
 		<input type="hidden" name="errorCallback" id="errorCallback" value="<?php echo $errorCallback; ?>" />
