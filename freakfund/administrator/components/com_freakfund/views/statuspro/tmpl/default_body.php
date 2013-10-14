@@ -14,7 +14,7 @@ $datos 			= $this->items;
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_CLOSEDATE').': '.$datos->fundEndDate; ?>
+			<?php echo $datos->FechaApintar; ?>
 		</td>
 	</tr>
 	<tr>

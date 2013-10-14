@@ -17,14 +17,17 @@ $document 		= JFactory::getDocument();
 $callback 		= $base.'index.php?option=com_jumi&view=application&fileid=29&proyid=';
 $errorCallback 	= $base.'index.php?option=com_jumi&view=application&fileid=29&proyid=';
 $pathJumi 		= $base.'components/com_jumi/files/classIncludes/';
+$usuario->balance = JTrama::getUserBalance($usuario->id)->balance;
 
 $document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
 echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';
 echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
+echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		jQuery("#formAbono").validationEngine();
+		jQuery("span.number").number(true,2,',','.');
 		
 		jQuery('#abonar').click(function() {
 			if(confirm('¿Esta seguro que quiere abonar la cantidad de $'+jQuery('#amount').val()+'? ¡Esta accion es IRREVERSIBLE!')) {
@@ -36,9 +39,17 @@ echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
 		});
 	});
 </script>
-<form action="#" id="formAbono">
+<form action="#" id="formAbono" method="post">
 	<div>
-		<h3><?php echo strtoupper('Abono de cuenta de Socio'); ?></h3>
+		<h3><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR'); ?></h3>
+		
+		<p><?php echo $usuario->name; ?></p>
+		
+		<p>
+			<span><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_BALANCE'); ?></span>
+			$<span class="number"><?php echo $usuario->balance; ?></span>
+		</p>
+		
 	</div>
 	<div id="hiddens">
 		<input type="hidden" name="callback" id="callback" value="<?php echo $callback; ?>" />
@@ -51,6 +62,7 @@ echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
 		<input type="text" name="amount" id="amount" class="validate[required]" />
 	</div>
 	<div>
-		<input type="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />
+		<input type="button" class="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />
+		<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onclick="javascript:window.history.back();" />
 	</div>
 </form>
