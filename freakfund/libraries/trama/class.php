@@ -289,6 +289,16 @@ class JTrama
 			$value->settlementDateCode = $value->settlementDate;
 			$value->settlementDate = date('d-m-Y', ($value->settlementDate/1000) );
 		}
+		if(!is_null($value->providers)) {
+			foreach ($value->providers as $indice => $valor) {
+				$valor->settlementDateCode = $valor->settlementDate;
+				$valor->settlementDate = date('d-m-Y', ($valor->settlementDate/1000) );
+				
+				$valor->advanceDateCode = $valor->advanceDate;
+				$valor->advanceDate = date('d-m-Y', ($valor->advanceDate/1000) );				
+			}
+		}
+		
 		$value->projectFinancialData = null;
 	}
 	

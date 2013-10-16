@@ -2,17 +2,15 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
-$providers = $this -> items -> providers;
-$presupuesto = $this->items -> budget;
-
+$providers = $this->items->providers;
+$presupuesto = $this->items->budget;
 foreach ($providers as $key => $value) {
-	JTrama::formatDatosProy($value);
 	if($value->advancePaidDate) {
 		$deshabilitarAnticipo = 'disabled';
+	}else{
+		$deshabilitarAnticipo = '';
 	}
-	else{
-		$$deshabilitarAnticipo = '';
-	}
+	
 	if($value->settlementPaidDate) {
 		$deshabilitaFiniquito = 'disabled';
 	}else{
