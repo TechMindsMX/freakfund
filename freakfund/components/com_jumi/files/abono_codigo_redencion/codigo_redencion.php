@@ -67,14 +67,8 @@ $action = '#';
 	
 			request.fail(function (jqXHR, textStatus) {
 	 			console.log('Error:' + jqXHR.status);
-	 			
-	 			
 	    	});
-			
-
 		});
-		
-		
 	});
 </script>
 

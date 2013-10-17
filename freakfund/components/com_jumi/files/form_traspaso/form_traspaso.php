@@ -13,24 +13,25 @@ if ($usuario->guest == 1) {
 jimport('trama.class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
-$token 			= JTrama::	token();
+$token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
-$datosUsuario	= JTrama::	getUserBalance($usuario->email);
-$friends		= JTrama::	searchFriends($usuario->id);
-$callback 		= JURI::	base().'index.php?option=com_jumi&view=appliction&fileid=29';
-$errorCallback 	= JURI::	base().'index.php?option=com_jumi&view=appliction&fileid=29';
+$datosUsuario	= JTrama::getUserBalance($usuario->email);
+$friends		= JTrama::searchFriends($usuario->id);
+$callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
+$errorCallback 	= JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
 $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $arrayFriends	= explode(',',$friends->friends);
 $arregloEnvio   = '';
 
 foreach($arrayFriends as $key => $value){
 	if($value!=378){
-		$arregloEnvio .= 'arregloEnvio["'.JFactory::getUser($value)->name.'"] = '.$value.';';
+		$arregloEnvio .= 'arregloEnvio["'.JFactory::getUser($value)->name.'"] = "'.JFactory::getUser($value)->email.'";';
 		$arregloAmigos[] = '"'.JFactory::getUser($value)->name.'"';
 	}
 }
 $amigosJs = implode(',' ,$arregloAmigos);
+
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -49,9 +50,9 @@ $amigosJs = implode(',' ,$arregloAmigos);
 		<?php echo $arregloEnvio; ?>
 
 		jQuery("#enviar").click(function(){
-			var receiverId = arregloEnvio[jQuery('#tag_traspaso').val()];
-			jQuery('#receiverId').val(receiverId);
-
+			var receiverEmail = arregloEnvio[jQuery('#tag_traspaso').val()];
+			jQuery('#receiverEmail').val(receiverEmail);
+			
 			jQuery('#form_traspaso').submit();
 		});
 	});
@@ -66,9 +67,9 @@ $amigosJs = implode(',' ,$arregloAmigos);
 	  <input id="tag_traspaso" />
 	</div>
 	
-	<input type="hidden" name="receiverId" id="receiverId" >
+	<input type="hidden" name="receiverEmail" id="receiverEmail" >
 	<input type="hidden" name="token" value="<?php echo $token?>"> 
-	<input type="hidden" name="senderId" value="<?php echo $usuario->email; ?>"> 
+	<input type="hidden" name="senderEmail" value="<?php echo $usuario->email; ?>"> 
 	<input type="hidden" name="callback" value="<?php echo $callback ?>"> 
 	<input type="hidden" name="errorCallback" value="<?php echo $errorCallback ?>"> 
 	

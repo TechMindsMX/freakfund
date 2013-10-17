@@ -14,8 +14,8 @@ jimport('trama.class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
-$token = JTrama::token();
-$datosUsuario = JTrama::getUserBalance($usuario->email);
+$token 			= JTrama::token();
+$datosUsuario 	= JTrama::getUserBalance($usuario->email);
 
 //definicion de campos del formulario
 $action = '#';
@@ -42,20 +42,20 @@ $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
 foreach ($arregloobjetos as $obj) {
-	$tableHtml .= "<tr id='".$obj->tipo ."'>";
-	$tableHtml .= "<td>" .$obj->fecha . "<td />";
-	$tableHtml .= "<td>" .$obj->movimiento . "<td />";
-	$tableHtml .= "<td>" .$obj->tipo . "<td />";
-	$tableHtml .= "<td>" .$obj->detalle . "<td />";
-	$tableHtml .= "<td>" .$obj->referencia . "<td />";
-	$tableHtml .= "<td>" .$obj->institucion . "<td />";
-	$tableHtml .= "<td>" .$obj->tasa . "<td />";
-	$tableHtml .= "<td>" .$obj->cantidad . "<td />";
-	$tableHtml .= "<td>" .$obj->unitario . "<td />";
-	$tableHtml .= "<td>" .$obj->subtotal . "<td />";
-	$tableHtml .= "<td>" .$obj->saldo . "<td />";
-	$tableHtml .= "<td>" .$obj->notas . "<td />";
-	$tableHtml .= "</tr>";
+	$tableHtml .= '<tr id="'.$obj->tipo.'">';
+	$tableHtml .= '<td>'.$obj->fecha. '<td />';
+	$tableHtml .= '<td>'.$obj->movimiento.'<td />';
+	$tableHtml .= '<td>'.$obj->tipo.'<td />';
+	$tableHtml .= '<td>'.$obj->detalle.'<td />';
+	$tableHtml .= '<td>'.$obj->referencia.'<td />';
+	$tableHtml .= '<td>'.$obj->institucion.'<td />';
+	$tableHtml .= '<td>'.$obj->tasa.'<td />';
+	$tableHtml .= '<td>'.$obj->cantidad.'<td />';
+	$tableHtml .= '<td>$<span class="number">'.$obj->unitario.'</span><td />';
+	$tableHtml .= '<td>$<span class="number">'.$obj->subtotal.'</span><td />';
+	$tableHtml .= '<td>$<span class="number">'.$obj->saldo.'</span><td />';
+	$tableHtml .= '<td>'.$obj->notas.'<td />';
+	$tableHtml .= '</tr>';
 }
 
 foreach ($arregloCatalogo as $obj) {
@@ -64,11 +64,15 @@ foreach ($arregloCatalogo as $obj) {
 
 $tableHtml .= "</table>";
 $selectTipo .='</select>';
+
+echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
+
 ?>
 
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form_cuenta").validationEngine();
+		jQuery("span.number").number(true,2,',','.');
 		
 		jQuery('#filtroTipo').change(function(){
 			var limite = jQuery('#edocta_table tr').length;
@@ -77,7 +81,7 @@ $selectTipo .='</select>';
 			    jQuery('#edocta_table tr').show();
 			}else{
 			    var variable=this.value;			    
-console.log(variable);
+
 	           	jQuery('#edocta_table tr').hide();
 		       	jQuery('#edocta_table tr#'+variable).show();	
 		    	jQuery('#edocta_table tr#cabezera').show();		    
@@ -95,27 +99,27 @@ console.log(variable);
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO');?></td>
-				<td><?php echo $datosUsuario->balance;?></td>
+				<td>$<span class="number"><?php echo $datosUsuario->balance;?></span></td>
 			</tr>
 			<tr>
 				<td>Financiamientos</td>
-				<td><?php echo $sumaFinanciamientos;?></td>
+				<td>$<span class="number"><?php echo $sumaFinanciamientos;?></span></td>
 			</tr>
 			<tr>
 				<td>Inversiones</td>
-				<td><?php echo $sumaInversiones;?></td>
+				<td>$<span class="number"><?php echo $sumaInversiones;?></span></td>
 			</tr>
 			<tr>
 				<td>Valor de cartera</td>
-				<td><?php echo $valorCartera;?></td>
+				<td>$<span class="number"><?php echo $valorCartera;?></span></td>
 			</tr>
 			<tr>
 				<td>Retornos acumulados</td>
-				<td><?php echo $sumaRetornos;?></td>
+				<td>$<span class="number"><?php echo $sumaRetornos;?></span></td>
 			</tr>
 			<tr>
 				<td>Utilidad acumulada</td>
-				<td><?php echo $sumaUtilidad;?></td>
+				<td>$<span class="number"><?php echo $sumaUtilidad;?></span></td>
 			</tr>
 		</table>
 	</div>
