@@ -6,6 +6,21 @@
 #rt-mainbody-surround .info-proyecto h5
  {
 	text-shadow: none;
-	color: #FFFFFF;
+	color: #000;
 	margin: 0;
+}
+.jcarousel-list-horizontal .info-proyecto {
+	position:relative;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal, 
+.jcarousel-skin-tango .jcarousel-item-horizontal .jcarousel-item,
+.jcarousel-skin-tango .contenedor 
+{
+	height: auto;
+}
+.contenedor {
+	color: #000;
+}
+.info-proyecto .boton-wrap {
+	text-align:right;
 }

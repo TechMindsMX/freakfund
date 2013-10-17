@@ -14,7 +14,7 @@ switch ($params->get('tipodepro')) {
 		break;
 	
 	case 'apoyados':
-		$datos = modCarreteHelper::closestEnd();
+		$datos = modCarreteHelper::profitables($cantidad);
 		
 		break;
 

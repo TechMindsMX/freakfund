@@ -2,16 +2,16 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $document = JFactory::getDocument();
 
-$document->addStyleSheet('modules/mod_carrete/css/mod_carrete.css');
+$modPath = 'modules/mod_carrete';
+$document->addStyleSheet($modPath.'/css/mod_carrete.css');
 
-$pathJumi = 'components/com_jumi/files/carrusel';
 $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 
 ?>
 
-<link href="<?php echo $pathJumi;?>/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?php echo $pathJumi;?>/lib/jquery.jcarousel.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $pathJumi;?>/skins/tango/skin.css" />
+<link href="<?php echo $modPath;?>/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $modPath;?>/lib/jquery.jcarousel.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $modPath;?>/skins/tango/skin.css" />
 
 <script type="text/javascript">
 
@@ -35,8 +35,8 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 	};
 	
 	jQuery(document).ready(function() {
-	    jQuery('#mycarousel2').jcarousel({
-	        auto: 10,
+	    jQuery('#mycarousel<?php echo $module->id; ?>').jcarousel({
+	        auto: 100,
 	        wrap: 'last',
 	        initCallback: mycarousel_initCallback,
 	        scroll: 4
@@ -46,26 +46,83 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 </script>
 
 <div id="wrap">
-	<ul id="mycarousel2" class="jcarousel-skin-tango">
-  	<?php 
-  		foreach ($datos as $key => $value) {
-			echo '<li>
-    				<div class="contenedor" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
-    					<div class="info-proyecto" >
-							<div><h3>'.$value->name.'</h3></div>
-							<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
-							<span>'.$value->subcategoryName.'</span><br />
-							<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
-							<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
-							<span>
-								<a class="button" href="'.$url.$value->id.'">
-									'.JText::_('INVERTIR_PROYECTO').'</a>
-    						</span>
-    					</div>
-    				</div>
-    			</li>';
-		}
-  	?>
+	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
+  	<?php
+  	switch ($params->get('tipodepro')) {
+		case 'cerrar':
+	 		foreach ($datos as $key => $value) {
+				echo '<li>
+	    				<div class="contenedor">
+	    					<div style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
+	    						<img src="'.AVATAR.'/'.$value->projectAvatar->name.'" class="imagenes" />
+	    					</div>
+	    					<div class="info-proyecto" >
+								<div><h3>'.$value->name.'</h3></div>
+								<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
+								<span>'.$value->subcategoryName.'</span><br />
+								<span>'.$value->status.'</span><br />
+								<span>'.JText::_('LABEL_RECAUDADO').' '.$value->balance.'</span><br />
+								<span>'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</span><br />
+								<div class="boton-wrap">
+									<a class="button btn-invertir" href="'.$url.$value->id.'">
+										'.JText::_('INVERTIR_PROYECTO').'</a>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</li>';
+			}
+			break;
+		  
+		case 'apoyados':
+	 		foreach ($datos as $key => $value) {
+				echo '<li>
+	    				<div class="contenedor">
+	    					<div style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
+	    						<img src="'.AVATAR.'/'.$value->projectAvatar->name.'" class="imagenes" />
+	    					</div>
+	    					<div class="info-proyecto" >
+								<div><h3>'.$value->name.'</h3></div>
+								<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
+								<span>'.$value->subcategoryName.'</span><br />
+								<span>'.$value->status.'</span><br />
+								<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
+								<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
+								<div class="boton-wrap">
+									<a class="button btn-invertir" href="'.$url.$value->id.'">
+										'.JText::_('INVERTIR_PROYECTO').'</a>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</li>';
+			}
+			  
+			break;
+		case 'ultimosROI':
+	 		foreach ($datos as $key => $value) {
+				echo '<li>
+	    				<div class="contenedor">
+	    					<div style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
+	    						<img src="'.AVATAR.'/'.$value->projectAvatar->name.'" class="imagenes" />
+	    					</div>
+	    					<div class="info-proyecto" >
+								<div><h3>'.$value->name.'</h3></div>
+								<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
+								<span>'.$value->subcategoryName.'</span><br />
+								<span>'.$value->status.'</span><br />
+								<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
+								<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
+								<div class="boton-wrap">
+									<a class="button btn-invertir" href="'.$url.$value->id.'">
+										'.JText::_('INVERTIR_PROYECTO').'</a>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</li>';
+			}
+
+			break;
+	  } 
+   	?>
   </ul>
 </div>
 
