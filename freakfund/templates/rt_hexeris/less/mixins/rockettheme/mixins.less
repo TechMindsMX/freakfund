@@ -138,17 +138,25 @@
 	}
 	.button, button.validate, p.readmore a, #member-profile a, #member-registration a, .formelm-buttons button, .controls .btn, .logout-button .btn, #gantry-totop, .rt-popupmodule-button button,
 	.sprocket-mosaic-header li.active, &.roksearch_results a.clr {
-		color: @white;
+		color: #002c61;
 		background: @accent;
-		text-shadow: 1px -1px 0 rgba(0, 0, 0, 0.3);
 		border: 0;
 		.box-shadow(0 2px 0 rgba(0, 0, 0, 0.1));
 		.transition(all 0.1s ease-in);
+		text-shadow: none;
+		border-radius: 15px;
 		&:hover, &:active, &:focus {
 			color: @white;
-			background: @hoverColor;
+			background: #009ed3;
 		}
 	}	
+	.btn-invertir{
+		background: #FF763F;
+		color: @white;
+		&:hover{
+		background: #EF4123;
+		}
+	}
 }
 
 // Module and Title Variations
