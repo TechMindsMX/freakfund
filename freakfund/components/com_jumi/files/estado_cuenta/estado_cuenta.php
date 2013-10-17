@@ -15,12 +15,10 @@ require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
-
-$datosUsuario=JTrama::getUserBalance($usuario->id);
+$datosUsuario = JTrama::getUserBalance($usuario->email);
 
 //definicion de campos del formulario
 $action = '#';
-//$action = 'components/com_jumi/files/costos_variables/post.php';
 
 include_once ("objetote.php");
 

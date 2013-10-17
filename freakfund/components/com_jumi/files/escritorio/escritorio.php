@@ -1,15 +1,15 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 
-$count = 0;
-$usuario = JFactory::getUser();
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
-$base = JUri::base();
-$input = $app->input;
-$jumiurl = 'index.php?option=com_jumi&view=application&fileid=';
-$htmlInversionActual = '';
-$htmlFinanActual = '';
+$count 					= 0;
+$usuario 				= JFactory::getUser();
+$app 					= JFactory::getApplication();
+$doc 					= JFactory::getDocument();
+$base 					= JUri::base();
+$input 					= $app->input;
+$jumiurl 				= 'index.php?option=com_jumi&view=application&fileid=';
+$htmlInversionActual 	= '';
+$htmlFinanActual 		= '';
 
 if ($usuario->guest == 1) {
 	$return = JURI::getInstance()->toString();
@@ -21,6 +21,7 @@ if ($usuario->guest == 1) {
 jimport("trama.class");
 jimport("trama.jsocial"); 
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
+
 $doc->addScript( 'libraries/trama/js/jquery.number.min.js' );
 $doc->addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
@@ -33,10 +34,9 @@ if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
-$datosgenerales->userBalance = $objuserdata->getUserBalance($userid)->balance;
+$datosgenerales->userBalance = $objuserdata->getUserBalance($usuario->email)->balance;
 $promedio = $objuserdata->scoreUser($userid);
 
-// $proyectos = JTrama::getProjectsByUser($userid);
 $proyectos = JTrama::allProjects();
 
 foreach ($proyectos as $key => $value) {

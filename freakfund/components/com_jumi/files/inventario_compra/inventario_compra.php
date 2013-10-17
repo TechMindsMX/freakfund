@@ -14,16 +14,14 @@ jimport('trama.class');
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
-
-$input = JFactory::getApplication()->input;
-$usuario= JFactory::getUser();
-$proyid= $input->get("proyid",0,"int");
-$pro=JTrama::getDatos($proyid);
-$datosUsuario=JTrama::getUserBalance($usuario->id);
+$input 			= JFactory::getApplication()->input;
+$usuario		= JFactory::getUser();
+$proyid			= $input->get("proyid",0,"int");
+$pro			= JTrama::getDatos($proyid);
+$datosUsuario	= JTrama::getUserBalance($usuario->email);
 
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
-//$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
 
 <script>

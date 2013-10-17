@@ -14,15 +14,12 @@ jimport('trama.class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
-$token = JTrama::token();
-
-$input = JFactory::getApplication()->input;
-$usuario= JFactory::getUser();
-$datosUsuario=JTrama::getUserBalance($usuario->id);
+$token 			= JTrama::token();
+$input 			= JFactory::getApplication()->input;
+$usuario		= JFactory::getUser();
 
 //definicion de campos del formulario
 $action = '#';
-//$action = 'components/com_jumi/files/costos_variables/post.php';
 ?>
 
 <script>
@@ -49,7 +46,7 @@ $action = '#';
 	 	     			url:"libraries/trama/js/ajax.php",
 	 	 				data: {
 	 	  					"codigo": jQuery("#codigo").val(),
-	 	  					"userId": <?php echo $usuario->id; ?>,
+	 	  					"userId": <?php echo $usuario->email; ?>,
 	 	  					"fun": 5
 	 	 				},
 	 	 				type: 'post'
