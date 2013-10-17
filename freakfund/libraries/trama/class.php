@@ -375,6 +375,13 @@ class JTrama
 		return $value;
 	}
 	
+	public static function dateDiff ($fecha, $obj) {
+		$fecha1 = new DateTime();
+		
+		$fecha2 = new DateTime($fecha);
+
+		$obj->dateDiff = date_diff($fecha1,$fecha2);
+	}
 	
 }
 ?>
