@@ -1,5 +1,4 @@
 .jcarousel-skin-tango .jcarousel-container {
-    border-top: 1px solid #346F97;
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl {
@@ -22,29 +21,27 @@
 }
 
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
-    width:  1185px;
-    height: 266px;
+    width:  100%;
+    height: 266px;;
 }
 
 .jcarousel-skin-tango .jcarousel-clip-vertical {
     width:  75px;
-    height: 245px;
+    height: 266px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal,
 .jcarousel-skin-tango .jcarousel-item,
 .contenedor {
     height: auto;
 }
-.contenedor {
-	width: 266px;
-}
+.contenedor, 
 .jcarousel-skin-tango .jcarousel-item {
-    width: 266px;
+    width: 260px;;
 }
 
 .jcarousel-skin-tango .jcarousel-item-horizontal {
 	margin-left: 0;
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-item-horizontal {
@@ -66,8 +63,8 @@
  */
 .jcarousel-skin-tango .jcarousel-next-horizontal {
     position: absolute;
-    top: 43px;
-    right: 5px;
+    top: 45%;
+    right: -40px;
     width: 32px;
     height: 32px;
     cursor: pointer;
@@ -99,8 +96,8 @@
 
 .jcarousel-skin-tango .jcarousel-prev-horizontal {
     position: absolute;
-    top: 43px;
-    left: 5px;
+    top: 45%;
+    left: -40px;
     width: 32px;
     height: 32px;
     cursor: pointer;
@@ -187,9 +184,26 @@
 }
 
 .info-proyecto {
-	margin: 0 13px;
 	bottom: 0;
 	position: absolute;
-	width: 230px;
-	padding: 5px;
+	width: 100%;
+}
+.jcarousel-list .avatar,
+.jcarousel-list .mask {
+	height: 260px;
+	width: 260px;
+	background-size: 100%;
+	display: block;
+}
+.jcarousel-list li:nth-child(4n+1) .mask {
+	background-image: url('mask-topright.png');
+}
+.jcarousel-list li:nth-child(4n+2) .mask {
+	background-image: url('mask-bottomright.png');
+}
+.jcarousel-list li:nth-child(4n+3) .mask {
+	background-image: url('mask-bottomleft.png');
+}
+.jcarousel-list li:nth-child(4n+4) .mask {
+	background-image: url('mask-topleft.png');
 }

@@ -31,7 +31,7 @@ class modCarreteHelper
 		
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
-				$status = array(6,7); 
+				$status = array(0,5,6,7,8,9,10,11); 
 				if (in_array($value->status, $status)) {
 					$dataFilterStatus[] = $value;
 				}

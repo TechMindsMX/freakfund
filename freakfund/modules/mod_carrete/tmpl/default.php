@@ -53,8 +53,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 	 		foreach ($datos as $key => $value) {
 				echo '<li>
 	    				<div class="contenedor">
-	    					<div style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
-	    						<img src="'.AVATAR.'/'.$value->projectAvatar->name.'" class="imagenes" />
+	    					<div class="avatar" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
 	    					</div>
 	    					<div class="info-proyecto" >
 								<div><h3>'.$value->name.'</h3></div>
@@ -77,8 +76,8 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 	 		foreach ($datos as $key => $value) {
 				echo '<li>
 	    				<div class="contenedor">
-	    					<div style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
-	    						<img src="'.AVATAR.'/'.$value->projectAvatar->name.'" class="imagenes" />
+	    					<div class="avatar" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
+	    					<span class="mask"></span>
 	    					</div>
 	    					<div class="info-proyecto" >
 								<div><h3>'.$value->name.'</h3></div>
