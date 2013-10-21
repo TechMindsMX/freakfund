@@ -37,7 +37,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		$name = explode(' ',$user->name);
 		if (!$user->guest) {
 			echo '<script>';
-			echo 'jQuery(document).ready( function(){';
+// 			echo 'jQuery(document).ready( function(){';
 			echo 'jQuery(".desc").text("Salir");';
 			echo 'jQuery(".logo-block").after("<div class=\"bienvenidaUsuario\">Hola '.$name[0].'</div>")';
 			echo '});';
