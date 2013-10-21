@@ -120,7 +120,7 @@ function htmlFinanActual($value, $datosgenerales){
 				</div>
 			</span>
 			<span>
-				<label class="label-cartera"><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
+				<label class="label-cartera upercase"><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
 				<div class="bordesH3-fin">
 					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
 				</div>
