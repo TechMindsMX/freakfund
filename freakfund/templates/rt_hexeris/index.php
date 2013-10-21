@@ -175,11 +175,12 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 				</div>
 			</div>
 			<?php /** End Bottom **/ endif; ?>
-			<?php /** Begin Footer **/ if ($gantry->countModules('footer')) : ?>
+			<?php /** Begin Footer **/ if ($gantry->countModules('footer') || $gantry->countModules('subfooter')) : ?>
 			<div id="rt-footer">
 				<div id="rt-footer-overlay">
 					<div class="rt-container">
 						<?php echo $gantry->displayModules('footer','standard','standard'); ?>
+						<?php echo $gantry->displayModules('subfooter','standard','standard'); ?>
 						<div class="clear"></div>
 					</div>
 				</div>

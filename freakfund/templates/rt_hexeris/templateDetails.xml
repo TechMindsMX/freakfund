@@ -115,6 +115,12 @@
         <position>footer-d</position>
         <position>footer-e</position>
         <position>footer-f</position>
+        <position>subfooter-a</position>
+        <position>subfooter-b</position>
+        <position>subfooter-c</position>
+        <position>subfooter-d</position>
+        <position>subfooter-e</position>
+        <position>subfooter-f</position>
         <position>copyright-a</position>
         <position>copyright-b</position>
         <position>copyright-c</position>
