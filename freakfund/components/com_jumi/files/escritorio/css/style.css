@@ -131,16 +131,16 @@ div.bussines-card{
 	height: 24px;
 	right: 13px;
 	top: 7px;
-	background: transparent url(../img/arrow_down_blanco.png) no-repeat center center;
+	background: transparent url(../img/arrow_down_naranja.png) no-repeat center center;
 	border-radius: 15px;
 }
 .ac-container label:after, .ac-container2 label:after {
-	background: transparent url(../img/arrow_down_blanco.png) no-repeat center center;
+	background: transparent url(../img/arrow_down_naranja.png) no-repeat center center;
 	border-radius: 15px;	
 }
 .ac-container input:checked + label:hover:after{
 	border-radius: 15px;
-	background-image: url(../img/arrow_up_blanco.png);
+	background-image: url(../img/arrow_up_naranja.png);
 }
 .ac-container input{
 	border-radius: 15px;

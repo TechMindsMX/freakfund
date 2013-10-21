@@ -50,7 +50,7 @@ foreach ($proyectos as $key => $value) {
 function moreProData($value, $datosgenerales) {
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		JTrama::getEditUrl($value);
-		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" />';
+		$value->imgAvatar = '<img src="http://192.168.0.122/' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" class="table-cartera"/>';
 		$value->investmentValue = 1000;
 		$value->roi = $value->investmentValue * ($value->tri / 100);
 		if ( $value->status  == 5 || $value->status == 6 ) {
@@ -66,23 +66,23 @@ function moreProData($value, $datosgenerales) {
 function htmlInversionActual($value, $datosgenerales) {
 	moreProData($value, $datosgenerales);
 	$htmlInversionActual = '<tr>
-							<td><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-							<td><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
-							<td>' . $value->fundEndDate . '</td>
-							<td><span class="number">' . $value->breakeven . '</span></td>
-							<td>' . $value->porcentajeRecaudado . ' %</td>
-							<td><span class="number">' . $value->investmentValue . '</span></td>
+							<td class="middle-td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+							<td class="middle-td-titulo"><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
+							<td class="middle-td">' . $value->fundEndDate . '</td>
+							<td class="middle-td"><span class="number">' . $value->breakeven . '</span></td>
+							<td class="middle-td">' . $value->porcentajeRecaudado . ' %</td>
+							<td class="middle-td"><span class="number">' . $value->investmentValue . '</span></td>
 								</tr>';
 	return $htmlInversionActual;
 }
 function htmlFinanActual($value, $datosgenerales){
 	moreProData($value, $datosgenerales);
 	$htmlFinanActual = '<tr>
-						<td><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-						<td><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
-						<td><span class="number">' . $value->investmentValue . '</span></td>
-						<td><span class="number">' . $value->roi . '</span></td>
-						<td>' . $value->tri . ' %</td>
+						<td class="middle-td"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+						<td class="middle-td"><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
+						<td class="middle-td"><span class="number">' . $value->investmentValue . '</span></td>
+						<td class="middle-td"><span class="number">' . $value->roi . '</span></td>
+						<td class="middle-td">' . $value->tri . ' %</td>
 						</tr>';
 	return $htmlFinanActual;
 }
@@ -93,7 +93,6 @@ function htmlFinanActual($value, $datosgenerales){
 		jQuery('span.number').number( true, 2, ',','.' );
 	});
 </script>
-
 <div class="contenedor-cartera">
 		<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 	
@@ -163,11 +162,11 @@ function htmlFinanActual($value, $datosgenerales){
 				<article class="ac-medium">
 					<table class="table table-striped cartera" >
 						<tr>
-							<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-							<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
-							<th><?php echo JText::_('BREAKEVEN'); ?></th>
-							<th><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
-							<th><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
+							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('BREAKEVEN'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
 						</tr>
 						<?php
 							echo $htmlInversionActual;

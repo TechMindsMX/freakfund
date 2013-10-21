@@ -83,3 +83,24 @@
 .contenedor-cartera {
 	padding: 10px 50px 0px;
 }
+.table-cartera {
+	border-radius: 50%;
+}
+.middle-td {
+	vertical-align: middle !important;
+	text-align: center !important;
+}
+.middle-td-img {
+	vertical-align: middle !important;
+	text-align: right !important;
+}
+.middle-td-titulo {
+	vertical-align: middle !important;
+	text-align: left !important;
+}
+.th-center-cartera {
+	text-align: center !important;
+	color: #2C9AD9 !important;
+	font-weight: bold;
+}
+
