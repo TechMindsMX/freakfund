@@ -65,23 +65,23 @@ function moreProData($value, $datosgenerales) {
 
 function htmlInversionActual($value, $datosgenerales) {
 	moreProData($value, $datosgenerales);
-	$htmlInversionActual = '<tr>
-							<td class="middle-td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-							<td class="middle-td-titulo"><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
-							<td class="middle-td">' . $value->fundEndDate . '</td>
-							<td class="middle-td"><span class="number">' . $value->breakeven . '</span></td>
-							<td class="middle-td">' . $value->porcentajeRecaudado . ' %</td>
-							<td class="middle-td"><span class="number">' . $value->investmentValue . '</span></td>
+	$htmlInversionActual = '<tr class="middle-td">
+							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+							<td>' . $value->fundEndDate . '</td>
+							<td>$<span class="number">' . $value->breakeven . '</span></td>
+							<td>' . $value->porcentajeRecaudado . ' %</td>
+							<td>$<span class="number">' . $value->investmentValue . '</span></td>
 								</tr>';
 	return $htmlInversionActual;
 }
 function htmlFinanActual($value, $datosgenerales){
 	moreProData($value, $datosgenerales);
-	$htmlFinanActual = '<tr>
-						<td class="middle-td"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-						<td class="middle-td"><a href="' . $value->viewUrl . '" >' . $value->name . '</a></td>
-						<td class="middle-td"><span class="number">' . $value->investmentValue . '</span></td>
-						<td class="middle-td"><span class="number">' . $value->roi . '</span></td>
+	$htmlFinanActual = '<tr class="middle-td">
+						<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+						<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+						<td class="middle-td">$<span class="number">' . $value->investmentValue . '</span></td>
+						<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
 						<td class="middle-td">' . $value->tri . ' %</td>
 						</tr>';
 	return $htmlFinanActual;
@@ -179,12 +179,12 @@ function htmlFinanActual($value, $datosgenerales){
 				<input id="ac-3a" name="accordion-2" type="radio" />
 				<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
 				<article class="ac-large">
-					<table class="table-striped cartera"">
+					<table class="table table-striped cartera">
 						<tr>
-							<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-							<th><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
-							<th><?php echo JText::_('ESCRIT_ROI'); ?></th>
-							<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
+							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_ROI'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_TRI'); ?></th>
 						</tr>
 						<?php
 							echo $htmlFinanActual;

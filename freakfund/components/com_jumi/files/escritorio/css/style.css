@@ -64,7 +64,7 @@ div.bussines-card{
 	border-radius: 15px;
 }
 .ac-container label {
-	background: #73CEE4;
+	background: #99CCFF;
 	padding: 5px 20px;
 	position: relative;
 	z-index: 20;
@@ -108,7 +108,7 @@ div.bussines-card{
 }
 .ac-container input:checked + label,
 .ac-container input:checked + label:hover{
-	background: #73CEE4;
+	background: #99CCFF;
     color: #606060;
     font-family: 'BarnaBold',Geneva,Verdana,Helvetica,Arial,sans-serif;
     font-weight: normal;
@@ -116,7 +116,7 @@ div.bussines-card{
 }
 .ac-container-color2 input:checked + label,
 .ac-container-color2 input:checked + label:hover{
-	background: #73CEE4;
+	background: #99CCFF;
     color: #606060;
     font-family: 'BarnaBold',Geneva,Verdana,Helvetica,Arial,sans-serif;
     font-weight: normal;
