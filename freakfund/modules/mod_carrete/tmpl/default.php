@@ -51,14 +51,16 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
   	switch ($params->get('tipodepro')) {
 		case 'cerrar':
 	 		foreach ($datos as $key => $value) {
+	 			$value->porcentajeRecaudado = 30;
 				echo '<li>
 	    				<div class="contenedor">
 	    					<div class="avatar" style="background:url(\''.AVATAR.'/'.$value->projectAvatar->name.'\'); background-size: 100%;">
 	    					</div>
 	    					<div class="info-proyecto" >
-								<div><h3>'.$value->name.'</h3></div>
+								<div><h2>'.$value->name.'</h2></div>
 								<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
 								<span>'.$value->subcategoryName.'</span><br />
+								<div class="barra" style="width: '.$value->porcentajeRecaudado.'% "></div>
 								<span>'.$value->status.'</span><br />
 								<span>'.JText::_('LABEL_RECAUDADO').' '.$value->balance.'</span><br />
 								<span>'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</span><br />
@@ -80,12 +82,26 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 	    					<span class="mask"></span>
 	    					</div>
 	    					<div class="info-proyecto" >
-								<div><h3>'.$value->name.'</h3></div>
-								<span>'.JText::_('CATEGORIA').' '.$value->categoryName.'</span> - 
-								<span>'.$value->subcategoryName.'</span><br />
-								<span>'.$value->status.'</span><br />
-								<span>'.JText::_('LABEL_ROI').' '.$value->ROI.'%</span><br />
-								<span>'.JText::_('LABEL_ROF').' '.$value->ROF.'%</span><br />
+								<div class="titulo">
+								<a href="'.$url.$value->id.'">
+								<h2>'.$value->name.'</h2>
+								</a>
+								</div>
+								<div class="cat">
+								<span>'.$value->categoryName.'</span> - 
+								<span>'.$value->subcategoryName.'<span>'.$value->status.'</span></span>
+								</div>
+								<div class="datos">
+								<div class="two-cols first">
+								<div class="big">'.$value->ROI.'%</div>
+								<div class="small">'.JText::_('LABEL_ROI').'</div>
+								</div>
+								<div class="two-cols second">
+								<div class="big">'.$value->ROF.'%</div>
+								<div class="small">'.JText::_('LABEL_ROF').'</div>
+								</div>
+								<div class="clearfix"></div>
+								</div>
 								<div class="boton-wrap">
 									<a class="button btn-invertir" href="'.$url.$value->id.'">
 										'.JText::_('INVERTIR_PROYECTO').'</a>

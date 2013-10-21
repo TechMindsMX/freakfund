@@ -23,4 +23,9 @@
 }
 .info-proyecto .boton-wrap {
 	text-align:right;
+	margin-top: 10px;
+}
+.info-proyecto .titulo {
+	height: 56px;
+	margin: 10px 0;
 }
