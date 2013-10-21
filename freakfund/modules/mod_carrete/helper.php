@@ -16,7 +16,6 @@ class modCarreteHelper
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
 				$datos[] = JTrama::fundPercentage($value);
-				$value = JTrama::dateDiff ($value->fundEndDate, $value);
 			}
 			$datos = modCarreteHelper::getCatNames($datos);
 		}
@@ -35,6 +34,7 @@ class modCarreteHelper
 				if (in_array($value->status, $status)) {
 					$dataFilterStatus[] = $value;
 				}
+				$value = JTrama::dateDiff ($value->fundEndDate, $value);
 			}
 			$datos = array_splice($dataFilterStatus, 0, $cantidad);
 			$datos = modCarreteHelper::getCatNames($datos);
