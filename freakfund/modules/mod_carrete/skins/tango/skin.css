@@ -286,6 +286,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33ffff', end
     position: absolute;
     right: 0px;
     top: 0px;
+    height:30px;
     width: 25%;
     border-left: 3px solid #fff;
     background: #9cf;
