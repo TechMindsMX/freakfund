@@ -28,3 +28,58 @@
 #movimientos {
 	margin-right: 3%;
 }
+
+.cartera-seccion-1 {
+	margin-left:4px;
+	margin-top: 40px;
+}
+.bordesH3 {
+	border-top: 2px solid #009999;
+	border-right: 2px solid #009999;
+	margin-left: -3px;
+}
+.bordesH3-centradas {
+	border-top: 2px solid #009999;
+	border-right: 2px solid #009999;
+	margin-left: -3px;
+}
+.cartera-h3 {
+	margin-left:20px;
+}
+.bordesH3-fin {
+	border-top: 2px solid #009999;
+	margin-left: -3px;
+	width: 114% !important;
+}
+.label-cartera-inicio {
+	color:#009ED3; 
+	font-weight: bold;
+}
+.label-cartera {
+	color:#009ED3; 
+	font-weight: bold;
+	margin-left: 15px;
+}
+.cartera-titulo-pleca {
+	color: #000000;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.label-compras {
+	color:#009ED3;
+	width: 20% !important; 
+}
+.hr-cartera {
+	border-color: #009999;
+	margin-bottom: 40px;
+	margin-top: -5px;
+}
+.cartera-buttons {
+	text-align:center;
+	margin-top:35px;
+	margin-bottom:35px;
+}
+.contenedor-cartera {
+	padding: 10px 50px 0px;
+}

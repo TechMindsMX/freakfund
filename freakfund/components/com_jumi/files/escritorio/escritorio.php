@@ -23,7 +23,7 @@ jimport("trama.jsocial");
 require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
 
 $doc->addScript( 'libraries/trama/js/jquery.number.min.js' );
-$doc->addStyleSheet($base . 'components/com_jumi/files/perfil_usuario/css/style.css');
+$doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
 $objuserdata = new UserData;
@@ -34,7 +34,7 @@ if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
-$datosgenerales->userBalance = $objuserdata->getUserBalance($usuario->email)->balance;
+$datosgenerales->userBalance = $objuserdata->getUserBalance($usuario->id)->balance;
 $promedio = $objuserdata->scoreUser($userid);
 
 $proyectos = JTrama::allProjects();
@@ -93,81 +93,110 @@ function htmlFinanActual($value, $datosgenerales){
 		jQuery('span.number').number( true, 2, ',','.' );
 	});
 </script>
-<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 
-<div class="infodiv">
-	<span><label><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->actualFundings; ?></span></h3>
-	</span>
-	<br />
-	<span><label><?php echo JText::_('SALDO_FF'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->userBalance; ?></span></h3>
-	</span>
-	<span><label><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->actualInvestments; ?></span></h3>
-	</span>
-	<span><label><?php echo JText::_('ESCRIT_TOTAL_ROI'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->sumRoi; ?></span></h3>
-	</span>
-	<span><label><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
-		<h3><span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
-	</span>
-</div>
-
-<div id="movimientos" class="rt-block box5">
-	<div class="rt-inner">
-	<h3><?php echo JText::_('ESCRIT_MOVIMIENTOS'); ?></h3>
-	<a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
-	<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_ABONO_PAYPAL'); ?></a>
-	<a class="button" href="<?php echo $jumiurl; ?>29"><?php echo JText::_('ESCRIT_TRASPASO'); ?></a>
-	<a class="button" href="<?php echo $jumiurl; ?>30"><?php echo JText::_('ESCRIT_ESTADO_CUENTA'); ?></a>
-	<a class="button" href="<?php echo $jumiurl; ?>31"><?php echo JText::_('ESCRIT_REDIMIR'); ?></a>
+<div class="contenedor-cartera">
+		<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
+	
+	<div class="infodiv">
+		<div class="module-title">
+			<h2 class="title"><?php echo JText::_('ESCRIT_CARTERA'); ?></<h2>
+		</div>
+		<div class="cartera-seccion-1">
+			<span>
+				<label class="label-cartera-inicio"><?php echo JText::_('SALDO_FF'); ?></label>
+				<div class="bordesH3">
+					<h3>$<span class="number"><?php echo $datosgenerales->userBalance; ?></span></h3>
+				</div>
+			</span>
+			<span>
+				<label class="label-cartera"><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
+				<div class="bordesH3-centradas">
+					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->actualInvestments; ?></span></h3>
+				</div>
+			</span>
+			<span>
+				<label class="label-cartera"><?php echo JText::_('ESCRIT_TOTAL_ROI'); ?></label>
+				<div class="bordesH3-centradas">
+					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></h3>
+				</div>
+			</span>
+			<span>
+				<label class="label-cartera"><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
+				<div class="bordesH3-fin">
+					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
+				</div>
+			</span>
+		</div>
+		
+		
+		<div class="module-title">
+			<h2 class="title"><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></h2>
+		</div>
+		
+		<div class="cartera-seccion-1">
+			<h3>
+				<span class="label-compras"><?php echo JText::_('ESCRIT_ACTUAL_FUNDING'); ?></span>
+				$<span class="number"><?php echo $datosgenerales->actualFundings; ?></span>
+			</h3>
+		</div>
+		<hr class="hr-cartera">
+	
+		<div class="module-title">
+			<h2 class="title"><?php echo JText::_('ESCRIT_MOVIMIENTOS'); ?></h2>
+		</div>
+		<div class="cartera-buttons">
+			<a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
+			<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_ABONO_PAYPAL'); ?></a>
+			<a class="button" href="<?php echo $jumiurl; ?>29"><?php echo JText::_('ESCRIT_TRASPASO'); ?></a>
+			<a class="button" href="<?php echo $jumiurl; ?>30"><?php echo JText::_('ESCRIT_ESTADO_CUENTA'); ?></a>
+			<a class="button" href="<?php echo $jumiurl; ?>31"><?php echo JText::_('ESCRIT_REDIMIR'); ?></a>
+		</div>
 	</div>
-</div>
-
-<script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
-    
-<div id="contenido">
-	<section class="ac-container" style="max-width: 100%;">
-		<div>
-			<input id="ac-2a" name="accordion-2" type="radio" checked />
-			<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
-			<article class="ac-medium">
-				<table class="table table-striped cartera" >
-					<tr>
-						<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-						<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
-						<th><?php echo JText::_('BREAKEVEN'); ?></th>
-						<th><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
-						<th><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
-					</tr>
-					<?php
-						echo $htmlInversionActual;
-					?>							
-				</table>
-			</article>
-		</div>
-		
-		<div>
-			<input id="ac-3a" name="accordion-2" type="radio" />
-			<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
-			<article class="ac-large">
-				<table class="table-striped cartera"">
-					<tr>
-						<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-						<th><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
-						<th><?php echo JText::_('ESCRIT_ROI'); ?></th>
-						<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
-					</tr>
-					<?php
-						echo $htmlFinanActual;
-					?>	
-				</table>
-			</article>
-		</div>
-		
-	</section>
-<div style="clear: both"></div>
+	
+	<script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
+	    
+	<div id="contenido" style="margin-top: 15px;">
+		<section class="ac-container" style="max-width: 100%;">
+			<div>
+				<input id="ac-2a" name="accordion-2" type="radio" checked />
+				<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
+				<article class="ac-medium">
+					<table class="table table-striped cartera" >
+						<tr>
+							<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+							<th><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
+							<th><?php echo JText::_('BREAKEVEN'); ?></th>
+							<th><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
+							<th><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
+						</tr>
+						<?php
+							echo $htmlInversionActual;
+						?>							
+					</table>
+				</article>
+			</div>
+			
+			<div>
+				<input id="ac-3a" name="accordion-2" type="radio" />
+				<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
+				<article class="ac-large">
+					<table class="table-striped cartera"">
+						<tr>
+							<th colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+							<th><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
+							<th><?php echo JText::_('ESCRIT_ROI'); ?></th>
+							<th><?php echo JText::_('ESCRIT_TRI'); ?></th>
+						</tr>
+						<?php
+							echo $htmlFinanActual;
+						?>	
+					</table>
+				</article>
+			</div>
+			
+		</section>
+	<div style="clear: both"></div>
+	</div>
 </div>
    
       
