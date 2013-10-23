@@ -113,8 +113,20 @@ class UserData {
 		
 		return $results[0];
 	}
-
-
+	
+	public static function getUserMiddlewareId($userId) {
+		$db = JFactory::getDBO();
+		
+		$query = $db->getQuery(true);
+		$query->select('idJoomla, idMiddleware');
+		$query->from($db->quoteName('#__users_middleware'));
+		$query->where('idJoomla = '.$userId);
+		
+		$db->setQuery( $query );
+		$id = $db->loadObject();
+		
+		return $id;
+	}
 }
 
 ?>
