@@ -38,6 +38,7 @@ class procesamiento extends manejoImagenes {
 				$data = $generales;
 				$data['Foto'] = $this->cargar_imagen($usuario->id, 400, 300, $_POST['daGr_Foto_guardada']);
 				$data['users_id'] = $usuario->id;
+				$data['perfil_tipoContacto_idtipoContacto'] = 1;
 				$data['existe'] = $getDatosGuardados->existingUser($usuario->id);
 				break;
 			case 'perfil_datosfiscales':

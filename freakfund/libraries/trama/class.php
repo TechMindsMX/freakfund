@@ -382,6 +382,5 @@ class JTrama
 
 		$obj->dateDiff = date_diff($fecha1,$fecha2);
 	}
-	
 }
 ?>

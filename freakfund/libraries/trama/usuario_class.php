@@ -100,7 +100,7 @@ class UserData {
 		}
 	}
 	
-	public function scoreUser ($userid) {
+	public static function scoreUser ($userid) {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true); 
 		
@@ -112,6 +112,21 @@ class UserData {
 		$results = $db->loadObjectList();
 		
 		return $results[0];
+	}
+	
+	public function getUserBalance ( $userid ) {
+	
+		if( isset($userid) ) {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
+			$json = @file_get_contents($url);
+			$respuesta = json_decode($json);
+				
+		} else {
+	
+			$respuesta = null;
+		}
+	
+		return $respuesta;
 	}
 	
 	public static function getUserMiddlewareId($userId) {
