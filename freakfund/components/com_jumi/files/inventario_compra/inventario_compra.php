@@ -11,17 +11,25 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
+jimport("trama.usuario_class");
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token = JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
+
+$idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
+
+
 $proyid			= $input->get("proyid",0,"int");
 $pro			= JTrama::getDatos($proyid);
 $datosUsuario	= JTrama::getUserBalance($usuario->email);
 
+var_dump($idMiddleware->idMiddleware);
+var_dump($pro->projectUnitSales);
 //definicion de campos del formulario
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/';
+//$action = MIDDLE.PUERTO.'/trama-middleware/rest/';
+$action="/components/com_jumi/files/inventario_compra/post.php";
 ?>
 
 <script>
@@ -59,6 +67,8 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 <h1><?php echo JText::_('INVENTARIO_COMPRA');  ?></h1>
 <div>
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
+		<input type="hidden" name="userId" id="userId" value="<?php echo $idMiddleware->idMiddleware; ?>" />
+		<input type="hidden" name="productId" id="productId" value="<?php echo $pro->id; ?>" />
 	
 		<?php 	
 		if ($datosUsuario->balance == null ){
@@ -85,7 +95,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/';
 		echo '<div>'.JText::_('TOTAL_PAGAR').':<span id="resultadoglobal"></span></div>';
 		?>
 		<div style="margin: 10px;">
-		<input type="button" class="button" value="Invertir" />
+		<input type="submit" class="button" value="Invertir" />
 		</div>
 		<div><input type="button" class="button" value="Cancelar" onclick="history.go(-1);" /> </div>
 	</form>
