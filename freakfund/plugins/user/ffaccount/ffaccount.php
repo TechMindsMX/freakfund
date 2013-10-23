@@ -3,7 +3,6 @@
 defined('_JEXEC') or die;
 
 jimport('trama.class');
-
 class plgUserFFAccount extends JPlugin
 {
 
@@ -12,8 +11,8 @@ class plgUserFFAccount extends JPlugin
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 		
-		$this->url = 'http://localhost/post.php'; // SIMULADO DEBE CAMBIAR POR SERVICIO
-		// $this->token = JTrama::token();
+		$this->url = MIDDLE.PUERTO.'/trama-middleware/rest/user/saveUser';
+		$this->token = JTrama::token();
 	}
 
 	function onUserAfterSave($user, $isnew, $success, $msg)
@@ -40,29 +39,33 @@ class plgUserFFAccount extends JPlugin
 		$id = $db->loadResult();
 
 		// chequea que el usuario este activado y no este bloqueado y envia al middleware
-		$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($id) : "blocked"; 
-
-		if ($respuesta == 'existe') {
-			$mensaje = 'PLG_FFACCOUNT_ALREADY_CREATED';
-			$type = 'notice';
-		} elseif ($respuesta == 'blocked' ) {
-			$mensaje = 'PLG_FFACCOUNT_ERR_BLOCKED';
-			$type = 'message';
-		} elseif ($respuesta == 'true' ) {
-			$mensaje = 'PLG_FFACCOUNT_SUCCESS';
-			$type = 'message';
-		} else {
-			$mensaje = 'PLG_FFACCOUNT_ERR_FAILED';
-			$type = 'error';
+		$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($user['email']) : "blocked"; 
+		
+		if( $isnew ){
+			$this->saveUserMiddle(json_decode($respuesta),$user);
 		}
-		JFactory::getApplication()->enqueueMessage(JText::sprintf($mensaje), $type);
 	}
-	function sendToMiddle ($id) {
+
+	function saveUserMiddle($idMiddle, $user){
+		$values = $idMiddle->id.','.$user['id'];
 		
-		$data =   array('user_id' => $id, 
-						// 'token' => $this->token
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query
+			->insert($db->quoteName('#__users_middleware'))
+			->columns('idMiddleware, idJoomla')
+			->values($values);
+		
+		$db->setQuery( $query );
+		$db->query();
+	}
+	
+	function sendToMiddle ($email) {
+		
+		$data =   array('email' => $email, 
+						'token' => $this->token
 				  );
-		
+				  
 		$ch = curl_init();
 		
 		curl_setopt($ch, CURLOPT_URL,$this->url);
@@ -75,7 +78,7 @@ class plgUserFFAccount extends JPlugin
 		$server_output = curl_exec ($ch);
 		
 		curl_close ($ch);
-// echo $server_output;exit;		
+ //echo $server_output;exit;		
 		return $server_output;
 
 	}
