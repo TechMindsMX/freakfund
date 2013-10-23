@@ -41,9 +41,7 @@ class plgUserFFAccount extends JPlugin
 		// chequea que el usuario este activado y no este bloqueado y envia al middleware
 		$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($user['email']) : "blocked"; 
 		
-		if( $isnew ){
-			$this->saveUserMiddle(json_decode($respuesta),$user);
-		}
+		$this->saveUserMiddle(json_decode($respuesta),$user);
 	}
 
 	function saveUserMiddle($idMiddle, $user){
@@ -52,12 +50,24 @@ class plgUserFFAccount extends JPlugin
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
-			->insert($db->quoteName('#__users_middleware'))
-			->columns('idMiddleware, idJoomla')
-			->values($values);
-		
+			->select('idJoomla')
+			->from($db->quoteName('#__users_middleware'))
+			->where('idJoomla = '.$user['id']);
+
 		$db->setQuery( $query );
-		$db->query();
+		$existe = $db->loadObject();
+		
+		if(is_null($existe)){
+			$db =& JFactory::getDBO();
+			$query = $db->getQuery(true);
+			$query
+				->insert($db->quoteName('#__users_middleware'))
+				->columns('idMiddleware, idJoomla')
+				->values($values);
+	
+			$db->setQuery( $query );
+			$db->query();
+		}
 	}
 	
 	function sendToMiddle ($email) {
@@ -65,7 +75,7 @@ class plgUserFFAccount extends JPlugin
 		$data =   array('email' => $email, 
 						'token' => $this->token
 				  );
-				  
+				  		  
 		$ch = curl_init();
 		
 		curl_setopt($ch, CURLOPT_URL,$this->url);
@@ -78,7 +88,7 @@ class plgUserFFAccount extends JPlugin
 		$server_output = curl_exec ($ch);
 		
 		curl_close ($ch);
- //echo $server_output;exit;		
+		
 		return $server_output;
 
 	}
