@@ -267,17 +267,22 @@ box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
 z-index: 1000;
 }
 .busq{
-  background-color: #009999;
-  height: 36px;
-  background-color: #009999;
-  box-shadow: 2px 4px 13px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 2px 4px 13px rgba(0,0,0,0.5);
-  -moz-box-shadow: 2px 4px 13px rgba(0,0,0,0.5);
+  height: 36px;  
   padding-left: 10px;
   border-style: solid;
   border-width: 0 2px;
+  position: absolute;
+  left: 405px;
 }
 #rt-mainbody-surround #rt-mainbody {
   border-radius: 15px;
   box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.5);
+}
+.separada{
+  margin-right:320px !important;
+}
+@media screen and (max-width : 799px) {
+  .busq{
+   left: 10px;
+}
 }
