@@ -11,13 +11,16 @@ if ($usuario->guest == 1) {
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
 jimport('trama.class');
+jimport('trama.usuario_class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
-$datosUsuario	= JTrama::getUserBalance($usuario->email);
+$idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
+$datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $action 		= '#';
+
 echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
 ?>
 
@@ -31,12 +34,9 @@ echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>'
 <div>
 	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">
 	
-		<?php 	
-		if ($datosUsuario->balance == null ){
-			$saldo= "0";
-		}else{
-			$saldo= $datosUsuario->balance;
-		}
+		<?php
+		$saldo = $datosUsuario->balance == null ? 0 : $datosUsuario->balance;
+		
 		echo '<div>'.JText::_('SALDO_FF').': $<span class="number">'. $saldo .'</span></div>';
 		$campo = '<label>'.JText::_('CANTIDAD_TRANSFERENCIA').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /> ';
 		

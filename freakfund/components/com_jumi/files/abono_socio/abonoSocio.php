@@ -9,17 +9,19 @@ if ($usuario->guest == 1) {
 }
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
+jimport('trama.usuario_class');
 
 $token 				= JTrama::token();
 $base 				= JUri::base();
 $usuario 			= JFactory::getUser();
 $document 			= JFactory::getDocument();
 $app 				= JFactory::getApplication();
+$idMiddleware		= UserData::getUserMiddlewareId($usuario->id);
 $callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32';
 $errorCallback 		= $base.'index.php?option=com_jumi&view=application&fileid=32';
 $pathJumi 			= $base.'components/com_jumi/files/classIncludes/';
 $accion				= MIDDLE.PUERTO.'/trama-middleware/rest/paypal/payment';
-$usuario->balance 	= JTrama::getUserBalance($usuario->id)->balance;
+$usuario->balance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $jinput 			= $app->input;
 $amount 			= $jinput->get('amount', '', 'INT');
 $balance 			= $jinput->get('balance', '', 'INT');
@@ -113,7 +115,7 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 		<input type="hidden" name="callback" id="callback" value="<?php echo $callback; ?>" />
 		<input type="hidden" name="errorCallback" id="errorCallback" value="<?php echo $errorCallback; ?>" />
 		<input type="hidden" name="token" id="token" value="<?php echo $token; ?>" />
-		<input type="hidden" name="email" id="email" value="<?php echo $usuario->email; ?>" />
+		<input type="hidden" name="userId" id="userId" value="<?php echo $idMiddleware->idMiddleware; ?>" />
 	</div>
 	<div>
 		<label for="amount"><?php echo JText::_('MONTO'); ?></label>

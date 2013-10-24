@@ -1,7 +1,8 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die("Direct Access Is Not Allowed");
 $usuario = JFactory::getUser();
-
+$app 	 = JFactory::getApplication();
+$doc 	 = JFactory::getDocument();
 if ($usuario->guest == 1) {
 	$return = JURI::getInstance()->toString();
 	$url = 'index.php?option=com_users&view=login';
@@ -13,8 +14,7 @@ jimport("trama.class");
 jimport("trama.jsocial");
 jimport("trama.usuario_class");
 
-$app 							= JFactory::getApplication();
-$doc 							= JFactory::getDocument();
+
 $base 							= JUri::base();
 $input 							= $app->input;
 $jumiurl		 				= 'index.php?option=com_jumi&view=application&fileid=';
@@ -23,7 +23,7 @@ $htmlFinanActual		 		= '';
 $count 							= 0;
 $idMiddleware					= UserData::getUserMiddlewareId($usuario->id);
 $datosgenerales 				= UserData::datosGr($idMiddleware->idJoomla);
-$datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idJoomla)->balance;
+$datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 

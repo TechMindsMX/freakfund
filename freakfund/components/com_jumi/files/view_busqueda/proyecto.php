@@ -65,7 +65,11 @@ $json = json_decode(prodProy($busquedaPor[$tipoPP], $params));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 jimport('trama.class');
+jimport('trama.usuario_class');
+
 foreach ($json as $key => $value) {
+	var_dump(UserData::getUserJoomlaId($value->userId));
+	
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer = JTrama::getProducerProfile($value->userId);

@@ -114,7 +114,7 @@ class UserData {
 		return $results[0];
 	}
 	
-	public function getUserBalance ( $userid ) {
+	public static function getUserBalance ( $userid ) {
 	
 		if( isset($userid) ) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
@@ -139,6 +139,23 @@ class UserData {
 		
 		$db->setQuery( $query );
 		$id = $db->loadObject();
+		
+		return $id;
+	}
+	
+	public static function getUserJoomlaId($userId) {
+		$db = JFactory::getDBO();
+		
+		$query = $db->getQuery(true);
+		$query->select('idJoomla');
+		$query->from($db->quoteName('#__users_middleware'));
+		$query->where('idMiddleware = '.$userId);
+		echo $query;
+		
+		$db->setQuery( $query );
+		$id = $db->loadResult();
+
+		exit;
 		
 		return $id;
 	}

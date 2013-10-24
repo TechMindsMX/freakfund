@@ -38,10 +38,12 @@ class plgUserFFAccount extends JPlugin
 		$db->setQuery( $query );
 		$id = $db->loadResult();
 
-		// chequea que el usuario este activado y no este bloqueado y envia al middleware
-		$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($user['email']) : "blocked"; 
-		
-		$this->saveUserMiddle(json_decode($respuesta),$user);
+		if($isnew) {
+			// chequea que el usuario este activado y no este bloqueado y envia al middleware
+			$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($user['email']) : "blocked"; 
+			
+			$this->saveUserMiddle(json_decode($respuesta),$user);
+		}
 	}
 
 	function saveUserMiddle($idMiddle, $user){
@@ -50,24 +52,12 @@ class plgUserFFAccount extends JPlugin
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query
-			->select('idJoomla')
-			->from($db->quoteName('#__users_middleware'))
-			->where('idJoomla = '.$user['id']);
+			->insert($db->quoteName('#__users_middleware'))
+			->columns('idMiddleware, idJoomla')
+			->values($values);
 
 		$db->setQuery( $query );
-		$existe = $db->loadObject();
-		
-		if(is_null($existe)){
-			$db =& JFactory::getDBO();
-			$query = $db->getQuery(true);
-			$query
-				->insert($db->quoteName('#__users_middleware'))
-				->columns('idMiddleware, idJoomla')
-				->values($values);
-	
-			$db->setQuery( $query );
-			$db->query();
-		}
+		$db->query();
 	}
 	
 	function sendToMiddle ($email) {

@@ -11,11 +11,13 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
+jimport('trama.usuario_class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
-$datosUsuario 	= JTrama::getUserBalance($usuario->email);
+$idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
+$datosUsuario 	= UserData::getUserBalance($idMiddleware->idMiddleware);
 
 //definicion de campos del formulario
 $action = '#';
@@ -95,7 +97,7 @@ echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>'
 		<table class='table table-striped' id="datos_usuario">
 			<tr>
 				<td><?php echo JText::_('SOCIO');?></td>
-				<td><?php echo $usuario->name;?></td>
+				<td><?php echo JFactory::getUser($idMiddleware->idJoomla)->name;?></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO');?></td>
