@@ -197,18 +197,6 @@
 	display: block;
 	margin-bottom: 1em;
 }
-.jcarousel-list li:nth-child(4n+1) .mask {
-	background-image: url('mask-topright.png');
-}
-.jcarousel-list li:nth-child(4n+2) .mask {
-	background-image: url('mask-bottomright.png');
-}
-.jcarousel-list li:nth-child(4n+3) .mask {
-	background-image: url('mask-bottomleft.png');
-}
-.jcarousel-list li:nth-child(4n+4) .mask {
-	background-image: url('mask-topleft.png');
-}
 .big,
 .info-proyecto h2 {
 	color:#009ed3 !important;
