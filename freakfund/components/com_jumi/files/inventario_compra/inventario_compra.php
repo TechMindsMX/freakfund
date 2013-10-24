@@ -63,14 +63,13 @@ $action="/post.php";
 		<input type="hidden" name="productId" id="productId" value="<?php echo $pro->id; ?>" />
 	
 		<?php
-		var_dump($pro->projectUnitSales);
-		
 		$saldo = $datosUsuario->balance == null ? 0: $datosUsuario->balance;
 		
-		$campo = '<label>'.JText::_('CANTIDAD_COMPRAR').':</label><input class="input_compra" type="text" id="cantidad"	name="compra[]" /> ';
-		
 		foreach ($pro->projectUnitSales as $key => $value){
-	
+
+		$campo = '<label>'.JText::_('CANTIDAD_COMPRAR').':
+			</label><input class="input_compra" type="text" id="cantidad"	name="'.$value->id.'" /> ';
+
 			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';			
 			echo '<div>'.JText::_('PRECIO_UNIDAD').': '. $value ->unitSale.'</div>';
 			echo '<div>'.JText::_('INVENTARIOPP').': '. $value ->unit .'</div>';
