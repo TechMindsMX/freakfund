@@ -17,19 +17,12 @@ jimport("trama.usuario_class");
 $token = JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
-
 $idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
-
-
 $proyid			= $input->get("proyid",0,"int");
 $pro			= JTrama::getDatos($proyid);
-$datosUsuario	= JTrama::getUserBalance($usuario->email);
+$datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 
-var_dump($idMiddleware->idMiddleware);
-var_dump($pro->projectUnitSales);
-//definicion de campos del formulario
-//$action = MIDDLE.PUERTO.'/trama-middleware/rest/';
-$action="/components/com_jumi/files/inventario_compra/post.php";
+$action="/post.php";
 ?>
 
 <script>
@@ -60,8 +53,7 @@ $action="/components/com_jumi/files/inventario_compra/post.php";
 				});
 				
 			}
-			});	
-		
+		});	
 	});
 </script>
 <h1><?php echo JText::_('INVENTARIO_COMPRA');  ?></h1>
@@ -70,22 +62,19 @@ $action="/components/com_jumi/files/inventario_compra/post.php";
 		<input type="hidden" name="userId" id="userId" value="<?php echo $idMiddleware->idMiddleware; ?>" />
 		<input type="hidden" name="productId" id="productId" value="<?php echo $pro->id; ?>" />
 	
-		<?php 	
-		if ($datosUsuario->balance == null ){
-			$saldo= "0";
-		}else{
-			$saldo= $datosUsuario->balance;
-		}
+		<?php
+		var_dump($pro->projectUnitSales);
 		
-		$campo = '<label>'.JText::_('CANTIDAD_COMPRAR').':</label><input class="input_compra" type="text" id="cantidad"	name="compra" /> ';
+		$saldo = $datosUsuario->balance == null ? 0: $datosUsuario->balance;
+		
+		$campo = '<label>'.JText::_('CANTIDAD_COMPRAR').':</label><input class="input_compra" type="text" id="cantidad"	name="compra[]" /> ';
 		
 		foreach ($pro->projectUnitSales as $key => $value){
 	
 			echo '<div>'.JText::_('SECCION').':'. $value ->section .'</div>';			
-			echo '<div>'.JText::_('PRECIO_UNIDAD').':'. $value ->unitSale.'</div>';
-			echo '<div>'.JText::_('INVENTARIOPP').':'. $value ->unit .'</div>';
-			echo '<input type="hidden" value="'.$value ->unit.'"/>';
-			echo '<input type="hidden" value="'.$value ->unitSale.'"/>';
+			echo '<div>'.JText::_('PRECIO_UNIDAD').': '. $value ->unitSale.'</div>';
+			echo '<div>'.JText::_('INVENTARIOPP').': '. $value ->unit .'</div>';
+			echo '<input type="hidden" name="id[]" value="'.$value ->id.'"/>';
 			echo $campo;
 			echo '<div>'.JText::_('TOTAL_SECCION').':'.'<span id="resultados"></span></div><br /><br />';
 			
