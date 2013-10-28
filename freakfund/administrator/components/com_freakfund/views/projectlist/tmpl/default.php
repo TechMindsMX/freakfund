@@ -7,7 +7,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 $document = JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document->addScript(JURI::base().'../libraries/trama/js/jquery.number.min.js');
-$vName = $this->items[0]->vName;
+
+$vName = ( isset($this->items[0]->vName))?$this->items[0]->vName :'listproduct';
 
 JSubMenuHelper::addEntry(
 	JText::_('COM_FREAKFUND_FREAKFUND_SUBMENU_PAYMENTS'),

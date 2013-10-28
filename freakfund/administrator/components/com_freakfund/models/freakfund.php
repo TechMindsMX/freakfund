@@ -9,8 +9,10 @@ class freakfundModelfreakfund extends JModelList
         public function getDatos()
         {
         	$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/5,6'));
-			
-			$query[0]->vName = 'Payments';
+
+			if(!empty($query)) {
+				$query[0]->vName = 'Payments';
+			}
 
 			return $query;
         }

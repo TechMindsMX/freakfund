@@ -2,6 +2,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
+
 $datosSelect = $this->items[0]->statusList;
 ?>
 <tr>
