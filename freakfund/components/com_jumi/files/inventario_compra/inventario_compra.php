@@ -23,18 +23,30 @@ $pro			= JTrama::getDatos($proyid);
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $saldo 			= $datosUsuario->balance == null ? 0: $datosUsuario->balance;
 $uri 			=& JFactory::getURI();
-$callback 		= $uri->toString();
+$callback 		= $uri->toString().'&appId=27';
 
 $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/project/consumeUnits';
+// $action = '/post.php';
 
-$response		= $input->get("response",1,"int"); // RESPUESTA EXITO
+$response		= $input->get("response",0,"int"); // RESPUESTA EXITO
 $error			= $input->get("error",0,"int");
+
+echo '<script src="'.JURI::base().'libraries/trama/js/jquery.number.min.js"> </script>';
+
+?>
+<script>
+jQuery(document).ready(function(){
+	jQuery("span.number").number(true,2,',','.');
+});
+</script>
+<?php
 
 if ($error === 0 && $response === 0) {
 ?>
 
 <script>
 jQuery(document).ready(function(){
+	jQuery('#guardar').prop('disabled', true);
 	
 	jQuery(':input').change(function(){
 		var limite = parseInt(jQuery(this).prev().prev().prev().children().text());
@@ -50,6 +62,8 @@ jQuery(document).ready(function(){
 				total += parseFloat(jQuery(this).text()) || 0;
 			
 			jQuery("#resultadoglobal").text(total);
+
+			habilitarCompra();
 			});
 		}else{
 		  var val_uni = parseFloat(jQuery(this).prev().prev().prev().prev().children().text());
@@ -69,8 +83,18 @@ jQuery(document).ready(function(){
 			} else {
 				jQuery(this).attr('name', '');
 			}
+			habilitarCompra();
 		}
-	});	
+	});
+	function habilitarCompra() {
+		var total = parseFloat(jQuery('#resultadoglobal').text());
+			console.log(total);
+		if ( total > 0 && <?php echo $saldo ?> > total ) {
+			jQuery('#guardar').prop('disabled', false);
+		} else {
+			jQuery('#guardar').prop('disabled', true);
+		}
+	}
 });
 </script>
 
@@ -86,19 +110,19 @@ jQuery(document).ready(function(){
 
 			$html = '<div class="wrapper">
 					<div>'.JText::_('SECCION').':'. $value ->section .'</div>
-					<div>'.JText::_('PRECIO_UNIDAD').': <span class="valor_unidad">'. $value ->unitSale.'</span></div>
+					<div>'.JText::_('PRECIO_UNIDAD').': <span class="number valor_unidad">'. $value ->unitSale.'</span></div>
 					<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
 					<input type="hidden" value="'.$value ->id.'"/>
 					<label>'.JText::_('CANTIDAD_COMPRAR').':</label>
 					<input class="input_compra" type="text" id="'.$value->id.'" name="" />
-					<div>'.JText::_('TOTAL_SECCION').':'.'<span id="resultados"></span></div>
+					<div>'.JText::_('TOTAL_SECCION').': '.'<span class="number" id="resultados"></span></div>
 					</div>';
 			echo $html;
 		}
 
 		echo '<h3>'. $usuario->name .'</h3>';
-		echo '<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>';
-		echo '<div>'.JText::_('TOTAL_PAGAR').':<span id="resultadoglobal"></span></div>';
+		echo '<div>'.JText::_('SALDO_FF').': '. $saldo .'</div>';
+		echo '<div>'.JText::_('TOTAL_PAGAR').': <span class="number" id="resultadoglobal"></span></div>';
 		?>
 		<input type="hidden" name="callback" value="<?php echo $callback; ?>" />
 		<input type="hidden" name="token" value="<?php echo $token; ?>" />
@@ -115,12 +139,12 @@ jQuery(document).ready(function(){
 	$totalCompra = 0;
 	
 	$html = '<h2>'.$usuario->name.'</h2>
-			<div>'.JText::_('SALDO_FF').':'. $saldo .'</div>
+			<div>'.JText::_('SALDO_FF').': <span class="number">'. $saldo .'</span></div>
 			<h3>'.$pro->name.'</h3>
 			<p>'.JText::_('COMPRA_SUCCESS').'</p>
 			<h3>'.JText::_('COMPRA_SUCCESS_DETAILS').'</h3>
 			<div class="detalles_tx">
-				<span class="label">'.JText::_('COMPRA_TX_ID').'</span>'.rand(3, 100).'
+				<span class="label">'.JText::_('COMPRA_TX_ID').' : </span>'.$response.'
 				<table class="table table-stripped">
 					<tr>
 						<th>'.JText::_('SECCION').'</th>
@@ -135,18 +159,18 @@ jQuery(document).ready(function(){
 	
 	$html .=	'<tr>
 					<td>'.$value->section.'</td>
-					<td>'.$value->unitSale.'</td>
+					<td><span class="number">'.$value->unitSale.'</span></td>
 					<td>'.$cant.'</td>
-					<td>'.$subtotal.'</td>
+					<td><span class="number">'.$subtotal.'</span></td>
 				</tr>';
 	}
 	
 	$html .=	'<tr>
 					<td colspan="3" style="text-align: right;">'.JText::_('TOTAL').'</td>
-					<td><b>'.$totalCompra.'</b></td>
+					<td><b><span class="number">'.$totalCompra.'</span></b></td>
 				</tr>
 				</table>
-					<pre>SIMULADO FALTA CREAR SERVICIO</pre>
+					<pre>SIMULADO FALTA CREAR SERVICIO PARA REGRESAR DATOS DE UNA TX</pre>
 				</div>
 				';
 	echo $html;
