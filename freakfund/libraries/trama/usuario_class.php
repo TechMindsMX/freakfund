@@ -120,7 +120,7 @@ class UserData {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
 			$json = @file_get_contents($url);
 			$respuesta = json_decode($json);
-				
+
 		} else {
 	
 			$respuesta = null;
@@ -150,13 +150,10 @@ class UserData {
 		$query->select('idJoomla');
 		$query->from($db->quoteName('#__users_middleware'));
 		$query->where('idMiddleware = '.$userId);
-		echo $query;
 		
 		$db->setQuery( $query );
 		$id = $db->loadResult();
 
-		exit;
-		
 		return $id;
 	}
 }
