@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
 			habilitarCompra();
 			});
 		}else{
-		  var val_uni = parseFloat(jQuery(this).prev().prev().prev().prev().children().text());
+			var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
 			var resultado = val_uni * jQuery(this).val();
 
 			jQuery(this).next().children().text(resultado);
@@ -120,7 +120,7 @@ jQuery(document).ready(function(){
 					<div>'.JText::_('SECCION').': '. $value ->section .'</div>
 					<div>'.JText::_('PRECIO_UNIDAD').': <span class="number valor_unidad">'. $value ->unitSale.'</span></div>
 					<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
-					<input type="hidden" value="'.$value ->id.'"/>
+					<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
 					<label>'.JText::_('CANTIDAD_COMPRAR').':</label>
 					<input class="input_compra" type="text" id="'.$value->id.'" name="" />
 					<div>'.JText::_('TOTAL_SECCION').': '.'<span class="number" id="resultados"></span></div>
@@ -134,7 +134,7 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="callback" value="'. $callback .'" />
 				<input type="hidden" name="token" value="'. $token .'" />
 				<div style="margin: 10px;">
-					<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'" />
+					<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'" onclick="confrm(\'envias\')" />
 					<input type="button" class="button" value="'.JText::_('CANCELAR').'" onclick="history.go(-1);" />
 				</div>';
 
