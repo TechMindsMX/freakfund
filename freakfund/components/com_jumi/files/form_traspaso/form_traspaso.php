@@ -25,12 +25,16 @@ $arrayFriends	= explode(',',$friends->friends);
 $arregloEnvio   = '';
 
 foreach($arrayFriends as $key => $value){
-	if($value != 378){
+	if($value != 378 && $value != ""){
 		$arregloEnvio .= 'arregloEnvio["'.JFactory::getUser($value)->name.'"] = "'.UserData::getUserMiddlewareId($value)->idMiddleware.'";';
 		$arregloAmigos[] = '"'.JFactory::getUser($value)->name.'"';
 	}
 }
-$amigosJs = implode(',' ,$arregloAmigos);
+$amigosJs = isset($arregloAmigos)?implode(',' ,$arregloAmigos) : array();
+
+if ( empty($amigosJs) ) {
+	$app->enqueueMessage('Ve a TELCEL y comprate un amigo pinche forever alone', 'notice');
+}
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>

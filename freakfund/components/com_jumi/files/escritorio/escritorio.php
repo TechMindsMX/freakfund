@@ -40,6 +40,10 @@ foreach ($proyectos as $key => $value) {
 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 	} elseif ( $value->status == 7 ) {
 		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+	}else {
+		$htmlInversionActual .= @htmlInversionActual(nul, null);
+		$htmlFinanActual .= @htmlFinanActual(null,null);
+		break;
 	}
 }
 
@@ -60,26 +64,38 @@ function moreProData($value, $datosgenerales) {
 }
 
 function htmlInversionActual($value, $datosgenerales) {
-	moreProData($value, $datosgenerales);
-	$htmlInversionActual = '<tr class="middle-td">
-							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td>' . $value->fundEndDate . '</td>
-							<td>$<span class="number">' . $value->breakeven . '</span></td>
-							<td>' . $value->porcentajeRecaudado . ' %</td>
-							<td>$<span class="number">' . $value->investmentValue . '</span></td>
+	if( !is_null($value) && !is_null($datosgenerales) ) {
+		moreProData($value, $datosgenerales);
+		$htmlInversionActual = '<tr class="middle-td">
+								<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+								<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+								<td>' . $value->fundEndDate . '</td>
+								<td>$<span class="number">' . $value->breakeven . '</span></td>
+								<td>' . $value->porcentajeRecaudado . ' %</td>
+								<td>$<span class="number">' . $value->investmentValue . '</span></td>
+									</tr>';
+	} else {
+		$htmlInversionActual = '<tr class="middle-td">
+								<td colspan="6" align="center">Sin Inversiones</td>
 								</tr>';
+	}
 	return $htmlInversionActual;
 }
 function htmlFinanActual($value, $datosgenerales){
-	moreProData($value, $datosgenerales);
-	$htmlFinanActual = '<tr class="middle-td">
-						<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-						<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-						<td class="middle-td">$<span class="number">' . $value->investmentValue . '</span></td>
-						<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
-						<td class="middle-td">' . $value->tri . ' %</td>
-						</tr>';
+	if( !is_null($value) && !is_null($datosgenerales) ) {
+		moreProData($value, $datosgenerales);
+		$htmlFinanActual = '<tr class="middle-td">
+							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+							<td class="middle-td">$<span class="number">' . $value->investmentValue . '</span></td>
+							<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
+							<td class="middle-td">' . $value->tri . ' %</td>
+							</tr>';
+	} else {
+		$htmlFinanActual = '<tr class="middle-td">
+							<td colspan="5" align="center">Sin Financiamientos</td>
+							</tr>';
+	}
 	return $htmlFinanActual;
 }
 
@@ -106,19 +122,31 @@ function htmlFinanActual($value, $datosgenerales){
 			<span>
 				<label class="label-cartera"><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
 				<div class="bordesH3-centradas">
-					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->actualInvestments; ?></span></h3>
+					<h3 class="cartera-h3">$
+						<span class="number">
+							<?php echo isset($datosgenerales->actualInvestments)? $datosgenerales->actualInvestments : 0; ?>
+						</span>
+					</h3>
 				</div>
 			</span>
 			<span>
 				<label class="label-cartera"><?php echo JText::_('ESCRIT_TOTAL_ROI'); ?></label>
 				<div class="bordesH3-centradas">
-					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></h3>
+					<h3 class="cartera-h3">$
+						<span class="number">
+							<?php echo isset($datosgenerales->sumRoi)? $datosgenerales->sumRoi: 0; ?>
+						</span>
+					</h3>
 				</div>
 			</span>
 			<span>
 				<label class="label-cartera upercase"><?php echo JText::_('ESCRIT_PORTFOLIO_VALUE'); ?></label>
 				<div class="bordesH3-fin">
-					<h3 class="cartera-h3">$<span class="number"><?php echo $datosgenerales->portfolioValue; ?></span></h3>
+					<h3 class="cartera-h3">$
+						<span class="number">
+							<?php echo isset($datosgenerales->portfolioValue)? $datosgenerales->portfolioValue : 0; ?>
+						</span>
+					</h3>
 				</div>
 			</span>
 		</div>
@@ -131,7 +159,7 @@ function htmlFinanActual($value, $datosgenerales){
 		<div class="cartera-seccion-1">
 			<h3>
 				<span class="label-compras"><?php echo JText::_('ESCRIT_ACTUAL_FUNDING'); ?></span>
-				$<span class="number"><?php echo $datosgenerales->actualFundings; ?></span>
+				$<span class="number"><?php echo isset($datosgenerales->actualFundings)? $datosgenerales->actualFundings : 0; ?></span>
 			</h3>
 		</div>
 		<hr class="hr-cartera">
