@@ -1,25 +1,24 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
+jimport('trama.class');
+jimport('trama.usuario_class');
 
-$path = AVATAR."/";
+$path 			= AVATAR."/";
+$usuario 		=& JFactory::getUser();
+$base 			=& JUri::base();
+$document 		=& JFactory::getDocument();
+$pathJumi 		= Juri::base().'components/com_jumi/files';
+$busquedaPor 	= array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
+$ligasPP 		= '';
+$input 			= JFactory::getApplication()->input;
+$tipoPP 		= $input->get('typeId', 0, 'INT');
+$params 		= new stdClass;
 
-$usuario =& JFactory::getUser();
-$base =& JUri::base();
-$document =& JFactory::getDocument();
 
-$pathJumi = Juri::base().'components/com_jumi/files';
-$busquedaPor = array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTORY' );
-$ligasPP = '';
-
-$input = JFactory::getApplication()->input;
-$tipoPP = $input->get('typeId', 0, 'INT');
-
-$params = new stdClass;
-$params->categoria = $input->get('categoria', 'all', 'STR');
-$params->subcategoria = $input->get('subcategoria', 'all', 'STR');
-$params->estatus = $input->get('status', '', 'STR');
-
-$params->tags = $input->get('tags', null, "STR");
+$params->categoria 		= $input->get('categoria', 'all', 'STR');
+$params->subcategoria 	= $input->get('subcategoria', 'all', 'STR');
+$params->estatus 		= $input->get('status', '', 'STR');
+$params->tags 			= $input->get('tags', null, "STR");
 
 if ( !$tipoPP ) {
 	$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
@@ -64,40 +63,35 @@ function prodProy ($tipo, $params) {
 $json = json_decode(prodProy($busquedaPor[$tipoPP], $params));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
-jimport('trama.class');
-jimport('trama.usuario_class');
-
 foreach ($json as $key => $value) {
-	var_dump(UserData::getUserJoomlaId($value->userId));
-	
 	$value->nomCat = JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
-	$value->producer = JTrama::getProducerProfile($value->userId);
+	$value->producer = JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
 	$value->statusName = JTrama::getStatusName($value->status);
 }
 
 
 foreach ($json as $key => $value) {
 	if($value->status != 4){
-	$jsonJS[] = $value;
-			switch ($value->type) {
-				case 'PROJECT':
-					$proyectos[] = $value; //Solo Proyectos
-					$prodProy[] = $value; //Proyectos y Productos
-					$repertProy[] = $value; //PRoyectos y Repertorios				
-					break; 
-				case 'PRODUCT':
-					$productos[] = $value; //Solo Productos
-					$prodProy[] = $value; //Proyectos y Productos
-					$repertorioProduc[] = $value; //Productos y Repertorios				
-					break;
-				case 'REPERTORY':
-					$repertorio[] = $value; //Solo Repertorios
-					$repertorioProduc[] = $value; //Repertorios y Productos
-					$repertProy[] = $value; //Repertorios y Proyectos							
-					break;	
-			}		
+		$jsonJS[] = $value;
+		switch ($value->type) {
+			case 'PROJECT':
+				$proyectos[] = $value; //Solo Proyectos
+				$prodProy[] = $value; //Proyectos y Productos
+				$repertProy[] = $value; //PRoyectos y Repertorios				
+				break; 
+			case 'PRODUCT':
+				$productos[] = $value; //Solo Productos
+				$prodProy[] = $value; //Proyectos y Productos
+				$repertorioProduc[] = $value; //Productos y Repertorios				
+				break;
+			case 'REPERTORY':
+				$repertorio[] = $value; //Solo Repertorios
+				$repertorioProduc[] = $value; //Repertorios y Productos
+				$repertProy[] = $value; //Repertorios y Proyectos							
+				break;	
 		}		
+	}		
 };
 
 if (!empty($jsonJS)) {
