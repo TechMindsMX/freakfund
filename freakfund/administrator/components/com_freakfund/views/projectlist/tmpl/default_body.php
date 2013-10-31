@@ -5,7 +5,7 @@ jimport('trama.class');
 $document = JFactory::getDocument();
 $document->addScript('../libraries/trama/js/jquery.number.min.js'); 
 
-if( isset($this->items->type) ) {
+if( isset($this->items[0]->type) ) {
 	foreach($this->items as $i => $item):
 		if ( $item->type != 'REPERTORY' ) {
 			$item->htmlChange = ($item->status != 4 && $item->status != 8)? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';

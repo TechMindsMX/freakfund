@@ -2,6 +2,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
+jimport('trama.usuario_class');
 
 class projectListModelprojectList extends JModelList
 {
@@ -14,9 +15,7 @@ class projectListModelprojectList extends JModelList
 		$data10 = JTrama::getProyByStatus('10');
 		$data11 = JTrama::getProyByStatus('11');
 		
-		$validacion = JTrama::getProyByStatus('4,5,6,7,8,10,11');
-		
-		if(!empty($data4) && !empty($data5) && !empty($data6) && !empty($data7) && !empty($data8) && !empty($data10) && !empty($data11)) {
+		if(!empty($data4) || !empty($data5) || !empty($data6) || !empty($data7) || !empty($data8) || !empty($data10) || !empty($data11)) {
 		
 			if( !empty($data4) ){
 				$query[] =$this->agrupaObj($data4, 'premiereEndDateCode');
@@ -45,7 +44,7 @@ class projectListModelprojectList extends JModelList
 					$queryResp[] = $valor;
 				}
 			}
-	
+			
 			$queryResp[0]->vName = 'listproduct';
 			$statusList = JTrama::getStatus();
 			
@@ -93,7 +92,7 @@ class projectListModelprojectList extends JModelList
 		
 		foreach ($nuevo as $key => $value) {
 			$value->percentage 	= ($value->balance*100)/$value->breakeven;
-			$value->producerName = JFactory::getUser($value->userId)->name;
+			$value->producerName = JFactory::getUser(UserData::getUserJoomlaId($value->userId))->name;
 
 			switch ($value->status) {
 				case '4':

@@ -1,6 +1,7 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+jimport('trama.usuario_class');
 
 $providers = $this->items->providers;
 $presupuesto = $this->items->budget;
@@ -19,7 +20,7 @@ foreach ($providers as $key => $value) {
 ?>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JFactory::getUser($value->providerId)->name; ?>
+			<?php echo JFactory::getUser(UserData::getUserJoomlaId($value->providerId))->name; ?>
 		</td>
 		
 		<td>

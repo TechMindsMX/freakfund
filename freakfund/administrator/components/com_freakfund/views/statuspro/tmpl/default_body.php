@@ -34,7 +34,6 @@ $datos 			= $this->items;
 			<input type="hidden" value="<?php echo $usuario->id; ?>"   name="userId" />
 			<input type="hidden" value="<?php echo $token; ?>"  	   name="token" />
 			<input type="hidden" value="<?php echo $callback; ?>"  	   name="callback" />
-			<input type="hidden" value="<?php echo $errorCallback; ?>" name="errorCallback" />
 			
 			<div id="status5">
 				<?php echo $datos->inputs; ?>

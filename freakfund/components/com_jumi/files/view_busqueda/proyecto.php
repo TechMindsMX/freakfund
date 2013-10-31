@@ -37,8 +37,7 @@ function prodProy ($tipo, $params) {
 		if (!is_null($params->tags)) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
-		}
-		elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
+		} elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
 		} elseif ( ($params->categoria == '') && ($params->subcategoria == "all") && ($params->estatus != "")) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
@@ -48,6 +47,7 @@ function prodProy ($tipo, $params) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
 		}	
 	} else {
+		//MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus  esta es la buenasss
 		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
 	}
 
@@ -64,10 +64,10 @@ $json = json_decode(prodProy($busquedaPor[$tipoPP], $params));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 foreach ($json as $key => $value) {
-	$value->nomCat = JTrama::getSubCatName($value->subcategory);
+	$value->nomCat 		= JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
-	$value->producer = JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
-	$value->statusName = JTrama::getStatusName($value->status);
+	$value->producer 	= JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
+	$value->statusName 	= JTrama::getStatusName($value->status);
 }
 
 

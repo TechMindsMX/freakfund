@@ -7,6 +7,6 @@ require_once( dirname(__FILE__).DS.'helper.php' );
  
 $categoria = modCategoriasHelper::getCategoria( $params );
 $subCategorias = modCategoriasHelper::getSubCat( 'all' );
-$status = '5,6,7';
+$status = '5';
 require( JModuleHelper::getLayoutPath( 'mod_busqueda_cat_proy' ) );
 ?>

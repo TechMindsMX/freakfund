@@ -2,11 +2,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
+jimport('trama.usuario_class');
+
 $urls = new JTrama;
 if( !empty($this->items) ) {
 	foreach($this->items as $i => $item):
 		if ( $item->type != 'REPERTORY' ) {
-			$item->producerName = JFactory::getUser($item->userId)->name;
+			$item->producerName = JFactory::getUser(UserData::getUserJoomlaId($item->userId))->name;
 			if ( empty($item->providers) ) {
 				$htmlProveedores = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
 			} else {
