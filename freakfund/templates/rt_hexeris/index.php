@@ -22,6 +22,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 <html xml:lang="<?php echo $gantry->language; ?>" lang="<?php echo $gantry->language;?>" >
 <head>
 	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery-1.9.1.js" type="text/javascript"></script>
+	
 	<?php if ($gantry->get('layout-mode') == '960fixed') : ?>
 	<meta name="viewport" content="width=960px">
 	<?php elseif ($gantry->get('layout-mode') == '1200fixed') : ?>
@@ -39,7 +40,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 			echo '<script>';
 // 			echo 'jQuery(document).ready( function(){';
 			echo 'jQuery(".desc").text("Salir");';
-			echo 'jQuery(".logo-block").after("<div class=\"bienvenidaUsuario\">Hola '.$name[0].'</div>")';
+			echo 'jQuery("span.number").number( true, 2, ".","," );';
 			echo '});';
 			echo '</script>';
 		}

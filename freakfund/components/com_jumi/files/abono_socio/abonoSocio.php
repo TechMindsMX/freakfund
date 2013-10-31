@@ -122,7 +122,7 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 		<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
 	</div>
 	<div>
-		<input type="button" class="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />
 		<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onclick="javascript:window.history.back();" />
+		<input type="button" class="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />		
 	</div>
 </form>

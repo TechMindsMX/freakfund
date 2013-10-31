@@ -134,8 +134,9 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="callback" value="'. $callback .'" />
 				<input type="hidden" name="token" value="'. $token .'" />
 				<div style="margin: 10px;">
-					<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'" onclick="confrm(\'envias\')" />
 					<input type="button" class="button" value="'.JText::_('CANCELAR').'" onclick="history.go(-1);" />
+					<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'" onclick="confrm(\'envias\')" />
+					
 				</div>';
 
 			echo $html;

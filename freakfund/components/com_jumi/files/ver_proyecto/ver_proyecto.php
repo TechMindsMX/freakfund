@@ -439,7 +439,7 @@ function grafico($data) {
 	if ($data->status == '5' && $data->type == 'PROJECT') {
 		$diasRestan = floor($data->difToday / 86400000);
 		
-		$tmpl = '<div><h3>'.JText::_('RECAUDADO').' = '.$data->balance.'</h3></div>'.
+		$tmpl = '<div><span class="number"><h3>'.JText::_('RECAUDADO').' = '.$data->balance.'</h3></span</div>'.
 				'<div><h3>'.JText::_('RECAUDADO_PORCEN').' = '.round($data->balancePorcentaje, 2).'%</h3></div>'.
 				'<div><h3>'.JText::_('DIAS_RESTAN').' = '.$diasRestan.'</h3></div>';
 	
