@@ -143,13 +143,13 @@ class UserData {
 		return $id;
 	}
 	
-	public static function getUserJoomlaId($userId) {
+	public static function getUserJoomlaId($middlewareId) {
 		$db = JFactory::getDBO();
 		
 		$query = $db->getQuery(true);
 		$query->select('idJoomla');
 		$query->from($db->quoteName('#__users_middleware'));
-		$query->where('idMiddleware = '.$userId);
+		$query->where('idMiddleware = '.$middlewareId);
 		
 		$db->setQuery( $query );
 		$id = $db->loadResult();

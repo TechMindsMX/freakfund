@@ -5,7 +5,7 @@ $datos = $this->items;
 ?>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_HEADING_NAME').': '.JFactory::getUser($datos->userId)->name; ?>
+			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_HEADING_NAME').': '.$datos->productorName; ?>
 		</td>
 	</tr>
 	<tr>
