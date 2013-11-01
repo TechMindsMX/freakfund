@@ -36,14 +36,6 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 
 		$user = JFactory::getUser();
 		$name = explode(' ',$user->name);
-		if (!$user->guest) {
-			echo '<script>';
-// 			echo 'jQuery(document).ready( function(){';
-			echo 'jQuery(".desc").text("Salir");';
-			echo 'jQuery("span.number").number( true, 2, ".","," );';
-			echo '});';
-			echo '</script>';
-		}
                 
 		$gantry->addStyle('grid-responsive.css', 5);
 		$gantry->addLess('bootstrap.less', 'bootstrap.css', 6);
@@ -65,6 +57,15 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
     ?>
     
 </head>
+
+<script>
+ 			jQuery(document).ready( function(){
+				jQuery("span.number").number( true, 2, ".","," );
+			});
+</script>
+			
+
+
 <body <?php echo $gantry->displayBodyTag(); ?>>
 	<div id="rt-page-surround">
 		<?php /** Begin Social **/ if ($gantry->countModules('social')) : ?>
