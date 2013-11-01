@@ -35,6 +35,7 @@ $amigosJs = isset($arregloAmigos)?implode(',' ,$arregloAmigos) : array();
 if ( empty($amigosJs) ) {
 	$app->enqueueMessage('Ve a TELCEL y comprate un amigo pinche forever alone', 'notice');
 }
+echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -48,7 +49,7 @@ if ( empty($amigosJs) ) {
 	
 	jQuery(document).ready(function(){
 		jQuery("#form_traspaso").validationEngine();
-
+		jQuery("span.number").number( true, 2, ".","," );
 		var arregloEnvio = new Array();
 		<?php echo $arregloEnvio; ?>
 
@@ -82,7 +83,7 @@ if ( empty($amigosJs) ) {
 		}else{
 			$saldo = $datosUsuario->balance;
 		}
-		echo '<div style="margin-top: 35px;">'.JText::_('SALDO_FF').': '. $saldo .'</div>';
+		echo '<div style="margin-top: 35px;">'.JText::_('SALDO_FF').':$<span class="number"> '. $saldo .'</span></div>';
 		$campo = '<label>'.JText::_('CANTIDAD_TRASPASO').
 				 ':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="amount" /> ';
 		

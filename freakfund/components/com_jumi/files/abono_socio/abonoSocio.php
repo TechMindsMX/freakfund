@@ -84,8 +84,26 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 			<span>Metodo de pago</span>
 			'.$metodoPago.'
 		</p>
-		
+		<p>
+				<a href="index.php?option=com_jumi&view=application&fileid=24" class="button">Ir a mi cartera</a>	
+		</p>
 	</div>';
+}else{
+	$html='
+	<div id="hiddens">
+	<input type="hidden" name="callback" id="callback" value=" $callback;" />
+	<input type="hidden" name="errorCallback" id="errorCallback" value="$errorCallback;" />
+	<input type="hidden" name="token" id="token" value="$token;" />
+	<input type="hidden" name="userId" id="userId" value="$idMiddleware->idMiddleware;" />
+	</div>
+	<div>
+	<label for="amount">'.JText::_("MONTO").'</label>
+			<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
+		</div>
+		<div>
+			<input type="button" class="button" value="'. JText::_("CANCELAR").' " onclick="javascript:window.history.back();" />
+			<input type="button" class="button" id="abonar" value=" '.JText::_("FREAKFUND_JUMI_ABONOSOCIO_ABONAR").' " />		
+		</div>';
 }
 
 ?>
@@ -111,18 +129,5 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 	<?php
 		echo $html; 
 	?>
-	<div id="hiddens">
-		<input type="hidden" name="callback" id="callback" value="<?php echo $callback; ?>" />
-		<input type="hidden" name="errorCallback" id="errorCallback" value="<?php echo $errorCallback; ?>" />
-		<input type="hidden" name="token" id="token" value="<?php echo $token; ?>" />
-		<input type="hidden" name="userId" id="userId" value="<?php echo $idMiddleware->idMiddleware; ?>" />
-	</div>
-	<div>
-		<label for="amount"><?php echo JText::_('MONTO'); ?></label>
-		<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
-	</div>
-	<div>
-		<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onclick="javascript:window.history.back();" />
-		<input type="button" class="button" id="abonar" value="<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR'); ?>" />		
-	</div>
+	
 </form>

@@ -22,7 +22,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 <html xml:lang="<?php echo $gantry->language; ?>" lang="<?php echo $gantry->language;?>" >
 <head>
 	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery-1.9.1.js" type="text/javascript"></script>
-	
+	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery.number.min.js" type="text/javascript"></script>
 	<?php if ($gantry->get('layout-mode') == '960fixed') : ?>
 	<meta name="viewport" content="width=960px">
 	<?php elseif ($gantry->get('layout-mode') == '1200fixed') : ?>
