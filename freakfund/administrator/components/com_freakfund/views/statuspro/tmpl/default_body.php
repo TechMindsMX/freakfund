@@ -1,11 +1,14 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+jimport('trama.usuario_class');
+
 $usuario 		= JFactory::getUser();
 $token			= JTrama::token();
 $callback		= JURI::base().'index.php?option=com_freakfund&task=projectlist';
 $errorCallback	= JURI::base().'index.php?option=com_freakfund&task=errors&error=projectlist';
 $datos 			= $this->items;
+$datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware;
 ?>
 	<tr>
 		<td align="absmiddle">
@@ -30,10 +33,10 @@ $datos 			= $this->items;
 	
 	<tr>
 		<td align="absmiddle">
-			<input type="hidden" value="<?php echo $datos->id; ?>"     name="projectId" />
-			<input type="hidden" value="<?php echo $usuario->id; ?>"   name="userId" />
-			<input type="hidden" value="<?php echo $token; ?>"  	   name="token" />
-			<input type="hidden" value="<?php echo $callback; ?>"  	   name="callback" />
+			<input type="hidden" value="<?php echo $datos->id; ?>"		name="projectId" />
+			<input type="hidden" value="<?php echo $datos->idMod; ?>"	name="userId" />
+			<input type="hidden" value="<?php echo $token; ?>"			name="token" />
+			<input type="hidden" value="<?php echo $callback; ?>"		name="callback" />
 			
 			<div id="status5">
 				<?php echo $datos->inputs; ?>

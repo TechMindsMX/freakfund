@@ -4,6 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
+jimport('trama.usuario_class');
 
 class statusproModelstatuspro extends JModelList
 {
@@ -40,7 +41,17 @@ class statusproModelstatuspro extends JModelList
 				break;
 		}
 		$query->motivosBaja = JTrama::getMotivosDeBaja();
-		
+		self::producerIdJoomlaANDName($query);
+
 		return $query;
+	}
+
+	public function producerIdJoomlaANDName($obj,$id=null){
+		if($id == null){
+			$id = $obj->userId;
+		}
+		
+		$obj->idJoomla = UserData::getUserJoomlaId($id);
+		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
 	}
 }

@@ -3,8 +3,9 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 
-$providers = $this->items->providers;
-$presupuesto = $this->items->budget;
+$providers 		= $this->items->providers;
+$presupuesto 	= $this->items->budget;
+
 foreach ($providers as $key => $value) {
 	if($value->advancePaidDate) {
 		$deshabilitarAnticipo = 'disabled';
@@ -20,7 +21,7 @@ foreach ($providers as $key => $value) {
 ?>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JFactory::getUser(UserData::getUserJoomlaId($value->providerId))->name; ?>
+			<?php echo $value->producerName; ?>
 		</td>
 		
 		<td>

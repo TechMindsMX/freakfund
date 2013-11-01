@@ -8,7 +8,7 @@ jimport('trama.class');
 JHtml::_('behavior.tooltip');
 $document = JFactory::getDocument();
 $document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
-$document->addScript('../libraries/trama/js/jquery.number.min.js');
+$document->addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 $token = JTrama::token();
 ?>
 <script language="JavaScript">
@@ -17,12 +17,12 @@ $token = JTrama::token();
 		 
 		 jQuery('.pagar').click(function () {
 		 	var request = $.ajax({
-				url:"<?php echo MIDDLE.PUERTO ?>/trama-middleware/rest/project/saveProviderPayment",
+				url	:"<?php echo MIDDLE.PUERTO ?>/trama-middleware/rest/project/saveProviderPayment",
 				data: {
-					"providerId": jQuery(this).next().next().val(),
-					"type": jQuery(this).next().val(),
-					"projectId" : jQuery(this).next().next().next().val(),
-					"token": "<?php echo $token; ?>"
+					"providerId"	:jQuery(this).next().next().val(),
+					"type"			: jQuery(this).next().val(),
+					"projectId" 	: jQuery(this).next().next().next().val(),
+					"token"			: "<?php echo $token; ?>"
 				},
 				type: 'post'
 			});

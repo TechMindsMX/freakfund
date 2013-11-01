@@ -47,8 +47,8 @@ function prodProy ($tipo, $params) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
 		}	
 	} else {
-		//MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus  esta es la buenasss
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/'.$tipo;
+		//  esta es la buenasss
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
 	}
 
 	$json0 = @file_get_contents($url);
