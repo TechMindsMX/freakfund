@@ -51,50 +51,73 @@ if ($error === 0 && $response === 0) {
 ?>
 
 <script>
+
 jQuery(document).ready(function(){
+	function formatoNumero() {
+		jQuery("span.number").number( true, 2 );
+	}
+	jQuery("#form_compra").validationEngine();
 	jQuery('#guardar').prop('disabled', true);
+	function formatoNumero() {
+		jQuery("span.number").number( true, 2 );
+	}
 	
-	jQuery(':input').change(function(){
+	function sumaarrecha(){
+		 var precio = 0;
+		 var cant = 0;
+		 var total = 0 ;
+		 jQuery("#form_compra").find("div.wrapper").each(function() {
+			 precio = parseFloat(jQuery(this).find('#precio').val()) || 0;
+			 cant = parseFloat(jQuery(this).find('input.input_compra').val()) || 0;
+			 total += precio * cant;
+			 jQuery("#resultadoglobal").text(total);
+		});			
+			 
+		if ( total > 0 && <?php echo $saldo ?> > total ) {
+			jQuery('#guardar').prop('disabled', false);
+		} else {
+			jQuery('#guardar').prop('disabled', true);
+		}
+
+	}
+	jQuery(':input').change(function(){		
+				
 		var limite = parseInt(jQuery(this).prev().prev().prev().children().text());
-//		console.log(jQuery(this).val(), limite, jQuery(this).val()>limite);
 
 		if ( jQuery(this).val()>limite){
 			jQuery(this).val(0);
 			jQuery(this).next().children().text(0);
 			alert('Cantidad superior a inventario');
-			
-			var total = 0 ;				
-			jQuery("#form_compra").find("span#resultados").each(function() {
-				total += parseFloat(jQuery(this).text()) || 0;
-			
-			jQuery("#resultadoglobal").text(total);
 
-			habilitarCompra();
-			});
+			sumaarrecha();
+			
+			formatoNumero();
+			//habilitarCompra();
+			
 		}else{
 			var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
 			var resultado = val_uni * jQuery(this).val();
 
 			jQuery(this).next().children().text(resultado);
 			
-			var total = 0 ;
-			jQuery("#form_compra").find("span#resultados").each(function() {
-				total += parseFloat(jQuery(this).text()) || 0;
+			sumaarrecha();			
 			
-			jQuery("#resultadoglobal").text(total);
-			});
 			if ( jQuery(this).val() > 0 ) {
 				var nombre = jQuery(this).attr('id');
 				jQuery(this).attr('name', nombre);
 			} else {
 				jQuery(this).attr('name', '');
 			}
-			habilitarCompra();
+			
+			formatoNumero();
+			
+			//habilitarCompra();		
 		}
+		
 	});
 	function habilitarCompra() {
-		var total = parseFloat(jQuery('#resultadoglobal').text());
-			console.log(total);
+		var total = sumaarrecha();
+			
 		if ( total > 0 && <?php echo $saldo ?> > total ) {
 			jQuery('#guardar').prop('disabled', false);
 		} else {
@@ -116,19 +139,19 @@ jQuery(document).ready(function(){
 
 			$html .= '<div class="wrapper">
 					<div>'.JText::_('SECCION').': '. $value ->section .'</div>
-					<div>'.JText::_('PRECIO_UNIDAD').': <span class="number valor_unidad">'. $value ->unitSale.'</span></div>
+					<div>'.JText::_('PRECIO_UNIDAD').': $<span class="number valor_unidad">'. $value ->unitSale.'</span></div>
 					<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
 					<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
 					<label>'.JText::_('CANTIDAD_COMPRAR').':</label>
-					<input class="input_compra" type="text" id="'.$value->id.'" name="" />
-					<div>'.JText::_('TOTAL_SECCION').': '.'<span class="number" id="resultados"></span></div>
+					<input class="input_compra validate[required,custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />
+					<div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div>
 					<hr />
 					</div>';
 		}
 
 		$html .= '<h3>'. $usuario->name .'</h3>
-				<div>'.JText::_('SALDO_FF').': <span class="number">'. $saldo .'</span></div>
-				<div>'.JText::_('TOTAL_PAGAR').': <span class="number" id="resultadoglobal"></span></div>
+				<div>'.JText::_('SALDO_FF').':$ <span class="number">'. $saldo .'</span></div>
+				<div>'.JText::_('TOTAL_PAGAR').':$ <span class="number" id="resultadoglobal"></span></div>
 				<input type="hidden" name="callback" value="'. $callback .'" />
 				<input type="hidden" name="token" value="'. $token .'" />
 				<div style="margin: 10px;">
