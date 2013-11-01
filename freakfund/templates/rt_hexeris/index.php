@@ -22,7 +22,7 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 <html xml:lang="<?php echo $gantry->language; ?>" lang="<?php echo $gantry->language;?>" >
 <head>
 	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery-1.9.1.js" type="text/javascript"></script>
-	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery.number.min.js" type="text/javascript"></script>
+
 	<?php if ($gantry->get('layout-mode') == '960fixed') : ?>
 	<meta name="viewport" content="width=960px">
 	<?php elseif ($gantry->get('layout-mode') == '1200fixed') : ?>
@@ -55,19 +55,19 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		$hidden = ' class="rt-hidden"';}
 		
     ?>
-    
+
 </head>
 
-<script>
- 			jQuery(document).ready( function(){
-				jQuery("span.number").number( true, 2, ".","," );
-			});
-</script>
-			
-
-
 <body <?php echo $gantry->displayBodyTag(); ?>>
-	<div id="rt-page-surround">
+	<script src="<?php echo JURI::base();?>templates/rt_hexeris/js/jquery.number.min.js" type="text/javascript"></script>
+
+<script>
+	jQuery(document).ready( function(){
+		jQuery("span.number").number( true, 2 );
+	});
+</script>
+
+    	<div id="rt-page-surround">
 		<?php /** Begin Social **/ if ($gantry->countModules('social')) : ?>
 		<?php echo $gantry->displayModules('social','basic','basic'); ?>
 		<?php /** End Social **/ endif; ?>
@@ -217,7 +217,9 @@ $gpreset = str_replace(' ','',strtolower($gantry->get('name')));
 		echo $gantry->displayModules('login','login','popup');
 		/** End Popups **/ ?>
 	</div>
+
 </body>
+
 </html>
 <?php
 $gantry->finalize();

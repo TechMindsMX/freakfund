@@ -54,3 +54,6 @@
 	width: 266px;
 	display: inline-block;
 }
+.productos .avatar {
+	border-radius: 50%;
+}

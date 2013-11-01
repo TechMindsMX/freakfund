@@ -31,12 +31,10 @@ $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/project/consumeUnits';
 $response		= $input->get("response",0,"int"); // RESPUESTA EXITO
 $error			= $input->get("error",0,"int");
 
-echo '<script src="'.JURI::base().'libraries/trama/js/jquery.number.min.js"> </script>';
 
 ?>
 <script>
 jQuery(document).ready(function(){
-	jQuery("span.number").number(true,2,',','.');
 	
 		var $scrollingDiv = $("#scrollingDiv");
  
@@ -115,7 +113,7 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="projectId" id="projectId" value="'. $pro->id .'" />';
 	
 		foreach ($pro->projectUnitSales as $key => $value){
-
+var_dump($value->unitSale);
 			$html .= '<div class="wrapper">
 					<div>'.JText::_('SECCION').': '. $value ->section .'</div>
 					<div>'.JText::_('PRECIO_UNIDAD').': <span class="number valor_unidad">'. $value ->unitSale.'</span></div>
