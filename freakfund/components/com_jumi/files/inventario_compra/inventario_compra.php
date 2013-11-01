@@ -113,7 +113,7 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="projectId" id="projectId" value="'. $pro->id .'" />';
 	
 		foreach ($pro->projectUnitSales as $key => $value){
-var_dump($value->unitSale);
+
 			$html .= '<div class="wrapper">
 					<div>'.JText::_('SECCION').': '. $value ->section .'</div>
 					<div>'.JText::_('PRECIO_UNIDAD').': <span class="number valor_unidad">'. $value ->unitSale.'</span></div>
