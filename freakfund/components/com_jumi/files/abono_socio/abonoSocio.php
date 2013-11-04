@@ -90,20 +90,20 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 	</div>';
 }else{
 	$html='
-	<div id="hiddens">
-	<input type="hidden" name="callback" id="callback" value=" $callback;" />
-	<input type="hidden" name="errorCallback" id="errorCallback" value="$errorCallback;" />
-	<input type="hidden" name="token" id="token" value="$token;" />
-	<input type="hidden" name="userId" id="userId" value="$idMiddleware->idMiddleware;" />
-	</div>
-	<div>
-	<label for="amount">'.JText::_("MONTO").'</label>
-			<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
+		<div id="hiddens">
+		<input type="hidden" name="callback" id="callback" value=" '.$callback.'" />
+		<input type="hidden" name="errorCallback" id="errorCallback" value="'.$errorCallback.'" />
+		<input type="hidden" name="token" id="token" value="'.$token.'" />
+		<input type="hidden" name="userId" id="userId" value="'.$idMiddleware->idMiddleware.'" />
 		</div>
 		<div>
-			<input type="button" class="button" value="'. JText::_("CANCELAR").' " onclick="javascript:window.history.back();" />
-			<input type="button" class="button" id="abonar" value=" '.JText::_("FREAKFUND_JUMI_ABONOSOCIO_ABONAR").' " />		
-		</div>';
+		<label for="amount">'.JText::_("MONTO").'</label>
+				<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
+			</div>
+			<div>
+				<input type="button" class="button" value="'. JText::_("CANCELAR").' " onclick="javascript:window.history.back();" />
+				<input type="button" class="button" id="abonar" value=" '.JText::_("FREAKFUND_JUMI_ABONOSOCIO_ABONAR").' " />		
+			</div>';
 }
 
 ?>
