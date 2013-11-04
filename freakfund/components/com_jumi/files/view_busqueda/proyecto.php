@@ -303,7 +303,7 @@ function pageselectCallback (page_index, jq) {
 			newcontent += '<div class="cuentas">'+ members[i].jtextdays +'</div>';
 		}
 		
-		if(members[i].status == 0 || members[i].status == 0){
+		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 0){
 			newcontent += '<div class="productStyle">';
 			newcontent += '<div><div class="big">'+roiInversionistas +'%</div> <div class="small"><?php echo JText::_('LABEL_ROI') ?></div></div>';
 			newcontent += '<div class="middle"><div class="big">'+ roiFinanciadores +'% </div> <div class="small"><?php echo JText::_('LABEL_ROF') ?></div></div>';
