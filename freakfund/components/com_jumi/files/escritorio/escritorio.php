@@ -27,7 +27,6 @@ $datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddle
 $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 
-$doc->addScript( 'libraries/trama/js/jquery.number.min.js' );
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
@@ -100,11 +99,6 @@ function htmlFinanActual($value, $datosgenerales){
 }
 
 ?>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery('span.number').number( true, 2, ',','.' );
-	});
-</script>
 <div class="contenedor-cartera">
 		<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
 	
