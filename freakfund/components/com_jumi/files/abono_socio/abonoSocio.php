@@ -110,7 +110,6 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		jQuery("#formAbono").validationEngine();
-		jQuery("span.number").number(true,2,',','.');
 		
 		
 		jQuery('#abonar').click(function() {
