@@ -77,9 +77,10 @@ foreach ($json as $key => $value) {
 	$value->jtextdays = JText::sprintf('LAPSED_DAYS', $value->dateDiff->days);
 	
 	if( isset($value->premiereEndDateCode) ) {
-		$fecha = date('d-M-Y',($value->premiereEndDateCode/1000));
+		$fecha = date('d-m-Y',($value->premiereEndDateCode/1000));
 		$value->premiereEndDateArray = explode('-', $fecha);
-	}else{
+		$value->premiereEndDateArray[1] = JFactory::getDate()->monthToString($value->premiereEndDateArray[1], true);
+	}else{ 
 		$value->premiereEndDateArray = array(0=>'01',1=>'Ene',2=>'2015');
 	}
 }
@@ -287,7 +288,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
-		newcontent += '<div class="avatar" style="background-image:url(\'http:\/\/192.168.0.122\/<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
+		newcontent += '<div class="avatar" style="background-image:url(\'\/<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
 		newcontent += '	<a href="' + link + '">';
 		newcontent += '		<span class="mask"></span>';
 		newcontent += '	</a>';
