@@ -21,15 +21,8 @@ $idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $action 		= '#';
 
-echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
 ?>
 
-<script>
-	jQuery(document).ready(function(){
-		jQuery("#form_cashout").validationEngine();
-		jQuery("span.number").number(true,2,',','.');
-	});
-</script>
 <h1><?php echo JText::_('TRANSFERIR_DINERO');  ?></h1>
 <div>
 	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">

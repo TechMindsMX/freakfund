@@ -67,14 +67,11 @@ foreach ($arregloCatalogo as $obj) {
 $tableHtml .= "</table>";
 $selectTipo .='</select>';
 
-echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
-
 ?>
 
 <script>
 	jQuery(document).ready(function(){
 		jQuery("#form_cuenta").validationEngine();
-		jQuery("span.number").number(true,2,',','.');
 		
 		jQuery('#filtroTipo').change(function(){
 			var limite = jQuery('#edocta_table tr').length;
