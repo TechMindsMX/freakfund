@@ -288,7 +288,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
-		newcontent += '<div class="avatar" style="background-image:url(\'\/<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
+		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
 		newcontent += '	<a href="' + link + '">';
 		newcontent += '		<span class="mask"></span>';
 		newcontent += '	</a>';
@@ -349,7 +349,7 @@ function initPagination() {
 <title>Pagination</title>
 </head>
 <body>
-	<?php echo $ligasPP; ?>
+	<?php //echo $ligasPP; ?>
 	<dl id="Searchresult"></dl>
 	<div id="Pagination" class="pagination"></div>
 </body>
