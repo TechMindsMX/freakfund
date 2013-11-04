@@ -18,7 +18,6 @@ $document 			= JFactory::getDocument();
 $app 				= JFactory::getApplication();
 $idMiddleware		= UserData::getUserMiddlewareId($usuario->id);
 $callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32';
-$errorCallback 		= $base.'index.php?option=com_jumi&view=application&fileid=32';
 $pathJumi 			= $base.'components/com_jumi/files/classIncludes/';
 $accion				= MIDDLE.PUERTO.'/trama-middleware/rest/paypal/payment';
 $usuario->balance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
@@ -91,8 +90,7 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 }else{
 	$html='
 		<div id="hiddens">
-		<input type="hidden" name="callback" id="callback" value=" '.$callback.'" />
-		<input type="hidden" name="errorCallback" id="errorCallback" value="'.$errorCallback.'" />
+		<input type="hidden" name="callback" id="callback" value="'.$callback.'" />
 		<input type="hidden" name="token" id="token" value="'.$token.'" />
 		<input type="hidden" name="userId" id="userId" value="'.$idMiddleware->idMiddleware.'" />
 		</div>
