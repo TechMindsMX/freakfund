@@ -11,9 +11,8 @@ $busquedaPor 	= array(0 => 'all', 1 => 'PROJECT', 2 => 'PRODUCT', 3 => 'REPERTOR
 $ligasPP 		= '';
 $input 			= JFactory::getApplication()->input;
 $tipoPP 		= $input->get('typeId', 0, 'INT');
+
 $params 		= new stdClass;
-
-
 $params->categoria 		= $input->get('categoria', 'all', 'STR');
 $params->subcategoria 	= $input->get('subcategoria', 'all', 'STR');
 $params->estatus 		= $input->get('status', '', 'STR');
@@ -41,12 +40,16 @@ function prodProy ($tipo, $params) {
 		} elseif ( ($params->categoria == '') && ($params->subcategoria == "all") && ($params->estatus != "")) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
 		} elseif ( ($params->categoria != "all") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$tipo.'/'.$params->categoria.'/'.$params->estatus;
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
 		} elseif ( ($params->categoria != "all") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
-		}	
+		}
 	} else {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
+		if ($params->categoria == 'all') {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
+		} else {
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
+		}
 	}
 
 	$json0 = @file_get_contents($url);
