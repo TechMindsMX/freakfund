@@ -234,9 +234,9 @@ class JTrama
 		}
 		// SIMULADOS
 		$value->fundStartDate = 1370284000000;
-		$value->fundEndDate = 1382284000000; 
-		$value->productionStartDateCode = 1378003651000;
-		$value->premiereStartDateCode = 1381003651000;
+		$value->fundEndDate = 1388284000000; 
+		$value->productionStartDateCode = 1388003651000;
+		$value->premiereStartDateCode = 1391003651000;
 		
 		if ($value->balance != 0) {
 			$value->porcentajeRecaudado = $value->balance / $value->breakeven;
@@ -364,8 +364,9 @@ class JTrama
 		$fecha1 = new DateTime();
 		
 		$fecha2 = new DateTime($fecha);
-
+		
 		$obj->dateDiff = date_diff($fecha1,$fecha2);
+		
 	}
 }
 ?>
