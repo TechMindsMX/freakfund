@@ -42,7 +42,7 @@
 	margin: 1em;
 }
 
-div.proyecto > .inner {
+div.proyectos > .inner {
  	margin: 0 5px 0 1em; 	
 	border-radius: 15px;
 	box-shadow: 5px 3px 16px #999292;
@@ -51,7 +51,7 @@ div.proyecto > .inner {
 	padding-bottom:7px;
 	
 }
-.proyecto {
+.proyectos {
 	float: left;
 	margin-bottom: 1em;
 }
@@ -68,7 +68,6 @@ div.proyecto > .inner {
 }
 .catSubCat {
   font-size: 129%;
-	text-transform: uppercase;
 }
 .descripcion {
   font-size: 114%;
@@ -94,7 +93,7 @@ div.proyecto > .inner {
 	font-size: 14px !important;
 	color: #666666;
 }
-.proyecto .readmore {
+.proyectos .readmore {
 	text-align: right;
 }
 .imgPerfil{
@@ -113,10 +112,20 @@ div.proyecto > .inner {
 @media screen and (max-width: 976px) {
 	.ancho {width: 100%;}
 }
-.progress-bar{
+.proyectos .barra, .proyectos .fondo_barra {
 	height: 6px;
 	border-radius: 4px;
-	margin: 36px 20px 24px;
+}
+.proyectos .fondo_barra {
+	background: #FFF;
+	margin-bottom: 14px;
+	margin: 36px 20px;
+}
+.txt_barra {
+	float:right;
+}
+.proyectos .barra {
+	display: inherit;
 	background: #33ffff; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMzZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDllZDMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -147,26 +156,15 @@ div.proyecto > .inner {
 	width: 33%;
 	display: inline-block;
 }
-.middle{
-	border-right: 1px solid #009ED3;
-	border-left: 1px solid #009ED3;
-}
 .big{
 	font-size: 36px;
 	color: #009ED3;
-	margin-top: 10px;
 }
 .productStyle .small{
-	font-size: 12px;
-	text-transform: uppercase;
+	font-size: 14px;
 }
-
 .productStyle .small, .big{
-	text-align: center;
 	line-height: 100%;
-}
-.fechaProd{
-	
 }
 .fechaDiaMesAnio{
 	padding: 0 10px 0;
@@ -181,5 +179,18 @@ div.proyecto > .inner {
 }
 .fechaCierreProd{
 	line-height: 65%;
+}
+.productStyle .two-cols {
+	display:inline-block;
+	width: 50%;
+}
+.productStyle .two-cols .inside {
+	padding-top: 10px;
+	color:#606060;
+}
+.productStyle .two-cols.first .inside {
+	border-right: 1px solid #009ed3;
+}
+.productStyle .two-cols.second .inside {
 	padding-left: 10px;
 }

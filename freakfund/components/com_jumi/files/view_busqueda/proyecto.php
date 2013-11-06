@@ -283,12 +283,12 @@ function pageselectCallback (page_index, jq) {
 		var trimmed = descripcion.substring(0, largo);
 		
 		newcontent += '<div id="'+members[i].type+'">'
-		newcontent += '<div class="proyecto col' + last + ' ancho">';
+		newcontent += '<div class="proyectos col' + last + ' ancho">';
 		newcontent += '<div class="inner">';
 		newcontent += '<div class="titulo">';
 		newcontent += '<div class="tituloText inner">';
 		newcontent += '<span class="tituloProy"><a href="' + link + '">' + trimmed + '</a></span>';
-		newcontent += '<span class="catSubCat">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
+		newcontent += '<span class="catSubCat upper">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
@@ -298,22 +298,23 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		
 		if(members[i].status == 5){
-			newcontent += '<div class="progress-bar" style="width: '+ porcentajeRecaudado +'%; text-align:center;"></div>';
-			newcontent += '<div class="cuentas">Monto recaudado: $<span class="number">'+ recaudado +'</span></div>';
+			newcontent += '<div class="fondo_barra">
+			newcontent += '<span class"txt_barra">'+ porcentajeRecaudado +'%</span>
+			newcontent += '<span class="barra" style="width: '+ porcentajeRecaudado +'%; text-align:center;"></span>';
+			newcontent += '</div>';
+			newcontent += '<div class="cuentas upper"><?php echo JText::_('LABEL_RECAUDADO'); ?>: $<span class="number">'+ recaudado +'</span></div>';
+			newcontent += '<div class="cuentas"><?php echo JText::_('PUNTO_EQUILIBRIO_ABR'); ?>: $<span class="number">'+ breakeven +'</span></div>';
 			newcontent += '<div class="cuentas">'+ members[i].jtextdays +'</div>';
 		}
 		
 		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 0){
 			newcontent += '<div class="productStyle">';
-			newcontent += '<div><div class="big">'+roiInversionistas +'%</div> <div class="small"><?php echo JText::_('LABEL_ROI') ?></div></div>';
-			newcontent += '<div class="middle"><div class="big">'+ roiFinanciadores +'% </div> <div class="small"><?php echo JText::_('LABEL_ROF') ?></div></div>';
-			newcontent += '<div class="fechaProd">';
-			newcontent += '	<div class="fechaDiaMesAnio">';
-			newcontent += '		<div class="big dia">'+ members[i].premiereEndDateArray[0]+'</div>';
-			newcontent += '		<div class="small mesAnio">'+ members[i].premiereEndDateArray[1]+'<br>'+ members[i].premiereEndDateArray[2]+'</div>';
-			newcontent += '	</div>'
-			newcontent += '<div class="fechaCierreProd"><?php echo JText::_('FECHA_CIERRE'); ?></div>';
-			newcontent += '	</div>';
+			newcontent += '<div class="box1 two-cols first"><div class="inside">';
+			newcontent += '<div class="big">'+ roiFinanciadores +'% </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
+			newcontent += '</div>';
+			newcontent += '<div class="box1 two-cols second"><div class="inside">';
+			newcontent += '<div class="big">'+ roiInversionistas +'%</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
+			newcontent += '</div>';
 			newcontent += '</div>';
 		}
 		

@@ -21,8 +21,8 @@
 				<field name="tipodepro" type="list" default="cerrar" label="Select an option" description="">
 				  <option value="cerrar">más cercanos a cerrar</option>
 				  <option value="apoyados">más apoyados</option>
-				  <option value="ultimosROI">ultimos por más rentables</option>
-				</field>
+<!-- 			  <option value="ultimosROI">ultimos por más rentables</option>
+-->				</field>
 				<field name="cantidad" type="integer" default="12" label="Cantidad" description="12" first="4" last="20" step="4" />
 				<field
 					name="layout"
