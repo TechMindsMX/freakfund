@@ -123,6 +123,7 @@ div.proyectos > .inner {
 }
 .txt_barra {
 	float:right;
+	margin-top: -19px;
 }
 .proyectos .barra {
 	display: inherit;
@@ -159,6 +160,9 @@ div.proyectos > .inner {
 .big{
 	font-size: 36px;
 	color: #009ED3;
+}
+#rt-mainbody-surround .productStyle .box1 {
+	background: transparent;
 }
 .productStyle .small{
 	font-size: 14px;

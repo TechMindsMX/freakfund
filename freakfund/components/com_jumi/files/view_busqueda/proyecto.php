@@ -264,7 +264,7 @@ function pageselectCallback (page_index, jq) {
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
 		var recaudado = members[i].recaudado != null ? members[i].recaudado : " ";
-		var porcentajeRecaudado = members[i].recaudado != null ? (members[i].recaudado/members[i].breakeven)*100 : 0;
+		var porcentajeRecaudado = members[i].recaudado != null ? ((members[i].recaudado/members[i].breakeven)*100).toFixed(2) : 0;
 		var cierreFinanciamiento = members[i].fundEnd != null ? members[i].fundEnd : " "; 
 		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores : " ";
 		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas : " ";
@@ -298,8 +298,8 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		
 		if(members[i].status == 5){
-			newcontent += '<div class="fondo_barra">
-			newcontent += '<span class"txt_barra">'+ porcentajeRecaudado +'%</span>
+			newcontent += '<div class="fondo_barra">';
+			newcontent += '<span class="txt_barra"><?php echo JText::_('LABEL_RECAUDADO'); ?>: '+ porcentajeRecaudado +'%</span>';
 			newcontent += '<span class="barra" style="width: '+ porcentajeRecaudado +'%; text-align:center;"></span>';
 			newcontent += '</div>';
 			newcontent += '<div class="cuentas upper"><?php echo JText::_('LABEL_RECAUDADO'); ?>: $<span class="number">'+ recaudado +'</span></div>';
