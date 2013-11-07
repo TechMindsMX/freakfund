@@ -10,6 +10,8 @@ if ($usuario->guest == 1) {
 }
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
+
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 $token 			= JTrama::token();
@@ -18,11 +20,14 @@ $usuario		= JFactory::getUser();
 $idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $friends		= JTrama::searchFriends($idMiddleware->idJoomla);
-$callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
-$errorCallback 	= JURI::base().'index.php?option=com_jumi&view=appliction&fileid=29';
+$errorCode 		= $input->get("error",0,"int");
+$from			= $input->get("from",0,"int");
+$callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=28&fileid=29';
 $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $arrayFriends	= explode(',',$friends->friends);
 $arregloEnvio   = '';
+
+$token .= 'kjhkjhkjhkjhkj';
 
 foreach($arrayFriends as $key => $value){
 	if($value != 378 && $value != ""){
