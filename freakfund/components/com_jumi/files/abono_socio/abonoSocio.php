@@ -10,6 +10,7 @@ if ($usuario->guest == 1) {
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
 
 $token 				= JTrama::token();
 $base 				= JUri::base();
@@ -17,7 +18,7 @@ $usuario 			= JFactory::getUser();
 $document 			= JFactory::getDocument();
 $app 				= JFactory::getApplication();
 $idMiddleware		= UserData::getUserMiddlewareId($usuario->id);
-$callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32';
+$callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32&from=32';
 $pathJumi 			= $base.'components/com_jumi/files/classIncludes/';
 $accion				= MIDDLE.PUERTO.'/trama-middleware/rest/paypal/payment';
 $usuario->balance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
@@ -25,6 +26,10 @@ $jinput 			= $app->input;
 $amount 			= $jinput->get('amount', '', 'INT');
 $balance 			= $jinput->get('balance', '', 'INT');
 $timestamp 			= $jinput->get('timestamp', '', 'INT');
+$errorCode 			= $jinput->get('error', '', 'INT');
+$from	 			= $jinput->get('from', '', 'INT');
+
+errorClass::manejoError($errorCode, $from);
 
 $html = '<div>
 		 	<h3>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR').'</h3>

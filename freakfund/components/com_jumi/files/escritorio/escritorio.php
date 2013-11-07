@@ -13,10 +13,12 @@ if ($usuario->guest == 1) {
 jimport("trama.class");
 jimport("trama.jsocial");
 jimport("trama.usuario_class");
-
+jimport("trama.error_class");
 
 $base 							= JUri::base();
 $input 							= $app->input;
+$errorCode				 		= $input->get("error", 0, "int");
+$from							= $input->get("from", 0, "int");
 $jumiurl		 				= 'index.php?option=com_jumi&view=application&fileid=';
 $htmlInversionActual 			= '';
 $htmlFinanActual		 		= '';
@@ -26,6 +28,8 @@ $datosgenerales 				= UserData::datosGr($idMiddleware->idJoomla);
 $datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
+
+errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');

@@ -12,6 +12,8 @@ if ($usuario->guest == 1) {
 }
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.error_class');
+
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 $token 			= JTrama::token();
@@ -19,6 +21,7 @@ $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
 $idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
+
 $action 		= '#';
 
 ?>

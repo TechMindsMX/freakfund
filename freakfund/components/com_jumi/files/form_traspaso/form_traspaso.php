@@ -22,12 +22,14 @@ $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $friends		= JTrama::searchFriends($idMiddleware->idJoomla);
 $errorCode 		= $input->get("error",0,"int");
 $from			= $input->get("from",0,"int");
-$callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=28&fileid=29';
+$callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
 $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $arrayFriends	= explode(',',$friends->friends);
 $arregloEnvio   = '';
 
 $token .= 'kjhkjhkjhkjhkj';
+
+errorClass::manejoError($errorCode, $from);
 
 foreach($arrayFriends as $key => $value){
 	if($value != 378 && $value != ""){
@@ -80,7 +82,6 @@ echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>'
 	<input type="hidden" name="token" value="<?php echo $token?>"> 
 	<input type="hidden" name="senderId" value="<?php echo $idMiddleware->idMiddleware; ?>"> 
 	<input type="hidden" name="callback" value="<?php echo $callback ?>"> 
-	<input type="hidden" name="errorCallback" value="<?php echo $errorCallback ?>"> 
 	
 		<?php 	
 		if ($datosUsuario->balance == null ){
