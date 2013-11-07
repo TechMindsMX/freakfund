@@ -368,5 +368,23 @@ class JTrama
 		$obj->dateDiff = date_diff($fecha1,$fecha2);
 		
 	}
+	public static function getProjectbyUser ($middlewareId){
+		$jsonobj= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/projects/'.$middlewareId));
+		if(isset($jsonobj)) {
+			foreach ($jsonobj as $key => $value) {
+				JTrama::formatDatosProy($value);
+			}
+		}
+		return $jsonobj;
+	}
+	public static function getProductbyUser ($middlewareId){
+		$jsonobj2= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/products/'.$middlewareId));
+		if(isset($jsonobj2)) {
+			foreach ($jsonobj2 as $key => $value) {
+				JTrama::formatDatosProy($value);
+			}
+		}
+		return $jsonobj2;
+	}
 }
 ?>

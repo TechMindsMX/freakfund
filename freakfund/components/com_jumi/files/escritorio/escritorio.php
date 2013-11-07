@@ -28,38 +28,43 @@ $datosgenerales 				= UserData::datosGr($idMiddleware->idJoomla);
 $datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
-
+$objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
+$objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
 errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
-
+var_dump($objProyectos);
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
-foreach ($proyectos as $key => $value) {
-	if ($value->status == 5 || $value->status == 6) {
-		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
-	} elseif ( $value->status == 7 ) {
-		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
-	}else {
-		$htmlInversionActual .= @htmlInversionActual(nul, null);
-		$htmlFinanActual .= @htmlFinanActual(null,null);
-		break;
-	}
+// foreach ($proyectos as $key => $value) {
+// 	if ($value->status == 5 || $value->status == 6) {
+// 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
+// 	} elseif ( $value->status == 7 ) {
+// 		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+// 	}else {
+// 		$htmlInversionActual .= @htmlInversionActual(nul, null);
+// 		$htmlFinanActual .= @htmlFinanActual(null,null);
+// 		break;
+// 	}
+// }
+foreach($objProyectos as $key => $value){
+	$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 }
-
+foreach($objProductos as $key => $value){
+	$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+}
 function moreProData($value, $datosgenerales) {
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		JTrama::getEditUrl($value);
 		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" class="table-cartera"/>';
-		$value->investmentValue = 1000;
-		$value->roi = $value->investmentValue * ($value->tri / 100);
+		$value->roi = $value->investedAmount * ($value->tri / 100);
 		if ( $value->status  == 5 || $value->status == 6 ) {
-			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investmentValue;
+			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investedAmount;
 		} elseif ( $value->status == 7 ) {
-			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investmentValue;
+			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investedAmount;
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 		}
 	}
@@ -75,7 +80,7 @@ function htmlInversionActual($value, $datosgenerales) {
 								<td>' . $value->fundEndDate . '</td>
 								<td>$<span class="number">' . $value->breakeven . '</span></td>
 								<td>' . $value->porcentajeRecaudado . ' %</td>
-								<td>$<span class="number">' . $value->investmentValue . '</span></td>
+								<td>$<span class="number">' . $value->investedAmount . '</span></td>
 									</tr>';
 	} else {
 		$htmlInversionActual = '<tr class="middle-td">
@@ -90,7 +95,7 @@ function htmlFinanActual($value, $datosgenerales){
 		$htmlFinanActual = '<tr class="middle-td">
 							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
 							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td class="middle-td">$<span class="number">' . $value->investmentValue . '</span></td>
+							<td class="middle-td">$<span class="number">' . $value->investedAmount . '</span></td>
 							<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
 							<td class="middle-td">' . $value->tri . ' %</td>
 							</tr>';
