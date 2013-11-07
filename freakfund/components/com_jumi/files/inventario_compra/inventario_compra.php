@@ -12,6 +12,7 @@ if ($usuario->guest == 1) {
 
 jimport('trama.class');
 jimport("trama.usuario_class");
+jimport("trama.error_class");
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
@@ -30,8 +31,9 @@ $action 		= MIDDLE.PUERTO.'/trama-middleware/rest/project/consumeUnits';
 
 $response		= $input->get("response",0,"int"); // RESPUESTA EXITO
 $error			= $input->get("error",0,"int");
+$from			= $input->get("appId",0,"int");
 
-
+errorClass::manejoError($error, $from, $proyid);
 ?>
 <script>
 jQuery(document).ready(function(){

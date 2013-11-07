@@ -9,15 +9,18 @@ class errorClass {
 			case 32:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;				
 				break;
+		
 			case 29:
-				if($errorCode == 1) {
+				if($errorCode == 1 || $errorCode == 4) {
 					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;
-				} 
-				if( $errorCode == 2) {
+				} elseif( $errorCode == 2) {
 					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid=32';
-				}				
+				}
 				break;
-			
+			case 27:
+				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen.'&proyid='.$id;				
+				break;
+				
 			default:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid=24';
 				break;
@@ -34,6 +37,10 @@ class errorClass {
 				break;
 			case 3:
 				$msg = JText::_('ERROR_NOUNITS');
+				$redirect = true;
+				break;
+			case 4:
+				$msg = JText::_('ERROR_USERNOFOUND');
 				$redirect = true;
 				break;
 				
