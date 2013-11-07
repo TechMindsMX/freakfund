@@ -15,9 +15,12 @@ jimport('trama.usuario_class');
 require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
-$token 			= JTrama::token();
-$idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
-$datosUsuario 	= UserData::getUserBalance($idMiddleware->idMiddleware);
+$token 					= JTrama::token();
+$idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
+$datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
+$datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
+
+var_dump($datosUsuarioMiddleware, $datosUsuarioJoomla);
 
 //definicion de campos del formulario
 $action = '#';

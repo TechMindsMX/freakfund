@@ -6,10 +6,12 @@ class UserData {
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query2 = $db->getQuery(true);
-		
+
 		$query
 			->select('*')
 			->from('perfil_persona')
+			->join('INNER','perfil_direccion ON perfil_persona.id = perfil_direccion.perfil_persona_idpersona')
+			->join('INNER', 'perfil_datosfiscales ON perfil_persona.id = perfil_datosfiscales.perfil_persona_idpersona')
 			->where('users_id = '.$userid.' && perfil_tipoContacto_idtipoContacto = 1');
 			
 		$db->setQuery( $query );
@@ -17,8 +19,8 @@ class UserData {
 		$temporal = $db->loadObjectList();
 		
 		$query2->select ('avg(rating) as score')
-			->from ('perfil_rating_usuario')
-			->where('idUserCalificado = '.$userid);
+			   ->from ('perfil_rating_usuario')
+			   ->where('idUserCalificado = '.$userid);
 
 		$db->setQuery( $query2 );
 		$score = $db->loadObject();		
@@ -155,6 +157,24 @@ class UserData {
 		$id = $db->loadResult();
 
 		return $id;
+	}
+	
+	public static function existingUser($idUsuario){
+		
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+		
+		$query
+			->select('*')
+			->from('perfil_persona')
+			->where('users_id = '.$idUsuario);
+		
+		$db->setQuery( $query );
+				
+		$resultado = $db->loadObjectList();
+		
+		return empty($resultado)?false:true;
+		
 	}
 }
 

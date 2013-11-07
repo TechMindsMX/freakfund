@@ -44,7 +44,7 @@ class getDatosObj {
 		->select('*')
 		->from('perfil_direccion')
 		->where('perfil_persona_idpersona = '.$idPersona);
-	
+		
 		$db->setQuery( $query );
 	
 		$resultado = $db->loadObject();
@@ -98,7 +98,6 @@ class getDatosObj {
 		->select('*')
 		->from('perfil_datosfiscales')
 		->where('perfil_persona_idpersona = '.$idPersona);
-	
 		$db->setQuery( $query );
 	
 		$resultado = $db->loadObject();
