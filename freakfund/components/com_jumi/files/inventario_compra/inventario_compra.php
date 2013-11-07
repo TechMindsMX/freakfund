@@ -143,7 +143,7 @@ jQuery(document).ready(function(){
 					<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
 					<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
 					<label>'.JText::_('CANTIDAD_COMPRAR').':</label>
-					<input class="input_compra validate[required,custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />
+					<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />
 					<div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div>
 					<hr />
 					</div>';
