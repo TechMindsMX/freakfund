@@ -34,7 +34,7 @@ errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
-var_dump($objProyectos);
+
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
@@ -62,7 +62,7 @@ function moreProData($value, $datosgenerales) {
 		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" class="table-cartera"/>';
 		$value->roi = $value->investedAmount * ($value->tri / 100);
 		if ( $value->status  == 5 || $value->status == 6 ) {
-			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->investedAmount;
+			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->fundedAmount;
 		} elseif ( $value->status == 7 ) {
 			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investedAmount;
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
@@ -80,7 +80,7 @@ function htmlInversionActual($value, $datosgenerales) {
 								<td>' . $value->fundEndDate . '</td>
 								<td>$<span class="number">' . $value->breakeven . '</span></td>
 								<td>' . $value->porcentajeRecaudado . ' %</td>
-								<td>$<span class="number">' . $value->investedAmount . '</span></td>
+								<td>$<span class="number">' . $value->fundedAmount . '</span></td>
 									</tr>';
 	} else {
 		$htmlInversionActual = '<tr class="middle-td">
