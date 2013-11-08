@@ -166,4 +166,9 @@ input[disabled="disabled"] {
 
 #datos_usuario {
 	max-width: 500px;
+	font-size: 18px;
+	line-height: 32px;
+}
+#datos_usuario td {
+	padding-left:15px;
 }

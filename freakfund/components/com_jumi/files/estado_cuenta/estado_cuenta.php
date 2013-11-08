@@ -20,7 +20,7 @@ $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
 
-var_dump($datosUsuarioMiddleware, $datosUsuarioJoomla);
+
 
 //definicion de campos del formulario
 $action = '#';
@@ -30,36 +30,27 @@ include_once ("objetote.php");
 $tableHtml = "<table class='table table-striped' id='edocta_table'>";
 $tableHtml .= "<tr id='cabezera'>";
 $tableHtml .= "<th>Fecha<th />";
-$tableHtml .= "<th>Movimiento<th />";
-$tableHtml .= "<th>Tipo<th />";
-$tableHtml .= "<th>Detalle<th />";
+$tableHtml .= "<th>Descripción<th />";
 $tableHtml .= "<th>Referencia<th />";
-$tableHtml .= "<th>Insitucion<th />";
-$tableHtml .= "<th>Tasa<th />";
-$tableHtml .= "<th>Cantidad<th />";
-$tableHtml .= "<th>Unitario<th />";
-$tableHtml .= "<th>Subtotal<th />";
+$tableHtml .= "<th>Retiro/Cargo<th />";
+$tableHtml .= "<th>Depósito/Abono<th />";
 $tableHtml .= "<th>Saldo<th />";
-$tableHtml .= "<th>Notas<th />";
 $tableHtml .= "</tr>";
 
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
 foreach ($arregloobjetos as $obj) {
+	$algo1 = ($obj->withdraw != '')? '$<span style="color:red;" class="number">'.$obj->withdraw.'</span>' : ' ';
+	$algo2 = ($obj->deposit != '')? '$<span class="number">'.$obj->deposit.'</span>' : ' ';
+	
 	$tableHtml .= '<tr id="'.$obj->tipo.'">';
-	$tableHtml .= '<td>'.$obj->fecha. '<td />';
-	$tableHtml .= '<td>'.$obj->movimiento.'<td />';
-	$tableHtml .= '<td>'.$obj->tipo.'<td />';
-	$tableHtml .= '<td>'.$obj->detalle.'<td />';
-	$tableHtml .= '<td>'.$obj->referencia.'<td />';
-	$tableHtml .= '<td>'.$obj->institucion.'<td />';
-	$tableHtml .= '<td>'.$obj->tasa.'<td />';
-	$tableHtml .= '<td>'.$obj->cantidad.'<td />';
-	$tableHtml .= '<td>$<span class="number">'.$obj->unitario.'</span><td />';
-	$tableHtml .= '<td>$<span class="number">'.$obj->subtotal.'</span><td />';
-	$tableHtml .= '<td>$<span class="number">'.$obj->saldo.'</span><td />';
-	$tableHtml .= '<td>'.$obj->notas.'<td />';
+	$tableHtml .= '<td>'.$obj->date. '<td />';
+	$tableHtml .= '<td>'.$obj->reference.'<td />';
+	$tableHtml .= '<td>'.$obj->description.'<td />';
+	$tableHtml .= '<td>'.$algo1.'<td />';
+	$tableHtml .= '<td>'.$algo2.'<td />';
+	$tableHtml .= '<td>$<span class="number">'.$obj->currentBalance.'</span><td />';
 	$tableHtml .= '</tr>';
 }
 
@@ -93,39 +84,7 @@ $selectTipo .='</select>';
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
 <div>
-	<div>
-		<table class='table table-striped' id="datos_usuario">
-			<tr>
-				<td><?php echo JText::_('SOCIO');?></td>
-				<td><?php echo JFactory::getUser($idMiddleware->idJoomla)->name;?></td>
-			</tr>
-			<tr>
-				<td><?php echo JText::_('SALDO');?></td>
-				<td>$<span class="number"><?php echo $datosUsuario->balance;?></span></td>
-			</tr>
-			<tr>
-				<td>Financiamientos</td>
-				<td>$<span class="number"><?php echo $sumaFinanciamientos;?></span></td>
-			</tr>
-			<tr>
-				<td>Inversiones</td>
-				<td>$<span class="number"><?php echo $sumaInversiones;?></span></td>
-			</tr>
-			<tr>
-				<td>Valor de cartera</td>
-				<td>$<span class="number"><?php echo $valorCartera;?></span></td>
-			</tr>
-			<tr>
-				<td>Retornos acumulados</td>
-				<td>$<span class="number"><?php echo $sumaRetornos;?></span></td>
-			</tr>
-			<tr>
-				<td>Utilidad acumulada</td>
-				<td>$<span class="number"><?php echo $sumaUtilidad;?></span></td>
-			</tr>
-		</table>
-	</div>
-
+<div style="width:100%; float:left;">
 	<form id="form_cuenta" action="<?php echo $action; ?>" method="POST">
 	
 		<select name="fechas" >
@@ -147,10 +106,67 @@ $selectTipo .='</select>';
   		<?php echo JText::_('RANGO_FECHA_FIN');  ?> <input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechafin">
 		
 		<input type="button" class="button" value="Consultar" />
-		
+	</div>
+	<div style="float:left; width:40%;" >
+		<table  id="datos_usuario">
+			<tr>
+			
+				<td colspan="3" ><strong><?php echo JFactory::getUser($idMiddleware->idJoomla)->name;?></strong></td>
+			</tr>
+			<tr>
+				<td ><?php echo $datosUsuarioJoomla->nomCalle?></td>
+				<td >No. <?php echo $datosUsuarioJoomla->noExterior?></td>
+				<td >Int. <?php echo isset($datosUsuarioJoomla->noInterior)? $datosUsuarioJoomla->noInterior : '';?></td>
+				
+			</tr>
+			<tr>
+				<td>Col.<?php echo $datosUsuarioJoomla->perfil_colonias_idcolonias?></td>
+				<td>Del.<?php echo $datosUsuarioJoomla->perfil_delegacion_iddelegacion?></td>
+			</tr>
+			<tr>
+				
+				<td><?php echo $datosUsuarioJoomla->perfil_estado_idestado?></td>
+				<td><?php echo JText::_('CP');?>: <?php echo $datosUsuarioJoomla->perfil_codigoPostal_idcodigoPostal?></td>
+				
+			</tr>
+			<tr>
+				<td>RFC: <?php echo $datosUsuarioJoomla->rfcRFC?></td>
+			</tr>
+			<tr>
+				<td colspan="3">Número de cuenta: <strong>34639278457868943</strong></td>
+			</tr>
+		</table>
+	</div>
+	<div style="float:right; width:40%;">
+		<table class='table '>
+			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
+			<tr>
+				<td><?php echo JText::_('SALDO_INICIAL_PERIODO');?></td>
+				<td>$<span class="number"><?php echo $datosUsuarioMiddleware->balance;?></span></td>
+			</tr>
+			<tr>
+				<td><?php echo JText::_('SUMATORIA_DEPOSITOS');?></td>
+				<td>$<span class="number"><?php echo $sumaFinanciamientos;?></span></td>
+			</tr>
+			<tr>
+				<td><?php echo JText::_('SUMATORIA_RETIROS');?></td>
+				<td>$<span style="color:red;" class="number"><?php echo $sumaInversiones;?></span></td>
+			</tr>
+			<tr>
+				<td><?php echo JText::_('SALDO_FINAL_PERIODO');?></td>
+				<td>$<span class="number"><?php echo $valorCartera;?></span></td>
+			</tr>
+			<tr>
+				<td><?php echo JText::_('PERIODO_FECHA_INI_FIN');?></td>
+				<td>06/2013  al  07/2013</td>
+			</tr>
+		</table>
+	</div>
+	<div style="clear:both"></div>
+		<div>
 	</form>
 		<?php echo $selectTipo; ?>
-		
+	</div>	
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
 		</div>
