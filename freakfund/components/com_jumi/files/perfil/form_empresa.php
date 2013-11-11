@@ -1,10 +1,19 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "doFict Access Is Not Allowed" );
+
+	$usuario = JFactory::getUser();
+	$app = JFactory::getApplication();
+	if ($usuario->guest == 1) {
+		$return = JURI::getInstance()->toString();
+		$url    = 'index.php?option=com_users&view=login';
+		$url   .= '&return='.base64_encode($return);
+		$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	}
+
 	include_once 'utilidades.php';
 	
 	$pathJumi		= 'components/com_jumi/files/perfil';
 	$datos 			= new getDatosObj;
-	$usuario 		= JFactory::getUser();
 	$accion 		= JURI::base(true).'/index.php?option=com_jumi&view=application&fileid=7&form=perfil_datosfiscales';
 	$datosgenerales	= $datos->datosGenerales($usuario->id);
 	$existenDatos	= !is_null($datos->datosFiscales($datosgenerales->id));
