@@ -14,7 +14,8 @@ class admincuentasModeladmincuentas extends JModelList
 		
 		$query->select ('c3rn2_users.name, c3rn2_users_middleware.idJoomla, c3rn2_users_middleware.idMiddleware')
 			  ->from ('c3rn2_users')
-			  ->join('INNER', 'c3rn2_users_middleware ON c3rn2_users_middleware.idJoomla = c3rn2_users.id');
+			  ->join('INNER', 'c3rn2_users_middleware ON c3rn2_users_middleware.idJoomla = c3rn2_users.id')
+			  ->where('idJoomla != 378');
 		
 		$db->setQuery($query);
 		
