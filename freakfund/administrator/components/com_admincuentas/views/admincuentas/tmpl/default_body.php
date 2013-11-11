@@ -16,7 +16,7 @@ foreach ($this->items as $key => $value) {
 			$<span class="number"><?php echo $value->balance; ?></span>
 		</td>
 		<td align="middle">
-			<a class="button" href="index.php?option=com_admincuentas"><?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRASPASO'); ?></a>
+			<a class="button" href="index.php?option=com_admincuentas&task=traspasocuentas&id=<?php echo $value->idMiddleware; ?>"><?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRASPASO'); ?></a>
 		</td>
 	</tr>
 <?php

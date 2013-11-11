@@ -13,3 +13,10 @@ a.button{
 		background: #009ed3 !important;
 	}
 }
+.datos{
+	margin-bottom: 15px;
+	text-align: left;
+}
+.labels{
+	font-weight: bolder;
+}
