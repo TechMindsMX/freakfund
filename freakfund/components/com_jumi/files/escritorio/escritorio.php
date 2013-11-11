@@ -68,7 +68,7 @@ function moreProData($value, $datosgenerales) {
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 		}
 	}
-	$datosgenerales->portfolioValue = @$datosgenerales->actualInvestments + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
+	$datosgenerales->portfolioValue = @$datosgenerales->actualFundings + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
 }
 
 function htmlInversionActual($value, $datosgenerales) {
@@ -89,6 +89,7 @@ function htmlInversionActual($value, $datosgenerales) {
 	}
 	return $htmlInversionActual;
 }
+
 function htmlFinanActual($value, $datosgenerales){
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);
@@ -123,11 +124,11 @@ function htmlFinanActual($value, $datosgenerales){
 				</div>
 			</span>
 			<span>
-				<label class="label-cartera"><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></label>
+				<label class="label-cartera"><?php echo JText::_('ESCRIT_ACTUAL_FUNDING_TOTAL'); ?></label>
 				<div class="bordesH3-centradas">
 					<h3 class="cartera-h3">$
 						<span class="number">
-							<?php echo isset($datosgenerales->actualInvestments)? $datosgenerales->actualInvestments : 0; ?>
+							<?php echo isset($datosgenerales->actualFundings)? $datosgenerales->actualFundings : 0; ?>
 						</span>
 					</h3>
 				</div>
@@ -156,13 +157,15 @@ function htmlFinanActual($value, $datosgenerales){
 		
 		
 		<div class="module-title">
-			<h2 class="title"><?php echo JText::_('ESCRIT_ACTUAL_FUNDINGS'); ?></h2>
+			<h2 class="title"><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></h2>
 		</div>
 		
 		<div class="cartera-seccion-1">
 			<h3>
-				<span class="label-compras"><?php echo JText::_('ESCRIT_ACTUAL_FUNDING'); ?></span>
-				$<span class="number"><?php echo isset($datosgenerales->actualFundings)? $datosgenerales->actualFundings : 0; ?></span>
+				<span class="label-compras"><?php echo JText::_('ESCRIT_ACTUAL_INVEST_TOTAL'); ?></span>$
+						<span class="number">
+							<?php echo isset($datosgenerales->actualInvestments)? $datosgenerales->actualInvestments : 0; ?>
+						</span>
 			</h3>
 		</div>
 		<hr class="hr-cartera">
