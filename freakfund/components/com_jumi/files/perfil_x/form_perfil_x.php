@@ -1,7 +1,14 @@
 <?php
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 
-$usuario = JFactory::getUser();
+	$usuario = JFactory::getUser();
+	$app = JFactory::getApplication();
+	if ($usuario->guest == 1) {
+		$return = JURI::getInstance()->toString();
+		$url    = 'index.php?option=com_users&view=login';
+		$url   .= '&return='.base64_encode($return);
+		$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+	}
 
 $base = JUri::base();
 $document = JFactory::getDocument();
