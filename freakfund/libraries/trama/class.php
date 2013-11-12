@@ -239,7 +239,7 @@ class JTrama
 		$value->premiereStartDateCode = 1391003651000;
 		
 		if ($value->balance != 0) {
-			$value->porcentajeRecaudado = $value->balance / $value->breakeven;
+			$value->porcentajeRecaudado = round($value->balance / $value->breakeven,2);
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
