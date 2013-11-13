@@ -71,8 +71,8 @@ foreach ($json as $key => $value) {
 	$value->statusName 	= JTrama::getStatusName($value->status);
 	
 	$string = strip_tags($value->description);
-	$value->description = (strlen($string > 113)?substr($string,0,110).'...':$string);
-	
+	$value->description = (strlen($string) > 113 ? substr($string,0,110).'...' : $string);
+
 	JTrama::formatDatosProy($value);
 	
 	JTrama::dateDiff($value->fundEndDate, $value);
