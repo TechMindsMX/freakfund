@@ -1,0 +1,17 @@
+/** text/css **/
+.datos{
+	margin-bottom: 15px;
+	text-align: left;
+}
+.labels{
+	font-weight: bolder;
+}
+.textos{
+	display: inline-block;
+	width: 110px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #AAA;
+}
+.derecha{
+	text-align: right;
+}
