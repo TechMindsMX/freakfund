@@ -20,8 +20,8 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 <form id="formstatus" action="" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
-                <thead><?php echo $this->loadTemplate('head');?></thead>
-                <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>
-                <tbody><?php echo $this->loadTemplate('body');?></tbody>
+            <thead><?php echo $this->loadTemplate('head');?></thead>
+            <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>
+            <tbody><?php echo $this->loadTemplate('body');?></tbody>
         </table>
 </form>

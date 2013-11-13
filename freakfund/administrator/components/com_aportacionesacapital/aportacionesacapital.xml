@@ -24,7 +24,7 @@
 	        <menu>aportecapital</menu>
 	        <files folder="admin">
 	                <filename>index.html</filename>
-	                <filename>aportecapital.php</filename>
+	                <filename>aportacionescapital.php</filename>
 	                <filename>controller.php</filename>
 	                <folder>models</folder>
 	                <folder>views</folder>

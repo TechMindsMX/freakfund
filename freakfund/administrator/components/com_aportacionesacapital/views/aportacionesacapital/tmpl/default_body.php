@@ -12,6 +12,9 @@ foreach ($this->items as $key => $value) {
 		<td align="absmiddle">
 			<?php echo $value->producerName; ?>
 		</td>
+		<td align="absmiddle">
+			$<span class="number"><?php echo $value->breakeven; ?></span>
+		</td>
 	</tr>
 <?php
 }
