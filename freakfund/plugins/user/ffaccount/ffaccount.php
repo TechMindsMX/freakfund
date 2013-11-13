@@ -3,6 +3,8 @@
 defined('_JEXEC') or die;
 
 jimport('trama.class');
+jimport('trama.usuario_class');
+
 class plgUserFFAccount extends JPlugin
 {
 
@@ -82,4 +84,108 @@ class plgUserFFAccount extends JPlugin
 		return $server_output;
 
 	}
+	
+	function onUserLogin($user, $options = array()) {
+		$instance = $this->_getUser($user, $options);
+
+		if ($instance instanceof Exception) {
+			return false;
+		}
+
+		if ($instance->get('block') == 1) {
+			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_NOLOGIN_BLOCKED'));
+			return false;
+		}
+
+		if (!isset($options['group'])) {
+			$options['group'] = 'USERS';
+		}
+		$result	= $instance->authorise($options['action']);
+		if (!$result) {
+
+			JError::raiseWarning(401, JText::_('JERROR_LOGIN_DENIED'));
+			return false;
+		}
+		
+		$instance->set('guest', 0);
+
+		$session = JFactory::getSession();
+		$session->set('user', $instance);
+
+		$db = JFactory::getDBO();
+
+		$app = JFactory::getApplication();
+		$app->checkSession();
+
+		$db->setQuery(
+			'UPDATE '.$db->quoteName('#__session') .
+			' SET '.$db->quoteName('guest').' = '.$db->quote($instance->get('guest')).',' .
+			'	'.$db->quoteName('username').' = '.$db->quote($instance->get('username')).',' .
+			'	'.$db->quoteName('userid').' = '.(int) $instance->get('id') .
+			' WHERE '.$db->quoteName('session_id').' = '.$db->quote($session->getId())
+		);
+		$db->query();
+
+		$instance->setLastVisit();
+
+		
+		$prop = $instance->getProperties();
+		$perfilff = UserData::datosGr($instance->id);
+		
+		$faltanDatos = new stdClass;
+		if ( !isset($perfilff) OR $perfilff->iddireccion == '' OR $perfilff->iddatosFiscales == '' ) {
+			$haystack = $options['entry_url'];
+			$needle = 'administrator';
+			if ( !strstr($haystack, $needle)) { // verifica que no este en el admin
+				$faltanDatos->check = true;
+			}
+		}
+
+		if ( isset($faltanDatos->check) ) {
+			$app =& JFactory::getApplication();
+			$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
+			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
+		}
+				
+	}
+	
+	protected function _getUser($user, $options = array())
+	{
+		$instance = JUser::getInstance();
+		if ($id = intval(JUserHelper::getUserId($user['username'])))  {
+			$instance->load($id);
+			return $instance;
+		}
+
+		jimport('joomla.application.component.helper');
+		$config	= JComponentHelper::getParams('com_users');
+		// Default to Registered.
+		$defaultUserGroup = $config->get('new_usertype', 2);
+
+		$acl = JFactory::getACL();
+
+		$instance->set('id'			, 0);
+		$instance->set('name'			, $user['fullname']);
+		$instance->set('username'		, $user['username']);
+		$instance->set('password_clear'	, $user['password_clear']);
+		$instance->set('email'			, $user['email']);	// Result should contain an email (check)
+		$instance->set('usertype'		, 'deprecated');
+		$instance->set('groups'		, array($defaultUserGroup));
+
+		//If autoregister is set let's register the user
+		$autoregister = isset($options['autoregister']) ? $options['autoregister'] :  $this->params->get('autoregister', 1);
+
+		if ($autoregister) {
+			if (!$instance->save()) {
+				return JError::raiseWarning('SOME_ERROR_CODE', $instance->getError());
+			}
+		}
+		else {
+			// No existing user and autoregister off, this is a temporary user.
+			$instance->set('tmp_user', true);
+		}
+
+		return $instance;
+	}
+	
 }
