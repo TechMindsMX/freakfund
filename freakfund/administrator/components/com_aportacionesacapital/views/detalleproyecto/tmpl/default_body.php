@@ -3,7 +3,7 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 $datos = $this->items;
-//var_dump($datos->providers);exit;
+//var_dump($datos);exit;
 ?>
 	<tr>
 		<td align="justify">
@@ -35,14 +35,17 @@ $datos = $this->items;
 				foreach ($datos->providers as $key => $value) {
 					if( $value->producerName != 'Super User' && ($value->providerId != $datos->userId) ){
 						echo '<li>';
-						echo '<a href="index.php?option=com_aportacionesacapital&task=aporteproveedor&id=1&providerId='.$value->providerId.'">'.$value->producerName.'</a>';
+						echo '<a href="index.php?option=com_aportacionesacapital&task=aporteproveedor&id='.$datos->id.'&providerId='.$value->providerId.'&producer=false">'.$value->producerName.'</a>';
 						echo '</li>';
 					}
 				}
 				echo "</ul>";
 			?>
 			<div>
-				<?php echo '<span class="labels">'.JText::_('COM_APORTACIONESCAPITAL_LISTADOPROYECTOS_HEADING_PRODUCTOR').':</span> '.$datos->producerName; ?> 
+				<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_LISTADOPROYECTOS_HEADING_PRODUCTOR');?>:</span> 
+				<a href="index.php?option=com_aportacionesacapital&task=aporteproveedor&id=<?php echo $datos->id; ?>&providerId=<?php echo $datos->userId; ?>&producer=true">
+					<?php echo $datos->producerName; ?>
+				</a> 
 			</div>
 		</td>
 	</tr>

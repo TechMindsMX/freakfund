@@ -9,20 +9,28 @@ jimport('trama.usuario_class');
 class aporteproveedorModelaporteproveedor extends JModelList
 {
 	public function getdetalleProv() {
-		$idProy = JFactory::getApplication()->input;
-		$idProy = $idProy->get('id');
-		
-		$idProv = JFactory::getApplication()->input;
-		$idProv = $idProv->get('providerId');
-		
-		$detalleProveedor = JTrama::getDatos($idProy)->providers;
+		$input				= JFactory::getApplication()->input;
+		$idProy				= $input->get('id');
+		$idProv 			= $input->get('providerId');
+		$producer 			= $input->get('producer');
+		$balance 			= JTrama::getDatos($idProy);
+		$detalleProveedor 	= JTrama::getDatos($idProy)->providers;
 		
 		foreach ($detalleProveedor as $key => $value) {
 			if($value->providerId == $idProv){
 				self::producerIdJoomlaANDName($value, $idProv);
 				$detalleProveedor = $value;
 			}
-		}		
+		}
+		
+		if($producer){
+			$detalleProveedor->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPRODUCTOR_TITLE';
+		} else {
+			$detalleProveedor->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_TITLE';
+		}
+
+		$detalleProveedor->producer = ($producer == 'true') ? true : false;
+		$detalleProveedor->balance	= $balance->breakeven - $balance->balance;
 		
 		return $detalleProveedor;
 	}

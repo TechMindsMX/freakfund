@@ -18,7 +18,7 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 	});
 </script>
 
-<form id="formstatus" action="index.php?option=com_aportacionesacapital&task=confirmtx&id=1&providerId=6" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="index.php?option=com_aportacionesacapital&task=confirmtx" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
             <thead><?php echo $this->loadTemplate('head');?></thead>

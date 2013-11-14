@@ -26,9 +26,8 @@ class detalleProyectoViewdetalleProyecto extends JView
 	        parent::display($tpl);
 	}
     protected function addToolBar()	{
-            JToolBarHelper::title(JText::_('COM_APORTACIONESCAPITAL_DETALLEPROYECTO_TITLE'));
-			JToolBarHelper::back();
-			
+        JToolBarHelper::title(JText::_('COM_APORTACIONESCAPITAL_DETALLEPROYECTO_TITLE'));
+		JToolBarHelper::back();
 	}
 
 }
