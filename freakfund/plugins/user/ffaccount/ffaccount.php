@@ -8,8 +8,7 @@ jimport('trama.usuario_class');
 class plgUserFFAccount extends JPlugin
 {
 
-	public function __construct(& $subject, $config)
-	{
+	public function __construct(& $subject, $config) {
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 		
@@ -17,39 +16,24 @@ class plgUserFFAccount extends JPlugin
 		$this->token = JTrama::token();
 	}
 
-	function onUserAfterSave($user, $isnew, $success, $msg)
-	{
-		if(!$success) {
-			return false; // si el usuario no se graba no hace nada
-		}
-
-		$user_id = (int)$user['id']; // convierte el user id a int sin importar que sea
+	function onFirstLogin($user) {
+		$user_id = (int)$user->id; // convierte el user id a int sin importar que sea
 
 		if (empty($user_id)) {
 			die('invalid userid');
 			return false; // sale si el user_id es vacio
 		}
 
-		$db = JFactory::getDBO();
-		
-		$query = $db->getQuery(true);
-		$query->select($db->quoteName('id'));
-		$query->from($db->quoteName('#__users'));
-		$query->where($db->quoteName('email').' = \''. $user['email'] . '\'');
-		
-		$db->setQuery( $query );
-		$id = $db->loadResult();
-
-		if($isnew) {
+		if($user->lastvisitDate == '0000-00-00 00:00:00' && $user->activation == '') {
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
-			$respuesta = (empty($user['activation']) && ($user['block'] == 0)) ? $this->sendToMiddle($user['email']) : "blocked"; 
+			$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email) : "blocked"; 
 			
 			$this->saveUserMiddle(json_decode($respuesta),$user);
 		}
 	}
 
-	function saveUserMiddle($idMiddle, $user){
-		$values = $idMiddle->id.','.$user['id'];
+	function saveUserMiddle($idMiddle, $user) {
+		$values = $idMiddle->id.','.$user->id;
 		
 		$db =& JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -85,6 +69,11 @@ class plgUserFFAccount extends JPlugin
 	
 	function onUserLogin($user, $options = array()) {
 		$instance = $this->_getUser($user, $options);
+		
+		// Envío al middleware
+		if ($instance->lastvisitDate == '0000-00-00 00:00:00' && $instance->activation == '') {
+			self::onFirstLogin($instance);
+		}
 
 		if ($instance instanceof Exception) {
 			return false;
@@ -146,8 +135,7 @@ class plgUserFFAccount extends JPlugin
 				
 	}
 	
-	protected function _getUser($user, $options = array())
-	{
+	protected function _getUser($user, $options = array()) {
 		$instance = JUser::getInstance();
 		if ($id = intval(JUserHelper::getUserId($user['username'])))  {
 			$instance->load($id);
