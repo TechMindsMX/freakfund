@@ -81,7 +81,6 @@ class plgUserFFAccount extends JPlugin
 		curl_close ($ch);
 		
 		return $server_output;
-
 	}
 	
 	function onUserLogin($user, $options = array()) {
