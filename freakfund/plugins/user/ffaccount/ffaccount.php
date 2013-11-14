@@ -63,7 +63,6 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	function sendToMiddle ($email) {
-		
 		$data =   array('email' => $email, 
 						'token' => $this->token
 				  );
@@ -97,20 +96,19 @@ class plgUserFFAccount extends JPlugin
 			return false;
 		}
 
-		if (!isset($options['group'])) {
+		if (!isset($options['group'])) {  // verifica que el usuario puede logear
 			$options['group'] = 'USERS';
 		}
 		$result	= $instance->authorise($options['action']);
 		if (!$result) {
-
 			JError::raiseWarning(401, JText::_('JERROR_LOGIN_DENIED'));
 			return false;
 		}
 		
-		$instance->set('guest', 0);
+		$instance->set('guest', 0);   // marca el usuario como logeado
 
 		$session = JFactory::getSession();
-		$session->set('user', $instance);
+		$session->set('user', $instance);   // set sesion de usuario
 
 		$db = JFactory::getDBO();
 
@@ -124,13 +122,13 @@ class plgUserFFAccount extends JPlugin
 			'	'.$db->quoteName('userid').' = '.(int) $instance->get('id') .
 			' WHERE '.$db->quoteName('session_id').' = '.$db->quote($session->getId())
 		);
-		$db->query();
+		$db->query();  // actualiza la sesion en la db
 
-		$instance->setLastVisit();
+		$instance->setLastVisit();  // actualiza el momento de la ultima visita
 
 		
-		$prop = $instance->getProperties();
-		$perfilff = UserData::datosGr($instance->id);
+		$prop = $instance->getProperties();   // busca las propiedades del usuario para tener el id
+		$perfilff = UserData::datosGr($instance->id);  // busca los datos en nuestras tablas
 		
 		$faltanDatos = new stdClass;
 		if ( !isset($perfilff) OR $perfilff->iddireccion == '' OR $perfilff->iddatosFiscales == '' ) {
@@ -141,7 +139,7 @@ class plgUserFFAccount extends JPlugin
 			}
 		}
 
-		if ( isset($faltanDatos->check) ) {
+		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
 			$app =& JFactory::getApplication();
 			$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
 			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
