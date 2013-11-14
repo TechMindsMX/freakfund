@@ -15,3 +15,11 @@
 .derecha{
 	text-align: right;
 }
+.subtitulo{
+	margin-bottom: 15px;
+	font-size: 13px;
+	font-weight: bolder;
+}
+.pie{
+	margin-top: 15px;
+}

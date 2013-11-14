@@ -9,20 +9,35 @@ jimport('trama.usuario_class');
 class confirmtxModelconfirmtx extends JModelList
 {
 	public function getconfirmTx() {
-		$idProy = JFactory::getApplication()->input;
-		$idProy = $idProy->get('id');
+		$projectId 			= $_POST['projectId'];
+		$providerId 		= $_POST['providerId'];
+		$detalleProveedor 	= JTrama::getDatos($projectId);
+		$nombreProducto 	= $detalleProveedor->name;
 		
-		$idProv = JFactory::getApplication()->input;
-		$idProv = $idProv->get('providerId');
-		
-		$detalleProveedor = JTrama::getDatos($idProy)->providers;
-		
-		foreach ($detalleProveedor as $key => $value) {
-			if($value->providerId == $idProv){
-				self::producerIdJoomlaANDName($value, $idProv);
+		foreach ($detalleProveedor->providers as $key => $value) {
+			if($value->providerId == $providerId){
+				self::producerIdJoomlaANDName($value, $providerId);
 				$detalleProveedor = $value;
 			}
-		}		
+		}
+		
+		$liquidacion		= isset($_POST['liquidacion']) 	? (int) $detalleProveedor->settlementQuantity 	: null;
+		$anticipo			= isset($_POST['anticipo']) 	? (int) $detalleProveedor->advanceQuantity 		: null;
+		
+		if( !is_null($anticipo) && !is_null($liquidacion) ){
+			$detalleProveedor->type 	= 2;
+			$detalleProveedor->monto 	= $anticipo + $liquidacion;
+		}elseif( is_null($anticipo) && !is_null($liquidacion) ){
+			$detalleProveedor->type 	= 1;
+			$detalleProveedor->monto 	= $liquidacion;
+		}elseif( !is_null($anticipo) && is_null($liquidacion) ){
+			$detalleProveedor->type 	= 0;
+			$detalleProveedor->monto 	= $anticipo;
+		}
+		
+		
+		$detalleProveedor->token		= JTrama::token();
+		$detalleProveedor->ProductName	= $nombreProducto;
 		
 		return $detalleProveedor;
 	}
@@ -32,7 +47,7 @@ class confirmtxModelconfirmtx extends JModelList
 			$id = $obj->userId;
 		}
 		
-		$obj->idJoomla = UserData::getUserJoomlaId($id);
+		$obj->idJoomla = (int) UserData::getUserJoomlaId($id);
 		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
 	}
 }
