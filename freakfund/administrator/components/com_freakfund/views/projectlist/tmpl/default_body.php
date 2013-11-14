@@ -21,6 +21,9 @@ if( isset($this->items[0]->type) ) {
 		        	<?php echo $item->FechaApintar; ?>
 		        </td>
 		        <td>
+		        	$<span class="number"><?php echo $item->balance; ?></span>
+		        </td>
+		        <td>
 		        	$<span class="number"><?php echo $item->breakeven; ?></span>
 		        </td>
 		        <td>

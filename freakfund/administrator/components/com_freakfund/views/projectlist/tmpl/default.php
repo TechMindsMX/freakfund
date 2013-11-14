@@ -5,8 +5,8 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 $document = JFactory::getDocument();
-$document->addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
-$document->addScript(JURI::base().'../libraries/trama/js/jquery.number.min.js');
+$document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
+$document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
 $vName = ( isset($this->items[0]->vName))?$this->items[0]->vName :'listproduct';
 
@@ -21,7 +21,7 @@ JSubMenuHelper::addEntry(
 	$vName == 'listproduct');
 ?>
 <script language="JavaScript">
-	jQuery("span.number").number(true,2,',','.');
+	jQuery('span.number').number(true,2);
 	
 	jQuery(document).ready(function() {
 		jQuery('#statusFilter').change(function(){

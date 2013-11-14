@@ -16,6 +16,9 @@ $datosSelect = $this->items[0]->statusList;
     	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_CLOSEDATE');?>
     </th>
     <th>
+    	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_BALANCE');?>
+    </th>
+    <th>
     	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_BREAKEVEN'); ?>
     </th>
     <th>
