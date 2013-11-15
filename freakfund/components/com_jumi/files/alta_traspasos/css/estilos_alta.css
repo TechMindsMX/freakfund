@@ -5,3 +5,7 @@
 .encabezado > div {
 	text-align: center;
 }
+
+.editable {
+	cursor: pointer;
+}

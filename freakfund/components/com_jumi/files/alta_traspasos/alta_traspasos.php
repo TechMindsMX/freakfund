@@ -29,10 +29,10 @@ $db =& JFactory::getDbo();
 
 foreach ($ids as $key => $benef) {
 	if($benef->idJoomla != 378 && $benef->idJoomla != 379 && $benef->idJoomla != 381){
-		 $benef->nombre  = JFactory::getUser($benef->idJoomla)->name;
+		 $benef->nombre  	= JFactory::getUser($benef->idJoomla)->name;
 		 $benef->no_cuenta  = 9876543210 + $key;
-		 $benef->maxAmount = 10000;
-		 $benef->email	= JFactory::getUser($benef->idJoomla)->email;
+		 $benef->maxAmount 	= 10000;
+		 $benef->email		= JFactory::getUser($benef->idJoomla)->email;
 		 array_push($beneficiarios, $benef);
 	}
 }
@@ -164,7 +164,7 @@ foreach ($ids as $key => $benef) {
 			<div><input type="text" name="clabe" id="clabe" /></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
-			<div style="display: inline;"><input type="button" id="guardar" value="Guardar" /></div>
+			<div><input type="button" id="guardar" value="Guardar" /></div>
 		</div>
 	</form>
 </div>
