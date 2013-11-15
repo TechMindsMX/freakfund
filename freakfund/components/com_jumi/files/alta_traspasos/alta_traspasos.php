@@ -28,12 +28,13 @@ $db =& JFactory::getDbo();
   $ids = $db->loadObjectList();
 
 foreach ($ids as $key => $benef) {
-// $benef->idJoomla  = UserData::getUserJoomlaId($benef->idMiddleware);
- $benef->nombre  = JFactory::getUser($benef->idJoomla)->name;
- $benef->no_cuenta  = 9876543210 + $key;
- $benef->maxAmount = 10000;
- $benef->email	= JFactory::getUser($benef->idJoomla)->email;
- array_push($beneficiarios, $benef);
+	if($benef->idJoomla != 378 && $benef->idJoomla != 379 && $benef->idJoomla != 381){
+		 $benef->nombre  = JFactory::getUser($benef->idJoomla)->name;
+		 $benef->no_cuenta  = 9876543210 + $key;
+		 $benef->maxAmount = 10000;
+		 $benef->email	= JFactory::getUser($benef->idJoomla)->email;
+		 array_push($beneficiarios, $benef);
+	}
 }
 ?>
 
@@ -138,7 +139,6 @@ foreach ($ids as $key => $benef) {
 		
 		<?php
 		foreach ($beneficiarios as $key => $value) {
-			if($value->idJoomla != 378 && $value->idJoomla != 379 && $value->idJoomla != 381){
 		?>
 			<div class="fila">
 				<div class="editable">
@@ -157,7 +157,6 @@ foreach ($ids as $key => $benef) {
 				</div>
 			</div>
 		<?php 
-			}
 		}
 		?>
 		<div class="fila">
