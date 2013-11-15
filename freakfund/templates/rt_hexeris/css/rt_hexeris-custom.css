@@ -172,3 +172,15 @@ input[disabled="disabled"] {
 #datos_usuario td {
 	padding-left:15px;
 }
+
+/********* pantallas de confirmación *******/
+.fila > div {
+	display:inline-block;
+	width:20%;
+}
+.encabezado > div {
+	text-align:center;
+}
+.editable {
+	cursor: pointer;
+}
