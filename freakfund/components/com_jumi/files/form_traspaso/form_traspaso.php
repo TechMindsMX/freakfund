@@ -145,7 +145,7 @@ function formConfirm($params, $app, $usuario){
 		<h3><?php echo JText::_('TRASPASO_CONFIRMA'); ?></h3>
 		<div class="bloque">
 			<div class="fila">
-				<div><?php echo JText::_('TRASPASO_CONCEPTO'); ?></div>
+				<div><?php echo JText::_('LABEL_CONCEPTO'); ?></div>
 				<div><?php echo JText::_('TRASPASO_DINERO'); ?></div>
 			</div>
 			<div class="fila">
