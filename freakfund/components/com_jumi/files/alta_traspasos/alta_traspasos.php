@@ -136,9 +136,9 @@ foreach ($ids as $key => $benef) {
 			<div><?php echo 'Email';//JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></div>
 		</div>
 		
-		<?php 
+		<?php
 		foreach ($beneficiarios as $key => $value) {
-			if($value->idJoomla != 378){
+			if($value->idJoomla != 378 && $value->idJoomla != 379 && $value->idJoomla != 381){
 		?>
 			<div class="fila">
 				<div class="editable">
