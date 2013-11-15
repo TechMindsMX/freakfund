@@ -9,9 +9,9 @@ date_default_timezone_set('America/Mexico_City');
 
 switch ($fun) {
 	case 1:
-		$calificador = is_numeric($_POST['calificador']) ? $_POST['calificador'] : 0;
-		$calificado = is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
-		$score = is_numeric($_POST['score']) ? $_POST['score'] : 0;
+		$calificador 	= is_numeric($_POST['calificador']) ? $_POST['calificador'] : 0;
+		$calificado  	= is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
+		$score 		 	= is_numeric($_POST['score']) ? $_POST['score'] : 0;
 		
 		$respuesta = array();
 		
@@ -55,21 +55,20 @@ switch ($fun) {
 		
 	case 3:
 		
-		$userId = $_POST['userId'];
-		$projectId = $_POST['projectId'];
-		$linkProyecto = $_POST['linkProyecto'];
-		$nomUser = $_POST['nomUser'];
-		$nomProyecto = $_POST['nomProyecto'];
-		
-		$queryShared = 'SELECT * FROM c3rn2_community_activities WHERE actor = '.$userId.' && proyId = '.$projectId;
-		$resultShared = $bd->query($queryShared);
+		$userId 		= $_POST['userId'];
+		$projectId 		= $_POST['projectId'];
+		$linkProyecto 	= $_POST['linkProyecto'];
+		$nomUser 		= $_POST['nomUser'];
+		$nomProyecto 	= $_POST['nomProyecto'];
+		$queryShared 	= 'SELECT * FROM c3rn2_community_activities WHERE actor = '.$userId.' && proyId = '.$projectId;
+		$resultShared 	= $bd->query($queryShared);
 		
 		if ($resultShared->num_rows == 0) {
 			
 			$queryMaxId = 'SELECT MAX(id) AS id from c3rn2_community_activities';
-			$resultado = $bd->query($queryMaxId);
-			
-			$objMaxId = $resultado->fetch_object();
+			$resultado 	= $bd->query($queryMaxId);
+			$objMaxId 	= $resultado->fetch_object();
+
 			$objMaxId->id = $objMaxId->id + 1;
 			
 			$frase = $nomUser.' ha compartido '.$nomProyecto.', '.$linkProyecto;
@@ -129,7 +128,71 @@ switch ($fun) {
 		
 		echo json_encode($codigo);
 		break;
+	
+	case 6:
+		$respuesta 	= array();
+		$query 		= 'select * from simulacion where account = '.$_POST['clabe'];
+		$result 	= $bd->query($query);
+		$algo 		= $result->fetch_object();
 		
+		if( !is_null($algo) ) {
+			$algo->error = false;
+			
+			echo json_encode($algo);
+		} else {
+			$respuesta['error'] = true;
+			echo json_encode($respuesta);
+		}
+		break;
+		
+	case 7:
+		$respuesta 	= array();
+		
+		$query 		= 'select * from safe_simulacion where userId = '.$_POST['userId'];
+		$result 	= $bd->query($query);
+		$algo 		= $result->fetch_object();
+		
+		if( is_null($algo) ){
+			$query 		= 'INSERT INTO safe_simulacion (id, userId, maxAmount, fechaalta) VALUES (NULL, '.$_POST['userId'].', '.$_POST['maxMount'].', CURRENT_TIMESTAMP )';
+			$bd->query($query);
+
+			$querySafe = 'SELECT * FROM safe_simulacion';
+			$resp = $bd->query($querySafe);
+			$existe = $resp->fetch_object();
+			
+			$query 		= 'select * from simulacion where id = '.$existe->userId;
+			$result 	= $bd->query($query);
+			$algo 		= $result->fetch_object();
+			
+			if( !is_null($algo) ) {
+				$algo->error = false;
+				
+				echo json_encode($algo);
+			} else {
+				$respuesta['error'] = true;
+				echo json_encode($respuesta);
+			}
+		} else {
+			$querySafe = 'SELECT * FROM safe_simulacion';
+			$resp = $bd->query($querySafe);
+			$existe = $resp->fetch_object();
+			
+			$query 		= 'select * from simulacion where id = '.$existe->userId;
+			$result 	= $bd->query($query);
+			$algo 		= $result->fetch_object();
+			
+			if( !is_null($algo) ) {
+				$algo->error = false;
+				
+				echo json_encode($algo);
+			} else {
+				$respuesta['error'] = true;
+				echo json_encode($respuesta);
+			}
+		}
+		
+		break;
+	
 	default:
 		echo 'error';
 		break;
