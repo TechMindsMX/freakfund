@@ -130,7 +130,8 @@ class plgUserFFAccount extends JPlugin
 
 		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
 			$app =& JFactory::getApplication();
-			$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
+			//$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
+			$url = 'index.php?option=com_jumi&view=application&fileid=24&Itemid=218';
 			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
 		}
 				
