@@ -50,7 +50,7 @@
 	height: auto;
 	position: static;
 	padding: 0;
-	margin: 0
+	margin: 0;
 }
 
 #community-wrap .cFloatedList li,#community-wrap .cThumbsList li,#community-wrap .cThumbsList li a
@@ -228,10 +228,10 @@
 }
 
 #community-wrap .cToolBar {
-	background: url(../images/bar-bg.png) bottom repeat-x #998575;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
+	background: url(../images/bar-bg.png) bottom repeat-x #dddddd;
+	-webkit-border-radius: 15px 15px 0 0;
+	-moz-border-radius: 15px 15px 0 0;
+	border-radius: 15px 15px 0 0;
 	border: 1px solid rgba(0, 0, 0, 0.08);
 	border-bottom: 0;
 	font-size: 14px;
@@ -242,10 +242,11 @@
 }
 
 #community-wrap .cToolBar a {
-	color: #fff;
+	color: #002c61;
 	display: block;
 	text-decoration: none !important;
-	white-space: nowrap
+	white-space: nowrap;
+	text-shadow: none;
 }
 
 #community-wrap .cToolBar>li {
@@ -267,12 +268,12 @@
 }
 
 #community-wrap .cToolBar .cMenu-Text>a {
-	background: #2C9AD9;
-	border: 1px solid #2D8DC3;
+	background: #99ccff;
+	border: 1px solid #99ccff;
 	border-bottom: 0;
-	-webkit-border-radius: 3px 3px 0 0;
-	-moz-border-radius: 3px 3px 0 0;
-	border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 15px 15px 0 0;
+	-moz-border-radius: 15px 15px 0 0;
+	border-radius: 15px 15px 0 0;
 	font-weight: bold;
 	line-height: 20px;
 	height: 20px;
@@ -281,26 +282,28 @@
 
 #community-wrap .cToolBar .cMenu-Text>a.active,#community-wrap .cToolBar .cMenu-Text:hover>a
 	{
-	background: #33CCFF;
-	border-color: #33CCFF;
+	background: #009ed3;
+	border-color: #009ed3;
 	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+	color: #fff;
 }
 
 #community-wrap .cToolBar .cHas-Childs ul {
-	border-top: 1px solid #4f661d;
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-	-webkit-border-radius: 0 0 2px 2px;
-	-moz-border-radius: 0 0 2px 2px;
-	border-radius: 0 0 2px 2px;
+	-webkit-border-radius: 0 15px 15px 15px;
+	-moz-border-radius: 0 15px 15px 15px;
+	border-radius: 0 15px 15px 15px;
 	display: none;
 	position: absolute;
 	left: 0;
 	z-index: 99998;
-	margin-top: -1px
+	margin-top: -1px;
+	background-color: #009ed3;
+	padding: 10px 0;
 }
 
 #community-wrap .cToolBar .cHas-Childs ul li {
@@ -314,7 +317,6 @@
 }
 
 #community-wrap .cToolBar .cHas-Childs ul a {
-	background: #2C9AD9;
 	color: #fff;
 	font-size: 14px;
 	line-height: 20px;
@@ -324,6 +326,9 @@
 #community-wrap .cToolBar .cHas-Childs ul a:hover {
 	color: #fff;
 	background: #33CCFF;
+}
+#community-wrap .cToolBar .cHas-Childs ul:first-child a:hover {
+	background: #FFF;
 }
 
 #community-wrap .cToolBar .cHas-Childs:hover ul {
@@ -491,7 +496,7 @@ color: #666 !important;
 }
 
 #community-wrap .cFilter .filters li.active a,#community-wrap .cFilter .filters li.active a:hover {
-	color: #33CCFF !important;
+	color: #2c9ad9 !important;
 	text-decoration: none
 }
 
