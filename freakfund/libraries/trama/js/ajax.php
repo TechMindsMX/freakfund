@@ -49,7 +49,7 @@ switch ($fun) {
 		break;
 		
 	case 2:
-		$url = "http://192.168.0.122:7070/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		$url = MIDDLE.PUERTO."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
 		echo file_get_contents($url);
 		break;
 		
