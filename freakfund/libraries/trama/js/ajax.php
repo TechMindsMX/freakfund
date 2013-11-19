@@ -8,6 +8,8 @@ if ($_SERVER['SERVER_ADDR'] != 'localhost') {
 
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
 
+include('../../../configuration.php');
+
 $configuracion = new JConfig;
 $bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
 
