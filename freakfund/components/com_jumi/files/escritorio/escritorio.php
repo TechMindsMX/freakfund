@@ -110,7 +110,7 @@ function htmlFinanActual($value, $datosgenerales){
 
 ?>
 <div class="contenedor-cartera">
-		<h1 class="mayusc"><?php echo $datosgenerales->nomNombre.' '.$datosgenerales->nomApellidoPaterno.' '.$datosgenerales->nomApellidoMaterno;?></h1>
+		<h1 class="mayusc"><?php echo $usuario->name ?></h1>
 	
 	<div class="infodiv">
 		<div class="module-title">

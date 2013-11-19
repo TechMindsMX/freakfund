@@ -1,7 +1,7 @@
 <?php
 $fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
 
-include('../../../configuration.php');
+include('../../../includes/defines.php');
 $configuracion = new JConfig;
 $bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
 
