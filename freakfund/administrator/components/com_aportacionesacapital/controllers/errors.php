@@ -16,8 +16,8 @@ class errorsController extends JController
          * @return void
          */
         function display($cachable = false, $urlparams = false) {
-        	$enviarA = JFactory::getApplication()->input;
-			$enviarA = $enviarA->get('error');
+        	$app = JFactory::getApplication()->input;
+			$enviarA = $app->get('error', null, 'int');
 
 			if($enviarA){
 				$errors = JFactory::getApplication();

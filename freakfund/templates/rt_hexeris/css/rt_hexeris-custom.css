@@ -184,3 +184,8 @@ input[disabled="disabled"] {
 .editable {
 	cursor: pointer;
 }
+/********* fin pantallas de confirmación *******/
+
+input#cantidad {
+	max-width: 100px;
+}

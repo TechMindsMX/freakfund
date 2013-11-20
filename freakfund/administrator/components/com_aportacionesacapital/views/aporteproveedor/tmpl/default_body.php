@@ -3,7 +3,6 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 $datos = $this->items;
-//var_dump($datos);exit;
 ?>
 	<tr>
 		<td align="justify">

@@ -79,12 +79,12 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 								</div>
 								<div class="datos">
 								<div class="two-cols first">
-								<div class="big">'.@$value->ROI.'%</div>
-								<div class="small">'.JText::_('LABEL_ROI').'</div>
-								</div>
-								<div class="two-cols second">
 								<div class="big">'.@$value->ROF.'%</div>
 								<div class="small">'.JText::_('LABEL_ROF').'</div>
+								</div>
+								<div class="two-cols second">
+								<div class="big">'.@$value->ROI.'%</div>
+								<div class="small">'.JText::_('LABEL_ROI').'</div>
 								</div>
 								<div class="clearfix"></div>
 								</div>
@@ -116,11 +116,14 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 								<span>'.@$value->categoryName.'</span> - 
 								<span>'.@$value->subcategoryName.'</span>
 								</div>
-								<div class="barra" style="width: '.@$value->porcentajeRecaudado.'% "></div>
-								<div class="cat texto-normal recaudado">'.JText::_('LABEL_RECAUDADO').
-								'<span class="number">'.@$value->balance.'</span>
+								<div class="fondo_barra"><span class="barra" style="width: '.@$value->porcentajeRecaudado.'%;"></span></div>
+								<div class="cat texto-proyectos recaudado">'.JText::_('LABEL_RECAUDADO').
+								' $<span class="number">'.@$value->balance.'</span>
 								</div>
-								<div class="cat texto-normal dias-restantes">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
+								<div class="cat texto-proyectos">'.JText::_('PUNTO_EQUILIBRIO_ABR').
+								' $<span class="number">'.@$value->breakeven.'</span>
+								</div>
+								<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
 								<div class="boton-wrap">
 									<a class="button btn-invertir" href="'.$url.@$value->id.'">
 										'.JText::_('INVERTIR_PROYECTO').'</a>
@@ -143,8 +146,8 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 								<span>'.JText::_('CATEGORIA').' '.@$value->categoryName.'</span> - 
 								<span>'.@$value->subcategoryName.'</span><br />
 								<span>'.@$value->status.'</span><br />
-								<span>'.JText::_('LABEL_ROI').' '.@$value->ROI.'%</span><br />
 								<span>'.JText::_('LABEL_ROF').' '.@$value->ROF.'%</span><br />
+								<span>'.JText::_('LABEL_ROI').' '.@$value->ROI.'%</span><br />
 								<div class="boton-wrap">
 									<a class="button btn-invertir" href="'.$url.@$value->id.'">
 										'.JText::_('INVERTIR_PROYECTO').'</a>

@@ -11,6 +11,9 @@ $document 	= JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
+$url = MIDDLE.PUERTO.'/trama-middleware/rest/tx/providerPartnership';
+// $url = '/post.php';
+
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
@@ -18,7 +21,7 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 	});
 </script>
 
-<form id="formstatus" action="index.php?option=com_aportacionesacapital&task=confirmaoperacion&id=1&providerId=6" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo $url; ?>" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
             <thead><?php echo $this->loadTemplate('head');?></thead>

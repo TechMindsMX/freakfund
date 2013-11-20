@@ -35,8 +35,9 @@ class confirmtxModelconfirmtx extends JModelList
 			$detalleProveedor->monto 	= $anticipo;
 		}
 		
-		
 		$detalleProveedor->token		= JTrama::token();
+		$detalleProveedor->callback		= 'index.php?option=com_aportacionesacapital&task=error&from=confirmtx&proyId='
+										.$projectId.'&providerId='.$providerId.'&producer='.$_POST['producer'];
 		$detalleProveedor->ProductName	= $nombreProducto;
 		
 		return $detalleProveedor;

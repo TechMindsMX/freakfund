@@ -3,8 +3,9 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 $datos = $this->items;
-//var_dump($datos);exit;
+
 ?>
+
 <tr>
 	<td align="justify">
 		<div id="hiddens">
@@ -12,6 +13,7 @@ $datos = $this->items;
 			<input type="hidden" name="projectId" value="<?php echo $datos->projectId; ?>" />
 			<input type="hidden" name="providerId" value="<?php echo $datos->providerId; ?>" />
 			<input type="hidden" name="type" value="<?php echo $datos->type; ?>" />
+			<input type="hidden" name="callback" value="<?php echo $datos->callback; ?>" />
 			
 		</div>
 		Esta seguro de enviar esta operacion es IRREVERSIBLE!!!!!!!!!!!!
@@ -29,5 +31,4 @@ $datos = $this->items;
 		<input type="submit" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND'); ?>" />
 	</td>
 </tr>
-<?php
-?>
+

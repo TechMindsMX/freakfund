@@ -4,6 +4,6 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <tr>
 	<th>
-		<?php echo strtoupper($this->items->name); ?>
+		<h2><?php echo strtoupper($this->items->name); ?></h2>
 	</th>
 </tr>

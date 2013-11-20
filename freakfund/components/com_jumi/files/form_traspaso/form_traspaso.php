@@ -29,6 +29,8 @@ $params->callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&fr
 $params->action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $params->arregloEnvio   = '';
 
+$params->datosUsuario->no_cuenta = 1234567890; // SIMULADO
+
 errorClass::manejoError($params->errorCode, $params->from);
 
 $beneficiarios = array();
@@ -56,7 +58,7 @@ function formTraspaso($params, $app, $usuario) {
 
 	$action = $params->confirmUrl;
 	
-	$optionsHtml = '<select name="receiverId">'.PHP_EOL.'<option>'.JText::_("Seleccione").'</option>'.PHP_EOL;
+	$optionsHtml = '<select id="receiverId" name="receiverId">'.PHP_EOL.'<option>'.JText::_("Seleccione").'</option>'.PHP_EOL;
 	if ( empty($params->beneficiarios) ) {
 		$app->enqueueMessage('Ve a TELCEL y comprate un amigo pinche forever alone', 'notice');
 	} else {
@@ -71,9 +73,15 @@ function formTraspaso($params, $app, $usuario) {
 	<script>
 		jQuery(document).ready(function(){
 			jQuery("#form_traspaso").validationEngine();
-			jQuery("span.number").number( true, 2, ".","," );
-			var arregloEnvio = new Array();
-			<?php echo $arregloEnvio; ?>
+			
+			jQuery("input#cantidad").focusout(function(){
+				var saldo = <?php echo $params->datosUsuario->balance; ?>;
+				var monto = parseFloat(jQuery(this).val());
+				if (jQuery(this).val() > saldo) {
+					var html = '<pre><?php echo JText::_("MONTO_MAYOR_A_SALDO"); ?></pre>';
+					jQuery(html).insertAfter(this).fadeOut(5000);
+				}
+			});
 		});
 	</script>
 	
@@ -121,6 +129,7 @@ function formTraspaso($params, $app, $usuario) {
 	</div>
 <?php
 }
+
 function formConfirm($params, $app, $usuario){
 	
 	$action = $params->callback;
@@ -131,7 +140,6 @@ function formConfirm($params, $app, $usuario){
 	$senderId		= $app->input->get('senderId');
 	$amount			= $app->input->get('amount');
 	
-	// var_dump($params->beneficiarios);
 	foreach ($params->beneficiarios as $key => $value) {
 		if ($receiver->id == $value->idMiddleware) {
 			$receiver->name = $value->nombre;
@@ -167,7 +175,7 @@ function formConfirm($params, $app, $usuario){
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
-			<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" />
+			<input type="button" class="button" id="enviar" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" />
 		</div>
 	</form>
 

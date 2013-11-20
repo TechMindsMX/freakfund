@@ -11,18 +11,17 @@ class aporteproveedorModelaporteproveedor extends JModelList
 	public function getdetalleProv() {
 		$input				= JFactory::getApplication()->input;
 		$idProy				= $input->get('id');
-		$idProv 			= $input->get('providerId');
-		$producer 			= $input->get('producer');
+		$idProveedor		= $input->get('providerId');
+		$producer 			= $input->get('producer','false','bool');
 		$balance 			= JTrama::getDatos($idProy);
 		$detalleProveedor 	= JTrama::getDatos($idProy)->providers;
 		
 		foreach ($detalleProveedor as $key => $value) {
-			if($value->providerId == $idProv){
-				self::producerIdJoomlaANDName($value, $idProv);
+			if($value->providerId == $idProveedor){
+				self::producerIdJoomlaANDName($value, $idProveedor);
 				$detalleProveedor = $value;
 			}
 		}
-		
 		if($producer){
 			$detalleProveedor->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPRODUCTOR_TITLE';
 		} else {
