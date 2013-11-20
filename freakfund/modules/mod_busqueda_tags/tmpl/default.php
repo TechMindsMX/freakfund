@@ -34,10 +34,11 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 	}); 
 </script>
 
-<form action="<?php echo $url; ?>" id="busqueda_tags" name="busqueda_tags" method="post">
+<form class="form-container" action="<?php echo $url; ?>" id="busqueda_tags" name="busqueda_tags" method="post">
 
-	<span class="busqueda_tag"><?php echo JText::_('BUSQUEDA_TAG'); ?></span><input type="text" name="tags" id="tags" size="30" class="validate[required]" />
-	<input type="submit" class="button" id="busqueda_tags" value="<?php echo JText::_('BUSCAR'); ?>" />
-
+	<span class="busqueda_tag"><?php echo JText::_('BUSQUEDA_TAG'); ?></span><input type="text" name="tags" id="tags" size="30" class="search-field validate[required]" />
+	<div class="submit-container">
+	<input type="submit" id="busqueda_tags" value="" class="submit" />
+	</div>
 </form>
 
