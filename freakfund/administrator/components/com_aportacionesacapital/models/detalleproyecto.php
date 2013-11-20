@@ -18,12 +18,14 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 		
 		foreach ($detalleProyecto->providers as $key => $value) {
 			self::producerIdJoomlaANDName($value, $value->providerId, $detalleProyecto->userId);
+var_dump(count($detalleProyecto->providers, 'key='.$key));
 			if ($value->isProducer){
 				array_unshift($detalleProyecto->providers, $value);
 			}
 			self::flags($value);
 		}
-			var_dump($detalleProyecto->providers);exit;
+var_dump(count($detalleProyecto->providers), $detalleProyecto->providers);
+exit;
 		
 		return $detalleProyecto;
 	}
