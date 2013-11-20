@@ -18,23 +18,23 @@ $params->subcategoria 	= $input->get('subcategoria', 'all', 'STR');
 $params->estatus 		= $input->get('status', '', 'STR');
 $params->tags 			= $input->get('tags', null, "STR");
 
-if ( !$tipoPP ) {
-	$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
-			   '<div id="filtrar" style="float:left;">'.JText::_('FILTRAR').'</div>'.
-			   '<div id="triangle"> </div>'.
-			   '<div class="barraProy">'.JText::_('LABEL_PROYECTOS').' <input  type="checkbox" id="proyecto" /></div>'.
-			   '<div class="barraProd">'.JText::_('LABEL_PRODUCTOS').' <input type="checkbox" id="producto" /></div>'.
-			   '<div class="barraRep">'.JText::_('LABEL_REPERTORIOS').' <input type="checkbox" id="repertorio" /></div>'.
-			   '<div class="botonLimpio"><input type="button" value="'.JText::_('LIMPIAR_FILTRO').'" /></div>'.
-			   '<div class="clearfix" id="contador"></div>'.
-			   '</div>';
+function filtro (){
+		$ligasPP = '<div id="ligasprod" class="barra-top clearfix">'.
+				   '<div id="filtrar" style="float:left;">'.JText::_('FILTRAR').'</div>'.
+				   '<div id="triangle"> </div>'.
+				   '<div class="barraProy">'.JText::_('LABEL_PROYECTOS').' <input  type="radio" id="proyecto" name="filtro" CHECKED /></div>'.
+				   '<div class="barraProd">'.JText::_('LABEL_PRODUCTOS').' <input type="radio" id="producto" name="filtro" /></div>'.
+				   '<div class="clearfix" id="contador"></div>'.
+				   '</div>';
+		
+		return $ligasPP;
 }
 
 function prodProy ($tipo, $params) {
 	if( !empty($_POST) ) {
 		if (!is_null($params->tags)) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByTag/'.$tagLimpia;
+			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByKeyword/'.$tagLimpia;
 		} elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
 		} elseif ( ($params->categoria == '') && ($params->subcategoria == "all") && ($params->estatus != "")) {
@@ -73,10 +73,10 @@ foreach ($json as $key => $value) {
 	$string = strip_tags($value->description);
 	$value->description = (strlen($string) > 113 ? substr($string,0,110).'...' : $string);
 
-	JTrama::formatDatosProy($value);
+	$value = JTrama::getDatos($value->id);
 	
 	JTrama::dateDiff($value->fundEndDate, $value);
-	
+
 	$value->jtextdays = JText::sprintf('LAPSED_DAYS', $value->dateDiff->days);
 	
 	if( isset($value->premiereEndDateCode) ) {
@@ -91,28 +91,19 @@ foreach ($json as $key => $value) {
 foreach ($json as $key => $value) {
 	if($value->status != 4){
 		$jsonJS[] = $value;
-		switch ($value->type) {
-			case 'PROJECT':
+		switch ($value->status) {
+			case '5':
 				$proyectos[] = $value; //Solo Proyectos
-				$prodProy[] = $value; //Proyectos y Productos
-				$repertProy[] = $value; //PRoyectos y Repertorios				
 				break; 
-			case 'PRODUCT':
+			case in_array($value->status, array(6,7)):
 				$productos[] = $value; //Solo Productos
-				$prodProy[] = $value; //Proyectos y Productos
-				$repertorioProduc[] = $value; //Productos y Repertorios				
 				break;
-			case 'REPERTORY':
-				$repertorio[] = $value; //Solo Repertorios
-				$repertorioProduc[] = $value; //Repertorios y Productos
-				$repertProy[] = $value; //Repertorios y Proyectos							
-				break;	
 		}		
 	}		
 };
 
 if (!empty($jsonJS)) {
-	$jsonJS = json_encode($jsonJS);
+	$jsonJS = json_encode($proyectos);
 }
 if (!empty($productos)) {
 	$productos = json_encode($productos);
@@ -120,18 +111,7 @@ if (!empty($productos)) {
 if (!empty($proyectos)) {
 	$proyectos = json_encode($proyectos);
 }
-if(!empty($repertorio)) {
-	$repertorio = json_encode($repertorio);
-}
-if(!empty($prodProy)) {
-	$prodProy = json_encode($prodProy);
-}
-if(!empty($repertorioProduc)) {
-	$repertorioProduc = json_encode($repertorioProduc);
-}
-if(!empty($repertProy)) {
-	$repertProy = json_encode($repertProy);
-}
+
 
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
@@ -353,7 +333,11 @@ function initPagination() {
 <title>Pagination</title>
 </head>
 <body>
-	<?php //echo $ligasPP; ?>
+	<?php
+	if (isset($params->tags)){
+	 	echo filtro();
+	 }
+	 ?>
 	<dl id="Searchresult"></dl>
 	<div id="Pagination" class="pagination"></div>
 </body>
