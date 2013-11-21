@@ -59,77 +59,6 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 			});
 		});
 		
-		jQuery('.safe').click(function(){
-			var maxAmount 		= jQuery('#maxMount').val();
-			var userId 			= jQuery('#userId').val();
-			var destinationId	= jQuery('#destinationId').val();
-			
-			var request = $.ajax({
-				url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/maxAmountToTransfer",
-				data: {
-  					"userId"		: userId,
-  					"amount"		: maxAmount,
-  					"destinationId"	: destinationId,
-  					"token"			: "<?php echo $token; ?>"
- 				},
- 				type: 'post'
-			});
-			
-			request.done(function(result){
-				if(this.value == Confirmar){
-					var html = '';
-					
-					html += '<div class="fila">';
-					html += '	<div class="editable" onclick="editar(this)">';
-					html += '		<input type="hidden" value="'+maxAmount+'" />';
-					html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
-					html += '	</div>';
-					html += '	<div>';
-					html += '	<input type="hidden" value="'+jQuery('#clabe').val()+'" />';
-					html += '	<span>'+jQuery('#clabe').val()+'</span>';
-					html += '	</div>';
-					html += '	<div>'+jQuery('#socio').val()+'</div>';
-					html += '	<div>'+jQuery('#email').val()+'</div>';
-					html += '	<div style="width: 170px;">';
-					html += '		<input type="button" class="button" value="Actualizar" />';
-					html += '		<input type="button" class="button" value="Borrar" />';
-					html += '	</div>';
-					html += '</div>';
-					
-					jQuery(html).insertBefore('#autocompletado');
-					
-					jQuery('#showSocio').html();
-					jQuery('#showmaxmount').html();
-					jQuery('#showemail').html();
-					jQuery('#showClabe').html();
-					
-					jQuery('#socio').val('');
-					jQuery('#maxMount').val('');
-					jQuery('#email').val('');
-					jQuery('#clabe').val('');
-					jQuery('#destinationId').val('');
-					
-					jQuery('#divConfirmacion').hide();
-					jQuery('#divFormulario').show();
-				}else{
-					jQuery(this).parent().parent().find('input[type="text"]').prop('type', 'hidden');
-					jQuery(this).parent().parent().find('span').text('');
-					jQuery(this).parent().parent().find('span').html('$<span class="number">' + jQuery(this).parent().parent().find('input[type="hidden"]').val() + '</span>');
-					jQuery("span.number").number( true, 2 );
-					jQuery(this).parent().parent().find('span').show();
-				}
-			});
-			
-			request.fail(function (jqXHR, textStatus) {
-				console.log(jqXHR, textStatus);
-			});
-		});
-
-		// jQuery('div.editable').click(function(){
-			// jQuery(this).find('span').hide();
-			// jQuery(this).find('input').prop('type', 'text')
-		// });
-			
 		jQuery('#guardar').click(function(){
 			jQuery('#showSocio').html(jQuery('#socio').val());
 			jQuery('#showmaxmount').html(jQuery('#maxMount').val());
@@ -155,6 +84,84 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		});
 	});
 	
+	function safeUpdate(campo){
+		var action = campo;
+			var userId 			= jQuery('#userId').val();
+			if(action.value == "Confirmar"){
+				var maxAmount 		= jQuery('#maxMount').val();
+				var destinationId	= jQuery('#destinationId').val();
+			}else{
+				var maxAmount 		= jQuery(campo).parent().parent().find('input[type="text"]').val();
+				var destinationId	= jQuery(campo).parent().parent().find('#destinationIdEdicion').val();
+			}
+			
+			var request = $.ajax({
+				url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/maxAmountToTransfer",
+				data: {
+  					"userId"		: userId,
+  					"amount"		: maxAmount,
+  					"destinationId"	: destinationId,
+  					"token"			: "<?php echo $token; ?>"
+ 				},
+ 				type: 'post'
+			});
+			
+			request.done(function(result){
+				if(action.value == "Confirmar"){
+					var html = '';
+					
+					html += '<div class="fila">';
+					html += '	<input type="hidden" id="destinationIdEdicion" value="' +destinationId+ '" />';
+					html += '	<div class="editable" onclick="editar(this)">';
+					html += '		<input type="hidden" value="'+maxAmount+'" />';
+					html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
+					html += '	</div>';
+					html += '	<div>';
+					html += '	<input type="hidden" value="'+jQuery('#clabe').val()+'" />';
+					html += '	<span>'+jQuery('#clabe').val()+'</span>';
+					html += '	</div>';
+					html += '	<div>'+jQuery('#socio').val()+'</div>';
+					html += '	<div>'+jQuery('#email').val()+'</div>';
+					html += '	<div style="width: 170px;">';
+					html += '		<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)"/>';
+					html += '		<input type="button" class="button" value="Borrar" />';
+					html += '	</div>';
+					html += '</div>';
+					
+					jQuery(html).insertBefore('#autocompletado');
+					
+					jQuery("span.number").number( true, 2 );
+					
+					jQuery('#showSocio').html();
+					jQuery('#showmaxmount').html();
+					jQuery('#showemail').html();
+					jQuery('#showClabe').html();
+					
+					jQuery('#socio').val('');
+					jQuery('#maxMount').val('');
+					jQuery('#email').val('');
+					jQuery('#clabe').val('');
+					jQuery('#destinationId').val('');
+					
+					jQuery('#divConfirmacion').hide();
+					jQuery('#divFormulario').show();
+				}else if(action.value == "Actualizar") {
+					jQuery(action).parent().parent().find('span').text('');
+					jQuery(action).parent().parent().find('span').html('$<span class="number">' + jQuery(action).parent().parent().find('input[type="text"]').val() + '</span>');
+					
+					jQuery(action).parent().parent().find('input[type="text"]').prop('type', 'hidden');
+					
+					jQuery("span.number").number( true, 2 );
+					
+					jQuery(action).parent().parent().find('span').show();
+				}
+			});
+			
+			request.fail(function (jqXHR, textStatus) {
+				alert("Ocurrio un problema al crear/actualizar los datos");
+			});
+	}
+	
 	function editar(campo){
 		jQuery(campo).find('span').hide();
 		jQuery(campo).find('input').prop('type', 'text')
@@ -162,6 +169,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 </script>
 
 <div id="divFormulario">
+	<h3><?php echo 'Alta de Cuentas para traspasos '.$usuario->name;//JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></h3>
 	<form id="formAltaTraspaso" action="" method="post">
 		<input type="hidden" name="userId" id="userId" value="<?php echo $userId->idMiddleware; ?>"/>
 		<input type="hidden" name="userId" id="destinationId" />
@@ -177,6 +185,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		foreach ($beneficiarios as $key => $value) {
 		?>
 			<div class="fila" id="<?php echo $key; ?>">
+				<input type="hidden" id="destinationIdEdicion" value="<?php echo $value->destinationId; ?>" />
 				<div class="editable" onclick="editar(this)">
 					<input type="hidden" value="<?php echo $value->amount; ?>" />
 					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
@@ -187,7 +196,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				<div><?php echo $value->name; ?></div>
 				<div><?php echo $value->email; ?></div>
 				<div style="width: 170px;">
-					<input type="button" class="button safe" value="Actualizar" />
+					<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)" />
 					<input type="button" class="button" value="Borrar" />
 				</div>
 			</div>
@@ -200,7 +209,9 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 			<div><input type="text" name="clabe" id="clabe" /></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
-			<div style="width: 170px;"><input type="button" class="button" id="guardar" value="Guardar" /></div>
+			<div style="width: 170px;">
+				<input type="button" class="button" id="guardar" value="Guardar" />
+			</div>
 		</div>
 	</form>
 </div>
@@ -229,6 +240,6 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 	
 	<div>
 		<span><input type="button" class="button" id="Cancelar" value="Cancelar" /></span>
-		<span><input type="button" class="button safe" value="Confirmar" /></span>
+		<span><input type="button" class="button safe" value="Confirmar" onclick="safeUpdate(this)" /></span>
 	</div>
 </div>

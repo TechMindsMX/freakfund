@@ -138,66 +138,14 @@ switch ($fun) {
 		break;
 	
 	case 6:
-		$respuesta 	= array();
-		$query 		= 'select * from simulacion where account = '.$_POST['clabe'];
-		$result 	= $bd->query($query);
-		$algo 		= $result->fetch_object();
+		$respuesta = file_get_contents('http://192.168.0.122:7070/trama-middleware/rest/user/getByAccount/'.$_POST['clabe']);
 		
-		if( !is_null($algo) ) {
-			$algo->error = false;
-			
-			echo json_encode($algo);
-		} else {
-			$respuesta['error'] = true;
-			echo json_encode($respuesta);
-		}
+		echo $respuesta;
+		
 		break;
 		
 	case 7:
-		$respuesta 	= array();
-		
-		$query 		= 'select * from safe_simulacion where userId = '.$_POST['userId'];
-		$result 	= $bd->query($query);
-		$algo 		= $result->fetch_object();
-		
-		if( is_null($algo) ){
-			$query 		= 'INSERT INTO safe_simulacion (id, userId, maxAmount, fechaalta) VALUES (NULL, '.$_POST['userId'].', '.$_POST['maxMount'].', CURRENT_TIMESTAMP )';
-			$bd->query($query);
-
-			$querySafe = 'SELECT * FROM safe_simulacion';
-			$resp = $bd->query($querySafe);
-			$existe = $resp->fetch_object();
-			
-			$query 		= 'select * from simulacion where id = '.$existe->userId;
-			$result 	= $bd->query($query);
-			$algo 		= $result->fetch_object();
-			
-			if( !is_null($algo) ) {
-				$algo->error = false;
-				
-				echo json_encode($algo);
-			} else {
-				$respuesta['error'] = true;
-				echo json_encode($respuesta);
-			}
-		} else {
-			$querySafe = 'SELECT * FROM safe_simulacion';
-			$resp = $bd->query($querySafe);
-			$existe = $resp->fetch_object();
-			
-			$query 		= 'select * from simulacion where id = '.$existe->userId;
-			$result 	= $bd->query($query);
-			$algo 		= $result->fetch_object();
-			
-			if( !is_null($algo) ) {
-				$algo->error = false;
-				
-				echo json_encode($algo);
-			} else {
-				$respuesta['error'] = true;
-				echo json_encode($respuesta);
-			}
-		}
+		json_encode($_POST);
 		
 		break;
 	
