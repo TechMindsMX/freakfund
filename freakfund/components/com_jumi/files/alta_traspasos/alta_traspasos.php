@@ -84,82 +84,107 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		});
 	});
 	
+	function deleteCta(campo){
+		var action 			= campo;
+		var userId 			= jQuery('#userId').val();
+		var destinationId	= jQuery(campo).parent().parent().find('#destinationIdEdicion').val();
+		
+		
+		var request = $.ajax({
+			url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/deleteLimitAmountToTransfer",
+			data: {
+				"userId"		: userId,
+				"destinationId"	: destinationId,
+				"token"			: "<?php echo $token; ?>"
+			},
+			type: 'post'
+		});
+		
+		request.done(function(result){
+			jQuery(campo).parent().parent().remove();
+		});
+		
+		request.fail(function (jqXHR, textStatus) {
+			alert("Ocurrio un problema al eliminar");
+		});
+	}
+	
 	function safeUpdate(campo){
-		var action = campo;
-			var userId 			= jQuery('#userId').val();
+		var action 			= campo;
+		var userId 			= jQuery('#userId').val();
+		if(action.value == "Confirmar"){
+			var maxAmount 		= jQuery('#maxMount').val();
+			var destinationId	= jQuery('#destinationId').val();
+		}else{
+			var maxAmount 		= jQuery(campo).parent().parent().find('input[type="text"]').val();
+			var destinationId	= jQuery(campo).parent().parent().find('#destinationIdEdicion').val();
+		}
+		
+		var request = $.ajax({
+			url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/maxAmountToTransfer",
+			data: {
+				"userId"		: userId,
+				"amount"		: maxAmount,
+				"destinationId"	: destinationId,
+				"token"			: "<?php echo $token; ?>"
+			},
+			type: 'post'
+		});
+		
+		request.done(function(result){
 			if(action.value == "Confirmar"){
-				var maxAmount 		= jQuery('#maxMount').val();
-				var destinationId	= jQuery('#destinationId').val();
-			}else{
-				var maxAmount 		= jQuery(campo).parent().parent().find('input[type="text"]').val();
-				var destinationId	= jQuery(campo).parent().parent().find('#destinationIdEdicion').val();
+				var html = '';
+				
+				html += '<div class="fila">';
+				html += '	<input type="hidden" id="destinationIdEdicion" value="' +destinationId+ '" />';
+				html += '	<div class="editable" onclick="editar(this)">';
+				html += '		<input type="hidden" value="'+maxAmount+'" />';
+				html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
+				html += '	</div>';
+				html += '	<div>';
+				html += '	<input type="hidden" value="'+jQuery('#clabe').val()+'" />';
+				html += '	<span>'+jQuery('#clabe').val()+'</span>';
+				html += '	</div>';
+				html += '	<div>'+jQuery('#socio').val()+'</div>';
+				html += '	<div>'+jQuery('#email').val()+'</div>';
+				html += '	<div style="width: 170px;">';
+				html += '		<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)"/>';
+				html += '		<input type="button" class="button" value="Borrar" onclick="deleteCta(this)" />';
+				html += '	</div>';
+				html += '</div>';
+				
+				jQuery(html).insertBefore('#autocompletado');
+				
+				jQuery("span.number").number( true, 2 );
+				
+				jQuery('#showSocio').html();
+				jQuery('#showmaxmount').html();
+				jQuery('#showemail').html();
+				jQuery('#showClabe').html();
+				
+				jQuery('#socio').val('');
+				jQuery('#maxMount').val('');
+				jQuery('#email').val('');
+				jQuery('#clabe').val('');
+				jQuery('#destinationId').val('');
+				
+				jQuery('#divConfirmacion').hide();
+				jQuery('#divFormulario').show();
+			}else if(action.value == "Actualizar") {
+				jQuery(action).parent().parent().find('span').text('');
+				jQuery(action).parent().parent().find('span').html('$<span class="number">' + jQuery(action).parent().parent().find('input[type="text"]').val() + '</span>');
+				
+				jQuery(action).parent().parent().find('input[type="text"]').prop('type', 'hidden');
+				
+				jQuery("span.number").number( true, 2 );
+				
+				jQuery(action).parent().parent().find('span').show();
 			}
-			
-			var request = $.ajax({
-				url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/maxAmountToTransfer",
-				data: {
-  					"userId"		: userId,
-  					"amount"		: maxAmount,
-  					"destinationId"	: destinationId,
-  					"token"			: "<?php echo $token; ?>"
- 				},
- 				type: 'post'
-			});
-			
-			request.done(function(result){
-				if(action.value == "Confirmar"){
-					var html = '';
-					
-					html += '<div class="fila">';
-					html += '	<input type="hidden" id="destinationIdEdicion" value="' +destinationId+ '" />';
-					html += '	<div class="editable" onclick="editar(this)">';
-					html += '		<input type="hidden" value="'+maxAmount+'" />';
-					html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
-					html += '	</div>';
-					html += '	<div>';
-					html += '	<input type="hidden" value="'+jQuery('#clabe').val()+'" />';
-					html += '	<span>'+jQuery('#clabe').val()+'</span>';
-					html += '	</div>';
-					html += '	<div>'+jQuery('#socio').val()+'</div>';
-					html += '	<div>'+jQuery('#email').val()+'</div>';
-					html += '	<div style="width: 170px;">';
-					html += '		<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)"/>';
-					html += '		<input type="button" class="button" value="Borrar" />';
-					html += '	</div>';
-					html += '</div>';
-					
-					jQuery(html).insertBefore('#autocompletado');
-					
-					jQuery("span.number").number( true, 2 );
-					
-					jQuery('#showSocio').html();
-					jQuery('#showmaxmount').html();
-					jQuery('#showemail').html();
-					jQuery('#showClabe').html();
-					
-					jQuery('#socio').val('');
-					jQuery('#maxMount').val('');
-					jQuery('#email').val('');
-					jQuery('#clabe').val('');
-					jQuery('#destinationId').val('');
-					
-					jQuery('#divConfirmacion').hide();
-					jQuery('#divFormulario').show();
-				}else if(action.value == "Actualizar") {
-					jQuery(action).parent().parent().find('span').text('');
-					jQuery(action).parent().parent().find('span').html('$<span class="number">' + jQuery(action).parent().parent().find('input[type="text"]').val() + '</span>');
-					
-					jQuery(action).parent().parent().find('input[type="text"]').prop('type', 'hidden');
-					
-					jQuery("span.number").number( true, 2 );
-					
-					jQuery(action).parent().parent().find('span').show();
-				}
-			});
-			
-			request.fail(function (jqXHR, textStatus) {
-				alert("Ocurrio un problema al crear/actualizar los datos");
-			});
+		});
+		
+		request.fail(function (jqXHR, textStatus) {
+			alert("Ocurrio un problema al crear/actualizar los datos");
+		});
 	}
 	
 	function editar(campo){
@@ -186,6 +211,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		?>
 			<div class="fila" id="<?php echo $key; ?>">
 				<input type="hidden" id="destinationIdEdicion" value="<?php echo $value->destinationId; ?>" />
+
 				<div class="editable" onclick="editar(this)">
 					<input type="hidden" value="<?php echo $value->amount; ?>" />
 					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
@@ -197,7 +223,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				<div><?php echo $value->email; ?></div>
 				<div style="width: 170px;">
 					<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)" />
-					<input type="button" class="button" value="Borrar" />
+					<input type="button" class="button" value="Borrar" onclick="deleteCta(this)" />
 				</div>
 			</div>
 		<?php 
