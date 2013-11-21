@@ -9,8 +9,8 @@ input#nomProy, input#nameRecinto, input#searchTextField {
 	max-width:550px;
 }
 
-input[type = 'file'], input[type = 'number'], input[type = 'text'], select{
-	width: 100% !important;
+#rt-mainbody input[type = 'file'],#rt-mainbody  input[type = 'number'],#rt-mainbody  input[type = 'text'],#rt-mainbody  select{
+	width: 100%;
 	max-width: 265px;
 }
 #datos_finanzas_proy input[type = 'file'],#datos_finanzas_proy input[type = 'number'],#datos_finanzas_proy input[type = 'text']{
