@@ -1,6 +1,7 @@
 .fila > div {
 	display: inline-block;
 	width: 20%;
+	margin-bottom: 10px;
 }
 .encabezado > div {
 	text-align: center;

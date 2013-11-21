@@ -174,7 +174,12 @@ class UserData {
 		$resultado = $db->loadObjectList();
 		
 		return empty($resultado)?false:true;
+	}
+	
+	public static function getBeneficiarios($idMiddleware) {
+		$listado = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getLimitAmountsToTransfer/'.$idMiddleware));
 		
+		return $listado;
 	}
 }
 
