@@ -25,8 +25,8 @@ class confirmtxModelconfirmtx extends JModelList
 			}
 		}
 		
-		$anticipo			= isset($advance) 		? (int) $detalleProveedor->advanceQuantity 		: null;
-		$liquidacion		= isset($settlement)	? (int) $detalleProveedor->settlementQuantity 	: null;
+		$anticipo		= isset($advance) 		? (int) $detalleProveedor->advanceQuantity 		: null;
+		$liquidacion	= isset($settlement)	? (int) $detalleProveedor->settlementQuantity 	: null;
 		
 		if( !is_null($anticipo) && !is_null($liquidacion) ){
 			$detalleProveedor->type 	= 2;
@@ -40,8 +40,8 @@ class confirmtxModelconfirmtx extends JModelList
 		}
 		
 		$detalleProveedor->token		= JTrama::token();
-		$detalleProveedor->callback		= 'index.php?option=com_aportacionesacapital&task=error&from=confirmtx&proyId='
-										.$projectId.'&providerId='.$providerId.'&producer='.$producer;
+		$detalleProveedor->callback		= JURI::base().'index.php?option=com_aportacionesacapital&task=errors&proyId='
+										.$projectId;
 		$detalleProveedor->ProductName	= $nombreProducto;
 		
 		return $detalleProveedor;

@@ -20,8 +20,8 @@ $confirm		= $input->get("confirm",0,"int");
 
 $params = new stdClass;
 $params->token			= JTrama::token();
-$params->idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
-$params->datosUsuario	= UserData::getUserBalance($params->idMiddleware->idMiddleware);
+$params->ids			= UserData::getUserMiddlewareId($usuario->id);
+$params->datosUsuario	= UserData::getUserBalance($params->ids->idMiddleware);
 $params->errorCode	 	= $input->get("error",0,"int");
 $params->from			= $input->get("from",0,"int");
 $params->confirmUrl		= 'index.php?option=com_jumi&view=appliction&fileid=29&confirm=1';
@@ -29,30 +29,13 @@ $params->callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&fr
 $params->action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $params->arregloEnvio   = '';
 
-$params->datosUsuario->no_cuenta = 1234567890; // SIMULADO
-
 errorClass::manejoError($params->errorCode, $params->from);
 
-$beneficiarios = array();
+$params->beneficiarios = UserData::getBeneficiarios($params->ids->idMiddleware);
 
-$db =& JFactory::getDbo();
-	$query = $db->getQuery(true);
-	$query->select('idJoomla, idMiddleware');
-	$query->from($db->quoteName('#__users_middleware'));
-		$db->setQuery( $query );
-		$ids = $db->loadObjectList();
-
-
-foreach ($ids as $key => $benef) {
-//	$benef->idJoomla 	= UserData::getUserJoomlaId($benef->idMiddleware);
-	$benef->nombre		= JFactory::getUser($benef->idJoomla)->name;
-	$benef->no_cuenta 	= 9876543210 + $key;
-	array_push($beneficiarios, $benef);
-}
-$params->beneficiarios = $beneficiarios;
-
-if ($confirm == 0) formTraspaso($params, $app, $usuario);
-if ($confirm == 1) formConfirm($params, $app, $usuario);
+if ($confirm == 0) 			formTraspaso($params, $app, $usuario);
+if ($confirm == 1) 			formConfirm($params, $app, $usuario);
+if ($params->from == 29) 	formResumen($tx);
 
 function formTraspaso($params, $app, $usuario) {
 
@@ -63,7 +46,7 @@ function formTraspaso($params, $app, $usuario) {
 		$app->enqueueMessage('Ve a TELCEL y comprate un amigo pinche forever alone', 'notice');
 	} else {
 		foreach ($params->beneficiarios as $key => $value) {
-			$optionsHtml .= '<option value="'.$value->idMiddleware.'">'.$value->no_cuenta.' - '.$value->nombre.'</option>'.PHP_EOL;
+			$optionsHtml .= '<option value="'.$value->destinationId.'">'.$value->account.' - '.$value->name.'</option>'.PHP_EOL;
 		}
 	}
 	$optionsHtml .= '</select>'.PHP_EOL;
@@ -95,7 +78,7 @@ function formTraspaso($params, $app, $usuario) {
 		<div>
 			<p>
 				<label><?php echo JText::_('NO_CUENTA_RETIRO'); ?></label>
-				<span><?php echo $params->datosUsuario->no_cuenta; ?></span>
+				<span><?php echo $params->datosUsuario->account; ?></span>
 			</p>
 			<p>
 				<label><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_BALANCE'); ?></label>
@@ -114,7 +97,7 @@ function formTraspaso($params, $app, $usuario) {
 		
 		<input type="hidden" name="token" value="<?php echo $params->token; ?>"> 
 		<input type="hidden" name="callback" value="<?php echo $params->callback; ?>">
-		<input type="hidden" name="senderId" value="<?php echo $params->idMiddleware->idMiddleware; ?>"> 
+		<input type="hidden" name="senderId" value="<?php echo $params->ids->idMiddleware; ?>"> 
 		<input type="hidden" name="objeto" value='<?php echo serialize($params); ?>'>
 		
 		<pre><?php echo JText::_('TRASPASO_LEGEND_2'); ?></pre>
@@ -130,9 +113,9 @@ function formTraspaso($params, $app, $usuario) {
 <?php
 }
 
-function formConfirm($params, $app, $usuario){
+function formConfirm($params, $app, $usuario) {
 	
-	$action = $params->callback;
+	$action = $params->action;
 	
 	$receiver 		= new stdClass;	
 	$receiver->id	= $app->input->get('receiverId');
@@ -141,11 +124,12 @@ function formConfirm($params, $app, $usuario){
 	$amount			= $app->input->get('amount');
 	
 	foreach ($params->beneficiarios as $key => $value) {
-		if ($receiver->id == $value->idMiddleware) {
-			$receiver->name = $value->nombre;
-			$receiver->no_cuenta = $value->no_cuenta;
+		if ($receiver->id == $value->destinationId) {
+			$receiver->name = $value->name;
+			$receiver->account = $value->account;
 		}
 	}
+
 ?>
 	<h1><?php echo JText::_('TRASPASO_DINERO'); ?></h1>
 	
@@ -161,25 +145,35 @@ function formConfirm($params, $app, $usuario){
 				<div><?php echo $receiver->name; ?></div>
 			</div>
 			<div class="fila">
+				<div><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
+				<div><?php echo $params->datosUsuario->balance; ?></div>
+			</div>
+			<div class="fila">
 				<div><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
-				<div><?php echo $receiver->no_cuenta; ?></div>
+				<div><?php echo $receiver->account; ?></div>
 			</div>
 			<div class="fila">
 				<div><?php echo JText::_('CANTIDAD_TRASPASO'); ?></div>
 				<div>$ <?php echo $amount; ?></div>
 			</div>
 		</div>
+		<input type="hidden" name="senderId" value="<?php echo $senderId; ?>"> 
+		<input type="hidden" name="receiverId" value="<?php echo $receiver->id; ?>"> 
+		<input type="hidden" name="amount" value="<?php echo $amount; ?>"> 
 		<input type="hidden" name="token" value="<?php echo $params->token; ?>"> 
 		<input type="hidden" name="callback" value="<?php echo $params->callback; ?>">
 
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
-			<input type="button" class="button" id="enviar" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" />
+			<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" />
 		</div>
 	</form>
 
 <?php
 }
 
+function formResumen($tx) {
+	
+}
 ?>

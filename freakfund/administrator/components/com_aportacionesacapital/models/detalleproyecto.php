@@ -46,16 +46,14 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 			$obj->flags = 0;
 			$obj->flagsTxt = '';
 		
-	// if ($obj->isProducer) {$advancePaidDate = 2; $settlementFundingDate = 1; }
-			
-			if (isset($advancePaidDate) OR isset($advanceFundingDate)) {
-				if(isset($advancePaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_PAID').'</p>';
-				if(isset($advanceFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_WAIVED').'</p>';
+			if (isset($obj->advancePaidDate) OR isset($obj->advanceFundingDate)) {
+				if(isset($obj->advancePaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_PAID').'</p>';
+				if(isset($obj->advanceFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_WAIVED').'</p>';
 				$obj->flags++;
 			}
-			if (isset($settlementPaidDate) OR isset($settlementFundingDate)) {
-				if(isset($settlementPaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_PAID').'</p>';
-				if(isset($settlementFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_WAIVED').'</p>';
+			if (isset($obj->settlementPaidDate) OR isset($obj->settlementFundingDate)) {
+				if(isset($obj->settlementPaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_PAID').'</p>';
+				if(isset($obj->settlementFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_WAIVED').'</p>';
 				$obj->flags++;
 			}
 			if ($obj->isProducer AND $obj->flags >= 1) {
