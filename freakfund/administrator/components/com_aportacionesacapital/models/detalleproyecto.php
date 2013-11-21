@@ -18,14 +18,14 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 		
 		foreach ($detalleProyecto->providers as $key => $value) {
 			self::producerIdJoomlaANDName($value, $value->providerId, $detalleProyecto->userId);
-var_dump(count($detalleProyecto->providers, 'key='.$key));
 			if ($value->isProducer){
+				unset($detalleProyecto->providers[$key]);
 				array_unshift($detalleProyecto->providers, $value);
 			}
+		}
+		foreach ($detalleProyecto->providers as $key => $value) {
 			self::flags($value);
 		}
-var_dump(count($detalleProyecto->providers), $detalleProyecto->providers);
-exit;
 		
 		return $detalleProyecto;
 	}
@@ -42,16 +42,28 @@ exit;
 	}
 	
 	public function flags($obj)	{
-		$obj->flags = 0;
-		$obj->flagsTxt = '';
+		if (($obj->isProducer) OR !$obj->isProducer AND isset($this->ProductorAporto)) {
+			$obj->flags = 0;
+			$obj->flagsTxt = '';
 		
-		if (isset($advancePaidDate) OR isset($advanceFundingDate)) {
-			$obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_PAID').'</p>';
-			$obj->flags++;
-		}
-		if (isset($settlementPaidDate) OR isset($settlementFundingDate)) {
-			$obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_PAID').'</p>';
-			$obj->flags++;
+	// if ($obj->isProducer) {$advancePaidDate = 2; $settlementFundingDate = 1; }
+			
+			if (isset($advancePaidDate) OR isset($advanceFundingDate)) {
+				if(isset($advancePaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_PAID').'</p>';
+				if(isset($advanceFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_ADVANCE_WAIVED').'</p>';
+				$obj->flags++;
+			}
+			if (isset($settlementPaidDate) OR isset($settlementFundingDate)) {
+				if(isset($settlementPaidDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_PAID').'</p>';
+				if(isset($settlementFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_WAIVED').'</p>';
+				$obj->flags++;
+			}
+			if ($obj->isProducer AND $obj->flags >= 1) {
+				$this->ProductorAporto = true;
+			}
+		} else {
+			$obj->flags = 3;
+			$obj->flagsTxt = '<p>'.JText::_('COM_APORTACIONESCAPITAL_PRODUCTOR_PRIMERO').'</p>';
 		}
 	}
 }

@@ -42,4 +42,5 @@ class aporteproveedorModelaporteproveedor extends JModelList
 		$obj->idJoomla = UserData::getUserJoomlaId($id);
 		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
 	}
+
 }

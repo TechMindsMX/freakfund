@@ -9,8 +9,12 @@ jimport('trama.usuario_class');
 class confirmtxModelconfirmtx extends JModelList
 {
 	public function getconfirmTx() {
-		$projectId 			= $_POST['projectId'];
-		$providerId 		= $_POST['providerId'];
+		$input				= JFactory::getApplication()->input;
+		$projectId 			= $input->get('projectId', null, 'str');
+		$providerId 		= $input->get('providerId', null, 'str');
+		$producer			= $input->get('producer', 0, 'str');
+		$advance			= $input->get('anticipo', null, 'str');
+		$settlement			= $input->get('liquidacion', null, 'str');
 		$detalleProveedor 	= JTrama::getDatos($projectId);
 		$nombreProducto 	= $detalleProveedor->name;
 		
@@ -21,8 +25,8 @@ class confirmtxModelconfirmtx extends JModelList
 			}
 		}
 		
-		$liquidacion		= isset($_POST['liquidacion']) 	? (int) $detalleProveedor->settlementQuantity 	: null;
-		$anticipo			= isset($_POST['anticipo']) 	? (int) $detalleProveedor->advanceQuantity 		: null;
+		$anticipo			= isset($advance) 		? (int) $detalleProveedor->advanceQuantity 		: null;
+		$liquidacion		= isset($settlement)	? (int) $detalleProveedor->settlementQuantity 	: null;
 		
 		if( !is_null($anticipo) && !is_null($liquidacion) ){
 			$detalleProveedor->type 	= 2;
@@ -37,7 +41,7 @@ class confirmtxModelconfirmtx extends JModelList
 		
 		$detalleProveedor->token		= JTrama::token();
 		$detalleProveedor->callback		= 'index.php?option=com_aportacionesacapital&task=error&from=confirmtx&proyId='
-										.$projectId.'&providerId='.$providerId.'&producer='.$_POST['producer'];
+										.$projectId.'&providerId='.$providerId.'&producer='.$producer;
 		$detalleProveedor->ProductName	= $nombreProducto;
 		
 		return $detalleProveedor;
