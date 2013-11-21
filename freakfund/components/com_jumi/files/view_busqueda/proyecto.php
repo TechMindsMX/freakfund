@@ -102,13 +102,17 @@ foreach ($json as $key => $value) {
 	}		
 };
 
-if (!empty($jsonJS)) {
-	$jsonJS = json_encode($proyectos);
+if (!empty($jsonJS) && isset($jsonJS)) {
+	if( !isset($proyectos) ){
+		$jsonJS = json_encode($productos);
+	}else{
+		$jsonJS = json_encode($proyectos);
+	}
 }
-if (!empty($productos)) {
+if (!empty($productos) && isset($productos)) {
 	$productos = json_encode($productos);
 }
-if (!empty($proyectos)) {
+if (!empty($proyectos) && isset($proyectos)) {
 	$proyectos = json_encode($proyectos);
 }
 
