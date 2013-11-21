@@ -7,7 +7,7 @@
 	}
  .search-field {
 	float: left;
-	width: 200px;
+	width: 230px;
 	height: 34px;
 	margin: 3px 0 0 8px;
 	padding: 0 8px;
@@ -58,12 +58,6 @@
 	border: 1px solid #009ED3;
 }
 
-.submit-container:active {
-	outline: 0;
-/* 	-moz-box-shadow: 0 1px 6px #e4340b inset; */
-	-webkit-box-shadow: 0 1px 6px #e4340b inset;
-	box-shadow: 0 1px 6px #e4340b inset;
-}
 
 #busqueda_tags .submit {
 	float: left;
