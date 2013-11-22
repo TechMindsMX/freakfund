@@ -14,7 +14,11 @@ class aportacionesacapitalModelaportacionesacapital extends JModelList
 		foreach ($proyectos as $key => $value) {
 			$value->toBreakeven = $value->breakeven - $value->balance;
 			$value->toBreakevenPercentage = round(( $value->balance / $value->breakeven ) * 100, 2 );
-
+			
+			JTrama::dateDiff($value->fundEndDate, $value);
+			
+			if($value->porcentajeRecaudado >= 1 );
+			
 			self::producerIdJoomlaANDName($value);
 		}
 		

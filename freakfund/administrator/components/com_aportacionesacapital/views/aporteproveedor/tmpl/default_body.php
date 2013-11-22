@@ -3,21 +3,24 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 $datos = $this->items;
+// var_dump($datos);
 ?>
-	<tr>
-		<td align="justify">
+<tr>
+	<td align="justify">
+
+		<div class="formulario">
 			<div class="subtitulo"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SUBTITLE'); ?></div>
 			<div>
 				<div class="textos">
-					<input type="checkbox" name="anticipo" value="1" <?php if ($datos->advancePaidDate OR $datos->advanceFundingDate) echo 'disabled';?> />
+					<input type="checkbox" name="anticipo" value="1" <?php if ($datos->disabledAdvance) echo 'disabled';?> />
 					<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_ADVANCEQUANTITY'); ?>:</span>
 				</div>
 				<div class="textos derecha">$<span class="number"><?php echo $datos->advanceQuantity; ?></span></div>
 			</div>
-			
+		
 			<div>
 				<div class="textos">
-					<input type="checkbox" name="liquidacion" value="2" <?php if ($datos->settlementPaidDate OR $datos->settlementFundingDate) echo 'disabled';?> />
+					<input type="checkbox" name="liquidacion" value="2" <?php if ($datos->disabledSettlement) echo 'disabled';?> />
 					<span class="labels">
 						<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SETTLEMENTQUENTITY'); ?>:
 					</span>
@@ -36,12 +39,13 @@ $datos = $this->items;
 			?>
 				<div style="margin-top: 20px;">
 					<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_MONTOCUENTA'); ?>: </span>
-					<input type="text" name="aportacionliquida" id="aportacionliquida" />
+					<input type="checkbox" name="aportacionliquida" value="<?php echo $datos->balanceToBE; ?>" />
 				</div>
 				
 				<div>
 					<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SALDOPENDIENTE') ?></span> 
-					$<span class="number"><?php echo $datos->balance; ?></span></div>
+					$<span class="number"><?php echo $datos->balanceToBE; ?></span>
+				</div>
 			<?php 
 			}
 			?>
@@ -51,9 +55,10 @@ $datos = $this->items;
 				<input type="hidden" name="providerId" value="<?php echo $datos->providerId; ?>" />
 				<input type="hidden" name="producer" value="<?php echo $productor; ?>" />
 				
-				<input type="submit" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND') ?>"
+				<input type="submit" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND') ?>" />
 			</div>
-		</td>
-	</tr>
+		</div>
+	</td>
+</tr>
 <?php
 ?>

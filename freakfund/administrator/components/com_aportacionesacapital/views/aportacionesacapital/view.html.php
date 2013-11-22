@@ -26,7 +26,7 @@ class aportacionesacapitalViewaportacionesacapital extends JView
 	        parent::display($tpl);
 	}
     protected function addToolBar()	{
-            JToolBarHelper::title(JText::_('COM_APORTACIONESCAPITAL_LISTADOPTOYECTOS_TITLE'));
+            JToolBarHelper::title(JText::_('COM_APORTACIONESCAPITAL_LISTADOPROYECTOS_TITLE'));
 	}
 
 }

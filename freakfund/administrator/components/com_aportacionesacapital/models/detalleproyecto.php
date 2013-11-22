@@ -9,12 +9,20 @@ jimport('trama.usuario_class');
 class detalleProyectoModeldetalleProyecto extends JModelList
 {
 	public function getdetalleProy() {
-		$idProy = JFactory::getApplication()->input;
-		$idProy = $idProy->get('id');
+		$app = JFactory::getApplication();
+		$input = $app->input;
+		$idProy = $input->get('id');
 		
 		$detalleProyecto = JTrama::getDatos($idProy);
 		
+		$detalleProyecto->balanceToBE = $detalleProyecto->breakeven - $detalleProyecto->balance;
+		
 		self::producerIdJoomlaANDName($detalleProyecto);
+		
+		JTrama::dateDiff($detalleProyecto->fundEndDate, $detalleProyecto);
+		if($detalleProyecto->dateDiff->invert == 0 && $detalleProyecto->dateDiff->days > 300 ) {
+			$app->redirect('index.php?option=com_aportacionesacapital', JText::_('ERROR'), 'error');
+		}
 		
 		foreach ($detalleProyecto->providers as $key => $value) {
 			self::producerIdJoomlaANDName($value, $value->providerId, $detalleProyecto->userId);
@@ -24,7 +32,7 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 			}
 		}
 		foreach ($detalleProyecto->providers as $key => $value) {
-			self::flags($value);
+			self::flags($value, $detalleProyecto);
 		}
 		
 		return $detalleProyecto;
@@ -41,7 +49,7 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
 	}
 	
-	public function flags($obj)	{
+	public function flags($obj, $proyecto)	{
 		if (($obj->isProducer) OR !$obj->isProducer AND isset($this->ProductorAporto)) {
 			$obj->flags = 0;
 			$obj->flagsTxt = '';

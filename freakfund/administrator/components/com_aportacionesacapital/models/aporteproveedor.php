@@ -13,25 +13,31 @@ class aporteproveedorModelaporteproveedor extends JModelList
 		$idProy				= $input->get('id');
 		$idProveedor		= $input->get('providerId');
 		$producer 			= $input->get('producer','false','bool');
-		$balance 			= JTrama::getDatos($idProy);
-		$detalleProveedor 	= JTrama::getDatos($idProy)->providers;
+		$data 				= JTrama::getDatos($idProy)->providers;
 		
-		foreach ($detalleProveedor as $key => $value) {
+		foreach ($data as $key => $value) {
 			if($value->providerId == $idProveedor){
 				self::producerIdJoomlaANDName($value, $idProveedor);
-				$detalleProveedor = $value;
+				$data = $value;
 			}
 		}
+
+		$data->proyecto 	= JTrama::getDatos($idProy);
+
 		if($producer){
-			$detalleProveedor->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPRODUCTOR_TITLE';
+			$data->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPRODUCTOR_TITLE';
 		} else {
-			$detalleProveedor->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_TITLE';
+			$data->comtitle = 'COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_TITLE';
 		}
 
-		$detalleProveedor->producer = ($producer == 'true') ? true : false;
-		$detalleProveedor->balance	= $balance->breakeven - $balance->balance;
+		$data->producer 				= ($producer == 'true') ? true : false;
+		$data->proyecto->balanceToBE	= $data->proyecto->breakeven - $data->proyecto->balance;
+
+		$data->disabled = ($data->advancePaidDate OR $data->advanceFundingDate) ? true : false;
+		$data->disabledAdvance = ($data->advanceQuantity > $data->proyecto->balanceToBE ) ? true : false;
+		$data->disabledSettlement = ($data->settlementQuantity > $data->proyecto->balanceToBE ) ? true : false;
 		
-		return $detalleProveedor;
+		return $data;
 	}
 
 	public function producerIdJoomlaANDName($obj,$id=null){
