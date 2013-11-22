@@ -2,12 +2,12 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario 	= JFactory::getUser();
 $app 		= JFactory::getApplication();
-if ($usuario->guest == 1) {
-	$return = JURI::getInstance()->toString();
-	$url    = 'index.php?option=com_users&view=login';
-	$url   .= '&return='.base64_encode($return);
-	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
-}
+// if ($usuario->guest == 1) {
+	// $return = JURI::getInstance()->toString();
+	// $url    = 'index.php?option=com_users&view=login';
+	// $url   .= '&return='.base64_encode($return);
+	// $app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+// }
 jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
@@ -27,7 +27,7 @@ $params->from			= $input->get("from",0,"int");
 $params->confirmUrl		= 'index.php?option=com_jumi&view=appliction&fileid=29&confirm=1';
 $params->action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
 $params->resumeUrl		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=29';
-$params->callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
+$params->cartera 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
 $params->arregloEnvio   = '';
 
 errorClass::manejoError($params->errorCode, $params->from);
@@ -36,12 +36,12 @@ $params->beneficiarios = UserData::getBeneficiarios($params->ids->idMiddleware);
 
 $tx						= $input->get('response', null, 'int');
 if (isset($tx)) {
-	$params->tx			= UserData::getTxData($params->tx);
+	$params->tx			= UserData::getTxData($tx);
 }
 
-if ($confirm == 0) 			formTraspaso($params, $app, $usuario);
-if ($confirm == 1) 			formConfirm($params, $app, $usuario);
-if ($params->from == 29) 	formResumen($params);
+if (!isset($params->from) && $confirm == 0) formTraspaso($params, $app, $usuario);
+if ($confirm == 1) 					formConfirm($params, $app, $usuario);
+if ($params->from == 29) 			formResumen($params);
 
 function formTraspaso($params, $app, $usuario) {
 
@@ -180,6 +180,44 @@ function formConfirm($params, $app, $usuario) {
 }
 
 function formResumen($params) {
-	var_dump($params); exit;
+	$params->tx->id;
+	$idJoomlaSender = UserData::getUserJoomlaId($params->tx->sender);
+	$params->tx->senderData = UserData::getUserBalance($params->tx->sender);
+	$idJoomlaReceiver = UserData::getUserJoomlaId($params->tx->receiver);
+	$params->tx->receiverData = UserData::getUserBalance($params->tx->receiver);
+	$params->tx->receiver;
+	$params->tx->timestamp;
+	$params->tx->amount;
+
+	?>
+	<h2><?php echo JText::_('RESUMEN_TRASPASO'); ?></h2>
+			<p>
+				<label><?php echo JText::_('TRASPASO_SENDER_NAME'); ?></label>
+				<span><?php echo $params->tx->senderData->name; ?></span>
+			</p>
+			<p>
+				<label><?php echo JText::_('NO_CUENTA_RETIRO'); ?></label>
+				<span><?php echo $params->tx->senderData->account; ?></span>
+			</p>
+	
+			<p>
+				<label><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></label>
+				<span><?php echo $params->tx->receiverData->name; ?></span>
+			</p>
+			<p>
+				<label><?php echo JText::_('NO_CUENTA_BENEFI'); ?></label>
+				<span><?php echo $params->tx->receiverData->account; ?></span>
+			</p>
+	
+			<p>
+				<label><?php echo JText::_('TRASPASO_AMOUNT'); ?></label>
+				<span><?php echo $params->tx->amount; ?></span>
+			</p>
+			<p>
+				<label><?php echo JText::_('TRASPASO_DATE'); ?></label>
+				<span><?php echo date( 'd-m-Y h:m:s', $params->tx->timestamp/1000); ?></span>
+			</p>
+			<a class="button" href="<?php echo $params->cartera; ?>"><?php echo JText::_('ESCRIT'); ?></a>
+	<?php
 }
 ?>
