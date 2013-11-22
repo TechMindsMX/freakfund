@@ -24,6 +24,11 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 <script>
 	jQuery(document).ready(function(){
 		jQuery('#clabe').change(function(){
+			console.log(jQuery(this).parent().find('input[type="text"]'));
+			jQuery(this).parent().find('input[type="text"]').each(function(){
+				console.log('algo');
+			});
+			jQuery(this).parent().parent().find('#guardar').prop('disabled', false);
 			var clabe = this.value;
 			
 			var request = $.ajax({
@@ -148,7 +153,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				html += '	<div>'+jQuery('#socio').val()+'</div>';
 				html += '	<div>'+jQuery('#email').val()+'</div>';
 				html += '	<div style="width: 170px;">';
-				html += '		<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)"/>';
+				html += '		<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)" disabled="disabled" />';
 				html += '		<input type="button" class="button" value="Borrar" onclick="deleteCta(this)" />';
 				html += '	</div>';
 				html += '</div>';
@@ -171,6 +176,9 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				jQuery('#divConfirmacion').hide();
 				jQuery('#divFormulario').show();
 			}else if(action.value == "Actualizar") {
+				console.log(jQuery(action).parent().parent().find('.safe'));
+				jQuery(action).parent().parent().find('.safe').attr('disabled', 'disabled');
+				
 				jQuery(action).parent().parent().find('span').text('');
 				jQuery(action).parent().parent().find('span').html('$<span class="number">' + jQuery(action).parent().parent().find('input[type="text"]').val() + '</span>');
 				
@@ -188,13 +196,15 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 	}
 	
 	function editar(campo){
+		jQuery(campo).parent().find('.safe').prop('disabled', false);
+		
 		jQuery(campo).find('span').hide();
 		jQuery(campo).find('input').prop('type', 'text')
 	}
 </script>
 
 <div id="divFormulario">
-	<h3><?php echo 'Alta de Cuentas para traspasos '.$usuario->name;//JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></h3>
+	<h3><?php echo 'Alta de Cuentas para traspasos ';//JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></h3>
 	<form id="formAltaTraspaso" action="" method="post">
 		<input type="hidden" name="userId" id="userId" value="<?php echo $userId->idMiddleware; ?>"/>
 		<input type="hidden" name="userId" id="destinationId" />
@@ -212,7 +222,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 			<div class="fila" id="<?php echo $key; ?>">
 				<input type="hidden" id="destinationIdEdicion" value="<?php echo $value->destinationId; ?>" />
 
-				<div class="editable" onclick="editar(this)">
+				<div class="editable" onclick="editar(this)" >
 					<input type="hidden" value="<?php echo $value->amount; ?>" />
 					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
 				</div>
@@ -222,7 +232,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				<div><?php echo $value->name; ?></div>
 				<div><?php echo $value->email; ?></div>
 				<div style="width: 170px;">
-					<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)" />
+					<input type="button" class="button safe" value="Actualizar" onclick="safeUpdate(this)" disabled="disabled" />
 					<input type="button" class="button" value="Borrar" onclick="deleteCta(this)" />
 				</div>
 			</div>
@@ -236,7 +246,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
 			<div style="width: 170px;">
-				<input type="button" class="button" id="guardar" value="Guardar" />
+				<input type="button" class="button" id="guardar" value="Guardar" disabled="disabled" />
 			</div>
 		</div>
 	</form>
