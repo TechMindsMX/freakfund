@@ -25,17 +25,23 @@ $params->datosUsuario	= UserData::getUserBalance($params->ids->idMiddleware);
 $params->errorCode	 	= $input->get("error",0,"int");
 $params->from			= $input->get("from",0,"int");
 $params->confirmUrl		= 'index.php?option=com_jumi&view=appliction&fileid=29&confirm=1';
-$params->callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
 $params->action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
+$params->resumeUrl		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=29';
+$params->callback 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
 $params->arregloEnvio   = '';
 
 errorClass::manejoError($params->errorCode, $params->from);
 
 $params->beneficiarios = UserData::getBeneficiarios($params->ids->idMiddleware);
 
+$tx						= $input->get('response', null, 'int');
+if (isset($tx)) {
+	$params->tx			= UserData::getTxData($params->tx);
+}
+
 if ($confirm == 0) 			formTraspaso($params, $app, $usuario);
 if ($confirm == 1) 			formConfirm($params, $app, $usuario);
-if ($params->from == 29) 	formResumen($tx);
+if ($params->from == 29) 	formResumen($params);
 
 function formTraspaso($params, $app, $usuario) {
 
@@ -161,7 +167,7 @@ function formConfirm($params, $app, $usuario) {
 		<input type="hidden" name="receiverId" value="<?php echo $receiver->id; ?>"> 
 		<input type="hidden" name="amount" value="<?php echo $amount; ?>"> 
 		<input type="hidden" name="token" value="<?php echo $params->token; ?>"> 
-		<input type="hidden" name="callback" value="<?php echo $params->callback; ?>">
+		<input type="hidden" name="callback" value="<?php echo $params->resumeUrl; ?>">
 
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
@@ -173,7 +179,7 @@ function formConfirm($params, $app, $usuario) {
 <?php
 }
 
-function formResumen($tx) {
-	
+function formResumen($params) {
+	var_dump($params); exit;
 }
 ?>

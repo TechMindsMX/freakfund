@@ -181,6 +181,12 @@ class UserData {
 		
 		return $listado;
 	}
+	
+	public static function getTxData($txId) {
+		$txData = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/get/userTransaction/'.$txId));
+		
+		return $txData;
+	}
 }
 
 ?>
