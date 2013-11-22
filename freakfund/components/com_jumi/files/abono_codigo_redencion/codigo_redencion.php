@@ -11,7 +11,7 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
-require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
+require_once 'libraries/trama/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
@@ -24,7 +24,6 @@ $action = '#';
 
 <script>
 	jQuery(document).ready(function(){
-		jQuery("#form_codigo").validationEngine();
 		jQuery("#form_codigo").validationEngine();
 		jQuery("#enviar").click(function(){
 			
@@ -46,7 +45,7 @@ $action = '#';
 	 	     			url:"libraries/trama/js/ajax.php",
 	 	 				data: {
 	 	  					"codigo": jQuery("#codigo").val(),
-	 	  					"userId": <?php echo $usuario->email; ?>,
+	 	  					"userId": '<?php echo $usuario->email; ?>',
 	 	  					"fun": 5
 	 	 				},
 	 	 				type: 'post'
@@ -76,7 +75,7 @@ $action = '#';
 <div>
 	<form id="form_codigo" action="<?php echo $action; ?>" method="POST">
 	
-		<?php echo JText::_('CODIGO_PROMO');  ?> <input type="text" class="validate[required]" id="codigo"name="codigo">
+		<?php echo JText::_('CODIGO_PROMO');  ?> <input type="text" class="validate[required,custom[number]]" id="codigo"name="codigo">
 		
 		 <script type="text/javascript"
        src="http://www.google.com/recaptcha/api/challenge?k=6LeDLOgSAAAAAIfown4LiNrDQgkwPVZ9FOG6moog">

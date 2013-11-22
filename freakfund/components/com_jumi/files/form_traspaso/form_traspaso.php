@@ -12,7 +12,7 @@ jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
 
-require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
+require_once 'libraries/trama/libreriasPP.php';
 
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();

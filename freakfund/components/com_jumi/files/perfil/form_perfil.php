@@ -9,7 +9,7 @@ if ($usuario->guest == 1) {
 	$url   .= '&return='.base64_encode($return);
 	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
 }
-
+require_once 'libraries/trama/libreriasPP.php';
 include_once 'utilidades.php';
 $datos = new getDatosObj;
 $pathJumi = 'components/com_jumi/files/perfil';
@@ -23,14 +23,6 @@ $existenDatos = $datos->existingUser($usuario->id);
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Registro de Perfil</title>
-
-	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/validationEngine.jquery.css" type="text/css"/>
-	<link rel="stylesheet" href="<?php echo $pathJumi ?>/css/form.css" type="text/css"/>
-	
-	<script src="<?php echo $pathJumi ?>/js/misjs.js" type="text/javascript"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.js" type="text/javascript"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<?php echo $pathJumi ?>/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script>
 		jQuery(document).ready(function(){

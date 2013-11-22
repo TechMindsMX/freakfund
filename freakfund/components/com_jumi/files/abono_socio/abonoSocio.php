@@ -12,6 +12,8 @@ jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
 
+require_once 'libraries/trama/libreriasPP.php';
+
 $token 				= JTrama::token();
 $base 				= JUri::base();
 $usuario 			= JFactory::getUser();
@@ -43,9 +45,7 @@ $html = '<div>
 		
 		 </div>';
 
-$document->addStyleSheet($pathJumi.'css/validationEngine.jquery.css');
-echo '<script src="'.$pathJumi.'js/jquery.validationEngine-es.js"> </script>';
-echo '<script src="'.$pathJumi.'js/jquery.validationEngine.js"> </script>';
+
 echo '<script src="'.$base.'libraries/trama/js/jquery.number.min.js"> </script>';
 
 if( $amount != '' && $balance != '' && $timestamp != '' ) {

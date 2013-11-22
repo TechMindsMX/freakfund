@@ -12,7 +12,7 @@ if ($usuario->guest == 1) {
 
 jimport('trama.class');
 jimport('trama.usuario_class');
-require_once 'components/com_jumi/files/classIncludes/libreriasPP.php';
+require_once 'libraries/trama/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 					= JTrama::token();

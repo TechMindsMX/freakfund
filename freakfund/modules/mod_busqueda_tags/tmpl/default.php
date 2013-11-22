@@ -5,9 +5,9 @@ $doc = JFactory::getDocument();
 
 $doc -> addScript('templates/rt_hexeris/js/jquery-1.9.1.js');
 $doc -> addScript('modules/mod_busqueda_tags/js/lib.js');
-$doc -> addScript('components/com_jumi/files/perfil/js/jquery.validationEngine.js');
-$doc -> addScript('components/com_jumi/files/perfil/js/jquery.validationEngine-es.js');
-$doc -> addStyleSheet('components/com_jumi/files/perfil/css/validationEngine.jquery.css');
+$doc -> addScript('libraries/trama/js/jquery.validationEngine.js');
+$doc -> addScript('libraries/trama/js/jquery.validationEngine-es.js');
+$doc -> addStyleSheet('libraries/trama/css/validationEngine.jquery.css');
 $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css');
 
 ?>
@@ -25,12 +25,7 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 			limitText : '<?php echo JText::_('MOD_BUSQUEDA_TAGS_CAMPO_LIMITADO'); ?> %n <?php echo JText::_('MOD_BUSQUEDA_TAGS_PALABRA'); ?>.'
 		});
 
-		function checkHELLO(field, rules, i, options){
-			if (field.val() != "HELLO") {
-			// this allows to use i18 for the error msgs
-				return options.allrules.validate2fields.alertText;
-			}
-		}
+	
 	}); 
 </script>
 
