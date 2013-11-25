@@ -14,6 +14,7 @@ class RedemptioncodesModelRedemptioncodes extends JModelList {
 		$proy = JTrama::getProyByStatus($statuses);
 		foreach ($proy as $key => $value) {
 			$value->statusName = JTrama::getStatusName($value->status);
+			$proy->redemptioncodes = JTrama::getRedemptionCodes($proy);
 		}
 
 		$resultado = $proy;

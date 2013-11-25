@@ -37,7 +37,7 @@ class RedemptioncodesViewRedemptioncodes extends JView
         }
         protected function addToolBar() 
         {
-                JToolBarHelper::title(JText::_('COM_REDEMPTIONCODES_MANAGER_REDEMPTIONCODES'));
+                JToolBarHelper::title(JText::_('COM_REDEMPTIONCODES_UPLOAD_REDEMPTIONCODES'));
                 JToolBarHelper::preferences('com_redemptioncodes');
 				
 		}

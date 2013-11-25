@@ -32,7 +32,6 @@ JHtml::_('behavior.tooltip');
 			
 			$linkCodes = 'index.php?option=com_redemptioncodes&view=uploadcodes&proyid=';
 			
-			// var_dump($this);
 			foreach($this->items as $i => $item):
 			 ?>
 				<tr class="row<?php echo $i % 2; ?>">
@@ -41,7 +40,9 @@ JHtml::_('behavior.tooltip');
 					</td>
 					<td>
 						<?php echo $item->name; ?>
-						<a target="_blank" href="<?php echo $linkPro. $item->id; ?>"><?php echo JText::_('VER_PROY'); ?></a>
+						<span style="margin-left: 50px;">
+							<a target="_blank" href="<?php echo $linkPro. $item->id; ?>"><?php echo JText::_('VER_PROY'); ?></a>
+						</span>
 					</td>
 					<td>
 						<?php echo $item->statusName; ?>
