@@ -24,13 +24,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 <script>
 	jQuery(document).ready(function(){
 		jQuery('#clabe').change(function(){
-			console.log(jQuery(this).parent().find('input[type="text"]'));
-			jQuery(this).parent().find('input[type="text"]').each(function(){
-				console.log('algo');
-			});
-			jQuery(this).parent().parent().find('#guardar').prop('disabled', false);
 			var clabe = this.value;
-			
 			var request = $.ajax({
 				url: "libraries/trama/js/ajax.php",
 				data: {
@@ -56,6 +50,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 					jQuery('#socio').val('');
 					jQuery('#email').val('');
 					jQuery('#clabe').val('');
+					jQuery('#guardar').attr('disabled', 'disabled');
 				}
 			});
 			
@@ -64,11 +59,30 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 			});
 		});
 		
+		jQuery('.altavalidation').focusout(function(){
+			var contador = 0;
+			
+			jQuery(this).parent().parent().find('.altavalidation').each(function(){
+					
+				if(this.value != ''){
+					contador++;
+				}
+				
+				if( contador == 2 ) {
+					jQuery(this).parent().parent().find('#guardar').prop('disabled', false);
+				} else {
+					jQuery(this).parent().parent().find('#guardar').attr('disabled', 'disabled');
+				}
+			});
+		});
+		
 		jQuery('#guardar').click(function(){
 			jQuery('#showSocio').html(jQuery('#socio').val());
-			jQuery('#showmaxmount').html(jQuery('#maxMount').val());
+			jQuery('#showmaxmount').html('$<span class="number">' + jQuery('#maxMount').val() + '</span>' );
 			jQuery('#showemail').html(jQuery('#email').val());
 			jQuery('#showClabe').html(jQuery('#clabe').val());
+			
+			jQuery("span.number").number( true, 2 );
 			
 			jQuery('#divConfirmacion').show();
 		});
@@ -176,7 +190,6 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 				jQuery('#divConfirmacion').hide();
 				jQuery('#divFormulario').show();
 			}else if(action.value == "Actualizar") {
-				console.log(jQuery(action).parent().parent().find('.safe'));
 				jQuery(action).parent().parent().find('.safe').attr('disabled', 'disabled');
 				
 				jQuery(action).parent().parent().find('span').text('');
@@ -217,6 +230,7 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		</div>
 		
 		<?php
+		//Se crea el listado de los usuario dados de alta
 		foreach ($beneficiarios as $key => $value) {
 		?>
 			<div class="fila" id="<?php echo $key; ?>">
@@ -239,10 +253,11 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 		<?php 
 		}
 		?>
-
+		
+		<!--Campos para dar de alta un numero de cuenta-->
 		<div class="fila" id="autocompletado">
-			<div><input type="text" name="maxMount" id="maxMount" /></div>
-			<div><input type="text" name="clabe" id="clabe" /></div>
+			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation"/></div>
+			<div><input type="text" name="clabe" id="clabe"  class="altavalidation" maxlength="10" /></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
 			<div style="width: 170px;">
@@ -252,26 +267,27 @@ $beneficiarios 	= UserData::getBeneficiarios($userId->idMiddleware);
 	</form>
 </div>
 
-<div id="divConfirmacion" style="display: none">
-	estas Segurooooooo
+<div id="divConfirmacion">
+	<h3>Estas Seguro de enviar la siguiente información!!!</h3>
+	
 	<div>
-		<span>CLABE:</span>
-		<span id="showClabe"></span>
+		<span class="labelsconfirmacion">CLABE FreakFund:</span>
+		<span class="datosconfirmacion" id="showClabe"></span>
 	</div>
 	
 	<div>
-		<span>Nombre del beneficiario:</span>
-		<span id="showSocio"></span>
+		<span class="labelsconfirmacion">Nombre del beneficiario:</span>
+		<span class="datosconfirmacion" id="showSocio"></span>
 	</div>
 	
 	<div>
-		<span>Monto máximo a traspasar:</span>
-		<span id="showmaxmount"></span>
+		<span class="labelsconfirmacion">Monto máximo a traspasar:</span>
+		<span class="datosconfirmacion" id="showmaxmount"></span>
 	</div>
 	
 	<div>
-		<span>Correo electrónico del beneficiario:</span>
-		<span id="showemail"></span>
+		<span class="labelsconfirmacion">Email del beneficiario:</span>
+		<span class="datosconfirmacion" id="showemail"></span>
 	</div>
 	
 	<div>
