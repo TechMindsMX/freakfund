@@ -38,8 +38,8 @@ $tx						= $input->get('response', null, 'int');
 if (isset($tx)) {
 	$params->tx			= UserData::getTxData($tx);
 }
-
-if (!isset($params->from) && $confirm == 0) formTraspaso($params, $app, $usuario);
+var_dump($confirm, $params->from);
+if ($params->from == 0 && $confirm == 0) formTraspaso($params, $app, $usuario);
 if ($confirm == 1) 					formConfirm($params, $app, $usuario);
 if ($params->from == 29) 			formResumen($params);
 
@@ -102,7 +102,7 @@ function formTraspaso($params, $app, $usuario) {
 		</div>
 		
 		<input type="hidden" name="token" value="<?php echo $params->token; ?>"> 
-		<input type="hidden" name="callback" value="<?php echo $params->callback; ?>">
+		<input type="hidden" name="callback" value="<?php echo $params->confirmUrl; ?>">
 		<input type="hidden" name="senderId" value="<?php echo $params->ids->idMiddleware; ?>"> 
 		<input type="hidden" name="objeto" value='<?php echo serialize($params); ?>'>
 		
