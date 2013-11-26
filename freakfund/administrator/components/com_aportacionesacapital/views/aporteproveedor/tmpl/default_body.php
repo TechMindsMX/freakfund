@@ -3,7 +3,6 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 $datos = $this->items;
-// var_dump($datos);
 ?>
 <tr>
 	<td align="justify">
@@ -34,17 +33,20 @@ $datos = $this->items;
 			</div>
 			
 			<?php
-			$fullAporte = ($datos->advancePaidDate AND $datos->advancePaidDate AND $datos->settlementPaidDate AND $datos->settlementFundingDate)? true: false;
-			if($datos->producer AND $fullAporte){ 
+			$fullAporte = ($datos->advancePaidDate AND $datos->advanceFundingDate) AND ($datos->settlementPaidDate AND $datos->settlementFundingDate)? true: false;
+			if (!$fullAporte) {
+				$fullAporte = ($datos->disabledAdvance AND $datos->disabledSettlement AND !$fullAporte);
+			}
+			if ($datos->producer AND $fullAporte){ 
 			?>
 				<div style="margin-top: 20px;">
 					<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_MONTOCUENTA'); ?>: </span>
-					<input type="checkbox" name="aportacionliquida" value="<?php echo $datos->balanceToBE; ?>" />
+					<input type="checkbox" name="aportacionliquida" value="<?php echo $datos->proyecto->balanceToBE; ?>" />
 				</div>
 				
 				<div>
 					<span class="labels"><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SALDOPENDIENTE') ?></span> 
-					$<span class="number"><?php echo $datos->balanceToBE; ?></span>
+					$<span class="number"><?php echo $datos->proyecto->balanceToBE; ?></span>
 				</div>
 			<?php 
 			}

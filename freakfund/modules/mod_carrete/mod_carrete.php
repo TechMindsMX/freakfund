@@ -18,10 +18,10 @@ switch ($params->get('tipodepro')) {
 		
 		break;
 
-	case 'ultimosROI':
-		$datos = modCarreteHelper::latestProductsByROI($cantidad);
-		
-		break;
+	// case 'ultimosROI':
+		// $datos = modCarreteHelper::latestProductsByROI($cantidad);
+// 		
+		// break;
 }
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));

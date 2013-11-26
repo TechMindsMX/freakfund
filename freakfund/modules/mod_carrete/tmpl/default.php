@@ -61,7 +61,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
   	switch ($params->get('tipodepro')) {
-		case 'cerrar':
+		case 'apoyados':
 	 		foreach ($datos as $key => $value) {
 				echo '<li>
 	    				<div class="contenedor productos">
@@ -98,7 +98,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 			}
 			  
 			break;
-		case 'apoyados':
+		case 'cerrar':
 	 		foreach ($datos as $key => $value) {
 	 			$value->porcentajeRecaudado = 30;
 				echo '<li>
@@ -134,30 +134,30 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 			}
 			break;
 		  
-		case 'ultimosROI':
-	 		foreach ($datos as $key => $value) {
-				echo '<li>
-	    				<div class="contenedor">
-	    					<div style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
-	    						<img src="'.AVATAR.'/'.@$value->projectAvatar->name.'" class="imagenes" />
-	    					</div>
-	    					<div class="info-proyecto" >
-								<div><h3>'.@$value->name.'</h3></div>
-								<span>'.JText::_('CATEGORIA').' '.@$value->categoryName.'</span> - 
-								<span>'.@$value->subcategoryName.'</span><br />
-								<span>'.@$value->status.'</span><br />
-								<span>'.JText::_('LABEL_ROF').' '.@$value->ROF.'%</span><br />
-								<span>'.JText::_('LABEL_ROI').' '.@$value->ROI.'%</span><br />
-								<div class="boton-wrap">
-									<a class="button btn-invertir" href="'.$url.@$value->id.'">
-										'.JText::_('INVERTIR_PROYECTO').'</a>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</li>';
-			}
-
-			break;
+		// case 'ultimosROI':
+	 		// foreach ($datos as $key => $value) {
+				// echo '<li>
+	    				// <div class="contenedor">
+	    					// <div style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
+	    						// <img src="'.AVATAR.'/'.@$value->projectAvatar->name.'" class="imagenes" />
+	    					// </div>
+	    					// <div class="info-proyecto" >
+								// <div><h3>'.@$value->name.'</h3></div>
+								// <span>'.JText::_('CATEGORIA').' '.@$value->categoryName.'</span> - 
+								// <span>'.@$value->subcategoryName.'</span><br />
+								// <span>'.@$value->status.'</span><br />
+								// <span>'.JText::_('LABEL_ROF').' '.@$value->ROF.'%</span><br />
+								// <span>'.JText::_('LABEL_ROI').' '.@$value->ROI.'%</span><br />
+								// <div class="boton-wrap">
+									// <a class="button btn-invertir" href="'.$url.@$value->id.'">
+										// '.JText::_('INVERTIR_PROYECTO').'</a>
+	    						// </div>
+	    					// </div>
+	    				// </div>
+	    			// </li>';
+			// }
+// 
+			// break;
 	  } 
    	?>
   </ul>

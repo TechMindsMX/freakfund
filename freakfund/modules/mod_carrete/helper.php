@@ -4,17 +4,18 @@ jimport('trama.class');
 
 class modCarreteHelper
 {
-    public static function latestProductsByROI( $cantidad ) {
-		$datosTmp = JTrama::allProjects();
-
-		$datos = array_splice($datosTmp, 0, $cantidad);
-		$datos = modCarreteHelper::getCatNames($datos);
-	}
+    // public static function latestProductsByROI( $cantidad ) {
+		// $datosTmp = JTrama::allProjects();
+// 
+		// $datos = array_splice($datosTmp, 0, $cantidad);
+		// $datos = modCarreteHelper::getCatNames($datos);
+	// }
 
 	public static function closestEnd() {
     	$datosTmp = JTrama::getClosestEnd();
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
+				JTrama::dateDiff ($value->fundEndDate, $value);
 				$datos[] = JTrama::fundPercentage($value);
 			}
 			$datos = modCarreteHelper::getCatNames($datos);
@@ -30,7 +31,7 @@ class modCarreteHelper
 		
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
-				$status = array(0,5,6,7,8,9,10,11); 
+				$status = array(6,7,8,11); 
 				if (in_array($value->status, $status)) {
 					$dataFilterStatus[] = $value;
 				}

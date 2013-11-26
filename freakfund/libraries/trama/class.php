@@ -78,7 +78,7 @@ class JTrama
 			$producer = implode(' ',$producer);
 		}
 		else {
-			$producer = 'Anonimo';
+			$producer = JFactory::getUser($data)->name;
 		}
 		$html = '<a href="'.$link.'" mce_href="'.$link.'">'.$producer.'</a>';
 		return $html;
@@ -348,14 +348,6 @@ class JTrama
 	
 	public static function getRedemptionCodes($value)
 	{
-		$con=mysql_connect("localhost","root","");
-		mysql_select_db('redempcodes', $con);
-		
-		$result = mysql_query("SELECT * FROM project_redemptioncodes WHERE projectid = ".$value->id);
-		
-		while($row=mysql_fetch_object($result)) {
-			$value->redemptionCodes[] = $row->redemptioncode;
-		}
 
 		return $value;
 	}
