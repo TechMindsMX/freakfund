@@ -38,7 +38,6 @@ $tx						= $input->get('response', null, 'int');
 if (isset($tx)) {
 	$params->tx			= UserData::getTxData($tx);
 }
-var_dump($confirm, $params->from);
 if ($params->from == 0 && $confirm == 0) formTraspaso($params, $app, $usuario);
 if ($confirm == 1) 					formConfirm($params, $app, $usuario);
 if ($params->from == 29) 			formResumen($params);
