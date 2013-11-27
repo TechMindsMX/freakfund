@@ -24,6 +24,7 @@ $callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32&from=
 $pathJumi 			= $base.'components/com_jumi/files/classIncludes/';
 $accion				= MIDDLE.PUERTO.'/trama-middleware/rest/paypal/payment';
 $usuario->balance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
+$cuenta				= UserData::getUserBalance($idMiddleware->idMiddleware);
 $jinput 			= $app->input;
 $amount 			= $jinput->get('amount', '', 'INT');
 $balance 			= $jinput->get('balance', '', 'INT');
@@ -32,7 +33,6 @@ $errorCode 			= $jinput->get('error', '', 'INT');
 $from	 			= $jinput->get('from', '', 'INT');
 
 errorClass::manejoError($errorCode, $from);
-
 $html = '<div>
 		 	<h3>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR').'</h3>
 		
@@ -55,38 +55,35 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 	$metodoPago = 'Paypal';
 	
 	$html = '<div>
-		<h3>'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR').'</h3>
-		
+			
 		<h4>Datos Capturados</h4>
 		
-		<p>
-			<span>Usuario: </span>
-			'.$usuario->name.'
-		</p>
+		
 		
 		<p>
-			<span>Saldo Anterior</span>
+			<span class="labelsconfirmacion">Saldo Anterior</span>
 			$<span class="number">'.$saldoAnterior.'</span>
 		</p>
 		
 		<p>
-			<span>Monto abonado</span>
+			<span class="labelsconfirmacion">Monto abonado</span>
 			$<span class="number">'.$amount.'</span>
 		</p>
 		
 		<p>
-			<span>Saldo Actual</span>
+			<span class="labelsconfirmacion">Saldo Actual</span>
 			$<span class="number">'.$balance.'</span>
 		</p>
 		
 		<p>
-			<span>Fecha de la transacción</span>
+			<span class="labelsconfirmacion">Fecha de la transacción</span>
 			'.$fechaActual.'
 		</p>
 		
 		<p>
-			<span>Metodo de pago</span>
+			<span class="labelsconfirmacion">Metodo de pago</span>
 			'.$metodoPago.'
+					<img style="maregin-left: 30px;" width="200px" src="images/paypal.jpg" />
 		</p>
 		<p>
 				<a href="index.php?option=com_jumi&view=application&fileid=24" class="button">Ir a mi cartera</a>	
@@ -100,9 +97,11 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 		<input type="hidden" name="userId" id="userId" value="'.$idMiddleware->idMiddleware.'" />
 		</div>
 		<div>
-		<label for="amount">'.JText::_("MONTO").'</label>
+		<label class="labelsconfirmacion" for="amount">'.JText::_("MONTO").' MXN  $</label>
 				<input type="text" name="amount" id="amount" class="validate[custom[number], required]" />
+				<img style="maregin-left: 30px;" width="110px" src="images/paypal.jpg" />
 			</div>
+				
 			<div>
 				<input type="button" class="button" value="'. JText::_("CANCELAR").' " onclick="javascript:window.history.back();" />
 				<input type="button" class="button" id="abonar" value=" '.JText::_("FREAKFUND_JUMI_ABONOSOCIO_ABONAR").' " />		
@@ -126,6 +125,17 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 		});
 	});
 </script>
+	<h3><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR')?></h3>
+	
+	<p>
+			<span class="labelsconfirmacion">Usuario: </span>
+			<?php echo $usuario->name;?>
+		</p>
+		<p>
+			<span class="labelsconfirmacion">Cuenta Freakfund: </span>
+			<?php echo $cuenta->account;?>
+		</p>
+		
 <form action="<?php echo $accion;  ?>" id="formAbono" method="post">
 		
 	<?php

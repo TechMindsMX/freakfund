@@ -25,26 +25,48 @@ $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $action 		= '#';
 
 ?>
-
+<script language="JavaScript">
+	jQuery(document).ready(function() {
+		jQuery("#form_cashout").validationEngine();
+		
+		
+		jQuery('#retirar').click(function() {
+			
+			if(confirm('¿Esta seguro que quiere retirar la cantidad de $'+jQuery('#cantidad').val()+'? ¡Esta accion es IRREVERSIBLE!')) {
+				jQuery("#form_cashout").validationEngine();
+				jQuery("#form_cashout").submit();
+			} else {
+				alert('Bien hecho');
+			}
+		});
+	});
+</script>
 <h1><?php echo JText::_('TRANSFERIR_DINERO');  ?></h1>
 <div>
 	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">
 	
 		<?php
 		$saldo = $datosUsuario->balance == null ? 0 : $datosUsuario->balance;
+		$cuenta = $datosUsuario->account == null ? 0 : $datosUsuario->account;
+		$name = $datosUsuario->name == null ? 0 : $datosUsuario->name;
 		
-		echo '<div>'.JText::_('SALDO_FF').': $<span class="number">'. $saldo .'</span></div>';
-		$campo = '<label>'.JText::_('CANTIDAD_TRANSFERENCIA').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /> ';
+		echo '<div ><span class="labelsconfirmacion">Usuario:</span> <span>'. $name .'</span></div><br / >';
+		echo '<div ><span class="labelsconfirmacion">'.JText::_('SALDO_FF').':</span> $<span class="number">'. $saldo .'</span></div><br / >';
+		echo '<div ><span class="labelsconfirmacion">Cuenta Freakfund:</span><span >'. $cuenta .'</span></div> <br />';
+		$campo = '<label class="labelsconfirmacion">'.JText::_('CANTIDAD_TRANSFERENCIA').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /><br /> ';
 		
 		echo $campo;
 		
 		?>
-		
+		<br />
+		<img style="maregin-left: 30px;" width="200px" src="images/paypalbanorte.jpg" />
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-			<input type="button" class="button" value="Transferir" />
+			<input type="button" id="retirar" class="button" value="Transferir" />
+			
 		</div>
+		
 	</form>
 	
 </div>
