@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/uploadTicketmasterLayout';
-$html = $this->items->redemptioncode?'<tr><th><p>Este elemento ya tiene codigos de redencion cargados</p></th></tr>':'';
+$html = $this->items->redemptioncode?'<tr><th><p><img src="'.JURI::base().'templates/bluestork/images/admin/tick.png" /> Este elemento ya tiene codigos de redencion cargados</p></th></tr>':'';
 ?>
 
 <form action="<?php echo $accion; ?>" method="post" name="adminForm" enctype="multipart/form-data">
