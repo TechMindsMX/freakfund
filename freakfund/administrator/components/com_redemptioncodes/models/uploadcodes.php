@@ -17,7 +17,7 @@ class RedemptioncodesModelUploadcodes extends JModelList {
 		
 		$proy = JTrama::getDatos($proId);
 		
-		$proy->redemptioncodes = JTrama::getRedemptionCodes($proy);
+		$proy->redemptioncode = JTrama::getRedemptionCodes($proId);
 		
 		$proy->token = JTrama::token();
 		$proy->callback = JURI::base().'index.php?option=com_redemptioncodes&task=success';

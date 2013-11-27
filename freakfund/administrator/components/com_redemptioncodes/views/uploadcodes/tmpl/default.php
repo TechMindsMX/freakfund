@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 
 $accion = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/uploadTicketmasterLayout';
-
+$html = $this->items->redemptioncode?'<tr><th><p>Este elemento ya tiene codigos de redencion cargados</p></th></tr>':'';
 ?>
 
 <form action="<?php echo $accion; ?>" method="post" name="adminForm" enctype="multipart/form-data">
@@ -26,6 +26,7 @@ $accion = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/uploadTicketmasterL
 			}
 		} else {
 			?>
+			<?php echo $html; ?>
 			<tr><th><?php echo JText::_('SIN_REDEMP_CSV'); ?></th></tr>
 			<tr><td>
 				<input type="file" name="layout" id="csv" />

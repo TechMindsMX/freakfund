@@ -22,6 +22,9 @@ JHtml::_('behavior.tooltip');
 		        <th>
 		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_CODES'); ?>
 		        </th>
+		        <th>
+		        	<?php echo JText::_('COM_REDEMPTIONCODES_REDEMPTIONCODES_HEADING_EXISTS'); ?>
+		        </th>
 			</tr>
 		</thead>
         <tbody>
@@ -33,7 +36,9 @@ JHtml::_('behavior.tooltip');
 			$linkCodes = 'index.php?option=com_redemptioncodes&view=uploadcodes&proyid=';
 			
 			foreach($this->items as $i => $item):
-			 ?>
+				$img = $item->redemptioncodes? JURI::base().'templates/bluestork/images/admin/tick.png':JURI::base().'templates/bluestork/images/admin/publish_x.png';
+			 	
+			?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<td>
 						<?php echo $item->id; ?>
@@ -50,6 +55,9 @@ JHtml::_('behavior.tooltip');
 					<td>
 						<a href="<?php echo $linkCodes. $item->id; ?>"><?php echo JText::_('ADD_REDEMP_CODES'); ?></a>
 					</td>
+					<td align="middle">
+						<img src="<?php echo $img; ?>" />
+					</td>
 				</tr>
 			<?php 
 			endforeach; 
@@ -64,7 +72,7 @@ JHtml::_('behavior.tooltip');
 
 	    <tfoot>
 			<tr>
-	        	<td colspan="4"><?php // echo $this->pagination->getListFooter(); ?></td>
+	        	<td colspan="5"><?php // echo $this->pagination->getListFooter(); ?></td>
 			</tr>
 		</tfoot>
 

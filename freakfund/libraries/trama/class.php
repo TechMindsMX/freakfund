@@ -346,10 +346,11 @@ class JTrama
 		return $data;
 	}
 	
-	public static function getRedemptionCodes($value)
+	public static function getRedemptionCodes($proyId)
 	{
-
-		return $value;
+		$redemptionCodeExist = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/isTicketmasterLayout/'.$proyId));
+		
+		return $redemptionCodeExist;
 	}
 	
 	public static function dateDiff ($fecha, $obj) {
