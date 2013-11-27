@@ -26,10 +26,41 @@ class plgUserFFAccount extends JPlugin
 
 		if($user->lastvisitDate == '0000-00-00 00:00:00' && $user->activation == '') {
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
+			
+			$this->savePerfilPersona($user);
+			
 			$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked"; 
 			
 			$this->saveUserMiddle(json_decode($respuesta),$user);
+			
 		}
+	}
+	
+	function savePerfilPersona($datosUsuario){
+		$nombreCompleto = explode(' ', $datosUsuario->name);
+
+		$columnas[] 	= 'nomNombre';
+		$columnas[] 	= 'nomApellidoPaterno';
+		$columnas[] 	= 'users_id';
+		$columnas[] 	= 'perfil_tipoContacto_idtipoContacto';
+		$columnas[] 	= 'perfil_personalidadJuridica_idpersonalidadJuridica';
+		
+		$values[] 		= '"'.$nombreCompleto[0].'"';
+		$values[]		= '"'.$nombreCompleto[1].'"';
+		$values[]		= '"'.$datosUsuario->id.'"';
+		$values[]		= '1';
+		$values[]		= '0';
+		
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query
+			->insert($db->quoteName('perfil_persona'))
+			->columns($db->quoteName($columnas))
+			->values(implode(',',$values));
+			
+		$db->setQuery( $query );
+		$db->query();
+
 	}
 
 	function saveUserMiddle($idMiddle, $user) {
@@ -53,6 +84,7 @@ class plgUserFFAccount extends JPlugin
 				  );
 				  		  
 		$ch = curl_init();
+		$this->url = '/post.php';
 		
 		curl_setopt($ch, CURLOPT_URL,$this->url);
 		curl_setopt($ch, CURLOPT_POST, true);
