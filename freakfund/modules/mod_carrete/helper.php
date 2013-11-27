@@ -4,13 +4,6 @@ jimport('trama.class');
 
 class modCarreteHelper
 {
-    // public static function latestProductsByROI( $cantidad ) {
-		// $datosTmp = JTrama::allProjects();
-// 
-		// $datos = array_splice($datosTmp, 0, $cantidad);
-		// $datos = modCarreteHelper::getCatNames($datos);
-	// }
-
 	public static function closestEnd() {
     	$datosTmp = JTrama::getClosestEnd();
 		if (!empty($datosTmp)) {
@@ -37,8 +30,8 @@ class modCarreteHelper
 				}
 				$value = JTrama::dateDiff ($value->fundEndDate, $value);
 			}
-			$datos = array_splice($dataFilterStatus, 0, $cantidad);
-			$datos = modCarreteHelper::getCatNames($datos);
+			$datos = @array_splice($dataFilterStatus, 0, $cantidad);
+			$datos = @modCarreteHelper::getCatNames($datos);
 		}
 		else {
 			$datos = '';
