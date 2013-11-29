@@ -8,7 +8,8 @@ $document->addScript('../libraries/trama/js/jquery.number.min.js');
 if( isset($this->items[0]->type) ) {
 	foreach($this->items as $i => $item):
 		if ( $item->type != 'REPERTORY' ) {
-			$item->htmlChange = ($item->status != 4 && $item->status != 8)? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';
+			$statusNoModificables = array(4,5,8);
+			$item->htmlChange = !in_array($item->status,$statusNoModificables) ? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';
 	?>
 	        <tr class="row<?php echo $i % 2; ?>" id="<?php echo $item->status; ?>">
 		        <td>
