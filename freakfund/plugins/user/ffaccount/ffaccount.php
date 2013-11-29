@@ -52,8 +52,7 @@ class plgUserFFAccount extends JPlugin
 			$chkJoomRel = self::checkJoomlaRelations($usuario);
 				if (is_null($chkJoomRel)) $this->savePerfilPersona($user);
 			$checkMiddle = self::checkMiddle($chkJoomRel->idMiddleware,$usuario);
-				// if (is_null($checkMiddle)) $this->sendToMiddle($user->email,$user->name);
-				var_dump($chkJoomRel, $checkMiddle); exit;
+				if (is_null($checkMiddle)) $this->sendToMiddle($user->email,$user->name);
 		}
 
 		$db = JFactory::getDBO();
@@ -74,7 +73,7 @@ class plgUserFFAccount extends JPlugin
 
 		$prop = $instance->getProperties();   // busca las propiedades del usuario para tener el id
 		$perfilff = UserData::datosGr($instance->id);  // busca los datos en nuestras tablas
-		
+				
 		$faltanDatos = new stdClass;
 		if ( !isset($perfilff) OR $perfilff->iddireccion == '' OR $perfilff->iddatosFiscales == '' ) {
 			$haystack = $options['entry_url'];
@@ -83,12 +82,18 @@ class plgUserFFAccount extends JPlugin
 				$faltanDatos->check = true;
 			}
 		}
+		
+		//$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';  // Perfil
+		$carteraUrl = 'index.php?option=com_jumi&view=application&fileid=24&Itemid=218'; // Mi cartera
+		$returnUrl = base64_decode(JRequest::getVar('return', '', 'method', 'base64'), true);
+		
+		$url = isset($returnUrl) ? $returnUrl : $carteraUrl;
 
 		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
 			$app =& JFactory::getApplication();
-			//$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
-			$url = 'index.php?option=com_jumi&view=application&fileid=24&Itemid=218';
 			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
+		} else {
+			$app->redirect($url);
 		}
 	}
 	
