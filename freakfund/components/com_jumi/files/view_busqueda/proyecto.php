@@ -12,7 +12,7 @@ $ligasPP 		= '';
 $input 			= JFactory::getApplication()->input;
 $tipoPP 		= $input->get('typeId', 0, 'INT');
 
-$params 		= new stdClass;
+$params 				= new stdClass;
 $params->categoria 		= $input->get('categoria', 'all', 'STR');
 $params->subcategoria 	= $input->get('subcategoria', 'all', 'STR');
 $params->estatus 		= $input->get('status', '', 'STR');
@@ -62,7 +62,7 @@ function prodProy ($tipo, $params) {
 	return $json0;
 }
 
-$json = json_decode(prodProy($busquedaPor[$tipoPP], $params));
+$json 		= json_decode(prodProy($busquedaPor[$tipoPP], $params));
 $statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 foreach ($json as $key => $value) {
@@ -74,12 +74,12 @@ foreach ($json as $key => $value) {
 	$string = strip_tags($value->description);
 	$value->description = (strlen($string) > 113 ? substr($string,0,110).'...' : $string);
 
-	$value = JTrama::getDatos($value->id);
+	JTrama::formatDatosProy($value);
 	
 	JTrama::dateDiff($value->fundEndDate, $value);
 
 	$value->jtextdays = JText::sprintf('LAPSED_DAYS', $value->dateDiff->days);
-	
+
 	if( isset($value->premiereEndDateCode) ) {
 		$fecha = date('d-m-Y',($value->premiereEndDateCode/1000));
 		$value->premiereEndDateArray = explode('-', $fecha);
@@ -94,10 +94,12 @@ foreach ($json as $key => $value) {
 		$jsonJS[] = $value;
 		switch ($value->status) {
 			case '5':
+				JTrama::formatDatosProy($value);
 				$proyectos[] = $value; //Solo Proyectos
 				break; 
 			default:
 				if( in_array($value->status, array(6,7,8,10,11)) ){
+					JTrama::formatDatosProy($value);
 					$productos[] = $value; //Solo Productos
 				}
 				
@@ -241,19 +243,20 @@ function pageselectCallback (page_index, jq) {
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
-		members[i].recaudado = 20000;
-		members[i].fundEnd = '12-12-2013';
+		//members[i].recaudado = 20000;
+		//members[i].fundEnd = '12-12-2013';
 		members[i].roiFinanciadores = 40;
 		members[i].roiInversionistas = 30;
 		members[i].premierEnd = '12-01-2014';
 		/**************************************************************************************/
 		
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		console.log(members);
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
-		var recaudado = members[i].recaudado != null ? members[i].recaudado : " ";
-		var porcentajeRecaudado = members[i].recaudado != null ? ((members[i].recaudado/members[i].breakeven)*100).toFixed(2) : 0;
-		var cierreFinanciamiento = members[i].fundEnd != null ? members[i].fundEnd : " "; 
+		var recaudado = members[i].balance != null ? members[i].balance : " ";
+		var porcentajeRecaudado = members[i].balance != null ? ((members[i].balance/members[i].breakeven)*100).toFixed(2) : 0;
+		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " "; 
 		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores : " ";
 		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas : " ";
 		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";

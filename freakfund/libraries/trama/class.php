@@ -354,7 +354,6 @@ class JTrama
 		$fecha2 = new DateTime($fecha);
 		
 		$obj->dateDiff = date_diff($fecha1,$fecha2);
-		
 	}
 	public static function getProjectbyUser ($middlewareId){
 		$jsonobj= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/projects/'.$middlewareId));
