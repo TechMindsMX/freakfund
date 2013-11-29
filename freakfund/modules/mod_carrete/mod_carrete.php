@@ -17,14 +17,8 @@ switch ($params->get('tipodepro')) {
 		$datos = modCarreteHelper::profitables($cantidad);
 		
 		break;
-
-	// case 'ultimosROI':
-		// $datos = modCarreteHelper::latestProductsByROI($cantidad);
-// 		
-		// break;
 }
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-
 require( JModuleHelper::getLayoutPath( 'mod_carrete', $params->get('layout', 'default') ) );
 ?>

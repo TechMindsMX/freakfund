@@ -31,13 +31,14 @@ function filtro (){
 }
 
 function prodProy ($tipo, $params) {
+	
 	if( !empty($_POST) ) {
 		if (!is_null($params->tags)) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByKeyword/'.$tagLimpia;
-		} elseif ( ($tipo == 'all' ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
+		} elseif ( ($tipo == "all" ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		} elseif ( ($params->categoria == '') && ($params->subcategoria == "all") && ($params->estatus != "")) {
+		} elseif ( ($params->categoria == "") && ($params->subcategoria == "all") && ($params->estatus != "") ) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
 		} elseif ( ($params->categoria != "all") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
@@ -45,7 +46,7 @@ function prodProy ($tipo, $params) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
 		}
 	} else {
-		if ($params->categoria == 'all') {
+		if ( $params->categoria == "all" ) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
 		} else {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
@@ -95,11 +96,14 @@ foreach ($json as $key => $value) {
 			case '5':
 				$proyectos[] = $value; //Solo Proyectos
 				break; 
-			case in_array($value->status, array(6,7)):
-				$productos[] = $value; //Solo Productos
+			default:
+				if( in_array($value->status, array(6,7,8,10,11)) ){
+					$productos[] = $value; //Solo Productos
+				}
+				
 				break;
 		}		
-	}		
+	}
 };
 
 if (!empty($jsonJS) && isset($jsonJS)) {

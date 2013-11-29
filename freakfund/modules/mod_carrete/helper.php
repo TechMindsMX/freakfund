@@ -24,7 +24,7 @@ class modCarreteHelper
 		
 		if (!empty($datosTmp)) {
 			foreach ($datosTmp as $key => $value) {
-				$status = array(6,7,8,11); 
+				$status = array(6,7,8,10,11); 
 				if (in_array($value->status, $status)) {
 					$dataFilterStatus[] = $value;
 				}
@@ -50,6 +50,7 @@ class modCarreteHelper
 		
 		return $datos;
     }
+	
 	public static function activePro ( $datos ) {
 		foreach ($datos as $key => $value) {
 		}

@@ -234,17 +234,13 @@ class JTrama
 		}
 		// SIMULADOS
 		$value->fundStartDate = 1370284000000;
-		$value->fundEndDate = 1388284000000; 
-		$value->productionStartDateCode = 1388003651000;
-		$value->premiereStartDateCode = 1391003651000;
 		
 		if ($value->balance != 0) {
 			$value->porcentajeRecaudado = round($value->balance / $value->breakeven,2);
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
-		if (is_null($value->tri)) { $value->tri = 32; };
-		// FIN SIMULADOS
+		if (is_null($value->tri)) { $value->tri = 0; };
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
@@ -283,7 +279,6 @@ class JTrama
 				$valor->advanceDate = date('d-m-Y', ($valor->advanceDate/1000) );				
 			}
 		}
-		
 		$value->projectFinancialData = null;
 	}
 	

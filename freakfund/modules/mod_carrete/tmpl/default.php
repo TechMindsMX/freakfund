@@ -23,8 +23,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 
 <script type="text/javascript">
 
-	function mycarousel_initCallback(carousel)
-	{
+	function mycarousel_initCallback(carousel) {
 	    // Disable autoscrolling if the user clicks the prev or next button.
 	    carousel.buttonNext.bind('click', function() {
 	        carousel.startAuto(0);
@@ -60,82 +59,84 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 </div>
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
-  	
-  	switch ($params->get('tipodepro') && !is_null($datos)) {
-		case 'apoyados':
-	 		foreach ($datos as $key => $value) {
-				echo '<li>
-	    				<div class="contenedor productos">
-	    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
-	    					</div>
-	    					<div class="info-proyecto" >
-								<div class="titulo">
-								<a href="'.$url.@$value->id.'">
-								<h2>'.@$value->name.'</h2>
-								</a>
-								</div>
-								<div class="cat">
-								<span>'.@$value->categoryName.'</span> - 
-								<span>'.@$value->subcategoryName.'</span>
-								</div>
-								<div class="datos">
-								<div class="two-cols first">
-								<div class="big">'.@$value->ROF.'%</div>
-								<div class="small">'.JText::_('LABEL_ROF').'</div>
-								</div>
-								<div class="two-cols second">
-								<div class="big">'.@$value->ROI.'%</div>
-								<div class="small">'.JText::_('LABEL_ROI').'</div>
-								</div>
-								<div class="clearfix"></div>
-								</div>
-								<div class="boton-wrap">
-									<a class="button btn-invertir" href="'.$url.@$value->id.'">
-										'.JText::_('INVERTIR_PROYECTO').'</a>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</li>';
-			}
-			break;
-			
-		case 'cerrar':
-	 		foreach ($datos as $key => $value) {
-	 			$value->porcentajeRecaudado = 30;
-				echo '<li>
-	    				<div class="contenedor proyectos">
-	    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
-		    					<span class="mask"></span>
-	    					</div>
-	    					<div class="info-proyecto" >
-								<div class="titulo">
-								<a href="'.$url.@$value->id.'">
-								<h2>'.@$value->name.'</h2>
-								</a>
-								</div>
-								<div class="cat">
-								<span>'.@$value->categoryName.'</span> - 
-								<span>'.@$value->subcategoryName.'</span>
-								</div>
-								<div class="fondo_barra"><span class="barra" style="width: '.@$value->porcentajeRecaudado.'%;"></span></div>
-								<div class="cat texto-proyectos recaudado">'.JText::_('LABEL_RECAUDADO').
-								' $<span class="number">'.@$value->balance.'</span>
-								</div>
-								<div class="cat texto-proyectos">'.JText::_('PUNTO_EQUILIBRIO_ABR').
-								' $<span class="number">'.@$value->breakeven.'</span>
-								</div>
-								<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
-								<div class="boton-wrap">
-									<a class="button btn-invertir" href="'.$url.@$value->id.'">
-										'.JText::_('INVERTIR_PROYECTO').'</a>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</li>';
-			}
-			break;
-			
-	  } 
+	if(!is_null($datos)){
+	  	switch ($params->get('tipodepro')) {
+			case 'apoyados':
+		 		foreach ($datos as $key => $value) {
+					echo '<li>
+		    				<div class="contenedor productos">
+		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
+		    					</div>
+		    					<div class="info-proyecto" >
+									<div class="titulo">
+									<a href="'.$url.@$value->id.'">
+									<h2>'.@$value->name.'</h2>
+									</a>
+									</div>
+									<div class="cat">
+									<span>'.@$value->categoryName.'</span> - 
+									<span>'.@$value->subcategoryName.'</span>
+									</div>
+									<div class="datos">
+									<div class="two-cols first">
+									<div class="big">'.@$value->ROF.'%</div>
+									<div class="small">'.JText::_('LABEL_ROF').'</div>
+									</div>
+									<div class="two-cols second">
+									<div class="big">'.@$value->ROI.'%</div>
+									<div class="small">'.JText::_('LABEL_ROI').'</div>
+									</div>
+									<div class="clearfix"></div>
+									</div>
+									<div class="boton-wrap">
+										<a class="button btn-invertir" href="'.$url.@$value->id.'">
+											'.JText::_('INVERTIR_PROYECTO').'</a>
+		    						</div>
+		    					</div>
+		    				</div>
+		    			</li>';
+				}
+				break;
+				
+			case 'cerrar':
+		 		foreach ($datos as $key => $value) {
+		 			$value->porcentajeRecaudado = 30;
+					echo '<li>
+		    				<div class="contenedor proyectos">
+		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
+			    					<span class="mask"></span>
+		    					</div>
+		    					<div class="info-proyecto" >
+									<div class="titulo">
+									<a href="'.$url.@$value->id.'">
+									<h2>'.@$value->name.'</h2>
+									</a>
+									</div>
+									<div class="cat">
+									<span>'.@$value->categoryName.'</span> - 
+									<span>'.@$value->subcategoryName.'</span>
+									</div>
+									<div class="fondo_barra"><span class="barra" style="width: '.@$value->porcentajeRecaudado.'%;"></span></div>
+									<div class="cat texto-proyectos recaudado">'.JText::_('LABEL_RECAUDADO').
+									' $<span class="number">'.@$value->balance.'</span>
+									</div>
+									<div class="cat texto-proyectos">'.JText::_('PUNTO_EQUILIBRIO_ABR').
+									' $<span class="number">'.@$value->breakeven.'</span>
+									</div>
+									<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
+									<div class="boton-wrap">
+										<a class="button btn-invertir" href="'.$url.@$value->id.'">
+											'.JText::_('INVERTIR_PROYECTO').'</a>
+		    						</div>
+		    					</div>
+		    				</div>
+		    			</li>';
+				}
+				break;
+		  }
+	  } else{
+	  	echo '<p>Sin datos</p>';
+	  }
    	?>
   </ul>
 </div>
