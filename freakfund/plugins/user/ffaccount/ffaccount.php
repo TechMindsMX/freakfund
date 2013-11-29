@@ -16,6 +16,82 @@ class plgUserFFAccount extends JPlugin
 		$this->token = JTrama::token();
 	}
 
+	function onUserLogin($user, $options = array()) {
+		$instance = $this->_getUser($user, $options);
+
+		// Envío al middleware
+		if ($instance->lastvisitDate == '0000-00-00 00:00:00' && $instance->activation == '') {
+			self::onFirstLogin($instance);
+		}
+
+		if ($instance instanceof Exception) {
+			return false;
+		}
+
+		if ($instance->get('block') == 1) {
+			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_NOLOGIN_BLOCKED'));
+			return false;
+		}
+
+		if (!isset($options['group'])) {  // verifica que el usuario puede logear
+			$options['group'] = 'USERS';
+		}
+		$result	= $instance->authorise($options['action']);
+		if (!$result) {
+			JError::raiseWarning(401, JText::_('JERROR_LOGIN_DENIED'));
+			return false;
+		}
+		
+		$instance->set('guest', 0);   // marca el usuario como logeado
+
+		$session = JFactory::getSession();
+		$session->set('user', $instance);   // set sesion de usuario
+		
+		$usuario = JFactory::getUser($instance->id);
+		if ($usuario->get('isRoot')) {  // Chequeo para Super User en tablas de middle y users_middleware
+			$chkJoomRel = self::checkJoomlaRelations($usuario);
+				if (is_null($chkJoomRel)) $this->savePerfilPersona($user);
+			$checkMiddle = self::checkMiddle($chkJoomRel->idMiddleware,$usuario);
+				// if (is_null($checkMiddle)) $this->sendToMiddle($user->email,$user->name);
+				var_dump($chkJoomRel, $checkMiddle); exit;
+		}
+
+		$db = JFactory::getDBO();
+
+		$app = JFactory::getApplication();
+		$app->checkSession();
+
+		$db->setQuery(
+			'UPDATE '.$db->quoteName('#__session') .
+			' SET '.$db->quoteName('guest').' = '.$db->quote($instance->get('guest')).',' .
+			'	'.$db->quoteName('username').' = '.$db->quote($instance->get('username')).',' .
+			'	'.$db->quoteName('userid').' = '.(int) $instance->get('id') .
+			' WHERE '.$db->quoteName('session_id').' = '.$db->quote($session->getId())
+		);
+		$db->query();  // actualiza la sesion en la db
+
+		$instance->setLastVisit();  // actualiza el momento de la ultima visita
+
+		$prop = $instance->getProperties();   // busca las propiedades del usuario para tener el id
+		$perfilff = UserData::datosGr($instance->id);  // busca los datos en nuestras tablas
+		
+		$faltanDatos = new stdClass;
+		if ( !isset($perfilff) OR $perfilff->iddireccion == '' OR $perfilff->iddatosFiscales == '' ) {
+			$haystack = $options['entry_url'];
+			$needle = 'administrator';
+			if ( !strstr($haystack, $needle)) { // verifica que no este en el admin
+				$faltanDatos->check = true;
+			}
+		}
+
+		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
+			$app =& JFactory::getApplication();
+			//$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
+			$url = 'index.php?option=com_jumi&view=application&fileid=24&Itemid=218';
+			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
+		}
+	}
+	
 	function onFirstLogin($user) {
 		$user_id = (int)$user->id; // convierte el user id a int sin importar que sea
 
@@ -62,6 +138,32 @@ class plgUserFFAccount extends JPlugin
 		$db->query();
 
 	}
+	
+	protected function checkJoomlaRelations($usuario) {
+		$db =& JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query
+			->select('*')
+			->from($db->quoteName('#__users_middleware'))
+			->where('idJoomla = '.$usuario->id);
+
+		$db->setQuery( $query );
+		$db->query();
+		
+		$result = $db->loadObject();
+
+		return $result;
+	}
+	
+	protected function checkMiddle($userid, $usuario) {
+		$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
+		$json = @file_get_contents($url);
+		$respuesta = json_decode($json);
+		
+		if (is_null($respuesta)){
+			$this->sendToMiddle($usuario->email,$usuario->name);
+		}
+	}
 
 	function saveUserMiddle($idMiddle, $user) {
 		$values = $idMiddle->id.','.$user->id;
@@ -84,7 +186,6 @@ class plgUserFFAccount extends JPlugin
 				  );
 				  		  
 		$ch = curl_init();
-		$this->url = '/post.php';
 		
 		curl_setopt($ch, CURLOPT_URL,$this->url);
 		curl_setopt($ch, CURLOPT_POST, true);
@@ -98,75 +199,6 @@ class plgUserFFAccount extends JPlugin
 		curl_close ($ch);
 		
 		return $server_output;
-	}
-	
-	function onUserLogin($user, $options = array()) {
-		$instance = $this->_getUser($user, $options);
-		
-		// Envío al middleware
-		if ($instance->lastvisitDate == '0000-00-00 00:00:00' && $instance->activation == '') {
-			self::onFirstLogin($instance);
-		}
-
-		if ($instance instanceof Exception) {
-			return false;
-		}
-
-		if ($instance->get('block') == 1) {
-			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_NOLOGIN_BLOCKED'));
-			return false;
-		}
-
-		if (!isset($options['group'])) {  // verifica que el usuario puede logear
-			$options['group'] = 'USERS';
-		}
-		$result	= $instance->authorise($options['action']);
-		if (!$result) {
-			JError::raiseWarning(401, JText::_('JERROR_LOGIN_DENIED'));
-			return false;
-		}
-		
-		$instance->set('guest', 0);   // marca el usuario como logeado
-
-		$session = JFactory::getSession();
-		$session->set('user', $instance);   // set sesion de usuario
-
-		$db = JFactory::getDBO();
-
-		$app = JFactory::getApplication();
-		$app->checkSession();
-
-		$db->setQuery(
-			'UPDATE '.$db->quoteName('#__session') .
-			' SET '.$db->quoteName('guest').' = '.$db->quote($instance->get('guest')).',' .
-			'	'.$db->quoteName('username').' = '.$db->quote($instance->get('username')).',' .
-			'	'.$db->quoteName('userid').' = '.(int) $instance->get('id') .
-			' WHERE '.$db->quoteName('session_id').' = '.$db->quote($session->getId())
-		);
-		$db->query();  // actualiza la sesion en la db
-
-		$instance->setLastVisit();  // actualiza el momento de la ultima visita
-
-		
-		$prop = $instance->getProperties();   // busca las propiedades del usuario para tener el id
-		$perfilff = UserData::datosGr($instance->id);  // busca los datos en nuestras tablas
-		
-		$faltanDatos = new stdClass;
-		if ( !isset($perfilff) OR $perfilff->iddireccion == '' OR $perfilff->iddatosFiscales == '' ) {
-			$haystack = $options['entry_url'];
-			$needle = 'administrator';
-			if ( !strstr($haystack, $needle)) { // verifica que no este en el admin
-				$faltanDatos->check = true;
-			}
-		}
-
-		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
-			$app =& JFactory::getApplication();
-			//$url = 'index.php?option=com_jumi&view=application&Itemid=200&fileid=5';
-			$url = 'index.php?option=com_jumi&view=application&fileid=24&Itemid=218';
-			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
-		}
-				
 	}
 	
 	protected function _getUser($user, $options = array()) {
@@ -183,13 +215,13 @@ class plgUserFFAccount extends JPlugin
 
 		$acl = JFactory::getACL();
 
-		$instance->set('id'			, 0);
+		$instance->set('id'				, 0);
 		$instance->set('name'			, $user['fullname']);
 		$instance->set('username'		, $user['username']);
 		$instance->set('password_clear'	, $user['password_clear']);
 		$instance->set('email'			, $user['email']);	// Result should contain an email (check)
 		$instance->set('usertype'		, 'deprecated');
-		$instance->set('groups'		, array($defaultUserGroup));
+		$instance->set('groups'			, array($defaultUserGroup));
 
 		//If autoregister is set let's register the user
 		$autoregister = isset($options['autoregister']) ? $options['autoregister'] :  $this->params->get('autoregister', 1);
