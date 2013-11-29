@@ -36,14 +36,6 @@ function prodProy ($tipo, $params) {
 		if (!is_null($params->tags)) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByKeyword/'.$tagLimpia;
-		} elseif ( ($tipo == "all" ) && ($params->categoria == "all") && ($params->subcategoria == "all") ) { //Todo de Proyectos y Productos no importan las categorias ni subcategorias
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
-		} elseif ( ($params->categoria == "") && ($params->subcategoria == "all") && ($params->estatus != "") ) {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
-		} elseif ( ($params->categoria != "all") && ($params->subcategoria == "all") ) {//Productos o proyectos por categoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
-		} elseif ( ($params->categoria != "all") && ($params->subcategoria != "all") ) {//Productos o proyectos por Subcategoria
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/subcategory/'.$tipo.'/'.$params->subcategoria.'/'.$params->estatus;
 		}
 	} else {
 		if ( $params->categoria == "all" ) {
