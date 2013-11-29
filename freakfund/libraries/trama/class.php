@@ -104,6 +104,24 @@ class JTrama
 		return $status;
 	}
 	
+	public static function checkValidStatus($obj, $tipoActual = '') {
+		$tipoActual = strtolower($tipoActual);
+		switch ($tipoActual) {
+			case 'proyecto':
+				$statusAceptados = array(5);
+				break;
+			case 'producto':
+				$statusAceptados = array(6,7);
+				break;
+			default:
+				$statusAceptados = array(5,6,7);
+		}
+
+		$aceptado = in_array($obj->status, $statusAceptados);
+		
+		return $aceptado;
+	}
+	
 	public function getProjectsByUser ($userid) {
 		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
 		

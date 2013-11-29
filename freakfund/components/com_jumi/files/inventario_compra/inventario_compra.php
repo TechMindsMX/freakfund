@@ -21,6 +21,12 @@ $usuario		= JFactory::getUser();
 $idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
 $proyid			= $input->get("proyid",0,"int");
 $pro			= JTrama::getDatos($proyid);
+
+if(!JTrama::checkValidStatus($pro)) {
+	$returnUrl = $_SERVER['HTTP_REFERER'];
+	$app->redirect($returnUrl, JText::_('JGLOBAL_NO_ACEPTA_COMPRAS'), 'error');
+}
+
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $saldo 			= $datosUsuario->balance == null ? 0: $datosUsuario->balance;
 $uri 			=& JFactory::getURI();

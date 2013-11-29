@@ -7,10 +7,10 @@
 	$jinput = $app->input;
 	
 	jimport('trama.class');
+	jimport('trama.usuario_class');
 	jimport('trama.jsocial');
 	jimport('trama.jfactoryext');
 	
-
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
 	$grupos = new JFactoryExtended;
@@ -63,7 +63,6 @@ function tipoProyProd($data) {
 
 function buttons($data, $user) {
 	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
-	
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
 		$proyid = '&proyid='.$data->id;
@@ -74,9 +73,9 @@ function buttons($data, $user) {
 					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
 		}else{
 			$html = '<div id="buttons">'.
-					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div>'
-					.'<div class="arrecho" >'.$share.'</div>'
-					.'</div>';
+					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div>'.
+					'<div class="arrecho" >'.$share.'</div>'.
+					'</div>';
 		}
 	} else {
 		$html = '<div id="buttons"><div class="arrecho">'.$share.'</div></div>';
@@ -262,7 +261,7 @@ function encabezado($data) {
 	$html = '<div class="encabezado">'.
 		'<h1>'.$data->name.'</h2>'.
 		'<h2 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>'.
-		'<p id="productor">'.JTrama::getProducerProfile($data->userId).'</p>'.
+		'<p id="productor">'.JTrama::getProducerProfile(UserData::getUserJoomlaId($data->userId)).'</p>'.
 		'<p class="fechacreacion"> Creado '.date('d-M-Y', $fechacreacion).'</p>'.
 		'<h3 class="tipo_proy_prod mayusc">'.$data->etiquetaTipo.' - '.JTrama::getStatusName($data->status).'</h3>'.
 		'</div>';

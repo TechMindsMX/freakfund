@@ -30,6 +30,7 @@ $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 $objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
 $objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
+
 errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
@@ -39,17 +40,6 @@ if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
 
-// foreach ($proyectos as $key => $value) {
-// 	if ($value->status == 5 || $value->status == 6) {
-// 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
-// 	} elseif ( $value->status == 7 ) {
-// 		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
-// 	}else {
-// 		$htmlInversionActual .= @htmlInversionActual(nul, null);
-// 		$htmlFinanActual .= @htmlFinanActual(null,null);
-// 		break;
-// 	}
-// }
 foreach($objProyectos as $key => $value){
 	$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 }
