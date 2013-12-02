@@ -1,16 +1,17 @@
 <?php
 	defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 	
-	$usuario =& JFactory::getUser();
-
-	$app = JFactory::getApplication();
-	$jinput = $app->input;
-	
 	jimport('trama.class');
 	jimport('trama.usuario_class');
 	jimport('trama.jsocial');
 	jimport('trama.jfactoryext');
 	
+	$usuario =& JFactory::getUser();
+	$usuario->idMiddleware = ( $usuario->id != 0 ) ? UserData::getUserMiddlewareId($usuario->id)->idMiddleware : null;
+
+	$app = JFactory::getApplication();
+	$jinput = $app->input;
+
 	// chequeamos si el usuario es Special
 	$isSpecial = '';
 	$grupos = new JFactoryExtended;
@@ -62,6 +63,7 @@ function tipoProyProd($data) {
 }
 
 function buttons($data, $user) {
+	$html = '';
 	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
 	if ( $user->id == strval($data->userId) ) {
 		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
@@ -77,7 +79,7 @@ function buttons($data, $user) {
 					'<div class="arrecho" >'.$share.'</div>'.
 					'</div>';
 		}
-	} else {
+	} elseif ( $user->guest == 0 ) {
 		$html = '<div id="buttons"><div class="arrecho">'.$share.'</div></div>';
 	}
 	return $html;
@@ -481,7 +483,7 @@ function botonFinanciar($data) {
 		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
-		jQuery("#rt-mainbody").css( "margin-top","55px" );
+		jQuery("#rt-mainbody").css( "margin-top","<?php if( $usuario->guest == 0 ) {echo('55px');}  ?>" );
 		jQuery(".menu-item").hover(
 			function(){
 				jQuery(this).addClass("over");
@@ -680,7 +682,7 @@ function codeAddress() {
 							"score": score,
 							"projectId": "<?php echo $proyecto ?>",
 							"token": "<?php echo $token; ?>",
-							"userId": <?php echo $usuario->email; ?>
+							"userId": <?php echo $usuario->idMiddleware; ?>
 						},
 						type: 'post'
 					});
