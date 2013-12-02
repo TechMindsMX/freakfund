@@ -24,7 +24,7 @@ $pro			= JTrama::getDatos($proyid);
 
 if(!JTrama::checkValidStatus($pro)) {
 	$returnUrl = $_SERVER['HTTP_REFERER'];
-	$app->redirect($returnUrl, JText::_('JGLOBAL_NO_ACEPTA_COMPRAS'), 'error');
+	$app->redirect($returnUrl, JText::sprintf('JGLOBAL_NO_ACEPTA_COMPRAS', $pro->name), 'error');
 }
 
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
