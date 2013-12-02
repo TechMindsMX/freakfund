@@ -39,13 +39,17 @@ $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
+if ($objProyectos != '') {
+	foreach($objProyectos as $key => $value){
+		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
+	}
+}
+if ($objProductos != '') {
+	foreach($objProductos as $key => $value){
+		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+	}
+}
 
-foreach($objProyectos as $key => $value){
-	$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
-}
-foreach($objProductos as $key => $value){
-	$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
-}
 function moreProData($value, $datosgenerales) {
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		JTrama::getEditUrl($value);
