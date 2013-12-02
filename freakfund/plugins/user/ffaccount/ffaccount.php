@@ -91,7 +91,7 @@ class plgUserFFAccount extends JPlugin
 
 		if ( isset($faltanDatos->check) ) {  // si faltan datos redirecciona redirecciona
 			$app =& JFactory::getApplication();
-			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'message');
+			$app->redirect($url, JText::_('LLENAR_DATOS_USUARIO'), 'notice');
 		} else {
 			$app->redirect($url);
 		}
