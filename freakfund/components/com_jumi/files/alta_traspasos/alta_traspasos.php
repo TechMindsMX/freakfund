@@ -279,12 +279,12 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 					action.find('span').show();
 				}
 			}else{
-				alert('No puedes dar de alta tu propio numero de cuenta');
+				alert('<?php echo JText::_('FORM_ALTA_TRASPASOS_ERROR_MISMONUM')  ?>');
 			}
 		});
 		
 		request.fail(function (jqXHR, textStatus) {
-			alert("Ocurrio un problema al crear/actualizar los datos");
+			alert('<?php echo JText::_('FORM_ALTA_TRASPASOS_ERROR_DONTSAVE'); ?>');
 		});
 	}
 	
@@ -311,26 +311,26 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		</div>
 		
 		<div>
-			<span class="labelsconfirmacion">Cuenta Freakfund:</span>
+			<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_ASPASOS_NUMCUENTA'); ?>:</span>
 			<span class="datosconfirmacion"><?php echo $userdata->account; ?></span>
 		</div>
 		
 		<div>
-			<span class="labelsconfirmacion">Saldo Freakfund:</span>
+			<span class="labelsconfirmacion"><?php echo JText::_('SALDO_FF'); ?>:</span>
 			<span class="datosconfirmacion">$<span class="number"><?php echo $userdata->balance; ?></span></span>
 		</div>
 	</div>
 
-	<h3><?php echo 'Alta de Cuentas para traspasos ';//JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></h3>
+	<h3><?php echo JText::_('FORM_ALTA_TRASPASOS_TITLE'); ?></h3>
 	<form id="formAltaTraspaso" action="" method="post">
 		<input type="hidden" name="userId" id="userId" value="<?php echo $userId->idMiddleware; ?>"/>
 		<input type="hidden" name="userId" id="destinationId" />
 		
 		<div class="fila encabezado">
-			<div><?php echo 'Monto maximo'; //JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></div>
-			<div><?php echo 'Numero de cuenta';//JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?></div>
-			<div><?php echo 'Nombre del Socio';//JText::_('FORM_ALTA_TRASPASOS_NOMSOCIO'); ?></div>
-			<div><?php echo 'Email';//JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></div>
+			<div><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></div>
+			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?></div>
+			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_NOMSOCIO'); ?></div>
+			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></div>
 		</div>
 		
 		<?php
@@ -365,7 +365,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
 			<div style="width: 170px;">
-				<input type="button" class="button" id="guardar" value="Guardar" disabled="disabled" />
+				<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>" disabled="disabled" />
 			</div>
 		</div>
 	</form>
@@ -375,28 +375,28 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	<h3>Estas Seguro de enviar la siguiente información!!!</h3>
 	
 	<div>
-		<span class="labelsconfirmacion">CLABE FreakFund:</span>
+		<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_TRASPASOS_CONFIRM_CLABE'); ?>:</span>
 		<span class="datosconfirmacion" id="showClabe"></span>
 	</div>
 	
 	<div>
-		<span class="labelsconfirmacion">Nombre del beneficiario:</span>
+		<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_TRASPASOS_CONFIRM_BENEF'); ?>:</span>
 		<span class="datosconfirmacion" id="showSocio"></span>
 	</div>
 	
 	<div>
-		<span class="labelsconfirmacion">Monto máximo a traspasar:</span>
+		<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_TRASPASOS_CONFIRM_MONTOMAX'); ?>:</span>
 		<span class="datosconfirmacion" id="showmaxmount"></span>
 	</div>
 	
 	<div>
-		<span class="labelsconfirmacion">Email del beneficiario:</span>
+		<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_TRASPASOS_CONFIRM_EMAILBENE'); ?>:</span>
 		<span class="datosconfirmacion" id="showemail"></span>
 	</div>
 	
 	<div>
-		<span><input type="button" class="button" id="Cancelar" value="Cancelar" /></span>
-		<span><input type="button" class="button safe" value="Confirmar" onclick="safeUpdate(this)" /></span>
+		<span><input type="button" class="button" id="Cancelar" value="<?php echo JText::_('CANCELAR'); ?>" /></span>
+		<span><input type="button" class="button safe" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" onclick="safeUpdate(this)" /></span>
 	</div>
 </div>
 
