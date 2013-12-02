@@ -116,7 +116,7 @@ if (!empty($proyectos) && isset($proyectos)) {
 
 
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
-echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
+echo '<script src="libraries/trama/js/jquery.pagination.js"></script>';
 
 
 function tagLimpia ($data) {

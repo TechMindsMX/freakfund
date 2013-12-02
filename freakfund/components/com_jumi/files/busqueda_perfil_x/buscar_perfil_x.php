@@ -117,7 +117,7 @@ $jsonResult = json_encode($arregloOrdenado);
 
 <?php 
 	$document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
-	echo '<script src="'.$pathJumi.'/view_busqueda/js/jquery.pagination.js"></script>';
+	echo '<script src="libraries/trama/js/jquery.pagination.js"></script>';
 ?>
 
 <script type="text/javascript">
