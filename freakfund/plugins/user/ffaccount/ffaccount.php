@@ -118,7 +118,7 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	function savePerfilPersona($datosUsuario){
-		$nombreCompleto = explode(' ', $datosUsuario->name);
+		$nombreCompleto = explode(' ', trim($datosUsuario->name));
 
 		$columnas[] 	= 'nomNombre';
 		$columnas[] 	= 'nomApellidoPaterno';

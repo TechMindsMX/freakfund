@@ -54,15 +54,15 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 
 <div id="wrap">
 	<div class="vertodoscarrusel module-title">
-  <h2 class="title">Ver todos &gt; </h2>
+  <h2 class="title"><a href="<?php echo $datos->viewAllUrl; ?>"><?php echo JText::_('VIEW_ALL'); ?> &gt; </h2>
  
 </div>
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
-	if(!is_null($datos)){
+	if(!is_null($datos->items)){
 	  	switch ($params->get('tipodepro')) {
 			case 'apoyados':
-		 		foreach ($datos as $key => $value) {
+		 		foreach ($datos->items as $key => $value) {
 					echo '<li>
 		    				<div class="contenedor productos">
 		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
@@ -99,14 +99,14 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 				break;
 				
 			case 'cerrar':
-		 		foreach ($datos as $key => $value) {
+		 		foreach ($datos->items as $key => $value) {
 		 			$value->porcentajeRecaudado = 30;
 					echo '<li>
 		    				<div class="contenedor proyectos">
 		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
 			    					<span class="mask"></span>
 		    					</div>
-		    					<div class="info-proyecto" >
+		    					<div class="info-proyecto">
 									<div class="titulo">
 									<a href="'.$url.@$value->id.'">
 									<h2>'.@$value->name.'</h2>
@@ -135,7 +135,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 				break;
 		  }
 	  } else{
-	  	echo '<p>Sin datos</p>';
+	  	echo '<p>'.JText::_('Sin datos').'</p>';
 	  }
    	?>
   </ul>
