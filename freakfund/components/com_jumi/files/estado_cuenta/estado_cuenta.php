@@ -19,31 +19,31 @@ $token 					= JTrama::token();
 $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
-
-$projectList = JTrama::getTransactions($idMiddleware->idMiddleware);
+$projectList 			= JTrama::getTransactions($idMiddleware->idMiddleware);
+$descripcionTx			= array();
+$sumaDepositos			= 0;
+$sumaRetiros			= 0;
+$retiro					= '';
+$deposito				= '';
 
 //definicion de campos del formulario
-$action = '#';
-
-include_once ("objetote.php");
-
-$tableHtml = "<table class='table table-striped' id='edocta_table'>";
-$tableHtml .= "<tr id='cabezera'>";
-$tableHtml .= "<th>Fecha<th />";
-$tableHtml .= "<th>Descripción<th />";
-$tableHtml .= "<th>Referencia<th />";
-$tableHtml .= "<th>Retiro/Cargo<th />";
-$tableHtml .= "<th>Depósito/Abono<th />";
-$tableHtml .= "<th>Saldo<th />";
-$tableHtml .= "</tr>";
+$action 	= '#';
+$tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
+$tableHtml 	.= "<tr id='cabezera'>";
+$tableHtml 	.= "<th>Fecha<th />";
+$tableHtml 	.= "<th>Descripción<th />";
+$tableHtml 	.= "<th>Referencia<th />";
+$tableHtml 	.= "<th>Retiro/Cargo<th />";
+$tableHtml 	.= "<th>Depósito/Abono<th />";
+$tableHtml 	.= "<th>Saldo<th />";
+$tableHtml 	.= "</tr>";
 
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
-$sumaDepositos	= 0;
-$sumaRetiros= 0;
-$retiro= '';
-$deposito= '';
+$descripcionTx['CREDIT'] 	= 'Deposito';
+$descripcionTx['TRANSFER']	= 'Retiro';
+$descripcionTx['FUNDING']	= 'Financiamiento';
 
 if($projectList[0]->type == 'DEBIT'){
 	$saldoInicialPeriodo = $projectList[0]->balance - $projectList[0]->amount;
@@ -66,18 +66,18 @@ foreach ($projectList as $obj) {
 	//fin operaciones
 	$obj->fechaFormat =  date('d-m-Y',($obj->timestamp/1000));
 	
-	$tableHtml .= '<tr id="'.$obj->type.'">';
+	$tableHtml .= '<tr id="'.$obj->description.'">';
 	$tableHtml .= '<td>'.$obj->fechaFormat. '<td />';
-	$tableHtml .= '<td>'.$obj->description.'<td />';
-	$tableHtml .= '<td>'.$obj->reference.'<td />';
+	$tableHtml .= '<td>'.$descripcionTx[$obj->description].'<td />';
+	$tableHtml .= '<td>'.$obj->reference.''.$obj->timestamp.'<td />';
 	$tableHtml .= '<td>'.$retiro.'<td />';
 	$tableHtml .= '<td>'.$deposito.'<td />';
 	$tableHtml .= '<td>$<span class="number">'.$obj->balance.'</span><td />';
 	$tableHtml .= '</tr>';
 }
 
-foreach ($arregloCatalogo as $obj) {
-	$selectTipo .=	"<option value='" .$obj->name . "'>" .$obj->name . "</option>";
+foreach ($descripcionTx as $key => $value) {
+	$selectTipo .=	"<option value='" .$key . "'>" .$value . "</option>";
 }
 
 $tableHtml .= "</table>";

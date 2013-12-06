@@ -27,6 +27,8 @@ if(!JTrama::checkValidStatus($pro)) {
 	$app->redirect($returnUrl, JText::sprintf('JGLOBAL_NO_ACEPTA_COMPRAS', $pro->name), 'error');
 }
 
+
+
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $saldo 			= $datosUsuario->balance == null ? 0: $datosUsuario->balance;
 $uri 			=& JFactory::getURI();
@@ -39,6 +41,7 @@ $response		= $input->get("response",0,"int"); // RESPUESTA EXITO
 $error			= $input->get("error",0,"int");
 $from			= $input->get("appId",0,"int");
 
+$detalleInversion =  JTrama::getInvestmentDetail($response);
 errorClass::manejoError($error, $from, $proyid);
 ?>
 <script>
@@ -189,7 +192,7 @@ jQuery(document).ready(function(){
 	$totalCompra = 0;
 	
 	$html = '<h2>'.$usuario->name.'</h2>
-			<div>'.JText::_('SALDO_FF').': <span class="number">'. $saldo .'</span></div>
+			<div>'.JText::_('SALDO_FF').': $<span class="number">'. $saldo .'</span></div>
 			<p>'.JText::_('COMPRA_SUCCESS').'</p>
 			<h3>'.JText::_('COMPRA_SUCCESS_DETAILS').'</h3>
 			<div class="detalles_tx">
@@ -202,8 +205,9 @@ jQuery(document).ready(function(){
 						<th>'.JText::_('CANTIDAD_COMPRADAS').'</th>
 						<th>'.JText::_('COMPRA_SUBTOTAL').'</th>
 					</tr>';
-	foreach ($pro->projectUnitSales as $key => $value) {
-		$cant = 3;
+	foreach ($detalleInversion as $key => $value) {
+
+		$cant = $value->quantity;
 		$subtotal = $value->unitSale*$cant;
 		$totalCompra = $totalCompra + $subtotal;
 		
