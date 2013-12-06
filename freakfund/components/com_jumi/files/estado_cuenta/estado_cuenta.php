@@ -20,7 +20,7 @@ $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
 
-
+$projectList = JTrama::getTransactions($idMiddleware->idMiddleware);
 
 //definicion de campos del formulario
 $action = '#';
@@ -40,17 +40,39 @@ $tableHtml .= "</tr>";
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
-foreach ($arregloobjetos as $obj) {
-	$algo1 = ($obj->withdraw != '')? '$<span style="color:red;" class="number">'.$obj->withdraw.'</span>' : ' ';
-	$algo2 = ($obj->deposit != '')? '$<span class="number">'.$obj->deposit.'</span>' : ' ';
+$sumaDepositos	= 0;
+$sumaRetiros= 0;
+$retiro= '';
+$deposito= '';
+
+if($projectList[0]->type == 'DEBIT'){
+	$saldoInicialPeriodo = $projectList[0]->balance - $projectList[0]->amount;
+}elseif($projectList[0]->type == 'DEBIT'){
+	$saldoInicialPeriodo = $projectList[0]->balance + $projectList[0]->amount;
+}
+
+foreach ($projectList as $obj) {
+	//operaciones resumen de cuenta
+	if($obj->type == 'DEBIT'){
+		$sumaRetiros = $obj->amount + $sumaRetiros;
+		$retiro =  '$<span style="color:red;" class="number">'.$obj->amount.'</span>';
+		$deposito = '';
+	}elseif(($obj->type == 'CREDIT')){
+		$sumaDepositos = $obj->amount + $sumaDepositos;
+		$deposito = '$<span class="number">'.$obj->amount.'</span>';
+		$retiro = '';
+	}
 	
-	$tableHtml .= '<tr id="'.$obj->tipo.'">';
-	$tableHtml .= '<td>'.$obj->date. '<td />';
-	$tableHtml .= '<td>'.$obj->reference.'<td />';
+	//fin operaciones
+	$obj->fechaFormat =  date('d-m-Y',($obj->timestamp/1000));
+	
+	$tableHtml .= '<tr id="'.$obj->type.'">';
+	$tableHtml .= '<td>'.$obj->fechaFormat. '<td />';
 	$tableHtml .= '<td>'.$obj->description.'<td />';
-	$tableHtml .= '<td>'.$algo1.'<td />';
-	$tableHtml .= '<td>'.$algo2.'<td />';
-	$tableHtml .= '<td>$<span class="number">'.$obj->currentBalance.'</span><td />';
+	$tableHtml .= '<td>'.$obj->reference.'<td />';
+	$tableHtml .= '<td>'.$retiro.'<td />';
+	$tableHtml .= '<td>'.$deposito.'<td />';
+	$tableHtml .= '<td>$<span class="number">'.$obj->balance.'</span><td />';
 	$tableHtml .= '</tr>';
 }
 
@@ -133,32 +155,34 @@ $selectTipo .='</select>';
 				<td>RFC: <?php echo $datosUsuarioJoomla->rfcRFC?></td>
 			</tr>
 			<tr>
-				<td colspan="3">Número de cuenta: <strong>34639278457868943</strong></td>
+				<td colspan="3">Número de cuenta: <strong><?php echo $datosUsuarioMiddleware->account?></strong></td>
 			</tr>
 		</table>
 	</div>
+	
+	
 	<div style="float:right; width:40%;">
 		<table class='table '>
 			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
 			<tr>
 				<td><?php echo JText::_('SALDO_INICIAL_PERIODO');?></td>
-				<td>$<span class="number"><?php echo $datosUsuarioMiddleware->balance;?></span></td>
+				<td>$<span class="number"><?php echo $saldoInicialPeriodo?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_DEPOSITOS');?></td>
-				<td>$<span class="number"><?php echo $sumaFinanciamientos;?></span></td>
+				<td>$<span class="number"><?php echo $sumaDepositos;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_RETIROS');?></td>
-				<td>$<span style="color:red;" class="number"><?php echo $sumaInversiones;?></span></td>
+				<td>$<span style="color:red;" class="number"><?php echo $sumaRetiros;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO_FINAL_PERIODO');?></td>
-				<td>$<span class="number"><?php echo $valorCartera;?></span></td>
+				<td>$<span class="number"><?php echo end($projectList)->balance;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('PERIODO_FECHA_INI_FIN');?></td>
-				<td>06/2013  al  07/2013</td>
+				<td><?php echo $projectList[0]->fechaFormat.' al '.end($projectList)->fechaFormat; ?></td>
 			</tr>
 		</table>
 	</div>

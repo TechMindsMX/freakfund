@@ -391,5 +391,11 @@ class JTrama
 		}
 		return $jsonobj2;
 	}
+	
+	public static function getTransactions($idMiddleware) {
+		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getUserStatement/'.$idMiddleware));
+		return $transactionsList;
+		;
+	}
 }
 ?>

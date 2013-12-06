@@ -132,6 +132,16 @@ jQuery(document).ready(function(){
 			jQuery('#guardar').prop('disabled', true);
 		}
 	}
+	
+	jQuery('#guardar').click(function() {
+		
+		if(confirm('¿Esta seguro que quiere inverir en esas unidades? ¡Esta accion es IRREVERSIBLE!')) {
+			jQuery("#form_compra").validationEngine();
+			jQuery("#form_compra").submit();
+		} else {
+			alert('Bien hecho');
+		}
+	});
 });
 </script>
 
@@ -164,7 +174,7 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="token" value="'. $token .'" />
 				<div style="margin: 10px;">
 					<input type="button" class="button" value="'.JText::_('CANCELAR').'" onclick="history.go(-1);" />
-					<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'" onclick="confrm(\'envias\')" />
+					<input type="button" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />
 					
 				</div>';
 
@@ -211,7 +221,7 @@ jQuery(document).ready(function(){
 				</tr>
 				</table>
 				<a class="button" href="index.php?option=com_jumi&view=application&fileid=24&Itemid=218">'.JText::_('ESCRIT').'</a>
-					<pre>SIMULADO FALTA CREAR SERVICIO PARA REGRESAR DATOS DE UNA TX</pre>
+				
 				</div>
 				';
 	echo $html;
