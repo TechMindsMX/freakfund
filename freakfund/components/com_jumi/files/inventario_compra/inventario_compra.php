@@ -213,15 +213,15 @@ jQuery(document).ready(function(){
 		
 		$html .=	'<tr>
 						<td>'.$value->section.'</td>
-						<td><span class="number">'.$value->unitSale.'</span></td>
+						<td>$<span class="number">'.$value->unitSale.'</span></td>
 						<td>'.$cant.'</td>
-						<td><span class="number">'.$subtotal.'</span></td>
+						<td>$<span class="number">'.$subtotal.'</span></td>
 					</tr>';
 	}
 	
 	$html .=	'<tr>
 					<td colspan="3" style="text-align: right;">'.JText::_('TOTAL').'</td>
-					<td><b><span class="number">'.$totalCompra.'</span></b></td>
+					<td><b>$<span class="number">'.$totalCompra.'</span></b></td>
 				</tr>
 				</table>
 				<a class="button" href="index.php?option=com_jumi&view=application&fileid=24&Itemid=218">'.JText::_('ESCRIT').'</a>
