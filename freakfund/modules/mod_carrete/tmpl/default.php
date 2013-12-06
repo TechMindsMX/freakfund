@@ -103,7 +103,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 		 			$value->porcentajeRecaudado = 30;
 					echo '<li>
 		    				<div class="contenedor proyectos">
-		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
+		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->avatar.'\'); background-size: 100%;">
 			    					<span class="mask"></span>
 		    					</div>
 		    					<div class="info-proyecto">
