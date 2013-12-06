@@ -33,6 +33,18 @@ $periodo				= '';
 $saldoFinalPeriodo		= '0';
 $arreglodefechas		= array();
 
+if(!isset($datosUsuarioJoomla)){
+	$datosUsuarioJoomla->nomCalle = "";
+	$datosUsuarioJoomla->noExterior = "";
+	$datosUsuarioJoomla->perfil_colonias_idcolonias = "";
+	$datosUsuarioJoomla->perfil_delegacion_iddelegacion = "";
+	$datosUsuarioJoomla->perfil_estado_idestado = "";
+	$datosUsuarioJoomla->perfil_codigoPostal_idcodigoPostal = "";
+	$datosUsuarioJoomla->rfcRFC = "";
+	
+}
+
+
 for($i=1; $i<=12; $i++){ //for](inicio; hasta; incremento)
 	$fechas = new stdClass;
 	$queryDate 			= $year.'-'.$i;
