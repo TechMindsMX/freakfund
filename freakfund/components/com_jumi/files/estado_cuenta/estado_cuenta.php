@@ -69,9 +69,10 @@ $tableHtml 	.= "</tr>";
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
-$descripcionTx['CREDIT'] 	= 'Deposito';
-$descripcionTx['TRANSFER']	= 'Transferencia';
-$descripcionTx['FUNDING']	= 'Financiamiento';
+$descripcionTx['CREDIT'] 		= 'Deposito';
+$descripcionTx['TRANSFER']		= 'Transferencia';
+$descripcionTx['FUNDING']		= 'Financiamiento';
+$descripcionTx['RETURN_FUNDS']	= 'Reembolso';
 
 if(!is_null($projectList) && !empty($projectList)){
 	if($projectList[0]->type == 'CREDIT'){

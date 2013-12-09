@@ -274,7 +274,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<span class="catSubCat upper">' + members[i].nomCatPadre + ' - ' + members[i].nomCat +'</span>';
 		newcontent += '</div>';
 		newcontent += '</div>';
-		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].projectAvatar.name+'\');">';
+		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].avatar+'\');">';
 		newcontent += '	<a href="' + link + '">';
 		newcontent += '		<span class="mask"></span>';
 		newcontent += '	</a>';
