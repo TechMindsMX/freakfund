@@ -89,7 +89,7 @@ $action = '#';
 	
 	<div>
 		<label for="codigo" ><?php echo JText::_('CODIGO_PROMO');  ?></label> 
-		<input type="text" class="validate[required,custom[number]]" id="codigo" name="codigo">
+		<input type="text" class="validate[required,custom[onlyLetterNumber]]" id="codigo" name="codigo">
 	</div>
 	
 	<script type="text/javascript"
