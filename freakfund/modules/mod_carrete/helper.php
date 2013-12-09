@@ -6,7 +6,7 @@ class modCarreteHelper
 {
 	public static function closestEnd() {
 		$obj->validStatus = isset($obj->validStatus) ? $obj->validStatus : array(5);
-		$obj->viewAllUrl = base64_encode('index.php?option=com_jumi&view=application&fileid=8&status='.implode(",",$obj->validStatus).'&categoria=all');
+		$obj->viewAllUrl = 'index.php?option=com_jumi&view=application&fileid=8&status='.implode(",",$obj->validStatus).'&categoria=all';
     	$obj->items = JTrama::getClosestEnd();
 
 		if (!empty($obj->items)) {

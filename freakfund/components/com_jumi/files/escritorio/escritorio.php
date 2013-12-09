@@ -53,7 +53,7 @@ if ($objProductos != '') {
 function moreProData($value, $datosgenerales) {
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		JTrama::getEditUrl($value);
-		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->projectAvatar->name . '" alt="' . $value->name . '" class="table-cartera"/>';
+		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';
 		$value->roi = $value->investedAmount * ($value->tri / 100);
 		if ( $value->status  == 5 || $value->status == 6 ) {
 			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->fundedAmount;
