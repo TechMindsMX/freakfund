@@ -74,7 +74,7 @@ $descripcionTx['TRANSFER']	= 'Transferencia';
 $descripcionTx['FUNDING']	= 'Financiamiento';
 
 if(!is_null($projectList) && !empty($projectList)){
-	if($projectList[0]->type == 'DEBIT'){
+	if($projectList[0]->type == 'CREDIT'){
 		$saldoInicialPeriodo = $projectList[0]->balance - $projectList[0]->amount;
 	}elseif($projectList[0]->type == 'DEBIT'){
 		$saldoInicialPeriodo = $projectList[0]->balance + $projectList[0]->amount;
