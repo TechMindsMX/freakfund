@@ -111,10 +111,10 @@ class JTrama
 				$statusAceptados = array(5);
 				break;
 			case 'producto':
-				$statusAceptados = array(6,7);
+				$statusAceptados = array(6,7,10);
 				break;
 			default:
-				$statusAceptados = array(5,6,7);
+				$statusAceptados = array(5,6,7,10);
 		}
 
 		$aceptado = in_array($obj->status, $statusAceptados);
