@@ -59,7 +59,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 </div>
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
-	if(!is_null($datos->items)){
+	if(!is_null($datos->items) && $datos->items[0] != ''){
 	  	switch ($params->get('tipodepro')) {
 			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
@@ -79,11 +79,11 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 									</div>
 									<div class="datos">
 									<div class="two-cols first">
-									<div class="big">'.@$value->ROF.'%</div>
+									<div class="big">'.@$value->TRF.'%</div>
 									<div class="small">'.JText::_('LABEL_ROF').'</div>
 									</div>
 									<div class="two-cols second">
-									<div class="big">'.@$value->ROI.'%</div>
+									<div class="big">'.@$value->TRI.'%</div>
 									<div class="small">'.JText::_('LABEL_ROI').'</div>
 									</div>
 									<div class="clearfix"></div>

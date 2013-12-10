@@ -4,44 +4,46 @@ jimport('trama.class');
 
 class modCarreteHelper
 {
-	public static function closestEnd() {
+	public static function closestEnd( $cantidad, $tipoDePro ) {
 		$obj->validStatus = isset($obj->validStatus) ? $obj->validStatus : array(5);
 		$obj->viewAllUrl = 'index.php?option=com_jumi&view=application&fileid=8&status='.implode(",",$obj->validStatus).'&categoria=all';
-    	$obj->items = JTrama::getClosestEnd();
+		$result = JTrama::getClosestEnd();
 
-		if (!empty($obj->items)) {
-			foreach ($obj->items as $key => $value) {
-				JTrama::dateDiff ($value->fundEndDate, $value);
-				$datos[] = JTrama::fundPercentage($value);
-			}
-			$obj->items = modCarreteHelper::getCatNames($datos);
-		}
-		else {
-			$obj->items[] = '';
-		}
+		self::masDatos($obj, $result, $cantidad, $tipoDePro);
+
 		return $obj;
     }
     
-    public static function profitables( $cantidad ) {
-		$obj->validStatus = array(6,7,8,10,11);
+    public static function profitables( $cantidad, $tipoDePro ) {
+		$obj->validStatus = isset($obj->validStatus) ? $obj->validStatus : array(6,7,8,10,11);
 		$obj->viewAllUrl = 'index.php?option=com_jumi&view=application&fileid=8&status='.implode(",",$obj->validStatus).'&categoria=all';
-		$obj->items = JTrama::getMostProfitables();
+		$result = JTrama::getMostProfitables();
 		
+		self::masDatos($obj, $result, $cantidad, $tipoDePro);
+		
+		return $obj;
+	}
+	
+	public static function masDatos($obj, $result, $cantidad, $tipoDePro) {
+		if (!is_array($result) && count($result) == 1) {
+			$obj->items[] = $result;
+		} else {
+			$obj->items = $result;
+		}
 		if (!empty($obj->items)) {
 			foreach ($obj->items as $key => $value) {
 				if (in_array($value->status, $obj->validStatus)) {
 					$dataFilterStatus[] = $value;
 				}
-				$value = JTrama::dateDiff ($value->fundEndDate, $value);
+				if ($tipoDePro == 'cerrar') {
+					JTrama::dateDiff ($value->fundEndDate, $value);
+					JTrama::fundPercentage($value);
+				}
 			}
 			$obj->items = @array_splice($dataFilterStatus, 0, $cantidad);
 			$obj->items = @modCarreteHelper::getCatNames($obj->items);
 		}
-		else {
-			$obj->items = '';
-		}
 		return $obj;
-		
     }
 
 	public static function getCatNames( $datos ) {

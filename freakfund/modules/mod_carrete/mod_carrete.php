@@ -6,15 +6,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once( dirname(__FILE__).DS.'helper.php' );
 
 $cantidad = $params->get('cantidad');
+$tipoDePro = $params->get('tipodepro');
 
-switch ($params->get('tipodepro')) {
+switch ($tipoDePro) {
 	case 'cerrar':
-		$datos = modCarreteHelper::closestEnd();
+		$datos = modCarreteHelper::closestEnd($cantidad, $tipoDePro);
 		
 		break;
 	
 	case 'apoyados':
-		$datos = modCarreteHelper::profitables($cantidad);
+		$datos = modCarreteHelper::profitables($cantidad, $tipoDePro);
 		
 		break;
 }
