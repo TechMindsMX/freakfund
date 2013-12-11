@@ -100,7 +100,7 @@ if(!is_null($projectList) && !empty($projectList)){
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '<td>'.$obj->fechaFormat. '<td />';
 		$tableHtml .= '<td>'.$descripcionTx[$obj->description].'<td />';
-		$tableHtml .= '<td>'.$obj->reference.''.$obj->timestamp.'<td />';
+		$tableHtml .= '<td>'.$obj->reference.'<td />';
 		$tableHtml .= '<td>'.$retiro.'<td />';
 		$tableHtml .= '<td>'.$deposito.'<td />';
 		$tableHtml .= '<td>$<span class="number">'.$obj->balance.'</span><td />';

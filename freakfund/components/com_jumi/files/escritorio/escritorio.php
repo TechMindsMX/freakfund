@@ -23,6 +23,10 @@ $jumiurl		 				= 'index.php?option=com_jumi&view=application&fileid=';
 $htmlInversionActual 			= '';
 $htmlFinanActual		 		= '';
 $count 							= 0;
+$suma_inversion					= 0;
+$suma_retorno					= 0;
+$suma_tri					= 0;
+$suma_fund					= 0;
 $idMiddleware					= UserData::getUserMiddlewareId($usuario->id);
 $datosgenerales 				= UserData::datosGr($idMiddleware->idJoomla);
 $datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
@@ -30,7 +34,7 @@ $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 $objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
 $objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
-var_dump($objProductos);
+
 errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
@@ -42,11 +46,15 @@ if (is_null($datosgenerales)) {
 if ($objProyectos != '') {
 	foreach($objProyectos as $key => $value){
 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
+		$suma_fund = $value->fundedAmount + $suma_fund;
 	}
 }
 if ($objProductos != '') {
 	foreach($objProductos as $key => $value){
 		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+		$suma_inversion = $value->investedAmount + $suma_inversion;
+		$suma_retorno = $value->roi + $suma_retorno;
+		$suma_tri = $value->tri + $suma_tri;
 	}
 }
 
@@ -87,6 +95,7 @@ function htmlInversionActual($value, $datosgenerales) {
 function htmlFinanActual($value, $datosgenerales){
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);
+
 		$htmlFinanActual = '<tr class="middle-td">
 							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
 							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
@@ -94,6 +103,7 @@ function htmlFinanActual($value, $datosgenerales){
 							<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
 							<td class="middle-td">' . $value->tri . ' %</td>
 							</tr>';
+		
 	} else {
 		$htmlFinanActual = '<tr class="middle-td">
 							<td colspan="5" align="center">Sin Financiamientos</td>
@@ -148,20 +158,6 @@ function htmlFinanActual($value, $datosgenerales){
 			</span>
 		</div>
 		
-		
-		<div class="module-title">
-			<h2 class="title"><?php echo JText::_('ESCRIT_ACTUAL_INVEST'); ?></h2>
-		</div>
-		
-		<div class="cartera-seccion-1">
-			<h3>
-				<span class="label-compras"><?php echo JText::_('ESCRIT_ACTUAL_INVEST_TOTAL'); ?></span>$
-						<span class="number">
-							<?php echo isset($datosgenerales->actualInvestments)? $datosgenerales->actualInvestments : 0; ?>
-						</span>
-			</h3>
-		</div>
-		<hr class="hr-cartera">
 	
 		<div class="module-title">
 			<h2 class="title"><?php echo JText::_('ESCRIT_MOVIMIENTOS'); ?></h2>
@@ -195,6 +191,12 @@ function htmlFinanActual($value, $datosgenerales){
 						<?php
 							echo $htmlFinanActual;
 						?>	
+						<tr>
+							<td class="th-center-cartera" colspan="2"><?php echo JText::_('TOTAL'); ?></th>
+							<td class="th-center-cartera">$<span class="number"><?php echo $suma_inversion; ?></span></th>
+							<td class="th-center-cartera">$<span class="number"><?php echo $suma_retorno; ?></span></th>
+							<td class="th-center-cartera"><?php echo $suma_tri; ?>%</th>
+						</tr>
 					</table>
 				</article>
 			</div>
@@ -214,7 +216,11 @@ function htmlFinanActual($value, $datosgenerales){
 						</tr>
 						<?php
 							echo $htmlInversionActual;
-						?>							
+						?>	
+						<tr>
+							<td style= "text-align:right" colspan="5"><?php echo JText::_('TOTAL'); ?></th>
+							<td class="th-center-cartera">$<span class="number"><?php echo $suma_fund ?></span></th>
+						</tr>						
 					</table>
 				</article>
 			</div>
