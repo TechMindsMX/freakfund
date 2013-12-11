@@ -1,5 +1,4 @@
 <?php 
-
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
@@ -11,15 +10,24 @@ if ($usuario->guest == 1) {
 }
 
 jimport('trama.class');
+jimport('trama.usuario_class');
+jimport('trama.error_class');
+
 require_once 'libraries/trama/libreriasPP.php';
 
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
+$callback		= JURI::base().'index.php?option=com_jumi&view=application&fileid=31&from=31';
+$middleware		= UserData::getUserMiddlewareId($usuario->id);
+$error			= $input->get('error', null, 'int');
+$from			= $input->get('from', null, 'int');
+
+errorClass::manejoError($error, $from);
 
 //definicion de campos del formulario
-$action = '#';
+$action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterCode';
 ?>
 
 <script>
@@ -41,24 +49,10 @@ $action = '#';
 	 			obj = eval('(' + result + ')');
 
 	 			if(obj.mensaje) {
-	 				var request = $.ajax({
-	 	     			url:"libraries/trama/js/ajax.php",
-	 	 				data: {
-	 	  					"codigo": jQuery("#codigo").val(),
-	 	  					"userId": '<?php echo $usuario->email; ?>',
-	 	  					"fun": 5
-	 	 				},
-	 	 				type: 'post'
-	 				});
-
-	 				request.done(function(result){
-	 		 			obj = eval('(' + result + ')');
-
-						jQuery("#ajax_done").css("display","block");
- 			 			jQuery("#producto").text(obj.nombreProy);
- 			 			jQuery("#monto").text(obj.monto);
- 			 			jQuery("#tasa").text(obj.tasa);
-	 				});
+	 				jQuery("#form_codigo input[name='recaptcha_challenge_field']").prop('name', '');
+	 				jQuery("#form_codigo input[name='recaptcha_response_field']").prop('name','');
+	 				
+	 				jQuery("#form_codigo").submit();
 		 		}else{
 					alert(obj.error);
 	 			}
@@ -74,10 +68,13 @@ $action = '#';
 <h1><?php echo JText::_('REDENCION_CODIGO');  ?></h1>
 <div>
 	<form id="form_codigo" action="<?php echo $action; ?>" method="POST">
-	
+	<input type="hidden" name="userId" value="<?php echo $middleware->idMiddleware; ?>" id="userid"/>
+	<input type="hidden" name="token" value="<?php echo $token; ?>" id="token"/>
+	<input type="hidden" name="callback" value="<?php echo $callback; ?>" id="callback"/>
+
 	<div>
-		<label for="proys"><?php echo JText::_('CODIGO_PROYECTOS'); ?></label>
-		<select name="proys">
+		<label for="projectId"><?php echo JText::_('CODIGO_PROYECTOS'); ?></label>
+		<select name="projectId">
 		<?php
 			$proyectos = JTrama::getProyByStatus('5,6,7');
 			foreach($proyectos as $key => $value){
@@ -89,7 +86,7 @@ $action = '#';
 	
 	<div>
 		<label for="codigo" ><?php echo JText::_('CODIGO_PROMO');  ?></label> 
-		<input type="text" class="validate[required,custom[onlyLetterNumber]]" id="codigo" name="codigo">
+		<input type="text" class="validate[required]" id="code" name="code">
 	</div>
 	
 	<script type="text/javascript"

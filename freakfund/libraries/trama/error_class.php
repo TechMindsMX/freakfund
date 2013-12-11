@@ -5,6 +5,7 @@ class errorClass {
 	
 	public static function manejoError($errorCode = null,$origen = null,$id = null) {
 		$app = JFactory::getApplication();
+		
 		switch ($origen) {
 			case 32:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;				
@@ -19,6 +20,10 @@ class errorClass {
 				break;
 			case 27:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen.'&proyid='.$id;				
+				break;
+			
+			case 31:
+				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;				
 				break;
 				
 			default:
@@ -41,6 +46,14 @@ class errorClass {
 				break;
 			case 4:
 				$msg = JText::_('ERROR_USERNOFOUND');
+				$redirect = true;
+				break;
+			case 11:
+				$msg = JText::_('ERROR_REDEPTIONCODE_NOEXITS');
+				$redirect = true;
+				break;
+			case 12:
+				$msg = JText::_('ERROR_REDEPTIONCODE_EXITS');
 				$redirect = true;
 				break;
 				
