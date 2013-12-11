@@ -58,21 +58,22 @@ $fechasJS = json_encode($arreglodefechas);
 $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30"; 
 $tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
 $tableHtml 	.= "<tr id='cabezera'>";
-$tableHtml 	.= "<th>Fecha<th />";
-$tableHtml 	.= "<th>Descripción<th />";
-$tableHtml 	.= "<th>Referencia<th />";
-$tableHtml 	.= "<th>Retiro/Cargo<th />";
-$tableHtml 	.= "<th>Depósito/Abono<th />";
-$tableHtml 	.= "<th>Saldo<th />";
+$tableHtml 	.= "<th>". JText::_('FECHA') ."<th />";
+$tableHtml 	.= "<th>". JText::_('STATEMENT_DESC') ."<th />";
+$tableHtml 	.= "<th>". JText::_('STATEMENT_REFERENCE') ."<th />";
+$tableHtml 	.= "<th>". JText::_('STATEMENT_WITHDRAW') ."<th />";
+$tableHtml 	.= "<th>". JText::_('STATEMENT_DEPOSIT') ."<th />";
+$tableHtml 	.= "<th>". JText::_('SALDO_FF') ."<th />";
 $tableHtml 	.= "</tr>";
 
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
 
-$descripcionTx['CREDIT'] 		= 'Deposito';
-$descripcionTx['TRANSFER']		= 'Transferencia';
-$descripcionTx['FUNDING']		= 'Financiamiento';
-$descripcionTx['RETURN_FUNDS']	= 'Reembolso';
+$descripcionTx['CREDIT'] 		= JText::_('STATEMENT_DEPOSIT');
+$descripcionTx['TRANSFER']		= JText::_('STATEMENT_TRANSFER');
+$descripcionTx['FUNDING']		= JText::_('STATEMENT_FUNDING');
+$descripcionTx['RETURN_FUNDS']	= JText::_('STATEMENT_REFUND');
+$descripcionTx['INVESTMENT']	= JText::_('STATEMENT_INVESTMENT');
 
 if(!is_null($projectList) && !empty($projectList)){
 	if($projectList[0]->type == 'CREDIT'){
