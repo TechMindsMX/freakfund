@@ -198,7 +198,7 @@ jQuery(document).ready(function(){
 			<tr>
 				
 				<td><?php echo $datosUsuarioJoomla->perfil_estado_idestado?></td>
-				<td><?php echo JText::_('CP');?>: <?php echo $datosUsuarioJoomla->perfil_codigoPostal_idcodigoPostal?></td>
+				<td><?php echo JText::_('LBL_CP');?>: <?php echo $datosUsuarioJoomla->perfil_codigoPostal_idcodigoPostal?></td>
 				
 			</tr>
 			<tr>

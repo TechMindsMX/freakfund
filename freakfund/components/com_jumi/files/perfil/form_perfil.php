@@ -55,7 +55,7 @@ $existenDatos = $datos->existingUser($usuario->id);
 			<div id="nombre"><h1><?php echo JText::_('DATOS_GR'); ?></h1></div>            
 			
 			<div class="_50">
-				<label for="daGr_nomNombre"><?php echo JText::_('NOMBRE'); ?> *:</label>   
+				<label for="daGr_nomNombre"><?php echo JText::_('LBL_NOMBRE'); ?> *:</label>   
 				<input 
 					name		= "daGr_nomNombre" 
 					class		= "validate[required,custom[onlyLetterSp]]" 
@@ -85,7 +85,7 @@ $existenDatos = $datos->existingUser($usuario->id);
 			</div>
 			
 			<div class="_100">
-				<label for="daGr_Foto"><?php echo JText::_('FOTO'); ?>:</label>
+				<label for="daGr_Foto"><?php echo JText::_('LBL_FOTO'); ?>:</label>
 				<input 
 					name		= "daGr_Foto"
 					id			= "daGr_Foto"

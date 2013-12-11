@@ -100,7 +100,7 @@
             <div id="nombre"><h3><?php echo JText::_('DOM_FISCAL'); ?></h3></div>
             
             <div class="_50">
-               	<label for="doFi_nomCalle"><?php echo JText::_('CALLE'); ?> *:</label>
+               	<label for="doFi_nomCalle"><?php echo JText::_('LBL_CALLE'); ?> *:</label>
                 <input 
                 	name		="doFi_nomCalle" 
                 	class		="validate[required,custom[onlyLetterNumber]]" 
@@ -132,7 +132,7 @@
             </div>
             
             <div class="_25">
-               	<label for="doFi_iniCodigoPostal"><?php echo JText::_('CP'); ?> *:</label>
+               	<label for="doFi_iniCodigoPostal"><?php echo JText::_('LBL_CP'); ?> *:</label>
                	<input 
                		name		="doFi_perfil_codigoPostal_idcodigoPostal" 
                		class		="validate[required,custom[onlyNumberSp]]"  
@@ -143,12 +143,12 @@
             </div>
             
             <div class="_75">
-               	<label for="doFi_nomColonias"><?php echo JText::_('COLONIA'); ?> *:</label>
+               	<label for="doFi_nomColonias"><?php echo JText::_('LBL_COLONIA'); ?> *:</label>
                	<select name="doFi_perfil_colonias_idcolonias" class="validate[required]" id="doFi_nomColonias"></select>
             </div>
             
             <div class="_50">
-            	<label for="doFi_nomDelegacion"><?php echo JText::_('DELEGACION'); ?> *:</label>
+            	<label for="doFi_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
             	<input 
             		name="doFi_perfil_delegacion_iddelegacion" 
             		class="validate[required,custom[onlyLetterSp]]"
@@ -158,12 +158,12 @@
             </div> 
             
             <div class="_25">
-               	<label for="doFi_nomEstado"><?php echo JText::_('ESTADO'); ?> *:</label>
+               	<label for="doFi_nomEstado"><?php echo JText::_('LBL_ESTADO'); ?> *:</label>
                	<select name="doFi_perfil_estado_idestado" id="doFi_nomEstado" class="validate[required]" ></select>
             </div>
             
             <div class="_25">
-               	<label for="doFi_nomPais"><?php echo JText::_('PAIS'); ?> *:</label>
+               	<label for="doFi_nomPais"><?php echo JText::_('LBL_PAIS'); ?> *:</label>
                	<select name="doFi_perfil_pais_idpais" id="doFi_nomPais" class="validate[required]">
                		<option value="1" selected="selected">M&eacute;xico</option>
 				</select>
