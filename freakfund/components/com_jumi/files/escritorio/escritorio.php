@@ -30,7 +30,7 @@ $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 $objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
 $objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
-
+var_dump($objProductos);
 errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
@@ -101,7 +101,6 @@ function htmlFinanActual($value, $datosgenerales){
 	}
 	return $htmlFinanActual;
 }
-
 ?>
 <div class="contenedor-cartera">
 		<h1 class="mayusc"><?php echo $usuario->name ?></h1>
@@ -181,8 +180,28 @@ function htmlFinanActual($value, $datosgenerales){
 	    
 	<div id="contenido" style="margin-top: 15px;">
 		<section class="ac-container" style="max-width: 100%;">
+		
 			<div>
-				<input id="ac-2a" name="accordion-2" type="radio" checked />
+				<input id="ac-3a" name="accordion-2" type="radio" checked />
+				<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
+				<article class="ac-large">
+					<table class="table table-striped cartera">
+						<tr>
+							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_ROI'); ?></th>
+							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_TRI'); ?></th>
+						</tr>
+						<?php
+							echo $htmlFinanActual;
+						?>	
+					</table>
+				</article>
+			</div>
+		
+		
+			<div>
+				<input id="ac-2a" name="accordion-2" type="radio" />
 				<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
 				<article class="ac-medium">
 					<table class="table table-striped cartera" >
@@ -200,23 +219,7 @@ function htmlFinanActual($value, $datosgenerales){
 				</article>
 			</div>
 			
-			<div>
-				<input id="ac-3a" name="accordion-2" type="radio" />
-				<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
-				<article class="ac-large">
-					<table class="table table-striped cartera">
-						<tr>
-							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_ROI'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_TRI'); ?></th>
-						</tr>
-						<?php
-							echo $htmlFinanActual;
-						?>	
-					</table>
-				</article>
-			</div>
+			
 			
 		</section>
 	<div style="clear: both"></div>
