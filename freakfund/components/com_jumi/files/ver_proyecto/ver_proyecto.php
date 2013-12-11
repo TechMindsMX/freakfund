@@ -70,7 +70,7 @@ function buttons($data, $user) {
 		$proyid = '&proyid='.$data->id;
 		if( ($data->status == 0) || ($data->status == 2)) {
 			$html = '<div id="buttons">'.
-					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('EDIT').'</a></span></div>'.
+					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>'.
 					'<div class="arrecho" >'.$share.'</div>'.
 					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
 		}else{

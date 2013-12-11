@@ -143,7 +143,7 @@ $promedio = $objuserdata->scoreUser($userid);
 									if ($value->type == 'REPERTORY') {
 										echo '<h4><a href="'.$value->viewUrl.'" target="_blank">'.$value->name.'</a></h4>';
 										if ( $usuario->id == $value->userId ) {
-											echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';	
+											echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';	
 										}
 										echo '<p>'.$value->description.'</p>';
 									}
@@ -164,7 +164,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										echo '<li><a href="'.$value->viewUrl.'" >'.$value->name.'</a></li>';
 											if ($usuario->id == $value->userId) {
 												if($value->status == 0 || $value->status == 2) {
-													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('EDIT').'</a></span>';
+													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';
 												}
 												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
 												if ( !empty($value->logs) ) {
