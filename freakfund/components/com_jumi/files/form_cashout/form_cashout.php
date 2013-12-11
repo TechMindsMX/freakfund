@@ -61,7 +61,7 @@ $action 		= '#';
 		<br />
 		<img style="maregin-left: 30px;" width="200px" src="images/paypalbanorte.jpg" />
 		<div style="margin: 10px;">
-			<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
 			<input type="button" id="retirar" class="button" value="Transferir" />
 			

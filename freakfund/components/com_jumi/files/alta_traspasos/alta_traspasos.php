@@ -365,7 +365,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
 			<div style="width: 170px;">
-				<input type="button" class="button" id="guardar" value="<?php echo JText::_('GUARDAR'); ?>" disabled="disabled" />
+				<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>" disabled="disabled" />
 			</div>
 		</div>
 	</form>
@@ -395,7 +395,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	</div>
 	
 	<div>
-		<span><input type="button" class="button" id="Cancelar" value="<?php echo JText::_('CANCELAR'); ?>" /></span>
+		<span><input type="button" class="button" id="Cancelar" value="<?php echo JText::_('LBL_CANCELAR'); ?>" /></span>
 		<span><input type="button" class="button safe" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" onclick="safeUpdate(this)" /></span>
 	</div>
 </div>

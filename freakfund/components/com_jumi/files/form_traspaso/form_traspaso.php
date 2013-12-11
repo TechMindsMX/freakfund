@@ -108,7 +108,7 @@ function formTraspaso($params, $app, $usuario) {
 		<pre><?php echo JText::_('TRASPASO_LEGEND_2'); ?></pre>
 		
 			<div style="margin: 10px;">
-				<input type="button" class="button" value="<?php echo JText::_('CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+				<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 			javascript:window.history.back();">
 				<input type="submit" class="button" id="enviar" value="Traspasar" />
 			</div>
@@ -169,7 +169,7 @@ function formConfirm($params, $app, $usuario) {
 		<input type="hidden" name="callback" value="<?php echo $params->resumeUrl; ?>">
 
 		<div style="margin: 10px;">
-			<input type="button" class="button" value="<?php echo JText::_('CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
+			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 		javascript:window.history.back();">
 			<input type="submit" class="button" id="enviar" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" />
 		</div>

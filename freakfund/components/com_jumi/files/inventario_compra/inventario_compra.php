@@ -176,7 +176,7 @@ jQuery(document).ready(function(){
 				<input type="hidden" name="callback" value="'. $callback .'" />
 				<input type="hidden" name="token" value="'. $token .'" />
 				<div style="margin: 10px;">
-					<input type="button" class="button" value="'.JText::_('CANCELAR').'" onclick="history.go(-1);" />
+					<input type="button" class="button" value="'.JText::_('LBL_CANCELAR').'" onclick="history.go(-1);" />
 					<input type="button" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />
 					
 				</div>';
