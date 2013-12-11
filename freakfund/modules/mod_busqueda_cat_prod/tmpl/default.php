@@ -18,7 +18,7 @@ $opcionesSubCat = '';
 <div class="busq_cat">
 <form target="_parent" action="<?php echo $accion; ?>" method="post"> 
 	<select id="selectCat" name="categoria">
-		<option value=""><?php echo JText::_('SELECCIONE').JText::_('CATEGORIA'); ?></option>
+		<option value=""><?php echo JText::_('SELECCIONE').JText::_('LBL_CATEGORIA'); ?></option>
 	<?php		
 	foreach ( $categoria as $key => $value ) {
 		echo '<option value="'.$value->id.'">'.$value->name.'</option>';

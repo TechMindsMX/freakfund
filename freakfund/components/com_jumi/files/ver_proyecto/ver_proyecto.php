@@ -209,7 +209,7 @@ function finanzas ($data) {
 function tablaFinanzas($data) {
 	$html = '<table class="table table-striped">'.
 			'<tr><th>'.
-			JText::_('SECCION').'</th><th>'.
+			JText::_('LBL_SECCION').'</th><th>'.
 			JText::_('PRECIO').'</th><th>'.
 			JText::_('CANTIDAD').'</th></tr>';
 	$opentag = '<td>';

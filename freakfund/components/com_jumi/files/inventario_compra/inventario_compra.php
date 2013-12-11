@@ -159,7 +159,7 @@ jQuery(document).ready(function(){
 		foreach ($pro->projectUnitSales as $key => $value){
 
 			$html .= '<div class="wrapper">
-					<div>'.JText::_('SECCION').': '. $value ->section .'</div>
+					<div>'.JText::_('LBL_SECCION').': '. $value ->section .'</div>
 					<div>'.JText::_('PRECIO_UNIDAD').': $<span class="number valor_unidad">'. $value ->unitSale.'</span></div>
 					<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
 					<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
@@ -200,7 +200,7 @@ jQuery(document).ready(function(){
 				<span>'.JText::_('COMPRA_TX_ID').' : </span>'.$response.'
 				<table class="table table-stripped">
 					<tr>
-						<th>'.JText::_('SECCION').'</th>
+						<th>'.JText::_('LBL_SECCION').'</th>
 						<th>'.JText::_('PRECIO_UNIDAD').'</th>
 						<th>'.JText::_('CANTIDAD_COMPRADAS').'</th>
 						<th>'.JText::_('COMPRA_SUBTOTAL').'</th>

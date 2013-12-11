@@ -99,8 +99,8 @@ $token = JTrama::token();
 <form action="<?php echo $accion ?>" method="post" class="" id="proveedores" >
 	<h3><?php echo $proyecto -> objDatos -> name; ?></h3>
 	
-	<p><?php echo JText::_('CATEGORIA').' = '.$proyecto -> objDatos -> catName; ?></p>
-	<p><?php echo JText::_('SUBCATEGORIA').' = '.$proyecto -> objDatos -> subCatName; ?></p>
+	<p><?php echo JText::_('LBL_CATEGORIA').' = '.$proyecto -> objDatos -> catName; ?></p>
+	<p><?php echo JText::_('LBL_SUBCATEGORIA').' = '.$proyecto -> objDatos -> subCatName; ?></p>
 	<p><?php echo JText::_('FECHA_INICIO_PRODUCCION').' = '.$proyecto -> objDatos -> productionStartDate; ?></p>
 	<p><?php echo JText::_('PREMIER_DATE').' = '.$proyecto -> objDatos -> premiereStartDate; ?></p>
 	<p><?php echo JText::_('STATUS').' = '.$proyecto -> objDatos -> statusName; ?></p>
