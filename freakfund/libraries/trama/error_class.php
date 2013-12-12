@@ -56,6 +56,10 @@ class errorClass {
 				$msg = JText::_('ERROR_REDEPTIONCODE_EXITS');
 				$redirect = true;
 				break;
+			case 13:
+				$msg = JText::_('ERROR_REDEPTIONCODE_SECTION_NOEXITS');
+				$redirect = true;
+				break;
 				
 			default:
 				$redirect = false;
