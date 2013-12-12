@@ -41,6 +41,6 @@ $opcionesSubCat = '';
 	?>
 	</select>
 	
-	<input type="submit" value="Buscar" >
+	<input type="submit" value="<?php echo JText::_('LBL_BUSCAR'); ?>" >
 </form>
 </div>

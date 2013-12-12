@@ -181,9 +181,9 @@ $promedio = $objuserdata->scoreUser($userid);
 										$fechacreacion = $valor->timestamp/1000;
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
-											 '<div><strong>Modificado</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>Status</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
-											 '<div align="justify"><strong>Comentario</strong>: '.$valor->comment.'</div>'.
+											 '<div><strong>'.JText::_('LABEL_MODIFIED').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
+											 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div align="justify"><strong>'.JText::_('JCOMENTARIO').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';
 										}
@@ -233,7 +233,7 @@ $promedio = $objuserdata->scoreUser($userid);
 					});
 			
 					request.fail(function (jqXHR, textStatus) {
-			 			console.log('Surguieron problemas al almacenar tu calificación');
+			 			alert('<?php echo JText::_("RATING_ERROR"); ?>');
 			    	});
 			   },
 			   score  : <?php echo $datosgenerales->score; ?>,

@@ -69,8 +69,8 @@ generacampos($idPadreParam, $tablaParam, $columnaIdParam, $columnaIdPadreParam, 
 	<div class="centrado">
 		<input type="hidden" name="campo" value="<?php echo $campoTabla ?>" />
 		<input type="hidden" name="usuario" value="<?php echo $usuario->id; ?>" />
-		<input class="button" type="button" id="uncheckAll" value="Limpiar Seleccion" />
-		<input class="button" type="submit" value="Buscar" />
+		<input class="button" type="button" id="uncheckAll" value="<?php echo JText::_('ES_INSTITUCION'); ?>" />
+		<input class="button" type="submit" value="<?php echo JText::_('LBL_BUSCAR'); ?>" />
 	</div>
 	</form>
 	
