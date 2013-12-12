@@ -78,7 +78,7 @@ if($confirm == 0){
 			 var precio = 0;
 			 var cant 	= 0;
 			 var total 	= 0 ;
-			 jQuery("#form_compra").find("div.wrapper").each(function() {
+			 jQuery("#form_compra").find("tr.wrapper").each(function() {
 				 precio = parseFloat(jQuery(this).find('#precio').val()) || 0;
 				 cant = parseFloat(jQuery(this).find('input.input_compra').val()) || 0;
 				 total += precio * cant;
@@ -94,8 +94,7 @@ if($confirm == 0){
 		}
 		jQuery(':input').change(function(){		
 					
-			var limite = parseInt(jQuery(this).prev().prev().prev().children().text());
-	
+			var limite = parseInt(jQuery(this).prev().prev().val());
 			if ( jQuery(this).val()>limite){
 				jQuery(this).val(0);
 				jQuery(this).next().children().text(0);
@@ -110,7 +109,8 @@ if($confirm == 0){
 				var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
 				var resultado = val_uni * jQuery(this).val();
 	
-				jQuery(this).next().children().text(resultado);
+				jQuery(this).parent().next().children().children().text(resultado);
+				
 				
 				sumaarrecha();			
 				
@@ -139,42 +139,48 @@ if($confirm == 0){
 		
 		jQuery('#guardar').click(function() {
 			
-			if(confirm('¿Esta seguro que quiere inverir en esas unidades? ¡Esta accion es IRREVERSIBLE!')) {
+			
 				jQuery("#form_compra").validationEngine();
 				jQuery("#form_compra").submit();
-			} else {
-				alert('Bien hecho');
-			}
+			
 		});
 	});
 	</script>
 	
 	<h1><?php echo JText::_('INVENTARIO_COMPRA');  ?></h1>
+	<?php
+	echo '<h3>'. $usuario->name .'</h3>
+					<div>'.JText::_('SALDO_FF').':$ <span class="number">'. $saldo .'</span></div>';
+	?>
 	<h2><?php echo $pro->name; ?></h2>
 	<div>
 		<form id="form_compra" action="<?php echo $action; ?>" method="POST">
+		<table class="table table-striped">
+			<tr>
+				<th><?php echo JText::_('LBL_SECCION'); ?></th>
+				<th><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
+				<th><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
+				<th><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
+			</tr>
 			<?php
+			
 			$html = '<input type="hidden" name="userId" id="userId" value="'. $idMiddleware->idMiddleware .'" />
 					<input type="hidden" name="projectId" id="projectId" value="'. $pro->id .'" />';
 		
 			foreach ($pro->projectUnitSales as $key => $value){
-	
-				$html .= '<div class="wrapper">
-						<div>'.JText::_('LBL_SECCION').': '. $value ->section .'</div>
-						<div>'.JText::_('PRECIO_UNIDAD').': $<span class="number valor_unidad">'. $value ->unitSale.'</span></div>
-						<div>'.JText::_('INVENTARIOPP').': <span>'. $value ->unit .'</span></div>
+		
+				$html .= '
+						<tr class="wrapper">
+						<td>'. $value ->section .'</td>
+						<td style="text-align: right;"> $<span class="number valor_unidad">'. $value ->unitSale.'</span></td>
+						<td><input id="" type="hidden" value="'.$value ->unit.'"/>
 						<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
-						<label>'.JText::_('CANTIDAD_COMPRAR').':</label>
-						<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />
-						<div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div>
-						<hr />
-						</div>';
+						<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" /></td>
+						<td style="text-align: right;"><div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div></td>
+						</tr>';
 			}
-	
-			$html .= '<h3>'. $usuario->name .'</h3>
-					<div>'.JText::_('SALDO_FF').':$ <span class="number">'. $saldo .'</span></div>
-					<div>'.JText::_('TOTAL_PAGAR').':$ <span class="number" id="resultadoglobal"></span></div>
-					<input type="hidden" name="callback" value="'. $callback .'" />
+			$html .= '<tr><td style="text-align: right;" colspan="3"><div><strong>'.JText::_('TOTAL_PAGAR').'</strong></td><td style="text-align: right;">$<strong><span class="number" id="resultadoglobal"></span><strong></div></td></tr></table>';
+			$html .= '<input type="hidden" name="callback" value="'. $callback .'" />
 					<input type="hidden" name="token" value="'. $token .'" />
 					<div style="margin: 10px;">
 						<input type="button" class="button" value="'.JText::_('LBL_CANCELAR').'" onclick="history.go(-1);" />
@@ -183,7 +189,10 @@ if($confirm == 0){
 					</div>';
 	
 				echo $html;
+				
+				
 			?>
+			
 		</form>
 		
 	</div>
@@ -214,15 +223,15 @@ if($confirm == 0){
 			
 			$html .=	'<tr>
 							<td>'.$value->section.'</td>
-							<td>$<span class="number">'.$value->unitSale.'</span></td>
-							<td>'.$cant.'</td>
-							<td>$<span class="number">'.$subtotal.'</span></td>
+							<td style="text-align:right">$<span class="number">'.$value->unitSale.'</span></td>
+							<td style="text-align:right">'.$cant.'</td>
+							<td style="text-align:right">$<span class="number">'.$subtotal.'</span></td>
 						</tr>';
 		}
 		
 		$html .=	'<tr>
-						<td colspan="3" style="text-align: right;">'.JText::_('TOTAL').'</td>
-						<td><b>$<span class="number">'.$totalCompra.'</span></b></td>
+						<td colspan="3" style="text-align: right;"><strong>'.JText::_('TOTAL').'</strong></td>
+						<td style="text-align:right"><b>$<span class="number">'.$totalCompra.'</span></b></td>
 					</tr>
 					</table>
 					<a class="button" href="index.php?option=com_jumi&view=application&fileid=24&Itemid=218">'.JText::_('ESCRIT').'</a>
@@ -233,7 +242,6 @@ if($confirm == 0){
 	}
 }else{
 	$params = $input->getArray($_POST);
-	var_dump($params);
 ?>
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
 		<input type="hidden" name="userId" value="<?php echo $params['userId']; ?>"/>
@@ -247,16 +255,20 @@ if($confirm == 0){
 			<tr>
 				<th><?php echo JText::_('LBL_SECCION'); ?></th>
 				<th><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
-				<th><?php echo JText::_('CANTIDAD'); ?></th>
-				<th><?php echo JText::_('TOTAL'); ?></th>
+				<th><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
+				<th><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
 			</tr>
 			<?php
 				$total = 0;
 				foreach ($pro->projectUnitSales as $key => $value) {
+
 					foreach ($params as $indice => $valor) {
-						$total = ($value->unitSale*$valor) + $total;
+
+						
 						
 						if($indice == $value->id){
+
+							$total = ($value->unitSale*$valor) + $total;
 			?>
 						<tr>
 							<td><?php echo $value->section; ?></td>
@@ -277,8 +289,8 @@ if($confirm == 0){
 				} 
 			?>	
 		<tr>
-			<td colspan="3" style="text-align: right;"><?php echo JText::_('TOTAL_PAGAR'); ?></td>
-			<td>$<span class="number"><?php echo $total; ?></span></td>
+			<td colspan="3" style="text-align: right;"><strong><?php echo JText::_('TOTAL_PAGAR'); ?></strong></td>
+			<td style="text-align: right;">$<strong><span class="number"><?php echo $total; ?></span></strong></td>
 		</tr>
 		</table>
 		
