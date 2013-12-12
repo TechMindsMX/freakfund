@@ -19,7 +19,7 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 		jQuery("#busqueda_tags").validationEngine();
 
 		jQuery('#tags').inputlimiter({
-			limit : 1,
+			limit : 5,
 			limitBy : 'words',
 			remText : '',
 			limitText : '<?php echo JText::_('MOD_BUSQUEDA_TAGS_CAMPO_LIMITADO'); ?> %n <?php echo JText::_('MOD_BUSQUEDA_TAGS_PALABRA'); ?>.'
@@ -30,8 +30,8 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 </script>
 
 <form class="form-container" action="<?php echo $url; ?>" id="busqueda_tags" name="busqueda_tags" method="post">
-
-	<span class="busqueda_tag"><?php echo JText::_('BUSQUEDA_TAG'); ?></span><input type="text" name="tags" id="tags" size="30" class="search-field validate[required] minSize[3]" />
+	<span class="busqueda_tag"><?php echo JText::_('BUSQUEDA_TAG'); ?></span>
+	<input type="text" name="tags" id="tags" size="30" class="search-field validate[required] minSize[3]" />
 	<div class="submit-container">
 	<input type="submit" id="busqueda_tags" value="" class="submit" />
 	</div>

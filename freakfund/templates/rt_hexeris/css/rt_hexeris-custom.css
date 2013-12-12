@@ -160,10 +160,6 @@ input[disabled="disabled"] {
 	text-shadow: none !important;
 }
 
-#slider {
-	min-height: 846px;
-}
-
 #datos_usuario {
 	max-width: 500px;
 	font-size: 18px;

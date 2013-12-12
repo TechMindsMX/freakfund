@@ -23,6 +23,7 @@
 	$proyecto = $jinput->get('proyid', '', 'INT');
 	
 	$document->addStyleSheet($pathJumi.'css/themes/bar/bar.css');
+	
 	$document->addStyleSheet($pathJumi.'css/nivo-slider.css');
 	$document->addStyleSheet($pathJumi.'css/style.css');
 
@@ -148,7 +149,7 @@ function imagenes($data) {
 	
 	$array = $data->projectPhotos;
 	foreach ( $array as $key => $value ) {
-		$imagen = "/".$value->name;
+		$imagen = "/".$value->url;
 		$html .= '<img width="100" height="100" src="'.PHOTO.$imagen.'" alt="" />';	
 	}
 
@@ -189,7 +190,7 @@ function audios($data) {
 }
 
 function avatar($data) {
-	$avatar = $data->projectAvatar->name;
+	$avatar = $data->avatar;
 	$html = '<img class="avatar" src="'.AVATAR.'/'.$avatar.'" />';
 	
 	return $html;
@@ -369,29 +370,24 @@ function userName($data) {
 	return $result;
 }
 
-function statusbar($data) {
+function proInfo($data) {
 // |  5 | Autorizado    |  Financiamiento
 // |  6 | Produccion    |  Produccion
 // |  7 | Presentacion  |  Presentacion
-	$labelTopLeft = '';
-	$labelBottomLeft = '';
-	$labelTopRight = '';
-	$labelBottomRight = '';
-	$labelInside = '';
 	$style = '';
 
 	switch ($data->status) { 
 		case '5':
-$ahora = '1374284000000'; // (time() * 1000);
-// $data->balance = 5000000000;
-			$labelTopLeft = $data->fundStartDate;
-			$labelTopRight = $data->fundEndDate;
-			$labelBottomLeft = JText::_('RECUADADO').' = <span class="number">'.$data->balance.'</span>';
-			$labelBottomRight = JText::_('PUNTO_EQUILIBRIO').' = <span class="number">'.$data->breakeven.'</span>';
-			$labelInside = null;
-			$data->difToday = $data->fundEndDateCode - $ahora ;
+			JTrama::dateDiff($data->fundEndDate, $data);
 			$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
 			$data->statusbarPorcentaje = $data->balancePorcentaje;
+
+			$statusInfo1 = '<span class="bloque"><div class="margen"><div>'.JText::_('LABEL_RECAUDADO').'</div>
+							<h1 class="naranja">$ <span class="number">'.$data->balance.'</span></h1></div></span>';
+			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('PUNTO_EQUILIBRIO').'</div>
+							<h1 class="naranja">$ <span class="number">'.$data->breakeven.'</span></h1></div></span>';
+			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('DIAS_RESTANTES').'</div>
+							<h1 class="naranja"><span>'.$data->dateDiff->days.'</span></h1></div></span>';
 			break;
 		case '6':
 $ahora =  '1394284000000'; // (time() * 1000);
@@ -400,6 +396,7 @@ $ahora =  '1394284000000'; // (time() * 1000);
 			$labelBottomLeft = JText::_('');
 			$labelBottomRight = JText::_('');
 			$labelInside = null;
+			$statusInfo1 = '<span></span>';
 			$difMax = $data->premiereStartDateCode - $data->productionStartDateCode;
 			$difToday = $data->premiereStartDateCode - $ahora;
 			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
@@ -415,23 +412,31 @@ $ahora =  '1407918800000'; // (time() * 1000);
 			$difToday = $data->premiereEndDateCode - $ahora;
 			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
 			break;
-		default:
-			$style = ' style="display: none" ';
 	}
-	if (!$style) {
+	$tmpl = '<div id="proInfo">
+			<span class="bloque">
+			<h1>'.$data->name.'</h1>
+			<h3 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>
+			<p id="productor">'.JTrama::getProducerProfile(UserData::getUserJoomlaId($data->userId)).'</p>
+			</span>
+			'.$statusInfo1.$statusInfo2.$statusInfo3.'
+			</div>';
+			
+			return $tmpl;
+}
+
+function statusbar($data)
+{
 	$data->animacion = 	'<script>
 						setTimeout(function () {
-							jQuery("#animacionbg").animate({
-								width: [ "'.(100-($data->statusbarPorcentaje)).'%", "swing" ]
+							jQuery("#statusbar").animate({
+								width: [ "'.(($data->statusbarPorcentaje)).'%", "swing" ]
 							}, 2000);
 						}, 1000);
 					</script>';
-	}
 	
-	$tmpl = '<div id="statusbar"'.$style.'><div id="animacionbg"></div>'.
-			'<span>'.$labelTopLeft.'</span><span>'.$labelBottomLeft.'</span><span>'.$labelTopRight.
-			'</span><span>'.$labelBottomRight.'</span><span>'.$labelInside.'</span>'.
-			'</div>';
+	$tmpl = '<div id="animacionbg"><div id="statusbar"></div>
+			</div>';
 
 	return $tmpl;
 }
@@ -450,7 +455,7 @@ function grafico($data) {
 		$diasRestan = floor($data->difToday / 86400000);
 	
 		$tmpl = '<div><h3>'.JText::_('TRI').' = '.$data->tri.'</h3></div>'.
-				'<div><h3>'.JText::_('TRF').' = '.$data->tri.'</h3></div>';
+				'<div><h3>'.JText::_('TRF').' = '.$data->trf.'</h3></div>';
 	
 		return $tmpl;
 	}
@@ -518,23 +523,16 @@ function botonFinanciar($data) {
 		
 	});
 	</script>
+<div class="clearfix">
 	<div id="wrapper">
-		<div id="content">
 			<?php echo buttons($json, $usuario); ?>
-		</div>
-				<?php echo statusbar($json); ?>
-			<div id="grafico">
-				<?php echo grafico($json); ?>
+		<div id="content">
+			<div id="detallepro" class="contenidoDetalleProy">
+				<?php // echo grafico($json); ?>
 			</div>
-			<?php echo botonFinanciar($json); ?>
 			<div id="banner" class="ver_proyecto">
-				<div class="info-banner">
-					<div class="rt-inner">
-						<?php echo encabezado($json); ?>
-					</div>
-				</div>
 				<div class="content-banner">
-					<img src="<?php echo BANNER.'/'.$json->projectBanner->name; ?>" />
+					<img src="<?php echo BANNER.'/'.$json->banner; ?>" />
 				</div>
 			</div>
 			<div id="video" class="ver_proyecto">
@@ -556,10 +554,10 @@ function botonFinanciar($data) {
 				}
 				?>
 				</div>
-			<a class="cerrar">cerrar</a>
+			<a class="cerrar">X</a>
 			</div>
 			<div id="gallery" class="ver_proyecto">
-			<div id="wrapper">
+			<div>
 				<?php
 				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->imagePublic == 1) || ($json->userId == $usuario->id) ){
 				?>
@@ -574,7 +572,7 @@ function botonFinanciar($data) {
 				}
 				?>
         	</div>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar">X</a>
 			</div>
 			<div id="audios" class="ver_proyecto">
 				<?php
@@ -584,7 +582,7 @@ function botonFinanciar($data) {
 					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar">X</a>
 			</div>
 			<div id="finanzas" class="ver_proyecto">
 				<?php
@@ -595,7 +593,7 @@ function botonFinanciar($data) {
 					echo JText::_('CONTENIDO_PRIVADO');
 				}
 				?>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar">X</a>
 			</div>
 			
 			<div id="info" class="ver_proyecto">
@@ -648,20 +646,25 @@ function codeAddress() {
     </script>
  	
 				</div>
-				<a class="cerrar">cerrar</a>
+				<a class="cerrar">X</a>
 			</div>
+		</div>
+		<div class="clearfix"></div>
+		<?php echo proInfo($json); ?>
 		</div>
 		<div id="menu">
 			<div>
 				<div class="menu-item video" id="video"></div>
 				<div class="menu-item gallery" id="gallery"></div>
 				<div class="menu-item audios" id="audios"></div>
-				<div class="menu-item finanzas" id="finanzas"></div>
-				<div class="menu-item info" id="info"></div>			
+				<div class="menu-item info" id="info"></div>
+				<?php echo botonFinanciar($json); ?>
 			</div>
-			<div style="clear: both;"></div>
 		</div>
+			<div style="clear: both;"></div>
+		<?php echo statusbar($json); ?>
 	</div>
+</div>
 	
 	<script type="text/javascript">
 	 var count = 0;
@@ -745,9 +748,6 @@ function codeAddress() {
 				});
 			});
 			
-			
-			jQuery('span.number').number( true, 0, ',','.' )
-
 		});
 		
 	    $(window).load(function() {
@@ -760,5 +760,4 @@ function codeAddress() {
 if (isset($json->animacion)) {
 	echo $json->animacion;
 }
-//var_dump($json);
  ?>
