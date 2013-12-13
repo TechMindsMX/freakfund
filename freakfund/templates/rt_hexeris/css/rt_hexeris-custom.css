@@ -185,3 +185,8 @@ input[disabled="disabled"] {
 input#cantidad {
 	max-width: 100px;
 }
+
+/*** modulo roksprocket home ******/
+#rt-top-surround .animation-slideandfade .sprocket-headlines-item {
+	margin-top:0;
+}
