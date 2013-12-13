@@ -68,7 +68,7 @@ foreach ($json as $key => $value) {
 
 	JTrama::formatDatosProy($value);
 	
-	JTrama::dateDiff($value->fundEndDate, $value);
+	$value->dateDiff = JTrama::dateDiff($value->fundEndDate);
 
 	$value->jtextdays = JText::sprintf('LAPSED_DAYS', $value->dateDiff->days);
 

@@ -15,7 +15,7 @@ class aportacionesacapitalModelaportacionesacapital extends JModelList
 			$value->toBreakeven = $value->breakeven - $value->balance;
 			$value->toBreakevenPercentage = round(( $value->balance / $value->breakeven ) * 100, 2 );
 			
-			JTrama::dateDiff($value->fundEndDate, $value);
+			$value->dateDiff = JTrama::dateDiff($value->fundEndDate);
 			
 			if($value->porcentajeRecaudado >= 1 );
 			

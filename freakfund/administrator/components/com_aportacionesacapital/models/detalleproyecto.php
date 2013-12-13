@@ -19,7 +19,7 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 		
 		self::producerIdJoomlaANDName($detalleProyecto);
 		
-		JTrama::dateDiff($detalleProyecto->fundEndDate, $detalleProyecto);
+		$detalleProyecto->dateDiff = JTrama::dateDiff($detalleProyecto->fundEndDate);
 		if($detalleProyecto->dateDiff->invert == 0 && $detalleProyecto->dateDiff->days > 300 ) {
 			$app->redirect('index.php?option=com_aportacionesacapital', JText::_('ERROR'), 'error');
 		}

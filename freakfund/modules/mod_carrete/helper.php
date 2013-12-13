@@ -36,7 +36,7 @@ class modCarreteHelper
 					$dataFilterStatus[] = $value;
 				}
 				if ($tipoDePro == 'cerrar') {
-					JTrama::dateDiff ($value->fundEndDate, $value);
+					$value->dateDiff = JTrama::dateDiff ($value->fundEndDate);
 					JTrama::fundPercentage($value);
 				}
 			}

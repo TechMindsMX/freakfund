@@ -141,7 +141,7 @@ class projectListModelprojectList extends JModelList
 	}
 
 	public function semaforo($diasYellow, $fecha, $value) {
-		JTrama::dateDiff($fecha, $value);
+		$value->dateDiff = JTrama::dateDiff($fecha);
 				
 		if( ($value->dateDiff->invert == 1) ) {
 			$value->semaphore = 'RED';

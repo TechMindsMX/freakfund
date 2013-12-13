@@ -63,29 +63,6 @@ function tipoProyProd($data) {
 	return $tipoEtiqueta;
 }
 
-function buttons($data, $user) {
-	$html = '';
-	$share = '<span style="cursor: pointer;" class="shareButton">'.JText::_('SHARE_PROJECT').'</span>';
-	if ( $user->id == strval($data->userId) ) {
-		$link = 'index.php?option=com_jumi&view=appliction&fileid='.$data->editUrl;
-		$proyid = '&proyid='.$data->id;
-		if( ($data->status == 0) || ($data->status == 2)) {
-			$html = '<div id="buttons">'.
-					'<div class="arrecho" ><span class="editButton"><a href="'.$link.$proyid.'">'.JText::_('LBL_EDIT').'</a></span></div>'.
-					'<div class="arrecho" >'.$share.'</div>'.
-					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div></div>';
-		}else{
-			$html = '<div id="buttons">'.
-					'<div class="arrecho" >'.JTramaSocial::inviteToGroup($data->id).'</div>'.
-					'<div class="arrecho" >'.$share.'</div>'.
-					'</div>';
-		}
-	} elseif ( $user->guest == 0 ) {
-		$html = '<div id="buttons"><div class="arrecho">'.$share.'</div></div>';
-	}
-	return $html;
-}
-
 function videos($obj, $param) {
 	$html = '';
 	
@@ -207,38 +184,12 @@ function finanzas ($data) {
 	return $html;
 }
 
-function tablaFinanzas($data) {
-	$html = '<table class="table table-striped">'.
-			'<tr><th>'.
-			JText::_('LBL_SECCION').'</th><th>'.
-			JText::_('PRECIO').'</th><th>'.
-			JText::_('CANTIDAD').'</th></tr>';
-	$opentag = '<td>';
-	$closetag = '</td>';
-	foreach ($data->projectUnitSales as $key => $value) {
-		$html .= '<tr>';
-		$html .= $opentag.$value->section.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->unitSale.'</span>'.$closetag;
-		$html .= $opentag.'<span class="number">'.$value->unit.'</span>'.$closetag;
-		$html .= '</tr>';
-	}
-	$html .= '</table>';
-	
-	return $html;
-}
-
 function descripcion ($data) {
 	$html = '';
 	
 	$html = '<p id="descripcion" class="texto">'.
 			$data->description.
 			'</p>';
-	
-	return $html;
-}
-
-function irGrupo($data) {
-	$html = '<a class="button" >'.JText::_('IR_GRUPO').'</a>';
 	
 	return $html;
 }
@@ -296,14 +247,6 @@ function informacionTmpl($data, $params) {
 		
 		default:
 			$izquierda = avatar($data).
-				'<div class="gantry-width-spacer flotado">'.
-		  		participar($data,$botonContactar).
-				'</div>'.
-				
-				'<div class="gantry-width-spacer flotado">'.
-				irGrupo($data).
-				'</div>'.
-				
 				'<div class="granty-width-spacer flotando">'.
 				rating($data).
 				
@@ -378,7 +321,7 @@ function proInfo($data) {
 
 	switch ($data->status) { 
 		case '5':
-			JTrama::dateDiff($data->fundEndDate, $data);
+			$data->dateDiff = JTrama::dateDiff($data->fundEndDate);
 			$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
 			$data->statusbarPorcentaje = $data->balancePorcentaje;
 
@@ -388,29 +331,24 @@ function proInfo($data) {
 							<h1 class="naranja">$ <span class="number">'.$data->breakeven.'</span></h1></div></span>';
 			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('DIAS_RESTANTES').'</div>
 							<h1 class="naranja"><span>'.$data->dateDiff->days.'</span></h1></div></span>';
+			$statusInfo4 = '<span class="bloque"><div class="margen"><div>'.botonFinanciar($data).'</div>
+							</div></span>';
+							
 			break;
-		case '6':
-$ahora =  '1394284000000'; // (time() * 1000);
-			$labelTopLeft = $data->fundStartDate;
-			$labelTopRight = $data->fundEndDate;
-			$labelBottomLeft = JText::_('');
-			$labelBottomRight = JText::_('');
-			$labelInside = null;
-			$statusInfo1 = '<span></span>';
-			$difMax = $data->premiereStartDateCode - $data->productionStartDateCode;
-			$difToday = $data->premiereStartDateCode - $ahora;
-			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
-			break;
-		case '7':
-$ahora =  '1407918800000'; // (time() * 1000);
-			$labelTopLeft = $data->fundStartDate;
-			$labelTopRight = $data->fundEndDate;
-			$labelBottomLeft = JText::_('');
-			$labelBottomRight = JText::_('');
-			$labelInside = null;
-			$difMax = $data->premiereEndDateCode - $data->premiereStartDateCode;
-			$difToday = $data->premiereEndDateCode - $ahora;
-			$data->statusbarPorcentaje = (( $difToday * 100) / $difMax ); 
+		case '6' OR '7' OR '10':
+			$difToday	= JTrama::dateDiff($data->premiereStartDate)->days;
+			$difMax		= JTrama::dateDiff($data->productionStartDate, $data->premiereStartDate)->days;
+
+			$data->statusbarPorcentaje = 100-(( $difToday * 100) / $difMax ); 
+
+			$statusInfo1 = '<span class="bloque" style="border: 0;"></span>';
+			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_FIN').'</div>
+							<h1 class="naranja"><span>'.$data->trf.'</span> %</h1></div></span>';
+			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_INV').'</div>
+							<h1 class="naranja"><span>'.$data->tri.'</span> %</h1></div></span>';
+			$statusInfo4 = '<span class="bloque"><div class="margen"><div>'.botonFinanciar($data).'</div>
+							</div></span>';
+
 			break;
 	}
 	$tmpl = '<div id="proInfo">
@@ -419,46 +357,25 @@ $ahora =  '1407918800000'; // (time() * 1000);
 			<h3 class="mayusc">'.JTrama::getSubCatName($data->subcategory).'</h3>
 			<p id="productor">'.JTrama::getProducerProfile(UserData::getUserJoomlaId($data->userId)).'</p>
 			</span>
-			'.$statusInfo1.$statusInfo2.$statusInfo3.'
+			'.$statusInfo1.$statusInfo2.$statusInfo3.$statusInfo4.'
 			</div>';
 			
 			return $tmpl;
 }
 
-function statusbar($data)
-{
+function statusbar($data) {
 	$data->animacion = 	'<script>
 						setTimeout(function () {
 							jQuery("#statusbar").animate({
 								width: [ "'.(($data->statusbarPorcentaje)).'%", "swing" ]
 							}, 2000);
-						}, 1000);
+						}, 3000);
 					</script>';
 	
 	$tmpl = '<div id="animacionbg"><div id="statusbar"></div>
 			</div>';
 
 	return $tmpl;
-}
-
-function grafico($data) {
-	if ($data->status == '5' && $data->type == 'PROJECT') {
-		$diasRestan = floor($data->difToday / 86400000);
-		
-		$tmpl = '<div><span class="number"><h3>'.JText::_('RECAUDADO').' = '.$data->balance.'</h3></span</div>'.
-				'<div><h3>'.JText::_('RECAUDADO_PORCEN').' = '.round($data->balancePorcentaje, 2).'%</h3></div>'.
-				'<div><h3>'.JText::_('DIAS_RESTAN').' = '.$diasRestan.'</h3></div>';
-	
-		return $tmpl;
-	}
-	if ($data->status == '5' && $data->type == 'PRODUCT') {
-		$diasRestan = floor($data->difToday / 86400000);
-	
-		$tmpl = '<div><h3>'.JText::_('TRI').' = '.$data->tri.'</h3></div>'.
-				'<div><h3>'.JText::_('TRF').' = '.$data->trf.'</h3></div>';
-	
-		return $tmpl;
-	}
 }
 
 function botonFinanciar($data) {
@@ -471,7 +388,7 @@ function botonFinanciar($data) {
 			break;
 	}
 	$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$data->id;
-	$tmpl = '<div><a class="button" href="'.$url.'">'.JText::_($string).'</a></div>';
+	$tmpl = '<div><a class="button btn-invertir" href="'.$url.'">'.JText::_($string).'</a></div>';
 	
 	return $tmpl;
 	
@@ -488,7 +405,7 @@ function botonFinanciar($data) {
 		scrollwrapper();
 		jQuery(".ver_proyecto").hide();
 		jQuery("#banner").show();
-		jQuery("#rt-mainbody").css( "margin-top","<?php if( $usuario->guest == 0 ) {echo('55px');}  ?>" );
+
 		jQuery(".menu-item").hover(
 			function(){
 				jQuery(this).addClass("over");
@@ -525,11 +442,7 @@ function botonFinanciar($data) {
 	</script>
 <div class="clearfix">
 	<div id="wrapper">
-			<?php echo buttons($json, $usuario); ?>
 		<div id="content">
-			<div id="detallepro" class="contenidoDetalleProy">
-				<?php // echo grafico($json); ?>
-			</div>
 			<div id="banner" class="ver_proyecto">
 				<div class="content-banner">
 					<img src="<?php echo BANNER.'/'.$json->banner; ?>" />
@@ -584,17 +497,6 @@ function botonFinanciar($data) {
 				?>
 				<a class="cerrar">X</a>
 			</div>
-			<div id="finanzas" class="ver_proyecto">
-				<?php
-				if( ($isSpecial == 1) || ($json->acceso != null) || ($json->numberPublic == 1) || ($json->userId == $usuario->id) ){
-					echo '<h1 class="mayusc">'.JText::_('LABEL_FINANZAS').'</h1>';
-					echo informacionTmpl($json, "finanzas"); 
-				}elseif( ($json->acceso == null) || ($json->numberPublic == 0) ) {
-					echo JText::_('CONTENIDO_PRIVADO');
-				}
-				?>
-				<a class="cerrar">X</a>
-			</div>
 			
 			<div id="info" class="ver_proyecto">
 				<?php
@@ -609,48 +511,46 @@ function botonFinanciar($data) {
 						echo JText::_('CONTENIDO_PRIVADO');
 					} ?>
 					
+			    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+			
+			    <script>
+					var geocoder;
+					var map;
+					function initialize() {
+					  geocoder = new google.maps.Geocoder();
+					  var latlng = new google.maps.LatLng(19.432684,-99.133359);
+					  var mapOptions = {
+					    zoom: 14,
+					    center: latlng,
+					    mapTypeId: google.maps.MapTypeId.ROADMAP
+					  }
+					  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					  codeAddress();
+					}
 					
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
-    <script>
-var geocoder;
-var map;
-function initialize() {
-  geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(19.432684,-99.133359);
-  var mapOptions = {
-    zoom: 14,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  codeAddress();
-}
-
-function codeAddress() {
-  var address = '<?php echo $json->showground; ?>';
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-     });
-    } else {
-    	map.setCenter(latlng);
-    	jQuery('#map-canvas').append('<p><?php echo JText::_('NO_ADDRESS'); ?></p>');
-    }
-  });
-}
-
-    </script>
+					function codeAddress() {
+					  var address = '<?php echo $json->showground; ?>';
+					  geocoder.geocode( { 'address': address}, function(results, status) {
+					    if (status == google.maps.GeocoderStatus.OK) {
+					      map.setCenter(results[0].geometry.location);
+					      var marker = new google.maps.Marker({
+					          map: map,
+					          position: results[0].geometry.location
+					     });
+					    } else {
+					    	map.setCenter(latlng);
+					    	jQuery('#map-canvas').append('<p><?php echo JText::_('NO_ADDRESS'); ?></p>');
+					    }
+					  });
+					}
+			
+			    </script>
  	
 				</div>
 				<a class="cerrar">X</a>
 			</div>
 		</div>
-		<div class="clearfix"></div>
-		<?php echo proInfo($json); ?>
+			<div class="clearfix"></div>
 		</div>
 		<div id="menu">
 			<div>
@@ -658,10 +558,10 @@ function codeAddress() {
 				<div class="menu-item gallery" id="gallery"></div>
 				<div class="menu-item audios" id="audios"></div>
 				<div class="menu-item info" id="info"></div>
-				<?php echo botonFinanciar($json); ?>
 			</div>
 		</div>
-			<div style="clear: both;"></div>
+		<div class="clearfix"></div>
+		<?php echo proInfo($json); ?>
 		<?php echo statusbar($json); ?>
 	</div>
 </div>
@@ -718,34 +618,6 @@ function codeAddress() {
 				},
 				score		: rating,
 				path		: ruta,
-				//target		: '#texto',
-				//targetText	: 'Puntuar'
-			});
-			
-			$('.shareButton').click(function() {
-				var respuesta = $.ajax({
-	     			url:"libraries/trama/js/ajax.php",
-	 				data: {
-	  					"userId": <?php echo $usuario->id; ?>,
-	  					"projectId": <?php echo $json->id; ?>,
-	  					"linkProyecto": "<?php echo JURI::base().'index.php?option=com_jumi&view=appliction&fileid=11&proyid='.$json->id; ?>",
-	  					"nomUser": "<?php echo userName($usuario->id); ?>",
-	  		  			"nomProyecto": "<?php echo $json->name;?>",		
-	  					"fun": 3
-	 				},
-	 				type: 'post'
-				});
-
-				respuesta.done(function(result){
-					var objShare = eval('('+result+')');
-
-					if (!objShare.shared) {
-						$('.shareButton').parent().append('<span><?php echo JText::_('SHARED_SUCCESS'); ?></span>');
-						$('.shareButton').remove();
-					} else {
-						alert('<?php echo JText::_('SHARED_ALREADY'); ?>');
-					}
-				});
 			});
 			
 		});

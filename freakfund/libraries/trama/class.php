@@ -258,7 +258,7 @@ class JTrama
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
-		if (is_null($value->tri)) { $value->tri = 0; };
+		$value->tri = (is_null($value->tri)) ? 0 : round($value->tri, 2);
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
@@ -359,20 +359,26 @@ class JTrama
 		return $data;
 	}
 	
-	public static function getRedemptionCodes($proyId)
-	{
+	public static function getRedemptionCodes($proyId)	{
 		$redemptionCodeExist = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/isTicketmasterLayout/'.$proyId));
 		
 		return $redemptionCodeExist;
 	}
 	
-	public static function dateDiff ($fecha, $obj) {
-		$fecha1 = new DateTime();
+	public static function dateDiff ($dateString1, $dateString2 = null) {
+		if (is_null($dateString2)) {
+			$fecha2 = new DateTime();
+		} else {
+			$fecha2 = new DateTime($dateString2);
+		}
 		
-		$fecha2 = new DateTime($fecha);
+		$fecha1 = new DateTime($dateString1);
+
+		$dateDiff = date_diff($fecha1,$fecha2);
 		
-		$obj->dateDiff = date_diff($fecha1,$fecha2);
+		return $dateDiff;
 	}
+	
 	public static function getProjectbyUser ($middlewareId){
 		$jsonobj= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/projects/'.$middlewareId));
 		if(isset($jsonobj)) {
@@ -382,6 +388,7 @@ class JTrama
 		}
 		return $jsonobj;
 	}
+	
 	public static function getProductbyUser ($middlewareId){
 		$jsonobj2= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/products/'.$middlewareId));
 		if(isset($jsonobj2)) {
