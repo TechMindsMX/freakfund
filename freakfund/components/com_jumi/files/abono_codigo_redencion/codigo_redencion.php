@@ -24,8 +24,11 @@ $middleware		= UserData::getUserMiddlewareId($usuario->id);
 $error			= $input->get('error', null, 'int');
 $from			= $input->get('from', null, 'int');
 
-errorClass::manejoError($error, $from);
-
+if(!is_null($error)){
+	errorClass::manejoError($error, $from);
+}elseif($from == 31){
+	$app->redirect(JURI::base().'index.php?option=com_jumi&view=application&fileid=24', JText::_('DATOS_GUARDADOS'), 'message');
+}
 //definicion de campos del formulario
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterCode';
 ?>
