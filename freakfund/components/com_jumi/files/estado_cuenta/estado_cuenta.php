@@ -17,13 +17,13 @@ require_once 'libraries/trama/libreriasPP.php';
 $year 					= date('Y');
 $month 					= date('m');
 $query_date 			= $year.'-'.$month;
-$fecha_inicial 			= $app->input->get('fechaInicial', date('01-m-Y', strtotime($query_date)), 'string'); // Primer dia del mes
+$fechaInicial 			= $app->input->get('fechaInicial', date('01-m-Y', strtotime($query_date)), 'string'); // Primer dia del mes
 $fechaFinal 			= $app->input->get('fechaFinal', date('t-m-Y', strtotime($query_date)), 'string' ); // Ultimo dia del mes
 $token 					= JTrama::token();
 $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
-$projectList 			= JTrama::getTransactions($idMiddleware->idMiddleware, $fecha_inicial, $fechaFinal);
+$projectList 			= JTrama::getTransactions($idMiddleware->idMiddleware, $fechaInicial, $fechaFinal);
 $descripcionTx			= array();
 $sumaDepositos			= 0;
 $sumaRetiros			= 0;
@@ -32,6 +32,9 @@ $deposito				= '';
 $periodo				= '';
 $saldoFinalPeriodo		= '0';
 $arreglodefechas		= array();
+
+$mes_actual 			= explode("-",$fechaInicial);
+
 
 if(!isset($datosUsuarioJoomla)){
 	$datosUsuarioJoomla->nomCalle = "";
@@ -105,10 +108,11 @@ if(!is_null($projectList) && !empty($projectList)){
 		$tableHtml .= '<td class="derecha">$<span class="number">'.$obj->balance.'</span><td />';
 		$tableHtml .= '</tr>';
 	}
+				$saldoFinalPeriodo = end($projectList)->balance;
 	
-	$periodo = $fecha_inicial.' al '.$fechaFinal;
-	$saldoFinalPeriodo = end($projectList)->balance;
 }
+$periodo = $fechaInicial.' al '.$fechaFinal;
+
 foreach ($descripcionTx as $key => $value) {
 	$selectTipo .=	"<option value='" .$key . "'>" .$value . "</option>";
 }
@@ -122,6 +126,9 @@ $selectTipo .='</select>';
 var objFechas = <?php echo $fechasJS; ?>;
 
 jQuery(document).ready(function(){
+	jQuery('#selectFechas').val('<?php echo $mes_actual[1]-1; ?>');
+	jQuery('#fechaInicial').val('<?php echo $fechaInicial; ?>');
+	jQuery('#fechaFinal').val('<?php echo $fechaFinal; ?>');
 	jQuery("#form_cuenta").validationEngine();
 	
 	jQuery('#filtroTipo').change(function(){
@@ -207,12 +214,12 @@ jQuery(document).ready(function(){
 			</tr>
 		</table>
 	</div>
-
+	
 	<div style="width:100%; float:left;">
+	<h1><?php echo JText::_('RANGE_SEARCH'); ?></h1>
 		<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
 		
 			<select id="selectFechas" name="" >
-				<option value="a" selected="selected"><?php echo JText::_('SELECCIONEOPCION'); ?></option>
 				<option value="0"><?php echo JText::_('JANUARY'); ?></option>
 				<option value="1"><?php echo JText::_('FEBRUARY'); ?></option>
 				<option value="2"><?php echo JText::_('MARCH'); ?></option>
@@ -235,12 +242,13 @@ jQuery(document).ready(function(){
 			<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
 		</form>
 	</div>
-
+	
 	<div style="clear:both"></div>
+	<h1><?php echo JText::_('TRANSACTION_DETAIL'); ?></h1>
 		<div>
 		<?php echo $selectTipo; ?>
 	</div>	
-	<h1><?php echo JText::_('TRANSACTION_DETAIL'); ?></h1>
+	
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
 		</div>
