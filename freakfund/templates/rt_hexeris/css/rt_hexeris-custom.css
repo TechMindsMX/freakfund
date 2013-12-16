@@ -2,7 +2,9 @@
 	position: absolute;
 	left: 3000px;
 }
-
+.derecha, table td.derecha {
+	text-align: right;
+}
 /*** com_users registration ***/
 #terminos a:link, #terminos a:visited, #terminos a:hover {
 	padding: 5px 10px;
@@ -159,15 +161,16 @@ input[disabled="disabled"] {
 	background: #DDDDDD !important;
 	text-shadow: none !important;
 }
-
+/********* estado de cuenta **********/
 #datos_usuario {
 	max-width: 500px;
-	font-size: 18px;
 	line-height: 32px;
 }
 #datos_usuario td {
 	padding-left:15px;
 }
+
+/********* fin estado de cuenta **********/
 
 /********* pantallas de confirmación *******/
 .fila > div {

@@ -41,9 +41,7 @@ if(!isset($datosUsuarioJoomla)){
 	$datosUsuarioJoomla->perfil_estado_idestado = "";
 	$datosUsuarioJoomla->perfil_codigoPostal_idcodigoPostal = "";
 	$datosUsuarioJoomla->rfcRFC = "";
-	
 }
-
 
 for($i=1; $i<=12; $i++){ //for](inicio; hasta; incremento)
 	$fechas = new stdClass;
@@ -53,6 +51,7 @@ for($i=1; $i<=12; $i++){ //for](inicio; hasta; incremento)
 	
 	$arreglodefechas[] = $fechas;
 }
+
 $fechasJS = json_encode($arreglodefechas);
 //definicion de campos del formulario
 $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30"; 
@@ -101,9 +100,9 @@ if(!is_null($projectList) && !empty($projectList)){
 		$tableHtml .= '<td>'.$obj->fechaFormat. '<td />';
 		$tableHtml .= '<td>'.$descripcionTx[$obj->description].'<td />';
 		$tableHtml .= '<td>'.$obj->reference.'<td />';
-		$tableHtml .= '<td>'.$retiro.'<td />';
-		$tableHtml .= '<td>'.$deposito.'<td />';
-		$tableHtml .= '<td>$<span class="number">'.$obj->balance.'</span><td />';
+		$tableHtml .= '<td class="derecha">'.$retiro.'<td />';
+		$tableHtml .= '<td class="derecha">'.$deposito.'<td />';
+		$tableHtml .= '<td class="derecha">$<span class="number">'.$obj->balance.'</span><td />';
 		$tableHtml .= '</tr>';
 	}
 	
@@ -153,37 +152,10 @@ jQuery(document).ready(function(){
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
 <div>
-<div style="width:100%; float:left;">
-	<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
-	
-		<select id="selectFechas" name="" >
-			<option value="a" selected="selected"><?php echo JText::_('SELECCIONEOPCION'); ?></option>
-			<option value="0"><?php echo JText::_('JANUARY'); ?></option>
-			<option value="1"><?php echo JText::_('FEBRUARY'); ?></option>
-			<option value="2"><?php echo JText::_('MARCH'); ?></option>
-			<option value="3"><?php echo JText::_('APRIL'); ?></option>
-			<option value="4"><?php echo JText::_('MAY'); ?></option>
-			<option value="5"><?php echo JText::_('JUNE'); ?></option>
-			<option value="6"><?php echo JText::_('JULY'); ?></option>
-			<option value="7"><?php echo JText::_('AUGUST'); ?></option>
-			<option value="8"><?php echo JText::_('SEPTEMBER'); ?></option>
-			<option value="9"><?php echo JText::_('OCTOBER'); ?></option>
-			<option value="10"><?php echo JText::_('NOVEMBER'); ?></option>
-			<option value="11"><?php echo JText::_('DECEMBER'); ?></option>
-		</select>
-					
-		<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
-		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
-  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
-  		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
-		
-		<input type="submit" class="button" value="Consultar" />
-	</div>
 	<div style="float:left; width:40%;" >
 		<table  id="datos_usuario">
 			<tr>
-			
-				<td colspan="3" ><strong><?php echo JFactory::getUser($idMiddleware->idJoomla)->name;?></strong></td>
+				<td colspan="3" ><h3><?php echo JFactory::getUser($idMiddleware->idJoomla)->name;?></h3></td>
 			</tr>
 			<tr>
 				<td ><?php echo $datosUsuarioJoomla->nomCalle?></td>
@@ -210,41 +182,68 @@ jQuery(document).ready(function(){
 		</table>
 	</div>
 	
-	
 	<div style="float:right; width:40%;">
 		<table class='table '>
 			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
 			<tr>
 				<td><?php echo JText::_('SALDO_INICIAL_PERIODO');?></td>
-				<td>$<span class="number"><?php echo $saldoInicialPeriodo?></span></td>
+				<td class="derecha">$<span class="number"><?php echo $saldoInicialPeriodo?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_DEPOSITOS');?></td>
-				<td>$<span class="number"><?php echo $sumaDepositos;?></span></td>
+				<td class="derecha">$<span class="number"><?php echo $sumaDepositos;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_RETIROS');?></td>
-				<td>$<span style="color:red;" class="number"><?php echo $sumaRetiros;?></span></td>
+				<td class="derecha">$<span style="color:red;" class="number"><?php echo $sumaRetiros;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO_FINAL_PERIODO');?></td>
-				<td>$<span class="number"><?php echo $saldoFinalPeriodo; ?></span></td>
+				<td class="derecha">$<span class="number"><?php echo $saldoFinalPeriodo; ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('PERIODO_FECHA_INI_FIN');?></td>
-				<td><?php echo $periodo ?></td>
+				<td class="derecha"><?php echo $periodo ?></td>
 			</tr>
 		</table>
 	</div>
+
+	<div style="width:100%; float:left;">
+		<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
+		
+			<select id="selectFechas" name="" >
+				<option value="a" selected="selected"><?php echo JText::_('SELECCIONEOPCION'); ?></option>
+				<option value="0"><?php echo JText::_('JANUARY'); ?></option>
+				<option value="1"><?php echo JText::_('FEBRUARY'); ?></option>
+				<option value="2"><?php echo JText::_('MARCH'); ?></option>
+				<option value="3"><?php echo JText::_('APRIL'); ?></option>
+				<option value="4"><?php echo JText::_('MAY'); ?></option>
+				<option value="5"><?php echo JText::_('JUNE'); ?></option>
+				<option value="6"><?php echo JText::_('JULY'); ?></option>
+				<option value="7"><?php echo JText::_('AUGUST'); ?></option>
+				<option value="8"><?php echo JText::_('SEPTEMBER'); ?></option>
+				<option value="9"><?php echo JText::_('OCTOBER'); ?></option>
+				<option value="10"><?php echo JText::_('NOVEMBER'); ?></option>
+				<option value="11"><?php echo JText::_('DECEMBER'); ?></option>
+			</select>
+						
+			<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
+			<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
+	  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
+	  		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
+			
+			<input type="submit" class="button" value="Consultar" />
+		</form>
+	</div>
+
 	<div style="clear:both"></div>
 		<div>
-	</form>
 		<?php echo $selectTipo; ?>
 	</div>	
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
 		</div>
 		<div class="espaciado">
-		<input type="button" class="button" value="<?php echo JText::_('REGRESAR');  ?>" onClick="javascript:window.history.back();">
+		<input type="button" class="button" value="<?php echo JText::_('IR_A_CARTERA');  ?>" onClick="javascript:window.history.back();">
 		</div>
 </div>
