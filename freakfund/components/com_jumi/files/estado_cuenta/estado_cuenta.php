@@ -66,7 +66,7 @@ $tableHtml 	.= "<th>". JText::_('SALDO_FF') ."<th />";
 $tableHtml 	.= "</tr>";
 
 $selectTipo = '<select name="tipo" id="filtroTipo">';
-$selectTipo .=	"<option value='nada' selected>Sin Filtro</option>";
+$selectTipo .=	"<option value='nada' selected>".JText::_('MOVEMENT_FILTER')."</option>";
 
 $descripcionTx['CREDIT'] 		= JText::_('STATEMENT_DEPOSIT');
 $descripcionTx['TRANSFER']		= JText::_('STATEMENT_TRANSFER');
@@ -177,7 +177,7 @@ jQuery(document).ready(function(){
 				<td>RFC: <?php echo $datosUsuarioJoomla->rfcRFC?></td>
 			</tr>
 			<tr>
-				<td colspan="3">Número de cuenta: <strong><?php echo $datosUsuarioMiddleware->account?></strong></td>
+				<td colspan="3"><?php echo JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?>   <strong><?php echo $datosUsuarioMiddleware->account?></strong></td>
 			</tr>
 		</table>
 	</div>
@@ -232,7 +232,7 @@ jQuery(document).ready(function(){
 	  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
 	  		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
 			
-			<input type="submit" class="button" value="Consultar" />
+			<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
 		</form>
 	</div>
 
@@ -240,10 +240,11 @@ jQuery(document).ready(function(){
 		<div>
 		<?php echo $selectTipo; ?>
 	</div>	
+	<h1><?php echo JText::_('TRANSACTION_DETAIL'); ?></h1>
 		<div style="margin-top:20px;">
 		<?php echo $tableHtml; ?>
 		</div>
 		<div class="espaciado">
-		<input type="button" class="button" value="<?php echo JText::_('IR_A_CARTERA');  ?>" onClick="javascript:window.history.back();">
+		<input type="button" class="button" value="<?php echo JText::_('IR_A_CARTERA');  ?>" onClick="window.location.href='index.php?option=com_jumi&view=application&fileid=24&Itemid=218'">
 		</div>
 </div>
