@@ -19,6 +19,7 @@ $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
 $idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
+$usuario->data	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $proyid			= $input->get("proyid",0,"int");
 $pro			= JTrama::getDatos($proyid);
 
@@ -68,8 +69,11 @@ if($confirm == 0){
 		function formatoNumero() {
 			jQuery("span.number").number( true, 2 );
 		}
+		
 		jQuery("#form_compra").validationEngine();
+		
 		jQuery('#guardar').prop('disabled', true);
+		
 		function formatoNumero() {
 			jQuery("span.number").number( true, 2 );
 		}
@@ -90,11 +94,10 @@ if($confirm == 0){
 			} else {
 				jQuery('#guardar').prop('disabled', true);
 			}
-	
 		}
 		jQuery(':input').change(function(){		
-					
 			var limite = parseInt(jQuery(this).prev().prev().val());
+
 			if ( jQuery(this).val()>limite){
 				jQuery(this).val(0);
 				jQuery(this).next().children().text(0);
@@ -103,8 +106,6 @@ if($confirm == 0){
 				sumaarrecha();
 				
 				formatoNumero();
-				//habilitarCompra();
-				
 			}else{
 				var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
 				var resultado = val_uni * jQuery(this).val();
@@ -122,8 +123,6 @@ if($confirm == 0){
 				}
 				
 				formatoNumero();
-				
-				//habilitarCompra();		
 			}
 			
 		});
@@ -138,8 +137,6 @@ if($confirm == 0){
 		}
 		
 		jQuery('#guardar').click(function() {
-			
-			
 				jQuery("#form_compra").validationEngine();
 				jQuery("#form_compra").submit();
 			
@@ -150,7 +147,8 @@ if($confirm == 0){
 	<h1><?php echo JText::_('INVENTARIO_COMPRA');  ?></h1>
 	<?php
 	echo '<h3>'. $usuario->name .'</h3>
-					<div>'.JText::_('SALDO_FF').':$ <span class="number">'. $saldo .'</span></div>';
+		      <div>'.JText::_('SALDO_FF').':$ <span class="number">'. $saldo .'</span>
+		      </div>';
 	?>
 	<h2><?php echo $pro->name; ?></h2>
 	<div>
@@ -241,6 +239,8 @@ if($confirm == 0){
 		echo $html;
 	}
 }else{
+	$recaudado = 0;
+		
 	$params = $input->getArray($_POST);
 ?>
 	<form id="form_compra" action="<?php echo $action; ?>" method="POST">
@@ -293,10 +293,24 @@ if($confirm == 0){
 			<td style="text-align: right;">$<strong><span class="number"><?php echo $total; ?></span></strong></td>
 		</tr>
 		</table>
-		
+		<?php
+		 $recaudado = $pro->balance + $total;
+
+		 if($recaudado > $pro->breakeven){
+		 	$app->enqueueMessage('Algunas unidades serán consideradas financiamiento y las restantes como inversión', 'notice');
+		 }
+		 
+		 if($total < $usuario->data->balance){
+		 	$botonGuardar = '<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />';
+		 }else{
+		 	$botonGuardar = '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32">'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR').
+		 	                ' '.str_replace(':', '', JText::_('FREAKFUND_JUMI_ABONOSOCIO_BALANCE')).'</a>';
+		 }
+		 
+		?>
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onclick="history.go(-1);" />
-			<input type="submit" id="guardar" class="button" value="<?php echo JText::_('INVERTIR_PROYECTO'); ?>"  />
+			<?php echo $botonGuardar; ?>
 		</div>
 	</form>
 <?php
