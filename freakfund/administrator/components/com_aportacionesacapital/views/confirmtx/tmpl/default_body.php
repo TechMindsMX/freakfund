@@ -16,16 +16,16 @@ $datos = $this->items;
 			<input type="hidden" name="callback" value="<?php echo $datos->callback; ?>" />
 			
 		</div>
-		Esta seguro de enviar esta operacion es IRREVERSIBLE!!!!!!!!!!!!
+		<?php echo JText::_('COM_APORTACIONESCAPITAL_IRREVERSIBLE'); ?>
 		<br /><br /><br />
 		
-		Nombre proveedor: <?php echo $datos->producerName; ?>
+		<?php echo JText::_('COM_APORTACIONESCAPITAL_LISTADOPROYECTOS_HEADING_PRODUCTOR'); ?> : <?php echo $datos->producerName; ?>
 		<br /><br />
 		
-		Nombre del proyecto:<?php echo $datos->ProductName; ?>
+		<?php echo JText::_('COM_APORTACIONESCAPITAL_LISTADOPROYECTOS_HEADING_NOMBREPROY'); ?> : <?php echo $datos->ProductName; ?>
 		<br /><br /> 
 		
-		Monto de la aportacion : $<span class="number"><?php echo $datos->monto; ?></span>
+		<?php echo JText::_('COM_APORTACIONESCAPITAL_APORTACION');?> : $<span class="number"><?php echo $datos->monto; ?></span>
 		<br /><br /><br />
 		
 		<input type="submit" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND'); ?>" />
