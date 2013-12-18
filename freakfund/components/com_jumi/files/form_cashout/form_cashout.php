@@ -29,14 +29,13 @@ $action 		= '#';
 	jQuery(document).ready(function() {
 		jQuery("#form_cashout").validationEngine();
 		
-		
 		jQuery('#retirar').click(function() {
 			
-			if(confirm('¿Esta seguro que quiere retirar la cantidad de $'+jQuery('#cantidad').val()+'? ¡Esta accion es IRREVERSIBLE!')) {
+			if(confirm('<?php echo JText::_("FREAKFUND_JUMI_CASHOUT_SEGURO1"); ?>'+jQuery('#cantidad').val()+'<?php echo JText::_("FREAKFUND_JUMI_ABONOSOCIO_SEGURO2"); ?>')) {
 				jQuery("#form_cashout").validationEngine();
 				jQuery("#form_cashout").submit();
 			} else {
-				alert('Bien hecho');
+				alert('<?php echo JText::_("FREAKFUND_JUMI_ABONOSOCIO_BIEN"); ?>');
 			}
 		});
 	});
@@ -50,9 +49,9 @@ $action 		= '#';
 		$cuenta = $datosUsuario->account == null ? 0 : $datosUsuario->account;
 		$name = $datosUsuario->name == null ? 0 : $datosUsuario->name;
 		
-		echo '<div ><span class="labelsconfirmacion">Usuario:</span> <span>'. $name .'</span></div><br / >';
+		echo '<div ><span class="labelsconfirmacion">'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_USER').':</span> <span>'. $name .'</span></div><br / >';
 		echo '<div ><span class="labelsconfirmacion">'.JText::_('SALDO_FF').':</span> $<span class="number">'. $saldo .'</span></div><br / >';
-		echo '<div ><span class="labelsconfirmacion">Cuenta Freakfund:</span><span >'. $cuenta .'</span></div> <br />';
+		echo '<div ><span class="labelsconfirmacion">'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_CUENTA').':</span><span >'. $cuenta .'</span></div> <br />';
 		$campo = '<label class="labelsconfirmacion">'.JText::_('CANTIDAD_TRANSFERENCIA').':</label>MXN $<input class="input_monto validate[required,custom[number]]" type="text" id="cantidad" name="cantidad" /><br /> ';
 		
 		echo $campo;
@@ -63,7 +62,7 @@ $action 		= '#';
 		<div style="margin: 10px;">
 			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 		javascript:window.history.back();">
-			<input type="button" id="retirar" class="button" value="Transferir" />
+			<input type="button" id="retirar" class="button" value="<?php echo JText::_('LBL_TRANSFERIR'); ?>" />
 			
 		</div>
 		

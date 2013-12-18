@@ -2,12 +2,12 @@
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario 	= JFactory::getUser();
 $app 		= JFactory::getApplication();
-// if ($usuario->guest == 1) {
-	// $return = JURI::getInstance()->toString();
-	// $url    = 'index.php?option=com_users&view=login';
-	// $url   .= '&return='.base64_encode($return);
-	// $app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
-// }
+if ($usuario->guest == 1) {
+	$return = JURI::getInstance()->toString();
+	$url    = 'index.php?option=com_users&view=login';
+	$url   .= '&return='.base64_encode($return);
+	$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'message');
+}
 jimport('trama.class');
 jimport('trama.usuario_class');
 jimport('trama.error_class');
@@ -48,7 +48,7 @@ function formTraspaso($params, $app, $usuario) {
 	
 	$optionsHtml = '<select id="receiverId" name="receiverId">'.PHP_EOL.'<option>'.JText::_("Seleccione").'</option>'.PHP_EOL;
 	if ( empty($params->beneficiarios) ) {
-		$app->enqueueMessage('Ve a TELCEL y comprate un amigo pinche forever alone', 'notice');
+		$app->enqueueMessage(JText::_('NO_ALTAS'), 'notice');
 	} else {
 		foreach ($params->beneficiarios as $key => $value) {
 			$optionsHtml .= '<option value="'.$value->destinationId.'">'.$value->account.' - '.$value->name.'</option>'.PHP_EOL;
@@ -108,9 +108,9 @@ function formTraspaso($params, $app, $usuario) {
 		<pre><?php echo JText::_('TRASPASO_LEGEND_2'); ?></pre>
 		
 			<div style="margin: 10px;">
-				<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+				<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
 			javascript:window.history.back();">
-				<input type="submit" class="button" id="enviar" value="Traspasar" />
+				<input type="submit" class="button" id="enviar" value="<?php echo JText::_('TRASPASOS_TRASPASAR'); ?>" />
 			</div>
 		</form>
 		
