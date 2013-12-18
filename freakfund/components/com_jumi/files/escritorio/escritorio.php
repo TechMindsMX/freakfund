@@ -34,8 +34,6 @@ $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 $objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
 $objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
-var_dump($idMiddleware ,$objProyectos,$objProductos);
-errorClass::manejoError($errorCode, $from);
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
@@ -64,7 +62,6 @@ function moreProData($value, $datosgenerales) {
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		
 		JTrama::getEditUrl($value);
-		var_dump($value ,$datosgenerales);
 		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';
 		$value->roi = $value->investedAmount * ($value->tri / 100);
 		if ( $value->status  == 5 || $value->status == 6 ) {
@@ -74,10 +71,10 @@ function moreProData($value, $datosgenerales) {
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 		}
 	}
+	$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 	$datosgenerales->portfolioValue = @$datosgenerales->actualFundings + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
 	
 }
-var_dump($datosgenerales);
 function htmlInversionActual($value, $datosgenerales) {
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);

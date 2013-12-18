@@ -156,9 +156,9 @@ if($confirm == 0){
 		<table class="table table-striped">
 			<tr>
 				<th><?php echo JText::_('LBL_SECCION'); ?></th>
-				<th><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
-				<th><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
-				<th><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
 			</tr>
 			<?php
 			
@@ -171,10 +171,10 @@ if($confirm == 0){
 						<tr class="wrapper">
 						<td>'. $value ->section .'</td>
 						<td style="text-align: right;"> $<span class="number valor_unidad">'. $value ->unitSale.'</span></td>
-						<td><input id="" type="hidden" value="'.$value ->unit.'"/>
+						<td style="text-align: right;"><input id="" type="hidden" value="'.$value ->unit.'"/>
 						<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
 						<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" /></td>
-						<td style="text-align: right;"><div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div></td>
+						<td style="text-align: right; width: 315px;"><div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div></td>
 						</tr>';
 			}
 			$html .= '<tr><td style="text-align: right;" colspan="3"><div><strong>'.JText::_('TOTAL_PAGAR').'</strong></td><td style="text-align: right;">$<strong><span class="number" id="resultadoglobal"></span><strong></div></td></tr></table>';
@@ -199,19 +199,19 @@ if($confirm == 0){
 	} else {
 		$totalCompra = 0;
 		
-		$html = '<h2>'.$usuario->name.'</h2>
+		$html = '<h1>'.JText::_('COMPRA_SUCCESS_DETAILS').'</h1>
+				<h3>'.$usuario->name.'</h3>
 				<div>'.JText::_('SALDO_FF').': $<span class="number">'. $saldo .'</span></div>
 				<p>'.JText::_('COMPRA_SUCCESS').'</p>
-				<h3>'.JText::_('COMPRA_SUCCESS_DETAILS').'</h3>
 				<div class="detalles_tx">
-					<h3>'.$pro->name.'</h3>
+					<h2>'.$pro->name.'</h2>
 					<span>'.JText::_('COMPRA_TX_ID').' : </span>'.$response.'
-					<table class="table table-stripped">
+					<table class="table table-striped">
 						<tr>
 							<th>'.JText::_('LBL_SECCION').'</th>
-							<th>'.JText::_('PRECIO_UNIDAD').'</th>
-							<th>'.JText::_('CANTIDAD_COMPRADAS').'</th>
-							<th>'.JText::_('COMPRA_SUBTOTAL').'</th>
+							<th style="text-align: right;">'.JText::_('PRECIO_UNIDAD').'</th>
+							<th style="text-align: right;">'.JText::_('CANTIDAD_COMPRADAS').'</th>
+							<th style="text-align: right;">'.JText::_('COMPRA_SUBTOTAL').'</th>
 						</tr>';
 		foreach ($detalleInversion as $key => $value) {
 	
@@ -249,14 +249,17 @@ if($confirm == 0){
 		<input type="hidden" name="callback" value="<?php echo $params['callback']; ?>"/>
 		<input type="hidden" name="token" value="<?php echo $token; ?>"/>
 		
-		<h2><?php echo JText::_('INVENTARIO_COMPRA_SCREENCONFIRM_TITTLE'); ?></h2>
+		<h1><?php echo JText::_('INVENTARIO_COMPRA_SCREENCONFIRM_TITTLE'); ?></h1>
+		<h3><?php echo $usuario->name; ?></h3>
+		<div><?php echo JText::_('SALDO_FF')?> : $<span class="number"><?php echo $saldo ?></span></div>
+		<h2><?php echo $pro->name ?> </h2>
 		
 		<table class="table table-striped">
 			<tr>
 				<th><?php echo JText::_('LBL_SECCION'); ?></th>
-				<th><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
-				<th><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
-				<th><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('PRECIO_UNIDAD'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('CANTIDAD_A_COMPRAR'); ?></th>
+				<th style="text-align: right;"><?php echo JText::_('COMPRA_SUBTOTAL'); ?></th>
 			</tr>
 			<?php
 				$total = 0;
