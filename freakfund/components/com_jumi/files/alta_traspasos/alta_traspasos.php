@@ -30,7 +30,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			
 			jQuery('.fila').each(function(){
 			    if( parseInt(jQuery(this).find('.numCuenta').html()) == parseInt(clabe) ){
-			    	alert('La cuenta ya esta dada de alta');
+			    	alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_ALREADY_SAVED"); ?>');
 			    	salir = true;
 			    }
 			    
@@ -198,7 +198,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		});
 		
 		request.fail(function (jqXHR, textStatus) {
-			alert("Ocurrio un problema al eliminar");
+			alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_PROBLEM_SAVING"); ?>');
 		});
 	}
 	
@@ -243,8 +243,8 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 					html += '	<div class="nomBeneficiario">'+jQuery('#socio').val()+'</div>';
 					html += '	<div class="mailBeneficiario">'+jQuery('#email').val()+'</div>';
 					html += '	<div style="width: 170px;">';
-					html += '		<input type="button" class="button safe" value="Actualizar" onclick="confirmacionUpdate(this)" disabled="disabled" />';
-					html += '		<input type="button" class="button" value="Borrar" onclick="confirmaciondelete(this)" />';
+					html += '		<input type="button" class="button safe" value="<?php echo JText::_('ALTA_TRASPASOS_UPDATE'); ?>" onclick="confirmacionUpdate(this)" disabled="disabled" />';
+					html += '		<input type="button" class="button" value="<?php echo JText::_('ALTA_TRASPASOS_BORRAR'); ?>" onclick="confirmaciondelete(this)" />';
 					html += '	</div>';
 					html += '</div>';
 					
@@ -350,8 +350,8 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				<div class="nomBeneficiario"><?php echo $value->name; ?></div>
 				<div class="mailBeneficiario"><?php echo $value->email; ?></div>
 				<div style="width: 170px;">
-					<input type="button" class="button safe" value="Actualizar" onclick="confirmacionUpdate(this)" disabled="disabled" />
-					<input type="button" class="button" value="Borrar" onclick="confirmaciondelete(this)" />
+					<input type="button" class="button safe" value="<?php echo JText::_('ALTA_TRASPASOS_UPDATE'); ?>" onclick="confirmacionUpdate(this)" disabled="disabled" />
+					<input type="button" class="button" value="<?php echo JText::_('ALTA_TRASPASOS_BORRAR'); ?>" onclick="confirmaciondelete(this)" />
 				</div>
 			</div>
 		<?php 
@@ -372,7 +372,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 </div>
 
 <div id="divConfirmacion">
-	<h3>Estas Seguro de enviar la siguiente información!!!</h3>
+	<h3><?php echo JText::_('ALTA_TRASPASOS_CONFIRM'); ?></h3>
 	
 	<div>
 		<span class="labelsconfirmacion"><?php echo JText::_('FORM_ALTA_TRASPASOS_CONFIRM_CLABE'); ?>:</span>

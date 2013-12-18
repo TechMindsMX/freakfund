@@ -137,7 +137,7 @@ $token = JTrama::token();
 		</table>
 	</div>
 	<!--Fin de tabla-->
-	<input type="submit" value="Enviar" id="guardar" class="button" />
+	<input type="submit" value="<?php echo JText::_('LBL_ENVIAR'); ?>" id="guardar" class="button" />
 </form>
 	<form id="agregados">
 		<span class="total_proveedor"><?php echo JText::_('TOTAL'); ?></span> = <span class="total"></span>
@@ -260,7 +260,6 @@ if (isset($proyecto->miembrosGrupo)) {
 			jQuery("#data_send").val(json);
 			
 			jQuery("#proveedores").submit(function(){
-				// return false;
 			});
 		});
 	});
