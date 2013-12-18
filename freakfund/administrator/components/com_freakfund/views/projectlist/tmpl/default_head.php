@@ -28,7 +28,7 @@ $datosSelect = $this->items[0]->statusList;
     	<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_STATUS'); ?>
     	<div>
     		<select id="statusFilter">
-    			<option value="all">Seleccione una opción</option>
+    			<option value="all"><?php echo JText::_('COM_FREAKFUND_SELECT_OPTION'); ?></option>
     			<?php
 				foreach ($datosSelect as $key => $value) {
 					if ( ($value->id >= 4) && ($value->id != 9) ) {

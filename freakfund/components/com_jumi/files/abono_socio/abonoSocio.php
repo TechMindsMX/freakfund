@@ -56,37 +56,35 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 	
 	$html = '<div>
 			
-		<h4>Datos Capturados</h4>
-		
-		
+		<h4>'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_DATA").'</h4>
 		
 		<p>
-			<span class="labelsconfirmacion">Saldo Anterior</span>
+			<span class="labelsconfirmacion">'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_SALDO_ANTES").'</span>
 			$<span class="number">'.$saldoAnterior.'</span>
 		</p>
 		
 		<p>
-			<span class="labelsconfirmacion">Monto abonado</span>
+			<span class="labelsconfirmacion">'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_MONTO").'</span>
 			$<span class="number">'.$amount.'</span>
 		</p>
 		
 		<p>
-			<span class="labelsconfirmacion">Saldo Actual</span>
+			<span class="labelsconfirmacion">'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_SALDO_ACTUAL").'</span>
 			$<span class="number">'.$balance.'</span>
 		</p>
 		
 		<p>
-			<span class="labelsconfirmacion">Fecha de la transacción</span>
+			<span class="labelsconfirmacion">'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_FECHA").'</span>
 			'.$fechaActual.'
 		</p>
 		
 		<p>
-			<span class="labelsconfirmacion">Metodo de pago</span>
+			<span class="labelsconfirmacion">'.JText::_("FREAKFUND_JUMI_ABONOSOCIO_METEDO_PAGO").'</span>
 			'.$metodoPago.'
 					<img style="maregin-left: 30px;" width="200px" src="images/paypal.jpg" />
 		</p>
 		<p>
-				<a href="index.php?option=com_jumi&view=application&fileid=24" class="button">Ir a mi cartera</a>	
+				<a href="index.php?option=com_jumi&view=application&fileid=24" class="button">'.JText::_("IR_A_CARTERA").'</a>	
 		</p>
 	</div>';
 }else{
@@ -116,23 +114,23 @@ if( $amount != '' && $balance != '' && $timestamp != '' ) {
 		
 		jQuery('#abonar').click(function() {
 			
-			if(confirm('¿Esta seguro que quiere abonar la cantidad de $'+jQuery('#amount').val()+'? ¡Esta accion es IRREVERSIBLE!')) {
+			if(confirm('<?php echo JText::_("FREAKFUND_JUMI_ABONOSOCIO_SEGURO1"); ?>'+jQuery('#amount').val()+'<?php echo JText::_("FREAKFUND_JUMI_ABONOSOCIO_SEGURO2"); ?>')) {
 				jQuery("#formAbono").validationEngine();
 				jQuery("#formAbono").submit();
 			} else {
-				alert('Bien hecho');
+				alert('<?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_BIEN'); ?>');
 			}
 		});
 	});
 </script>
-	<h3><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR')?></h3>
+	<h3><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_TITLE_ABONAR'); ?></h3>
 	
 	<p>
-			<span class="labelsconfirmacion">Usuario: </span>
+			<span class="labelsconfirmacion"><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_USER'); ?>: </span>
 			<?php echo $usuario->name;?>
 		</p>
 		<p>
-			<span class="labelsconfirmacion">Cuenta Freakfund: </span>
+			<span class="labelsconfirmacion"><?php echo JText::_('FREAKFUND_JUMI_ABONOSOCIO_CUENTA'); ?>: </span>
 			<?php echo $cuenta->account;?>
 		</p>
 		

@@ -171,14 +171,14 @@ switch($datos->status){
 					history.back();
 					break;
 				case 'finishButton':
-					if(confirm('¿Está seguro que desea finalizar el producto, dispersar los beneficios y notificar a los involucrados? ESTA ACCIÓN ES IRREVERSIBLE')) {
+					if(confirm('<?php echo JText::_("COM_FREAKFUND_STATUSPRO_SURE"); ?>')) {
 						jQuery("#formstatus").submit();
 					} else {
-						alert('Bien hecho');
+						alert('<?php echo JText::_("COM_FREAKFUND_STATUSPRO_NOTSURE"); ?>');
 					}
 					break;
 				default:
-					alert('que presionaste????');
+					alert('<?php echo JText::_("COM_FREAKFUND_STATUSPRO_WHAT"); ?>');
 					break;
 			}
 		});

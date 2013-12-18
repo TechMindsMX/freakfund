@@ -68,7 +68,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterC
 	});
 </script>
 
-<h1><?php echo JText::_('REDENCION_CODIGO');  ?></h1>
+<h1><?php echo JText::_('REDENCION_CODIGO'); ?></h1>
 <div>
 	<form id="form_codigo" action="<?php echo $action; ?>" method="POST">
 	<input type="hidden" name="userId" value="<?php echo $middleware->idMiddleware; ?>" id="userid"/>
@@ -88,7 +88,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterC
 	</div>
 	
 	<div>
-		<label for="codigo" ><?php echo JText::_('CODIGO_PROMO');  ?></label> 
+		<label for="codigo" ><?php echo JText::_('CODIGO_PROMO'); ?></label> 
 		<input type="text" class="validate[required]" id="code" name="code">
 	</div>
 	
@@ -103,15 +103,15 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterC
     </noscript>
 		
 	<div style="margin: 10px;">
-		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR'); ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>'))
 	javascript:window.history.back();">
-		<input type="button" class="button" id="enviar" value="Redimir" />
+		<input type="button" class="button" id="enviar" value="<?php echo JText::_('REDENCION_REDEEM'); ?>" />
 	</div>
 	
 	<div id="ajax_done" style="display: none">
-		Producto invertido:	<span id="producto"></span><br>
-		Monto invertido:	<span id="monto"></span><br>
-		Tasa de retorno al momento:	<span id="tasa"></span>
+		<?php echo JText::_('REDENCION_PROD_INVER'); ?> :	<span id="producto"></span><br>
+		<?php echo JText::_('REDENCION_RED_AMOUNT'); ?> :	<span id="monto"></span><br>
+		<?php echo JText::_('REDENCION_ACTUAL_TRI'); ?> :	<span id="tasa"></span>
 	</div>
 		
 	</form>

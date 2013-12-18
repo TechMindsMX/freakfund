@@ -34,8 +34,6 @@ class AltaProveedores {
 		
 		$this -> getMiembrosGrupo();
 		$this -> fechas();
-		//$this -> getProviders();
-
 	}
 	
 
