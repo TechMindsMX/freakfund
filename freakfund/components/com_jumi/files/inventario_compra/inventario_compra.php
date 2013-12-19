@@ -275,7 +275,7 @@ if($confirm == 0){
 							<td style="text-align: right;">
 								$<span class="number"><?php echo $value->unitSale; ?></span>
 							</td>
-							<td style="text-align: center;">
+							<td style="text-align: right;">
 								<?php echo $valor; ?>
 							</td>
 							<td style="text-align: right;">$<span class="number">
