@@ -229,8 +229,6 @@ function informacionTmpl($data, $params) {
 	 $botonContactar= JText::_('SOLICITA_PARTICIPAR');
  	require_once 'solicitud_participar.php';
  	
- 	
- 	
 	switch ($params) {
 		case 'finanzas':
 			$izquierda = avatar($data).
@@ -259,7 +257,6 @@ function informacionTmpl($data, $params) {
 			
 			break;
 	}
-
 
 	$html = '<div id="izquierdaDesc" class="ancho-col gantry-width-block">'.
 			'<div>'.
@@ -623,7 +620,10 @@ function botonFinanciar($data) {
 		});
 		
 	    $(window).load(function() {
-        	$('#slider').nivoSlider();
+        	$('#slider').nivoSlider({
+        		prevText: '<?php echo JText::_("LBL_PREV"); ?>',
+    			nextText: '<?php echo JText::_("LBL_NEXT"); ?>'
+        	});
 		});
     </script>
 
