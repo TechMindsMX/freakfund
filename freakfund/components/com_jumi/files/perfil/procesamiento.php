@@ -111,7 +111,7 @@ class procesamiento extends manejoImagenes {
 		
 		$fileid = $this->redireccion($tabladb);
 		$allDone = JFactory::getApplication();
-		$allDone->redirect($fileid, 'Sus datos fueron grabados exitosamente' );		
+		$allDone->redirect($fileid, JText::_('DATOS_GUARDADOS'));		
 	}
 	
 	public function redireccion ($tabladb) {
@@ -135,10 +135,6 @@ class procesamiento extends manejoImagenes {
 		return $respuesta;
 	}
 }
-
-
-
-
 
 $form 			= $_GET['form'];
 $objDatos 		= new getDatosObj;

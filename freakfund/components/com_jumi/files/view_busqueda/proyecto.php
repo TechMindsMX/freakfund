@@ -235,8 +235,6 @@ function pageselectCallback (page_index, jq) {
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
-		//members[i].recaudado = 20000;
-		//members[i].fundEnd = '12-12-2013';
 		members[i].roiFinanciadores = 40;
 		members[i].roiInversionistas = 30;
 		members[i].premierEnd = '12-01-2014';
@@ -333,9 +331,6 @@ function initPagination() {
 </script>
 
 
-<title>Pagination</title>
-</head>
-<body>
 	<?php
 	if (isset($params->tags)){
 	 	echo filtro();
@@ -343,5 +338,3 @@ function initPagination() {
 	 ?>
 	<dl id="Searchresult"></dl>
 	<div id="Pagination" class="pagination"></div>
-</body>
-</html>

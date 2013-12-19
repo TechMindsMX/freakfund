@@ -112,7 +112,6 @@ if($confirm == 0){
 	
 				jQuery(this).parent().next().children().children().text(resultado);
 				
-				
 				sumaarrecha();			
 				
 				if ( jQuery(this).val() > 0 ) {
@@ -266,8 +265,6 @@ if($confirm == 0){
 				foreach ($pro->projectUnitSales as $key => $value) {
 
 					foreach ($params as $indice => $valor) {
-
-						
 						
 						if($indice == $value->id){
 
@@ -300,7 +297,7 @@ if($confirm == 0){
 		 $recaudado = $pro->balance + $total;
 
 		 if($recaudado > $pro->breakeven){
-		 	$app->enqueueMessage('Algunas unidades serán consideradas financiamiento y las restantes como inversión', 'notice');
+		 	$app->enqueueMessage(JText::_('COMPRA_FINAN_E_INVERSION'), 'notice');
 		 }
 		 
 		 if($total < $usuario->data->balance){

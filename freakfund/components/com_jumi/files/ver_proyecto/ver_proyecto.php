@@ -255,7 +255,7 @@ function informacionTmpl($data, $params) {
 				$mapa.
 				'</div>';
 			$derecha = $data->description.
-				'<br /><h3>Elenco</h3><p>'.$data->cast.'</p>';
+				'<br /><h3>'.JText::_("LBL_ELENCO").'</h3><p>'.$data->cast.'</p>';
 			
 			break;
 	}

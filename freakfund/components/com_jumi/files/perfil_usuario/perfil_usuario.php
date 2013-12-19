@@ -36,7 +36,7 @@ $document->addStyleSheet($pathJumi.'css/style.css');
 $datosgenerales = $objuserdata::datosGr($userid);
 
 if(is_null($datosgenerales)){
-	$app->redirect('index.php', 'No hay datos de usuario','notice');
+	$app->redirect('index.php', JText::_('NO_HAY_DATOS'),'notice');
 }
 
 $id_datos_generales = $datosgenerales->id;
@@ -44,8 +44,6 @@ $id_datos_generales = $datosgenerales->id;
 $promedio = $objuserdata->scoreUser($userid);
 
 ?>
-
-    <body>
         
       <script type="text/javascript" src="components/com_jumi/files/crear_proyecto/js/raty/jquery.raty.js"></script>
         
@@ -78,7 +76,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				<div>
 					<div style="clear: both"></div>
 					<input id="ac-2" name="accordion-1" type="radio" />
-					<label for="ac-2">Perfil Extendido</label>
+					<label for="ac-2"><?php echo JText::_('LBL_PERFIL_EXT'); ?></label>
 					<article class="ac-medium">
 						<p>
 						<?php
@@ -89,7 +87,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<div>
 					<input id="ac-3" name="accordion-1" type="radio" />
-					<label for="ac-3">Funciograma</label>
+					<label for="ac-3"><?php echo JText::_('LBL_FUNCIOGRAMA'); ?></label>
 					<article class="ac-large">
 						<p>
 							<?php $objuserdata->generacampos(0, 'perfilx_catalogofuncion', 'idcatalogoFuncion', 'idcatalogoFuncionPadre', 'nomNombreCategoria', 'respuestaFuncion', $userid); ?>
@@ -98,7 +96,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<div>
 					<input id="ac-4" name="accordion-1" type="radio" />
-					<label for="ac-4">Producci&oacute;n</label>
+					<label for="ac-4"><?php echo JText::_('LBL_PRODUCICON'); ?></label>
 					<article class="ac-large">
 						<p>
 							<?php $objuserdata->generacampos(0, 'perfilx_catalogoproduccion', 'idcatalogoProduccion', 'idcatalogoProduccionPadre', 'nomNombreCategoria', 'respuestaProduccion', $userid); ?>
@@ -113,7 +111,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				
 				<div>
 					<input id="ac-2a" name="accordion-2" type="radio" checked />
-					<label for="ac-2a">Descripci&oacute;n</label>
+					<label for="ac-2a"><?php echo JText::_('STATEMENT_DESC'); ?></label>
 					<article class="ac-medium">
 						<p> 
 							<?php 
@@ -124,7 +122,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<div>
 					<input id="ac-3a" name="accordion-2" type="radio" />
-					<label for="ac-3a">Curr&iacute;culum</label>
+					<label for="ac-3a"><?php echo JText::_('LBL_CV'); ?></label>
 					<article class="ac-large">
 						<p>
 							<?php 
@@ -135,7 +133,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<div>
 					<input id="ac-4a" name="accordion-2" type="radio" />
-					<label for="ac-4a">Repertorio</label>
+					<label for="ac-4a"><?php echo JText::_('REPERTORIO'); ?></label>
 					<article class="ac-large">
 							<?php 
 								foreach ($proyectos as $key => $value) {
