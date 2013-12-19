@@ -57,7 +57,8 @@ if (!empty($objProductos)) {
 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 		$suma_inversion = $value->investedAmount + $suma_inversion;
 		$suma_retorno = $value->roi + $suma_retorno;
-		$suma_tri = $value->tri + $suma_tri;
+		$suma_tri2 = ($suma_retorno * 100)/ $suma_inversion;
+		$suma_tri = round($suma_tri2 , 2);
 	}
 } else {
 		$htmlInversionActual = '<tr class="middle-td">
