@@ -104,31 +104,43 @@ class plgUserFFAccount extends JPlugin
 			die('invalid userid');
 			return false; // sale si el user_id es vacio
 		}
-
+$data = date('d H:m:s').PHP_EOL.$user->email.PHP_EOL.$user->name.PHP_EOL.__FILE__.PHP_EOL.'Antes user->lastvisitDate == 0000-00-00 00:00:00 && user->activation == vacio'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		if($user->lastvisitDate == '0000-00-00 00:00:00' && $user->activation == '') {
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
-			
-			$this->savePerfilPersona($user);
-			
-			$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked"; 
-			
-			$this->saveUserMiddle(json_decode($respuesta),$user);
-			
+$data = date('d H:m:s').PHP_EOL.$user->email.PHP_EOL.$user->name.PHP_EOL.__FILE__.PHP_EOL.'Antes de guardar en middleware'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
+			if(!is_null($user->name)){
+				$this->savePerfilPersona($user);
+				$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked"; 
+				$this->saveUserMiddle(json_decode($respuesta),$user);
+			}
 		}
 	}
 	
 	function savePerfilPersona($datosUsuario){
+$data = date('d H:m:s').PHP_EOL.$datosUsuario->email.PHP_EOL.__FILE__.PHP_EOL.'Guardando en perfil Persona'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
+
 		$nombreCompleto = explode(' ', trim($datosUsuario->name));
 
 		$columnas[] 	= 'nomNombre';
 		$columnas[] 	= 'nomApellidoPaterno';
 		$columnas[] 	= 'users_id';
+		$columnas[] 	= 'foto';
 		$columnas[] 	= 'perfil_tipoContacto_idtipoContacto';
 		$columnas[] 	= 'perfil_personalidadJuridica_idpersonalidadJuridica';
 		
 		$values[] 		= '"'.$nombreCompleto[0].'"';
 		$values[]		= '"'.$nombreCompleto[1].'"';
 		$values[]		= '"'.$datosUsuario->id.'"';
+		$values[]		= '"images/fotoPerfil/default.jpg"';
 		$values[]		= '1';
 		$values[]		= '0';
 		
@@ -171,6 +183,10 @@ class plgUserFFAccount extends JPlugin
 	}
 
 	function saveUserMiddle($idMiddle, $user) {
+$data = date('d H:m:s').PHP_EOL.$idMiddle->id.PHP_EOL.__FILE__.PHP_EOL.'Guardando la relacion entre ids middleware y idJoomla'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		$values = $idMiddle->id.','.$user->id;
 		
 		$db =& JFactory::getDBO();
@@ -185,6 +201,10 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	function sendToMiddle ($email ,$name) {
+$data = date('d H:m:s').PHP_EOL.$email.PHP_EOL.__FILE__.PHP_EOL.'Enviando al Middleware'.PHP_EOL.PHP_EOL;
+$fp = fopen("textfile.txt", "a+");
+fwrite($fp, $data);
+fclose($fp);
 		$data =   array('email' => $email, 
 						'name' => $name,
 						'token' => $this->token
