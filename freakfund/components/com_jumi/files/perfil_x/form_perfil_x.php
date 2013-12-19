@@ -79,10 +79,10 @@ function generacampos ($idPadre, $tabla, $columnaId, $columnaIdPadre, $descripci
 	}
 }
 
-$document->addStyleSheet('http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css');
+$document->addStyleSheet('libraries/trama/css/jquery-ui.css');
 $document->addStyleSheet($pathJumi.'/perfil_x/minified/jquery.tree.min.css');
 
-echo '<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>';
+echo '<script src="libraries/trama/js/jquery-ui.min.js"></script>';
 echo '<script src="'.$pathJumi.'/perfil_x/minified/jquery.tree.min.js"></script>';
 ?>
 <script type="text/javascript">
