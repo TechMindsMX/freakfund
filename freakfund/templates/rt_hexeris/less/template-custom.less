@@ -217,10 +217,14 @@ left: -30px;
   background:url(http://www.wallcg.com/images/2013/02/blurry-blue-background-iv-us.jpg);
 }
 
-.gf-menu.l1 > li.active {
-border-radius: 15px;
+.gf-menu.l1 > li.active:first-child {
+border-top-left-radius: 15px;
+border-bottom-left-radius: 15px;
 }
-
+.gf-menu.l1 > li.active:last-child {
+border-top-right-radius: 15px;
+border-bottom-right-radius: 15px;
+}
 .menu-footer{
   color:#002C61;
   padding:45px !important;
