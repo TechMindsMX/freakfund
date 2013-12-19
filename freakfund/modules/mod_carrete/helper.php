@@ -50,8 +50,6 @@ class modCarreteHelper
 		foreach ($datos as $key => $value) {
 			$value->categoryName = JTrama::getCatName($value->subcategory);
 			$value->subcategoryName = JTrama::getSubCatName($value->subcategory);
-			JTrama::getTRI($value);
-			JTrama::getTRF($value);
 		}
 		
 		return $datos;

@@ -5,6 +5,12 @@
 .derecha, table td.derecha {
 	text-align: right;
 }
+
+#form_compra table th:last-of-type {
+	width: 30%;
+	min-width: 200px; 
+}
+
 /*** com_users registration ***/
 #terminos a:link, #terminos a:visited, #terminos a:hover {
 	padding: 5px 10px;

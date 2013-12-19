@@ -54,40 +54,40 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 
 <div id="wrap">
 	<div class="vertodoscarrusel module-title">
-  <h2 class="title"><a href="<?php echo $datos->viewAllUrl; ?>"><?php echo JText::_('VIEW_ALL'); ?> &gt; </h2>
+  <h2 class="title"><a href="<?php echo $datos->viewAllUrl; ?>"><?php echo JText::_('VIEW_ALL'); ?> &gt; </a></h2>
  
 </div>
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
 	if(!is_null($datos->items) && $datos->items[0] != ''){
 	  	switch ($params->get('tipodepro')) {
-			case 'apoyados':
+			case 'cerrar':
 		 		foreach ($datos->items as $key => $value) {
 					echo '<li>
-		    				<div class="contenedor productos">
-		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->projectAvatar->name.'\'); background-size: 100%;">
+		    				<div class="contenedor proyectos">
+		    					<a href="'.$url.@$value->id.'">
+		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->avatar.'\'); background-size: 100%;">
+			    					<span class="mask"></span>
 		    					</div>
-		    					<div class="info-proyecto" >
+		    					</a>
+		    					<div class="info-proyecto">
 									<div class="titulo">
-									<a href="'.$url.@$value->id.'">
-									<h2>'.@$value->name.'</h2>
-									</a>
+										<a href="'.$url.@$value->id.'">
+										<h2>'.@$value->name.'</h2>
+										</a>
 									</div>
 									<div class="cat">
-									<span>'.@$value->categoryName.'</span> - 
-									<span>'.@$value->subcategoryName.'</span>
+										<span>'.@$value->categoryName.'</span> - 
+										<span>'.@$value->subcategoryName.'</span>
 									</div>
-									<div class="datos">
-									<div class="two-cols first">
-									<div class="big">'.@$value->TRF.'%</div>
-									<div class="small">'.JText::_('LABEL_ROF').'</div>
+									<div class="fondo_barra"><span class="barra" style="width: '.@$value->balancePorcentaje.'%;"></span></div>
+									<div class="cat texto-proyectos recaudado">'.JText::_('LABEL_RECAUDADO').
+									' $<span class="number">'.@$value->balance.'</span>
 									</div>
-									<div class="two-cols second">
-									<div class="big">'.@$value->TRI.'%</div>
-									<div class="small">'.JText::_('LABEL_ROI').'</div>
+									<div class="cat texto-proyectos">'.JText::_('PUNTO_EQUILIBRIO_ABR').
+									' $<span class="number">'.@$value->breakeven.'</span>
 									</div>
-									<div class="clearfix"></div>
-									</div>
+									<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
 									<div class="boton-wrap">
 										<a class="button btn-invertir" href="'.$url.@$value->id.'">
 											'.JText::_('INVERTIR_PROYECTO').'</a>
@@ -97,33 +97,35 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 		    			</li>';
 				}
 				break;
-				
-			case 'cerrar':
+			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
-		 			$value->porcentajeRecaudado = 30;
 					echo '<li>
-		    				<div class="contenedor proyectos">
-		    					<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->avatar.'\'); background-size: 100%;">
-			    					<span class="mask"></span>
-		    					</div>
-		    					<div class="info-proyecto">
+		    				<div class="contenedor productos">
+								<a href="'.$url.@$value->id.'">
+		    						<div class="avatar" style="background:url(\''.AVATAR.'/'.@$value->avatar.'\'); background-size: 100%;">
+		    						</div>
+		    					</a>
+		    					<div class="info-proyecto" >
 									<div class="titulo">
-									<a href="'.$url.@$value->id.'">
-									<h2>'.@$value->name.'</h2>
-									</a>
+										<a href="'.$url.@$value->id.'">
+										<h2>'.@$value->name.'</h2>
+										</a>
 									</div>
 									<div class="cat">
-									<span>'.@$value->categoryName.'</span> - 
-									<span>'.@$value->subcategoryName.'</span>
+										<span>'.@$value->categoryName.'</span> - 
+										<span>'.@$value->subcategoryName.'</span>
 									</div>
-									<div class="fondo_barra"><span class="barra" style="width: '.@$value->porcentajeRecaudado.'%;"></span></div>
-									<div class="cat texto-proyectos recaudado">'.JText::_('LABEL_RECAUDADO').
-									' $<span class="number">'.@$value->balance.'</span>
+									<div class="datos">
+										<div class="two-cols first">
+										<div class="big">'.@$value->tri.'%</div>
+										<div class="small">'.JText::_('LABEL_ROF').'</div>
+										</div>
+										<div class="two-cols second">
+										<div class="big">'.@$value->trf.'%</div>
+										<div class="small">'.JText::_('LABEL_ROI').'</div>
+										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="cat texto-proyectos">'.JText::_('PUNTO_EQUILIBRIO_ABR').
-									' $<span class="number">'.@$value->breakeven.'</span>
-									</div>
-									<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
 									<div class="boton-wrap">
 										<a class="button btn-invertir" href="'.$url.@$value->id.'">
 											'.JText::_('INVERTIR_PROYECTO').'</a>
