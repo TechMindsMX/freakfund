@@ -41,55 +41,59 @@ $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
-if ($objProyectos != '') {
+
+if (!empty($objProyectos)) {
 	foreach($objProyectos as $key => $value){
-		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
+		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
 		$suma_fund = $value->fundedAmount + $suma_fund;
 	}
+} else {
+		$htmlFinanActual = '<tr class="middle-td">
+							<td colspan="5" align="center">'.JText::_('SIN_FINAN').'</td>
+							</tr>';
 }
-if ($objProductos != '') {
+if (!empty($objProductos)) {
 	foreach($objProductos as $key => $value){
-		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);
+		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 		$suma_inversion = $value->investedAmount + $suma_inversion;
 		$suma_retorno = $value->roi + $suma_retorno;
 		$suma_tri = $value->tri + $suma_tri;
 	}
+} else {
+		$htmlInversionActual = '<tr class="middle-td">
+								<td colspan="6" align="center">'.JText::_('SIN_INVER').'</td>
+								</tr>';
 }
 
 function moreProData($value, $datosgenerales) {
-	
 	
 	if ($value->type != 'REPERTORY' && $value->status != 4) {
 		
 		JTrama::getEditUrl($value);
 		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';
 		$value->roi = $value->investedAmount * ($value->tri / 100);
-		if ( $value->status  == 5 || $value->status == 6 ) {
+		
+		if ( !is_null($value->fundedAmount) ) {
 			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->fundedAmount;
-		} elseif ( $value->status == 7 ) {
+		} elseif ( !is_null($value->investedAmount) ) {
 			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investedAmount;
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 		}
 	}
-	$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 	$datosgenerales->portfolioValue = @$datosgenerales->actualFundings + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
 	
 }
 function htmlInversionActual($value, $datosgenerales) {
+	
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);
 		$htmlInversionActual = '<tr class="middle-td">
-								<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-								<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-								<td>' . $value->fundEndDate . '</td>
-								<td>$<span class="number">' . $value->breakeven . '</span></td>
-								<td>' . $value->porcentajeRecaudado . ' %</td>
-								<td>$<span class="number">' . $value->fundedAmount . '</span></td>
-									</tr>';
-	} else {
-		$htmlInversionActual = '<tr class="middle-td">
-								<td colspan="6" align="center">Sin Inversiones</td>
-								</tr>';
+							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+							<td class="middle-td">$<span class="number">' . $value->investedAmount . '</span></td>
+							<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
+							<td class="middle-td">' . $value->tri . ' %</td>
+							</tr>';
 	}
 	return $htmlInversionActual;
 }
@@ -99,18 +103,15 @@ function htmlFinanActual($value, $datosgenerales){
 		moreProData($value, $datosgenerales);
 
 		$htmlFinanActual = '<tr class="middle-td">
-							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td class="middle-td">$<span class="number">' . $value->investedAmount . '</span></td>
-							<td class="middle-td">$<span class="number">' . $value->roi . '</span></td>
-							<td class="middle-td">' . $value->tri . ' %</td>
-							</tr>';
+								<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
+								<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
+								<td>' . $value->fundEndDate . '</td>
+								<td>$<span class="number">' . $value->breakeven . '</span></td>
+								<td>' . $value->porcentajeRecaudado . ' %</td>
+								<td>$<span class="number">' . $value->fundedAmount . '</span></td>
+									</tr>';
 		
-	} else {
-		$htmlFinanActual = '<tr class="middle-td">
-							<td colspan="5" align="center">Sin Financiamientos</td>
-							</tr>';
-	}
+	} 
 	return $htmlFinanActual;
 }
 ?>
@@ -191,7 +192,7 @@ function htmlFinanActual($value, $datosgenerales){
 							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_TRI'); ?></th>
 						</tr>
 						<?php
-							echo $htmlFinanActual;
+							echo $htmlInversionActual;
 						?>	
 						<tr>
 							<td class="th-center-cartera" colspan="2"><?php echo JText::_('TOTAL'); ?></th>
@@ -217,7 +218,7 @@ function htmlFinanActual($value, $datosgenerales){
 							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
 						</tr>
 						<?php
-							echo $htmlInversionActual;
+							echo $htmlFinanActual;
 						?>	
 						<tr>
 							<td style= "text-align:right" colspan="5"><?php echo JText::_('TOTAL'); ?></th>
