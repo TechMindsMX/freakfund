@@ -13,6 +13,9 @@
 	}
 }
 
+.derecha, table td.derecha {
+	padding-right: 20px;
+}
 .cartera {
 	text-align: center;
 	width: 100%;
@@ -34,11 +37,6 @@
 	margin-top: 40px;
 }
 .bordesH3 {
-	border-top: 2px solid #009999;
-	border-right: 2px solid #009999;
-	margin-left: -3px;
-}
-.bordesH3-centradas {
 	border-top: 2px solid #009999;
 	border-right: 2px solid #009999;
 	margin-left: -3px;
@@ -89,22 +87,22 @@
 .table-cartera {
 	border-radius: 50%;
 }
-.middle-td td {
-	vertical-align: middle !important;
-	text-align: center !important;
+tr.middle-td td {
+	vertical-align: middle;
+	text-align: center;
 }
-.middle-td .td-img {
+tr.middle-td .td-img {
 	padding-right: 0;
-    text-align: left !important;
+    text-align: left;
     width: 90px;
 }
-.middle-td .td-titulo {
-	text-align: left !important;
+tr.middle-td .td-titulo {
+	text-align: left;
 	text-transform: uppercase;
 }
-.th-center-cartera {
-	text-align: center !important;
-	color: #2C9AD9 !important;
+table th.th-center-cartera, table td.th-center-cartera {
+	text-align: center;
+	color: #2C9AD9;
 	font-weight: bold;
 }
 #rt-mainbody table {
@@ -113,30 +111,27 @@
 .upercase {
 	text-transform: uppercase;
 }
-.table-bordered th, .table-bordered td, .table th, .table td, .table-bordered, .list-striped li, .list-striped dd, .row-striped .row, .row-striped .row-fluid{
-	border: 1px solid #009999 !important;
+.table-bordered th, .table-bordered td, table.cartera th, table.cartera td, .table-bordered, .list-striped li, .list-striped dd, .row-striped .row, .row-striped .row-fluid{
+	border: 1px solid #009999;
 }
-.table th:first-child {
-	border-left: none !important;
+table.cartera th:first-child {
+	border-left: none;
 }
-.table th{
-	border-top: none !important;
+table.cartera th{
+	border-top: none;
 }
 .table th:last-child {
-	border-right: none !important
+	border-right: none;
 }
-.table td:first-child {
-	border-left: none !important;
-	border-right: none !important;
-	border-bottom: none !important;
-	border-top: none !important;
+table.cartera td:first-child {
+	border: none;
 }
-.table td{
-	border-left: none !important;
-	border-bottom: none !important;
-	border-top: none !important;
-	color: #002C61 !important;
-	font-weight: bolder !important;
+table.cartera td{
+	border-left: none;
+	border-bottom: none;
+	border-top: none;
+	color: #002C61;
+	font-weight: bolder;
 }
 .table td:last-child {
 	border: none !important;
