@@ -22,7 +22,7 @@ $doc -> addStyleSheet('modules/mod_busqueda_tags/css/modulos_busqueda_modal.css'
 			limit : 5,
 			limitBy : 'words',
 			remText : '',
-			limitText : '<?php echo JText::_('MOD_BUSQUEDA_TAGS_CAMPO_LIMITADO'); ?> %n <?php echo JText::_('MOD_BUSQUEDA_TAGS_PALABRA'); ?>.'
+			limitText : '<?php echo JText::_('MOD_BUSQUEDA_TAGS_CAMPO_LIMITADO'); ?> %n <?php echo JText::_('MOD_BUSQUEDA_TAGS_PALABRAS'); ?>.'
 		});
 
 	
