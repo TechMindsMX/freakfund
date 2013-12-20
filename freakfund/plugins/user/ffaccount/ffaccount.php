@@ -50,9 +50,11 @@ class plgUserFFAccount extends JPlugin
 		$usuario = JFactory::getUser($instance->id);
 		if ($usuario->get('isRoot')) {  // Chequeo para Super User en tablas de middle y users_middleware
 			$chkJoomRel = self::checkJoomlaRelations($usuario);
-				if (is_null($chkJoomRel)) $this->savePerfilPersona($user);
-			$checkMiddle = self::checkMiddle($chkJoomRel->idMiddleware,$usuario);
-				if (is_null($checkMiddle)) $this->sendToMiddle($user->email,$user->name);
+				if (is_null($chkJoomRel)) {
+					$respMiddle = $this->sendToMiddle($user->email,$user->name);
+					$respMiddle = json_decode($respMiddle);
+					$this->saveUserMiddle($respMiddle, $usuario);
+				}
 		}
 
 		$db = JFactory::getDBO();
@@ -104,16 +106,8 @@ class plgUserFFAccount extends JPlugin
 			die('invalid userid');
 			return false; // sale si el user_id es vacio
 		}
-$data = date('d H:m:s').PHP_EOL.$user->email.PHP_EOL.$user->name.PHP_EOL.__FILE__.PHP_EOL.'Antes user->lastvisitDate == 0000-00-00 00:00:00 && user->activation == vacio'.PHP_EOL.PHP_EOL;
-$fp = fopen("textfile.txt", "a+");
-fwrite($fp, $data);
-fclose($fp);
 		if($user->lastvisitDate == '0000-00-00 00:00:00' && $user->activation == '') {
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
-$data = date('d H:m:s').PHP_EOL.$user->email.PHP_EOL.$user->name.PHP_EOL.__FILE__.PHP_EOL.'Antes de guardar en middleware'.PHP_EOL.PHP_EOL;
-$fp = fopen("textfile.txt", "a+");
-fwrite($fp, $data);
-fclose($fp);
 			if(!is_null($user->name)){
 				$this->savePerfilPersona($user);
 				$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked"; 
@@ -123,10 +117,6 @@ fclose($fp);
 	}
 	
 	function savePerfilPersona($datosUsuario){
-$data = date('d H:m:s').PHP_EOL.$datosUsuario->email.PHP_EOL.__FILE__.PHP_EOL.'Guardando en perfil Persona'.PHP_EOL.PHP_EOL;
-$fp = fopen("textfile.txt", "a+");
-fwrite($fp, $data);
-fclose($fp);
 
 		$nombreCompleto = explode(' ', trim($datosUsuario->name));
 
@@ -177,16 +167,10 @@ fclose($fp);
 		$json = @file_get_contents($url);
 		$respuesta = json_decode($json);
 		
-		if (is_null($respuesta)){
-			$this->sendToMiddle($usuario->email,$usuario->name);
-		}
+		return $respuesta;
 	}
 
 	function saveUserMiddle($idMiddle, $user) {
-$data = date('d H:m:s').PHP_EOL.$idMiddle->id.PHP_EOL.__FILE__.PHP_EOL.'Guardando la relacion entre ids middleware y idJoomla'.PHP_EOL.PHP_EOL;
-$fp = fopen("textfile.txt", "a+");
-fwrite($fp, $data);
-fclose($fp);
 		$values = $idMiddle->id.','.$user->id;
 		
 		$db =& JFactory::getDBO();
@@ -201,10 +185,6 @@ fclose($fp);
 	}
 	
 	function sendToMiddle ($email ,$name) {
-$data = date('d H:m:s').PHP_EOL.$email.PHP_EOL.__FILE__.PHP_EOL.'Enviando al Middleware'.PHP_EOL.PHP_EOL;
-$fp = fopen("textfile.txt", "a+");
-fwrite($fp, $data);
-fclose($fp);
 		$data =   array('email' => $email, 
 						'name' => $name,
 						'token' => $this->token
