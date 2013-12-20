@@ -55,13 +55,11 @@ function prodProy ($tipo, $params) {
 }
 
 $json 		= json_decode(prodProy($busquedaPor[$tipoPP], $params));
-$statusName = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 
 foreach ($json as $key => $value) {
 	$value->nomCat 		= JTrama::getSubCatName($value->subcategory);
 	$value->nomCatPadre = JTrama::getCatName($value->subcategory);
 	$value->producer 	= JTrama::getProducerProfile(UserData::getUserJoomlaId($value->userId));
-	$value->statusName 	= JTrama::getStatusName($value->status);
 	
 	$string = strip_tags($value->description);
 	$value->description = (strlen($string) > 113 ? substr($string,0,110).'...' : $string);

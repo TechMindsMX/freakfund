@@ -15,7 +15,7 @@ class modCarreteHelper
     }
     
     public static function profitables( $cantidad, $tipoDePro ) {
-		$obj->validStatus = isset($obj->validStatus) ? $obj->validStatus : array(6,7,8,10,11);
+		$obj->validStatus = isset($obj->validStatus) ? $obj->validStatus : array(6,7,8,10);
 		$obj->viewAllUrl = 'index.php?option=com_jumi&view=application&fileid=8&status='.implode(",",$obj->validStatus).'&categoria=all';
 		$result = JTrama::getMostProfitables();
 		

@@ -50,7 +50,7 @@ JHtml::_('behavior.tooltip');
 						</span>
 					</td>
 					<td>
-						<?php echo $item->statusName; ?>
+						<?php echo JHTML::tooltip($item->statusName->tooltipText,$item->statusName->tooltipTitle,'',$item->statusName->fullName); ?>
 					</td>
 					<td>
 						<a href="<?php echo $linkCodes. $item->id; ?>"><?php echo JText::_('ADD_REDEMP_CODES'); ?></a>

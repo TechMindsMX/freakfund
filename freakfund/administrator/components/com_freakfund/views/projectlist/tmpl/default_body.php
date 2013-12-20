@@ -9,6 +9,7 @@ if( isset($this->items[0]->type) ) {
 	foreach($this->items as $i => $item):
 		if ( $item->type != 'REPERTORY' ) {
 			$statusNoModificables = array(4,5,8);
+			$statusName = JTrama::getStatusName($item->status);
 			$item->htmlChange = !in_array($item->status,$statusNoModificables) ? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$item->id.'" />Modificar</a>':'';
 	?>
 	        <tr class="row<?php echo $i % 2; ?>" id="<?php echo $item->status; ?>">
@@ -31,7 +32,7 @@ if( isset($this->items[0]->type) ) {
 		        	<?php echo $item->percentage; ?>
 		        </td>
 		        <td>
-		        	<?php echo JTrama::getStatusName($item->status); ?>
+		        	<?php echo JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName); ?>
 		        </td>
 		        <td align="absmiddle" style="background-color: <?php echo $item->semaphore; ?>; font-weight:bolder; color:BLACK;">
 		        	<?php echo $item->status; ?>

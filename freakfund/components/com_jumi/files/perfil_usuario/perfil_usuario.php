@@ -164,9 +164,9 @@ $promedio = $objuserdata->scoreUser($userid);
 												if($value->status == 0 || $value->status == 2) {
 													echo '<span><a class="button editar" href="'.$value->editUrl.'">'.JText::_('LBL_EDIT').'</a></span>';
 												}
-												echo 'Status <span class="statusproyecto">'.JTrama::getStatusName($value->status).'</span> ';
+												echo JText::_('LABEL_STATUS').' <span class="statusproyecto">'.JTrama::getStatusName($value->status)->fullName.'</span> ';
 												if ( !empty($value->logs) ) {
-													echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">Comentarios</a>';
+													echo '<a data-rokbox href="#" data-rokbox-element="#divContent'.$count.'">'.JText::_('JCOMENTARIO').'s</a>';
 												}
 											}
 										echo ' Creado <span class="fechacreacion">'.date('d/M/Y',$fecha).'</span>';
@@ -180,7 +180,7 @@ $promedio = $objuserdata->scoreUser($userid);
 										echo '<div style="margin-bottom: 10px;">'.
 											 '<li>'.
 											 '<div><strong>'.JText::_('LABEL_MODIFIED').'</strong>: '.date('d/M/Y', $fechacreacion).'</div>'.
-											 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status).'</div>'.
+											 '<div><strong>'.JText::_('LABEL_STATUS').'</strong>: '.JTrama::getStatusName($valor->status)->fullName.'</div>'.
 											 '<div align="justify"><strong>'.JText::_('JCOMENTARIO').'</strong>: '.$valor->comment.'</div>'.
 											 '</li>'.
 											 '</div>';

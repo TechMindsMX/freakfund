@@ -129,7 +129,7 @@ switch($datos->status){
 	default:
 		$errors = JFactory::getApplication();
 	    $errors->redirect('index.php?option=com_freakfund&task=projectlist', 
-	    				   $msg = JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG').JTrama::getStatusName($datos->status),
+	    				   $msg = JText::_('COM_FREAKFUND_STATUSPRO_ERRORS_MSG').JTrama::getStatusName($datos->status)->fullName,
 	    				   $msgType='error');
 		break;
 }

@@ -84,18 +84,20 @@ class JTrama
 		return $html;
 	}
 	
-	public static function getStatusName ($string) {
+	public static function getStatusName ($id) {
 		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
-		if(isset($allNames)) {
+		if (!empty($allNames)) {
 			foreach ($allNames as $llave => $valor) {
-				if ($valor->id == $string) {
-					$statusName = $valor->name;
+				if ( $valor->id == $id ) {
+					$valor->fullName 		= JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
+					$valor->tooltipTitle 	= JText::_('TIP_'.strtoupper($valor->name).'_TITLE');
+					$valor->tooltipText 	= JText::_('TIP_'.strtoupper($valor->name).'_TEXT');
+				break;
 				}
 			}
 		}
-
-		return $statusName;
+		return $valor;
 	}
 	
 	public static function getStatus(){
@@ -258,8 +260,8 @@ class JTrama
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
-		$value->tri = (is_null($value->tri)) ? 0 : round($value->tri, 2);
-		$value->trf = (is_null($value->trf)) ? 0 : round($value->trf, 2);
+		$value->tri = (is_null($value->tri)) ? 0 : round(($value->tri * 100), 2);
+		$value->trf = (is_null($value->trf)) ? 0 : round(($value->trf * 100), 2);
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
@@ -332,16 +334,6 @@ class JTrama
 		return $data;
 	}
 	
-	public static function getTRI($data)
-	{
-		$data->ROI = 20;
-	}
-
-	public static function getTRF($data)
-	{
-		$data->ROF = 40;
-	}
-	
 	public static function getProyByStatus($params='')
 	{
 		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
@@ -349,7 +341,6 @@ class JTrama
 		foreach ($data as $key => $value) {
 			JTrama::formatDatosProy($value);	
 		}
-		
 		
 		return $data;
 	}
