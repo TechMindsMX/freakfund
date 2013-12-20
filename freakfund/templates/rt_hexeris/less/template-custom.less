@@ -64,7 +64,7 @@ div.dropdown .item, input {
     float: left;
     margin: 0 2px 2px 0;
     background: #b3b3b3;
-    height: 28px;
+    height: 26px;
     padding: 7px 9px 0px 13px;
     text-shadow: none;
     text-transform: capitalize;
@@ -80,14 +80,40 @@ div.dropdown .item, input {
     }
   }
 }
-.barra-top {
+.barra-top2 {
+  float:left;
+  margin: 0;
+  width:100%;
+  font-weight: bold;
+  color:black;
+  > div, > span, > li {
+    float: left;
+    margin: 0 2px 2px 0;
+    background: #b3b3b3;
+    height: 26px;
+    padding: 7px 9px 0px 13px;
+    text-shadow: none;
+    text-transform: capitalize;
+    a {
+      color: @link-color;
+        &:hover {
+           color: @link-color;
+        }
+        &:before {
+          content: "" !important;
+          margin: 0 !important;
+        }
+    }
+  }
+}
+.barra-top2 {
  
   > div, > span:first-child, > li:first-of-type {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
 }
-.barra-top {
+.barra-top2 {
 
   > div, > span:last-child, > li:last-of-type {
     border-top-right-radius: 15px;
