@@ -3,7 +3,6 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
 $document = JFactory::getDocument();
-$document->addScript('../libraries/trama/js/jquery.number.min.js'); 
 
 if( isset($this->items[0]->type) ) {
 	foreach($this->items as $i => $item):
@@ -22,14 +21,14 @@ if( isset($this->items[0]->type) ) {
 		        <td>
 		        	<?php echo $item->FechaApintar; ?>
 		        </td>
-		        <td>
-		        	$<span class="number"><?php echo $item->balance; ?></span>
+		        <td style="text-align: right;">
+		        	$ <span class="number"><?php echo $item->balance; ?></span>
 		        </td>
-		        <td>
-		        	$<span class="number"><?php echo $item->breakeven; ?></span>
+		        <td style="text-align: right;">
+		        	$ <span class="number"><?php echo $item->breakeven; ?></span>
 		        </td>
-		        <td>
-		        	<?php echo $item->percentage; ?>
+		        <td style="text-align: right;">
+		        	<?php echo $item->percentage; ?> %
 		        </td>
 		        <td>
 		        	<?php echo JHTML::tooltip($statusName->tooltipText,$statusName->tooltipTitle,'',$statusName->fullName); ?>

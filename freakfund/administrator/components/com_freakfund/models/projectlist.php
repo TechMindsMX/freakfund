@@ -96,7 +96,7 @@ class projectListModelprojectList extends JModelList
 		}
 		
 		foreach ($nuevo as $key => $value) {
-			$value->percentage 	= ($value->balance*100)/$value->breakeven;
+			$value->percentage 	= round((($value->balance*100)/$value->breakeven),2);
 			$value->producerName = JFactory::getUser(UserData::getUserJoomlaId($value->userId))->name;
 
 			switch ($value->status) {

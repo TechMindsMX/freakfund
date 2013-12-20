@@ -21,9 +21,10 @@ JSubMenuHelper::addEntry(
 	$vName == 'listproduct');
 ?>
 <script language="JavaScript">
-	jQuery('span.number').number(true,2);
-	
 	jQuery(document).ready(function() {
+
+	jQuery('span.number').number(true,2);
+
 		jQuery('#statusFilter').change(function(){
 			var valor = this.value;
 			if(valor == 'all') {
