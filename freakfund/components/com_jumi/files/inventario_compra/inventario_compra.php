@@ -101,7 +101,7 @@ if($confirm == 0){
 			if ( jQuery(this).val()>limite){
 				jQuery(this).val(0);
 				jQuery(this).next().children().text(0);
-				alert('Cantidad superior a inventario');
+				alert('<?php echo JText::_("CANT_MAYOR_INVENTARIO"); ?>');
 	
 				sumaarrecha();
 				

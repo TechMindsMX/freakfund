@@ -33,7 +33,6 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			    	alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_ALREADY_SAVED"); ?>');
 			    	salir = true;
 			    }
-			    
 			});
 			
 			if( salir ){
@@ -63,10 +62,10 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 						jQuery('#email').val(obj.email);
 						jQuery('#destinationId').val(obj.id);
 					} else {
-						alert('mal');
+						alert('<?php echo JText::_("LBL_MAL"); ?>');
 					}
 				}else{
-					alert('No existe el numero de cuenta');
+					alert('<?php echo JText::_("LBL_NO_EXISTE_CUENTA"); ?>');
 					jQuery('#socio').val('');
 					jQuery('#email').val('');
 					jQuery('#clabe').val('');
