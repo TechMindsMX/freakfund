@@ -295,8 +295,9 @@ if($confirm == 0){
 		</table>
 		<?php
 		 $recaudado = $pro->balance + $total;
+		 $status = array(6,7,8,10,11);
 
-		 if($recaudado > $pro->breakeven){
+		 if($recaudado > $pro->breakeven && !in_array($pro->status, $status)){
 		 	$app->enqueueMessage(JText::_('COMPRA_FINAN_E_INVERSION'), 'notice');
 		 }
 		 
