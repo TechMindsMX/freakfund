@@ -9,6 +9,8 @@ $callback		= JURI::base().'index.php?option=com_freakfund&task=projectlist';
 $errorCallback	= JURI::base().'index.php?option=com_freakfund&task=errors&error=projectlist';
 $datos 			= $this->items;
 $datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware;
+
+var_dump($datos->idMod);
 ?>
 	<tr>
 		<td align="absmiddle">
@@ -22,12 +24,12 @@ $datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware;
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_STATUSPRO_FINANTIALCASH').': $'.$datos->finantialCash; ?>
+			<?php echo JText::_('COM_FREAKFUND_STATUSPRO_FINANTIALCASH').': $<span class="number">'.$datos->balance; ?></span>
 		</td>
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_PERCENTAGE').': '.$datos->percentage; ?>
+			<?php echo JText::_('COM_FREAKFUND_PROJECTLIST_HEADING_PERCENTAGE').': <span class="number">'.$datos->percentage; ?></span>%
 		</td>
 	</tr>
 	

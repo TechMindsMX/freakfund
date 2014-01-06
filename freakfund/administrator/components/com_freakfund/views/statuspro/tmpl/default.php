@@ -9,6 +9,7 @@ JHtml::_('behavior.tooltip');
 $token 		= JTrama::token();
 $document 	= JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
+$document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 $datos 		= $this->items;
 $selectBaja = $datos->motivosBaja;
 
@@ -136,6 +137,8 @@ switch($datos->status){
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
+		jQuery('span.number').number(true,2);
+		
 		<?php
 			echo $datos->jquery;
 		?>

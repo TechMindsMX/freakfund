@@ -13,8 +13,7 @@ class statusproModelstatuspro extends JModelList
 		$temporal = $temporal->get('proyid');
 		
 		$query = JTrama::getDatos( $temporal );
-		$query->finantialCash = 20000;
-		$query->percentage = '20%';
+		$query->percentage 	= round((($query->balance*100)/$query->breakeven),2);
 		
 		switch ($query->status) {
 			case '5':
