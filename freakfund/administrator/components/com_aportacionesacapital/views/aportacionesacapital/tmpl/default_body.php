@@ -19,15 +19,6 @@ foreach ($this->items as $key => $value) {
 		<?php echo $value->producerName; ?>
 	</td>
 	<td align="absmiddle">
-		$<span class="number"><?php echo $value->breakeven; ?></span>
-	</td>
-	<td align="absmiddle">
-		$<span class="number"><?php echo $value->toBreakeven; ?></span>
-	</td>
-	<td align="absmiddle">
-		<span><?php echo $value->toBreakevenPercentage; ?> %</span>
-	</td>
-	<td align="absmiddle">
 		<span><?php echo $value->fundEndDate; ?></span>
 	</td>
 </tr>
