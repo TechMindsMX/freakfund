@@ -165,12 +165,18 @@ if($confirm == 0){
 					<input type="hidden" name="projectId" id="projectId" value="'. $pro->id .'" />';
 		
 			foreach ($pro->projectUnitSales as $key => $value){
-		
+				$value ->unit = 50;
+				$casiAgotado='';
+				
+				if($value ->unit <= 50){
+					$casiAgotado = '<span class="font-red">   '.JText::_('CANT_UNIDADES').  $value ->unit  .JText::_('CANT_UNIDADES_RESTANTES').'</span>';
+				}
+				
 				$html .= '
 						<tr class="wrapper">
-						<td>'. $value ->section .'</td>
+						<td>'. $value ->section .'&nbsp;'.  $casiAgotado.'</td>
 						<td style="text-align: right;"> $<span class="number valor_unidad">'. $value ->unitSale.'</span></td>
-						<td style="text-align: right;"><input id="" type="hidden" value="'.$value ->unit.'"/>
+						<td style="text-align: right;"><input id="" type="hidden"  value="'.$value ->unit.'"/>
 						<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
 						<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" /></td>
 						<td style="text-align: right; width: 315px;"><div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div></td>

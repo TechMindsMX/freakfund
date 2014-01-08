@@ -97,6 +97,10 @@ div.compacto {
 	line-height: 35px;
 	margin-top: 20px;
 }
+
+.font-red{
+	color: red;
+}
 @media screen and (max-width: 1024px)  {
 	  .videoHead{
 	  	height: 458px;
