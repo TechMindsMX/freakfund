@@ -95,7 +95,7 @@ if($confirm == 0){
 				jQuery('#guardar').prop('disabled', true);
 			}
 		}
-		jQuery(':input').change(function(){		
+		jQuery(':input').keyup(function(){		
 			var limite = parseInt(jQuery(this).prev().prev().val());
 
 			if ( jQuery(this).val()>limite){
@@ -163,36 +163,47 @@ if($confirm == 0){
 			
 			$html = '<input type="hidden" name="userId" id="userId" value="'. $idMiddleware->idMiddleware .'" />
 					<input type="hidden" name="projectId" id="projectId" value="'. $pro->id .'" />';
-		
+			
+			$agotado = 0;
+			
 			foreach ($pro->projectUnitSales as $key => $value){
-				$value ->unit = 50;
+			
 				$casiAgotado='';
+				$campoCantidad= '<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />';
+				$agotado = $value ->unit + $agotado;
 				
-				if($value ->unit <= 50){
+				if($value ->unit <= 50 && $value ->unit > 0){
 					$casiAgotado = '<span class="font-red">   '.JText::_('CANT_UNIDADES').  $value ->unit  .JText::_('CANT_UNIDADES_RESTANTES').'</span>';
+				}elseif ($value ->unit == 0){
+					$casiAgotado = '<span class="font-red">   '.JText::_('CANT_AGOTADO').'</span>';
+					$campoCantidad= '<input readonly style="background-color : #d1d1d1;" class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />';
 				}
 				
 				$html .= '
 						<tr class="wrapper">
 						<td>'. $value ->section .'&nbsp;'.  $casiAgotado.'</td>
 						<td style="text-align: right;"> $<span class="number valor_unidad">'. $value ->unitSale.'</span></td>
-						<td style="text-align: right;"><input id="" type="hidden"  value="'.$value ->unit.'"/>
-						<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>
-						<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" /></td>
+						<td style="text-align: right;"><input id=""  type="hidden" value="'.$value ->unit.'"/>
+						<input id="precio" type="hidden" value="'.$value ->unitSale.'"/>'.
+						$campoCantidad.'</td>
 						<td style="text-align: right; width: 315px;"><div>'.JText::_('TOTAL_SECCION').':$ '.'<span class="number" id="resultados"></span></div></td>
 						</tr>';
+			}
+			if($agotado == 0){
+				$botonEnviar= '<input type="button" disabled="disabled" class="button" value="'.JText::_('CANT_AGOTADO').'"  />';
+			}else{
+				$botonEnviar= '<input type="button" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />';
 			}
 			$html .= '<tr><td style="text-align: right;" colspan="3"><div><strong>'.JText::_('TOTAL_PAGAR').'</strong></td><td style="text-align: right;">$<strong><span class="number" id="resultadoglobal"></span><strong></div></td></tr></table>';
 			$html .= '<input type="hidden" name="callback" value="'. $callback .'" />
 					<input type="hidden" name="token" value="'. $token .'" />
 					<div style="margin: 10px;">
 						<input type="button" class="button" value="'.JText::_('LBL_CANCELAR').'" onclick="history.go(-1);" />
-						<input type="button" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />
+						'.$botonEnviar.'
 						
 					</div>';
 	
 				echo $html;
-				
 				
 			?>
 			
