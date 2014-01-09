@@ -169,14 +169,14 @@ if($confirm == 0){
 			foreach ($pro->projectUnitSales as $key => $value){
 			
 				$casiAgotado='';
-				$campoCantidad= '<input class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />';
+				$campoCantidad= '<input class="input_compra validate[custom[onlyNumberSp]]" type="text" id="'.$value->id.'" name="" />';
 				$agotado = $value ->unit + $agotado;
 				
 				if($value ->unit <= 50 && $value ->unit > 0){
 					$casiAgotado = '<span class="font-red">   '.JText::_('CANT_UNIDADES').  $value ->unit  .JText::_('CANT_UNIDADES_RESTANTES').'</span>';
 				}elseif ($value ->unit == 0){
 					$casiAgotado = '<span class="font-red">   '.JText::_('CANT_AGOTADO').'</span>';
-					$campoCantidad= '<input readonly style="background-color : #d1d1d1;" class="input_compra validate[custom[onlyNumberSp]]" type="number" id="'.$value->id.'" name="" />';
+					$campoCantidad= '<input readonly style="background-color : #d1d1d1;" class="input_compra validate[custom[onlyNumberSp]]" type="text" id="'.$value->id.'" name="" />';
 				}
 				
 				$html .= '
