@@ -397,6 +397,12 @@ class JTrama
 		;
 	}
 	
+	public static function getDetailTransactions($bulkId) {
+		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getBulkTransactions/'.$bulkId));
+		return $transactionsList;
+		;
+	}
+	
 	public static function getInvestmentDetail($transactionId) {
 		$transactionsDetail = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/get/transaction/'.$transactionId));
 		return $transactionsDetail;

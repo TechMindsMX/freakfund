@@ -204,3 +204,13 @@ input#cantidad {
 	margin-top:0;
 }
 /*** fin modulo roksprocket home ******/
+
+
+.hidedetail{
+	margin-left: 10px;
+	margin-top: -5px;
+}
+.showdetail{
+	margin-left: 10px;
+	margin-top: -5px;
+}
