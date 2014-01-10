@@ -14,12 +14,11 @@ jimport('trama.class');
 jimport('trama.usuario_class');
 require_once 'libraries/trama/libreriasPP.php';
 
-var_dump(time());exit;
 $year 					= date('Y');
 $month 					= date('m');
 $query_date 			= $year.'-'.$month;
-$fechaInicial 			= $app->input->get('fechaInicial', date('01-m-Y', strtotime($query_date)), 'string'); // Primer dia del mes
-$fechaFinal 			= $app->input->get('fechaFinal', date('d-m-Y'), 'string' ); // Ultimo dia del mes
+$fechaInicial 			= $app->input->get('fechaInicial', date('01-m-Y', strtotime($query_date)), 'string'); 	// Primer dia del mes
+$fechaFinal 			= $app->input->get('fechaFinal', date('d-m-Y'), 'string' ); 							// Ultimo dia del mes
 $token 					= JTrama::token();
 $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
@@ -33,8 +32,8 @@ $deposito				= '';
 $periodo				= '';
 $saldoFinalPeriodo		= '0';
 $arreglodefechas		= array();
-
 $mes_actual 			= explode("-",$fechaInicial);
+$validacionSelect 		= $year==$mes_actual[2]?$month:13;
 
 if(!isset($datosUsuarioJoomla)){
 	$datosUsuarioJoomla->nomCalle = "";
@@ -48,7 +47,8 @@ if(!isset($datosUsuarioJoomla)){
 
 for($i=1; $i<=12; $i++){
 	$fechas = new stdClass;
-	$queryDate 			= $year.'-'.$i;
+	$year1 = $year==$mes_actual[2]?$year:$mes_actual[2];
+	$queryDate 			= $year1.'-'.$i;
 	$fechas->fechaini	= date('01-m-Y', strtotime($queryDate)); // Primer dia del mes
 	$fechas->fechafin	= date('t-m-Y', strtotime($queryDate)); // Ultimo dia del mes
 	
@@ -98,8 +98,8 @@ if(!is_null($projectList) && !empty($projectList)){
 		
 		if(!is_null($obj->bulkId)){
 			$detailTransaction 	= JTrama::getDetailTransactions($obj->bulkId);
-			$agregarmas 		= '<span class="showdetail"><img src="'.JURI::base().'/images/agregar.png" width="25" /></span>';
-			$agregarmas			.= '<span class="hidedetail" style="display:none"><img src="'.JURI::base().'/images/quitar.png" width="25" /></span>';
+			$agregarmas 		= '<span class="showdetail"><img src="'.JURI::base().'/images/agregar.png" width="20" style="margin-top:-5px;" /></span>';
+			$agregarmas			.= '<span class="hidedetail" style="display:none"><img src="'.JURI::base().'/images/quitar.png" width="20" style="margin-top:-5px;" /></span>';
 			$detalleDescripcion	= '';
 			$detalleReferencia	= '';
 			$detalleRetiro		= '';
@@ -179,6 +179,9 @@ jQuery(document).ready(function(){
 		if(jQuery(this).val() != 'a'){
 			jQuery('#fechaInicial').val(objFechas[jQuery(this).val()].fechaini);
 			jQuery('#fechaFinal').val(objFechas[jQuery(this).val()].fechafin);
+			
+			functionFechaInicial(jQuery('#fechaInicial'));
+			functionFechaFinal(jQuery('#fechaFinal'));
 		}else{
 			jQuery('#fechaInicial').val('');
 			jQuery('#fechaFinal').val('');
@@ -203,10 +206,51 @@ jQuery(document).ready(function(){
 		jQuery(this).prev().show()
 	});
 
-	//valida que la fecha que se ingrese no sea machor a la fecha actual
+	//valida que la fecha inicial que se ingrese no sea mucho a la fecha actual
 	jQuery('#fechaInicial').change(function(){
-		console.log()
+		functionFechaInicial(this)
 	});
+	
+	//valida que la fecha  final que se ingrese no sea mucho a la fecha actual
+	jQuery('#fechaFinal').change(function(){
+		functionFechaFinal(this);
+	});
+	
+	function functionFechaInicial(campo){
+		var i 				= new Date();
+		var datefieldff		= jQuery('#fechaFinal').val().split('-');
+		var datefieldfi		= jQuery(campo).val().split('-');
+		var fechacampo 		= Math.round(new Date('"'+datefieldfi[1]+'/'+datefieldfi[1]+'/'+datefieldfi[2]+'"').getTime() / 1000);
+		var fechacampoff	= Math.round(new Date('"'+datefieldff[1]+'/'+datefieldff[1]+'/'+datefieldff[2]+'"').getTime() / 1000);
+		var fechaActualInt 	= Math.round(new Date( '"'+(i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()+'"' ).getTime() / 1000);
+		
+		console.log( fechacampo, fechacampoff, fechaActualInt );
+		
+		if(fechacampo > fechaActualInt){
+			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
+		}
+		if(fechacampo > fechacampoff){
+			jQuery(campo).val(jQuery('#fechaFinal').val());
+		}
+	}
+	
+	function functionFechaFinal(campo){
+		var i 				= new Date();
+		var datefieldfi		= jQuery('#fechaInicial').val().split('-');
+		var datefieldff		= jQuery(campo).val().split('-');
+		var fechacampoff 	= Math.round(new Date('"'+datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]+'"').getTime() / 1000);
+		var fechacampofi	= Math.round(new Date('"'+datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]+'"').getTime() / 1000);
+		var fechaActualInt 	= Math.round(new Date( '"'+(i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()+'"' ).getTime() / 1000);
+		
+		if( (fechacampoff > fechaActualInt ) && (datefieldff[2]==i.getFullYear()) ){
+			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
+		}
+
+		if( (fechacampoff < fechacampofi) && (datefieldff[2]==i.getFullYear()) ){
+			jQuery(campo).val(jQuery('#fechaInicial').val());
+		}
+	}
+	
 });
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
@@ -272,18 +316,18 @@ jQuery(document).ready(function(){
 		<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
 		
 			<select id="selectFechas" name="" >
-				<option value="0"><?php echo JText::_('JANUARY'); ?></option>
-				<option value="1"><?php echo JText::_('FEBRUARY'); ?></option>
-				<option value="2"><?php echo JText::_('MARCH'); ?></option>
-				<option value="3"><?php echo JText::_('APRIL'); ?></option>
-				<option value="4"><?php echo JText::_('MAY'); ?></option>
-				<option value="5"><?php echo JText::_('JUNE'); ?></option>
-				<option value="6"><?php echo JText::_('JULY'); ?></option>
-				<option value="7"><?php echo JText::_('AUGUST'); ?></option>
-				<option value="8"><?php echo JText::_('SEPTEMBER'); ?></option>
-				<option value="9"><?php echo JText::_('OCTOBER'); ?></option>
-				<option value="10"><?php echo JText::_('NOVEMBER'); ?></option>
-				<option value="11"><?php echo JText::_('DECEMBER'); ?></option>
+				<option value="0" <?php echo ($validacionSelect-1)<0?'disabled="disabled"':''; ?>><?php echo JText::_('JANUARY'); ?></option>
+				<option value="1" <?php echo ($validacionSelect-1)<=1?'disabled="disabled"':''; ?>><?php echo JText::_('FEBRUARY'); ?></option>
+				<option value="2" <?php echo ($validacionSelect-1)<=2?'disabled="disabled"':''; ?>><?php echo JText::_('MARCH'); ?></option>
+				<option value="3" <?php echo ($validacionSelect-1)<=3?'disabled="disabled"':''; ?>><?php echo JText::_('APRIL'); ?></option>
+				<option value="4" <?php echo ($validacionSelect-1)<=4?'disabled="disabled"':''; ?>><?php echo JText::_('MAY'); ?></option>
+				<option value="5" <?php echo ($validacionSelect-1)<=5?'disabled="disabled"':''; ?>><?php echo JText::_('JUNE'); ?></option>
+				<option value="6" <?php echo ($validacionSelect-1)<=6?'disabled="disabled"':''; ?>><?php echo JText::_('JULY'); ?></option>
+				<option value="7" <?php echo ($validacionSelect-1)<=7?'disabled="disabled"':''; ?>><?php echo JText::_('AUGUST'); ?></option>
+				<option value="8" <?php echo ($validacionSelect-1)<=8?'disabled="disabled"':''; ?>><?php echo JText::_('SEPTEMBER'); ?></option>
+				<option value="9" <?php echo ($validacionSelect-1)<=9?'disabled="disabled"':''; ?>><?php echo JText::_('OCTOBER'); ?></option>
+				<option value="10" <?php echo ($validacionSelect-1)<=10?'disabled="disabled"':''; ?>><?php echo JText::_('NOVEMBER'); ?></option>
+				<option value="11" <?php echo ($validacionSelect-1)<=11?'disabled="disabled"':''; ?>><?php echo JText::_('DECEMBER'); ?></option>
 			</select>
 						
 			<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
