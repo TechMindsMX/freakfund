@@ -256,7 +256,7 @@ class JTrama
 		$value->fundStartDate = 1370284000000;
 		
 		if ($value->balance != 0) {
-			$value->porcentajeRecaudado = round($value->balance / $value->breakeven,2);
+			$value->porcentajeRecaudado = round(($value->balance * 100) / $value->breakeven,2);
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
