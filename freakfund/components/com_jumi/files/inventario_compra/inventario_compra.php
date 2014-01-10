@@ -167,9 +167,9 @@ if($confirm == 0){
 			$agotado = 0;
 			
 			foreach ($pro->projectUnitSales as $key => $value){
-			
+				
 				$casiAgotado='';
-				$campoCantidad= '<input class="input_compra validate[custom[onlyNumberSp]]" type="text" id="'.$value->id.'" name="" />';
+				$campoCantidad= '<input autocomplete="off" class="input_compra validate[custom[onlyNumberSp]]" type="text" id="'.$value->id.'" name="" />';
 				$agotado = $value ->unit + $agotado;
 				
 				if($value ->unit <= 50 && $value ->unit > 0){
