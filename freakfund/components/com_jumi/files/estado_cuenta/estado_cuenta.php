@@ -14,6 +14,7 @@ jimport('trama.class');
 jimport('trama.usuario_class');
 require_once 'libraries/trama/libreriasPP.php';
 
+var_dump(time());exit;
 $year 					= date('Y');
 $month 					= date('m');
 $query_date 			= $year.'-'.$month;
@@ -103,10 +104,17 @@ if(!is_null($projectList) && !empty($projectList)){
 			$detalleReferencia	= '';
 			$detalleRetiro		= '';
 			
-			foreach ($detailTransaction as $key => $value) {
-				$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.$descripcionTx[$value->description].'</div>';
-				$detalleReferencia	.= '<div style="display:none; margin-top: 5px;">'.$value->reference.'</div>';
-				$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$<span class="number">'.$value->amount.'</span></div>';
+			if(count($detailTransaction) > 1){
+				foreach ($detailTransaction as $key => $value) {
+					$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.$descripcionTx[$value->description].'</div>';
+					$detalleReferencia	.= '<div style="display:none; margin-top: 5px;">'.$value->reference.'</div>';
+					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$<span class="number">'.$value->amount.'</span></div>';
+				}
+			}else{
+				$detalleDescripcion	= '';
+				$detalleReferencia	= '';
+				$detalleRetiro		= '';
+				$agregarmas			= '';
 			}
 		}else{
 			$detalleDescripcion	= '';
@@ -144,11 +152,14 @@ $periodo = $fechaInicial.' al '.$fechaFinal;
 var objFechas = <?php echo $fechasJS; ?>;
 
 jQuery(document).ready(function(){
-	jQuery('#selectFechas').val('<?php echo $mes_actual[1]-1; ?>');
-	jQuery('#fechaInicial').val('<?php echo $fechaInicial; ?>');
-	jQuery('#fechaFinal').val('<?php echo $fechaFinal; ?>');
 	jQuery("#form_cuenta").validationEngine();
 	
+	jQuery('#selectFechas').val('<?php echo $mes_actual[1]-1; ?>');//pone al select de los meses el mes corriente
+	jQuery('#fechaInicial').val('<?php echo $fechaInicial; ?>');//pone el primer dia del mes que este seleccionado
+	jQuery('#fechaFinal').val('<?php echo $fechaFinal; ?>'); // pone el ultimo dia del periodo (la primera ves pone el dia corriente, y cuando se seleccione un mes mostrara todo el mes)
+	
+	
+	//Filtra el contenido segun el select
 	jQuery('#filtroTipo').change(function(){
 		var limite = jQuery('#edocta_table tr').length;
 
@@ -163,8 +174,8 @@ jQuery(document).ready(function(){
 		}	
 	});
 	
+	//Muetsra las fechas del periodo del mes seleccionado
 	jQuery('#selectFechas').change(function(){
-		console.log(jQuery(this).val());
 		if(jQuery(this).val() != 'a'){
 			jQuery('#fechaInicial').val(objFechas[jQuery(this).val()].fechaini);
 			jQuery('#fechaFinal').val(objFechas[jQuery(this).val()].fechafin);
@@ -174,6 +185,7 @@ jQuery(document).ready(function(){
 		}
 	});
 	
+	//Muestra el detalle de la fila 
 	jQuery('.showdetail').click(function(){
 		jQuery(this).hide();
 		jQuery(this).parent().next().next().children('div').show();
@@ -182,12 +194,18 @@ jQuery(document).ready(function(){
 		jQuery(this).next().show();
 	});
 	
+	//Oculta el detalle de la fila
 	jQuery('.hidedetail').click(function(){
 		jQuery(this).hide();
 		jQuery(this).parent().next().next().children('div').hide();
 		jQuery(this).parent().next().next().next().next().children('div').hide();
 		jQuery(this).parent().next().next().next().next().next().next().children('div').hide();
 		jQuery(this).prev().show()
+	});
+
+	//valida que la fecha que se ingrese no sea machor a la fecha actual
+	jQuery('#fechaInicial').change(function(){
+		console.log()
 	});
 });
 </script>
