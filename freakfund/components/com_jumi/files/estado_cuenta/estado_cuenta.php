@@ -220,15 +220,16 @@ jQuery(document).ready(function(){
 		var i 				= new Date();
 		var datefieldff		= jQuery('#fechaFinal').val().split('-');
 		var datefieldfi		= jQuery(campo).val().split('-');
-		var fechacampo 		= Math.round(new Date('"'+datefieldfi[1]+'/'+datefieldfi[1]+'/'+datefieldfi[2]+'"').getTime() / 1000);
-		var fechacampoff	= Math.round(new Date('"'+datefieldff[1]+'/'+datefieldff[1]+'/'+datefieldff[2]+'"').getTime() / 1000);
-		var fechaActualInt 	= Math.round(new Date( '"'+(i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()+'"' ).getTime() / 1000);
+		var fechacampo 		= Math.round(new Date(datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]).getTime() / 1000);
+		var fechacampoff	= Math.round(new Date(datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]).getTime() / 1000);
+		var fechaActualInt 	= Math.round(new Date((i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()).getTime() / 1000);
 		
-		console.log( fechacampo, fechacampoff, fechaActualInt );
+		console.log(fechacampo, fechacampoff, fechaActualInt);
 		
 		if(fechacampo > fechaActualInt){
 			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
 		}
+		
 		if(fechacampo > fechacampoff){
 			jQuery(campo).val(jQuery('#fechaFinal').val());
 		}
@@ -238,9 +239,9 @@ jQuery(document).ready(function(){
 		var i 				= new Date();
 		var datefieldfi		= jQuery('#fechaInicial').val().split('-');
 		var datefieldff		= jQuery(campo).val().split('-');
-		var fechacampoff 	= Math.round(new Date('"'+datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]+'"').getTime() / 1000);
-		var fechacampofi	= Math.round(new Date('"'+datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]+'"').getTime() / 1000);
-		var fechaActualInt 	= Math.round(new Date( '"'+(i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()+'"' ).getTime() / 1000);
+		var fechacampoff 	= Math.round(new Date(datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]).getTime() / 1000);
+		var fechacampofi	= Math.round(new Date(datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]).getTime() / 1000);
+		var fechaActualInt 	= Math.round(new Date((i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()).getTime() / 1000);
 		
 		if( (fechacampoff > fechaActualInt ) && (datefieldff[2]==i.getFullYear()) ){
 			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
