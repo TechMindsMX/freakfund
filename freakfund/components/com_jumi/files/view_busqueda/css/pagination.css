@@ -198,3 +198,10 @@ div.proyectos > .inner {
 .productStyle .two-cols.second .inside {
 	padding-left: 10px;
 }
+#rt-mainbody-surround div.disabled {
+	background-color: #999999;
+}
+#rt-mainbody-surround div.disabled:hover {
+	background-color: #777777;
+}
+

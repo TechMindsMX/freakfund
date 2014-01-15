@@ -196,7 +196,6 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
                 <?php endif; ?>
             </a>
 
-
             <?php if ($item->hasChildren()): ?>
 
                 <?php if ($grouping == 0 or $item->getLevel() == 0) :
@@ -368,9 +367,19 @@ class GantryDropdownLayout extends AbstractRokMenuLayout
 ?>
 <div class="gf-menu-device-container"></div>
 <ul class="gf-menu l1 " <?php if (array_key_exists('tag_id',$this->args)): ?>id="<?php echo $this->args['tag_id'];?>"<?php endif;?>>
-	<?php foreach ($menu->getChildren() as $item) : ?>
- 		<?php $this->renderItem($item, $menu); ?>
-	<?php endforeach; ?>
+<?php 
+		if (JFactory::getUser()->guest != 1) {
+?>
+		<script>
+		jQuery(document).ready(function(){
+			jQuery("a:contains('Acceso')").html("Salir  ");
+		});
+		</script>
+<?php
+		}
+	foreach ($menu->getChildren() as $item) :
+	 		$this->renderItem($item, $menu);
+	endforeach; ?>
 </ul>
 <?php
         return ob_get_clean();

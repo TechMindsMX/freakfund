@@ -12,6 +12,8 @@ $ligasPP 		= '';
 $input 			= JFactory::getApplication()->input;
 $tipoPP 		= $input->get('typeId', 0, 'INT');
 
+$document->setTitle(JText::_('BUSQUEDA'));
+
 $params 				= new stdClass;
 $params->categoria 		= $input->get('categoria', 'all', 'STR');
 $params->subcategoria 	= $input->get('subcategoria', 'all', 'STR');
@@ -112,10 +114,8 @@ if (!empty($proyectos) && isset($proyectos)) {
 	$proyectos = json_encode($proyectos);
 }
 
-
 $document->addStyleSheet($pathJumi.'/view_busqueda/css/pagination.css');
 echo '<script src="libraries/trama/js/jquery.pagination.js"></script>';
-
 
 function tagLimpia ($data) {
   $limitePalabras = 1;
@@ -233,9 +233,9 @@ function pageselectCallback (page_index, jq) {
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 
 		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
-		members[i].roiFinanciadores = 40;
-		members[i].roiInversionistas = 30;
-		members[i].premierEnd = '12-01-2014';
+		// members[i].roiFinanciadores = 40;
+		// members[i].roiInversionistas = 30;
+		// members[i].premierEnd = '12-01-2014';
 		/**************************************************************************************/
 		
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
@@ -245,8 +245,8 @@ function pageselectCallback (page_index, jq) {
 		var recaudado = members[i].balance != null ? members[i].balance : " ";
 		var porcentajeRecaudado = members[i].balance != null ? ((members[i].balance/members[i].breakeven)*100).toFixed(2) : 0;
 		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " "; 
-		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores : " ";
-		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas : " ";
+		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores+"%" : "NA";
+		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas+"%" : "NA";
 		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";
 		/************************************************************************************/
 		countCol++;
@@ -276,7 +276,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '	</a>';
 		newcontent += '</div>';
 		
-		if(members[i].status == 5){
+		if( members[i].status == 5 ){
 			newcontent += '<div class="fondo_barra">';
 			newcontent += '<span class="txt_barra"><?php echo JText::_('LABEL_RECAUDADO'); ?>: '+ porcentajeRecaudado +'%</span>';
 			newcontent += '<span class="barra" style="width: '+ porcentajeRecaudado +'%; text-align:center;"></span>';
@@ -286,13 +286,13 @@ function pageselectCallback (page_index, jq) {
 			newcontent += '<div class="cuentas">'+ members[i].jtextdays +'</div>';
 		}
 		
-		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 0){
+		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 8 || members[i].status == 10 || members[i].status == 11){
 			newcontent += '<div class="productStyle">';
 			newcontent += '<div class="box1 two-cols first"><div class="inside">';
-			newcontent += '<div class="big">'+ roiFinanciadores +'% </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
+			newcontent += '<div class="big">'+ roiFinanciadores +' </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '<div class="box1 two-cols second"><div class="inside">';
-			newcontent += '<div class="big">'+ roiInversionistas +'%</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
+			newcontent += '<div class="big">'+ roiInversionistas +'</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '</div>';
 		}
@@ -302,7 +302,11 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
 		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '<div class="boton-wrap">';
-		newcontent += '<a class="button btn-invertir" href="' + link + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
+		if( members[i].status == 6 || members[i].status == 7 ){
+			newcontent += '<a class="button btn-invertir" href="' + link + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
+		}else{
+			newcontent += '<div class="button btn-invertir disabled" href="">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</div>';
+		}
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '</div>';
