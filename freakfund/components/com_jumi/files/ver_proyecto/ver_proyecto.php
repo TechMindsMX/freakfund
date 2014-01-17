@@ -335,10 +335,8 @@ function proInfo($data) {
 							
 			break;
 		case '6' OR '7' OR '10':
-			$difToday	= JTrama::dateDiff($data->premiereStartDate)->days;
-			$difMax		= JTrama::dateDiff($data->productionStartDate, $data->premiereStartDate)->days;
-
-			$data->statusbarPorcentaje = 100-(( $difToday * 100) / $difMax ); 
+			$data->balancePorcentaje = ((($data->balance - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
+			$data->statusbarPorcentaje = $data->balancePorcentaje;
 
 			$statusInfo1 = '<span class="bloque" style="border: 0;"></span>';
 			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_FIN').'</div>
@@ -371,8 +369,27 @@ function statusbar($data) {
 						}, 3000);
 					</script>';
 	
-	$tmpl = '<div id="animacionbg"><div id="statusbar"></div>
-			</div>';
+	switch ($data->status) { 
+		case '5':
+			$tmpl = '<div id="animacionbg">
+						<div id="statusbar"></div>
+					<span style="left: 47%; top: .3em; color: #000;">'.round($data->statusbarPorcentaje, 2).'%</span>
+					</div>';
+			break;
+		case '6' OR '7' OR '10':
+			$tmpl = '<div id="animacionbg" style="background: linear-gradient(to right, #00ff00 0%,#00ff00 50%,#d6d6d6 50.1%, #d6d6d6 100%);">
+					<span style="left: 22%;">'.JText::_("STATEMENT_FUNDING").'</span>
+					<span style="left: 70%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
+					<span style="left: 0%;">'.$data->fundStartDate.'</span>
+					<span style="left: 47%;">'.$data->fundEndDate.'</span>
+					<span style="left: 94%;">'.$data->premiereEndDate.'</span>
+					<div style="margin-left: 50%;">
+						<div id="statusbar" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
+						<span class="number" style="float: right; margin: .3em .5em 0 0; color: #000;">'.$data->balance.'</span></div>
+					</div>
+					</div>';
+			break;
+	}
 
 	return $tmpl;
 }

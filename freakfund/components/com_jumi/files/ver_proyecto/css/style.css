@@ -277,7 +277,7 @@ div#banner div.rt-inner a {
 }
 #statusbar, #animacionbg {
 	position: relative;
-	height: 0.8em;
+	height: 2em;
 	margin-bottom: 0.5em;
 	width : 0%;
 	border-radius: 10px;
@@ -294,6 +294,13 @@ background: linear-gradient(to bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /*
 	background: #d6d6d6;
 	width: 100%;
 	content: '';
+}
+#animacionbg > span {
+	position: absolute;
+	top: 2em;
+}
+#animacionbg span {
+	font-weight: bold;
 }
 div#proInfo h1, div#proInfo h2, div#proInfo h3 {
 	line-height: 100%;
