@@ -4,7 +4,6 @@ defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
 
 foreach ($this->items as $key => $value) {
-var_dump($value->fundEndDate, $value->dateDiff->invert, $value->dateDiff->days);
 	
 ?>
 
