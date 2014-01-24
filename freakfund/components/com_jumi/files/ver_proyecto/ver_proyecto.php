@@ -585,6 +585,8 @@ function botonFinanciar($data) {
 	</div>
 </div>
 	
+<?php if (!is_null($usuario->idMiddleware)) {
+?>
 	<script type="text/javascript">
 	 var count = 0;
 	 
@@ -640,7 +642,10 @@ function botonFinanciar($data) {
 			});
 			
 		});
-		
+	</script>
+<?php }
+?>
+	<script>	
 	    $(window).load(function() {
         	$('#slider').nivoSlider({
         		prevText: '<?php echo JText::_("LBL_PREV"); ?>',

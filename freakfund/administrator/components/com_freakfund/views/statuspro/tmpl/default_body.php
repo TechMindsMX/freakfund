@@ -10,7 +10,6 @@ $errorCallback	= JURI::base().'index.php?option=com_freakfund&task=errors&error=
 $datos 			= $this->items;
 $datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware;
 
-var_dump($datos->idMod);
 ?>
 	<tr>
 		<td align="absmiddle">
