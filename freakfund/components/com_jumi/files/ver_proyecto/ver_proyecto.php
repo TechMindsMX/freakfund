@@ -337,12 +337,15 @@ function proInfo($data) {
 		case '6' OR '7' OR '10':
 			$data->balancePorcentaje = ((($data->balance - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
 			$data->statusbarPorcentaje = $data->balancePorcentaje;
+			
+			$data->trf = ($data->trf != null || $data->trf != 0) ? $data->trf.' %' : 'NA';
+			$data->tri = ($data->tri != null || $data->tri != 0) ? $data->tri.' %' : 'NA';
 
 			$statusInfo1 = '<span class="bloque" style="border: 0;"></span>';
 			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_FIN').'</div>
-							<h1 class="naranja"><span>'.$data->trf.'</span> %</h1></div></span>';
+							<h1 class="naranja"><span>'.$data->trf.'</span></h1></div></span>';
 			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_INV').'</div>
-							<h1 class="naranja"><span>'.$data->tri.'</span> %</h1></div></span>';
+							<h1 class="naranja"><span>'.$data->tri.'</span></h1></div></span>';
 			$statusInfo4 = '<span class="bloque"><div class="margen"><div>'.botonFinanciar($data).'</div>
 							</div></span>';
 

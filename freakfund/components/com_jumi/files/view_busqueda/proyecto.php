@@ -28,7 +28,7 @@ function filtro (){
 				   '<div class="barraProd">'.JText::_('LABEL_PRODUCTOS').' <input type="radio" id="producto" name="filtro" /></div>'.
 				   '<div class="clearfix" id="contador"></div>'.
 				   '</div>';
-		
+
 		return $ligasPP;
 }
 
@@ -86,15 +86,12 @@ foreach ($json as $key => $value) {
 		$jsonJS[] = $value;
 		switch ($value->status) {
 			case '5':
-				JTrama::formatDatosProy($value);
 				$proyectos[] = $value; //Solo Proyectos
 				break; 
 			default:
 				if( in_array($value->status, array(6,7,8,10,11)) ){
-					JTrama::formatDatosProy($value);
 					$productos[] = $value; //Solo Productos
 				}
-				
 				break;
 		}		
 	}
@@ -231,22 +228,16 @@ function pageselectCallback (page_index, jq) {
 	
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
-
-		/*VARIABLES PARA PROBAR QUITARLAS CUANDO ESTE EL SERVICIO NO SE TE OLVIDE PENDEJO*/
-		// members[i].roiFinanciadores = 40;
-		// members[i].roiInversionistas = 30;
-		// members[i].premierEnd = '12-01-2014';
-		/**************************************************************************************/
 		
 		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
-		console.log(members);
+
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
 		var recaudado = members[i].balance != null ? members[i].balance : " ";
 		var porcentajeRecaudado = members[i].balance != null ? ((members[i].balance/members[i].breakeven)*100).toFixed(2) : 0;
 		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " "; 
-		var roiFinanciadores = members[i].roiFinanciadores != null ? members[i].roiFinanciadores+"%" : "NA";
-		var roiInversionistas = members[i].roiInversionistas != null ? members[i].roiInversionistas+"%" : "NA";
+		var trf = (members[i].trf != null && members[i].trf != 0) ? members[i].trf+"%" : "NA";
+		var tri = (members[i].tri != null && members[i].tri != 0) ? members[i].tri+"%" : "NA";
 		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";
 		/************************************************************************************/
 		countCol++;
@@ -289,20 +280,20 @@ function pageselectCallback (page_index, jq) {
 		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 8 || members[i].status == 10 || members[i].status == 11){
 			newcontent += '<div class="productStyle">';
 			newcontent += '<div class="box1 two-cols first"><div class="inside">';
-			newcontent += '<div class="big">'+ roiFinanciadores +' </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
+			newcontent += '<div class="big">'+ trf +' </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '<div class="box1 two-cols second"><div class="inside">';
-			newcontent += '<div class="big">'+ roiInversionistas +'</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
+			newcontent += '<div class="big">'+ tri +'</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '</div>';
 		}
 		
 		newcontent += '<div class="descripcion">';
-		newcontent += '<div class="inner">';		
+		newcontent += '<div class="inner">';
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
 		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '<div class="boton-wrap">';
-		if( members[i].status == 6 || members[i].status == 7 ){
+		if( members[i].status == 5 || members[i].status == 6 || members[i].status == 7 ){
 			newcontent += '<a class="button btn-invertir" href="' + link + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
 		}else{
 			newcontent += '<div class="button btn-invertir disabled" href="">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</div>';

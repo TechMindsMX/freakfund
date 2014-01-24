@@ -66,7 +66,7 @@ $promedio = $objuserdata->scoreUser($userid);
 				</div>
 				<?php 
 		  		echo '<div id="contactar">'.
-			  			participar($datosgenerales,$botonContactar).
+			  			participar($datosgenerales->users_id, $botonContactar).
 			  			'</div>';
 			  	?>
 				<div id="agrega_amigo" class="button"><?php echo JTramaSocial::addFriendJS($userid, $usuario); ?></div>
