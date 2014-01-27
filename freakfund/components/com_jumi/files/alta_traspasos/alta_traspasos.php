@@ -47,7 +47,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				url: "libraries/trama/js/ajax.php",
 				data: {
   					"clabe"	: clabe,
-  					"fun"	: 6
+  					"fun"	: 5
  				},
  				type: 'post'
 			});

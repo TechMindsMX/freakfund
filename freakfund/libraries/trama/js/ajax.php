@@ -1,27 +1,23 @@
 <?php
-
-if ($_SERVER['SERVER_ADDR'] != 'localhost') {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
+var_dump($_SERVER);
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7272');
 } else {
-	define('MIDDLE', 'http://192.168.0.122:7070');
+	define('MIDDLE', 'http://192.168.0.122:7272');
 } 
-
-$fun = is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
-
 include('../../../configuration.php');
 
-$configuracion = new JConfig;
-$bd = new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
-
+$fun 			= is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
+$configuracion 	= new JConfig;
+$bd 			= new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
 date_default_timezone_set('America/Mexico_City');
 
 switch ($fun) {
-	case 1:
+	case 1: //Graba la calificacion del usuario
 		$calificador 	= is_numeric($_POST['calificador']) ? $_POST['calificador'] : 0;
 		$calificado  	= is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
 		$score 		 	= is_numeric($_POST['score']) ? $_POST['score'] : 0;
-		
-		$respuesta = array();
+		$respuesta 		= array();
 		
 		$query = 'SELECT * FROM perfil_rating_usuario WHERE idUserCalificador = '.$calificador.' AND iduserCalificado = '.$calificado;
 		$resultado = $bd->query($query);
@@ -40,13 +36,9 @@ switch ($fun) {
 			$respuesta['msg'] = 'Guardado';
 			$respuesta['bloquear'] = true;
 		} else {
-			$query_promedio = 'SELECT avg(rating) as score FROM perfil_rating_usuario WHERE idUserCalificado = '.$calificado;
-		// echo $query_promedio;
-		// exit;
-		
-			$resultado_score = $bd->query($query_promedio);
-		
-			$obj_score = $resultado_score->fetch_object();
+			$query_promedio 	= 'SELECT avg(rating) as score FROM perfil_rating_usuario WHERE idUserCalificado = '.$calificado;
+			$resultado_score 	= $bd->query($query_promedio);
+			$obj_score 			= $resultado_score->fetch_object();
 			
 			$respuesta['score'] = is_null($obj_score->score)? 0 : $obj_score->score;
 			$respuesta['msg'] = 'Solo se acepta una sola calificación';
@@ -56,13 +48,12 @@ switch ($fun) {
 		echo json_encode($respuesta);
 		break;
 		
-	case 2:
+	case 2://Sepomex Trae los datos dado un código postal
 		$url = MIDDLE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
 		echo file_get_contents($url);
 		break;
 		
-	case 3:
-		
+	case 3://Boton de compartir en la red social
 		$userId 		= $_POST['userId'];
 		$projectId 		= $_POST['projectId'];
 		$linkProyecto 	= $_POST['linkProyecto'];
@@ -92,25 +83,22 @@ switch ($fun) {
 			$respuesta['shared'] = false;
 			
 		} else {
-			
 			$respuesta['shared'] = true;
 			$respuesta['name'] = $nomUser;
-			
 		}
 
 		echo json_encode($respuesta);
 		break;
 		
-	case 4:
+	case 4: //Recaptcha Código de redención
 		require_once('recaptchalib.php');
-		
 		$privatekey = "6LeDLOgSAAAAADUei7zA8aJPKbOyUVzDH5kMbJGh";
-		$codigo = array();
+		$codigo 	= array();
 		
-		$resp = recaptcha_check_answer ($privatekey,
-				$_SERVER["REMOTE_ADDR"],
-				$_POST["recaptcha_challenge_field"],
-				$_POST["recaptcha_response_field"]);
+		$resp 		= recaptcha_check_answer ($privatekey,
+					  $_SERVER["REMOTE_ADDR"],
+					  $_POST["recaptcha_challenge_field"],
+					  $_POST["recaptcha_response_field"]);
 
 		if (!$resp->is_valid) {
 			// What happens when the CAPTCHA was entered incorrectly
@@ -122,33 +110,19 @@ switch ($fun) {
 			$codigo['error'] =  'nada';
 		}
 		
-		
 		echo json_encode($codigo);
 		break;
 		
-	case 5:
-		$codigo = array();
-		$codigo['mensaje'] = true;
-		$codigo['proyid'] =  3;
-		$codigo['monto'] = 70;
-		$codigo['tasa'] = '10%';
-		$codigo['nombreProy'] = 'Kill Bill';
-		
-		echo json_encode($codigo);
-		break;
-	
-	case 6:
-		$respuesta = file_get_contents('http://192.168.0.122:7070/trama-middleware/rest/user/getByAccount/'.$_POST['clabe']);
-		
+	case 5://Obtiene los datos del usuario para la alta de número de cuenta
+		$respuesta = file_get_contents(MIDDLE.'/trama-middleware/rest/user/getByAccount/'.$_POST['clabe']);
 		echo $respuesta;
-		
-		break;
-		
-	case 7:
-		json_encode($_POST);
-		
 		break;
 	
+	case 6: //Obtiene un token nuevo
+		$token = @file_get_contents(MIDDLE.'/trama-middleware/rest/security/getKey');
+		echo $token;
+		break;
+		
 	default:
 		echo 'error';
 		break;
