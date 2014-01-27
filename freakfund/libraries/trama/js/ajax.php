@@ -1,5 +1,4 @@
 <?php
-var_dump($_SERVER);
 if ($_SERVER['SERVER_NAME'] != 'localhost') {
 	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7272');
 } else {
