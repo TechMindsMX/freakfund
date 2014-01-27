@@ -335,24 +335,24 @@ text-transform: uppercase;
   border-radius: 15px;
   box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.5);
 }
-.jcarousel-list .mask {
+ .mask {
 }
-#Searchresult {
+#Searchresult, .jcarousel-list {
   margin: 0;
   > div:nth-child(4n+1) .mask,
-  .jcarousel-list li:nth-child(4n+1) .mask {
+   .jcarousel-item-horizontal:nth-child(4n+1) .proyectos .mask {
     background-image: url('../images/carretes/mask-topright.png');
   }
   > div:nth-child(4n+2) .mask,
-  .jcarousel-list li:nth-child(4n+2) .mask {
+   .jcarousel-item-horizontal:nth-child(4n+2) .proyectos .mask {
     background-image: url('../images/carretes/mask-bottomright.png');
   }
   > div:nth-child(4n+3) .mask,
-  .jcarousel-list li:nth-child(4n+3) .mask {
+  .jcarousel-item-horizontal:nth-child(4n+3) .proyectos .mask {
     background-image: url('../images/carretes/mask-bottomleft.png');
   }
   > div:nth-child(4n+4) .mask,
-  .jcarousel-list li:nth-child(4n+4) .mask {
+   .jcarousel-item-horizontal:nth-child(4n+4) .proyectos .mask {
     background-image: url('../images/carretes/mask-topleft.png');
   }
 }
