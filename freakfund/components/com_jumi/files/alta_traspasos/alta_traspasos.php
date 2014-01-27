@@ -47,7 +47,6 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				url: "libraries/trama/js/ajax.php",
 				data: {
   					"clabe"	: clabe,
-  					"token"	: "<?php echo $token; ?>",
   					"fun"	: 6
  				},
  				type: 'post'
@@ -150,8 +149,6 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	}
 	
 	function pintadivConfirmacion(nombre, monto, email, numCta, action, message, div){
-		console.log(nombre, monto, email, numCta, action, message, div);
-		
 		jQuery('#showSocio').html(nombre);
 		jQuery('#showmaxmount').html('$<span class="number">' + monto + '</span>' );
 		jQuery('#showemail').html(email);
@@ -162,22 +159,22 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		switch(action){
 			case 'guardar':
 				$('#divConfirmacion').find('h3').html(message);
-				$('#divConfirmacion').find('.safe').attr('onclick','safeUpdate(this, "'+jQuery(div).prop('id')+'")');
+				$('#divConfirmacion').find('.safe').attr('onclick','getToken(this, "'+jQuery(div).prop('id')+'", "guardar")');
 				break;
 			case 'borrar':
 				$('#divConfirmacion').find('h3').html(message);
-				$('#divConfirmacion').find('.safe').attr('onclick','deleteCta(this, '+jQuery(div).prop('id')+')');
+				$('#divConfirmacion').find('.safe').attr('onclick','getToken(this, '+jQuery(div).prop('id')+', "borrar")');
 				break
 			case 'update':
 				$('#divConfirmacion').find('h3').html(message);
-				$('#divConfirmacion').find('.safe').attr('onclick','safeUpdate(this, "'+jQuery(div).prop('id')+'")');
+				$('#divConfirmacion').find('.safe').attr('onclick','getToken(this, "'+jQuery(div).prop('id')+'", "guardar")');
 				break;
 		}
 		
 		jQuery('#divConfirmacion').show();
 	}
 	
-	function deleteCta(campo, div){
+	function deleteCta(campo, div, token){
 		var userId 			= jQuery('#userId').val();
 		var destinationId	= jQuery('#'+div).parent().parent().find('#destinationIdEdicion').val();
 		
@@ -186,7 +183,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			data: {
 				"userId"		: userId,
 				"destinationId"	: destinationId,
-				"token"			: "<?php echo $token; ?>"
+				"token"			: token
 			},
 			type: 'post'
 		});
@@ -201,9 +198,10 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		});
 	}
 	
-	function safeUpdate(campo, div){
+	function safeUpdate(campo, div, token){
 		var action				= jQuery('#'+div);
 		var userId 				= jQuery('#userId').val();
+		
 		
 		if(action.prop('id') == "autocompletado"){
 			 var maxAmount 		= jQuery('#maxMount').val();
@@ -219,7 +217,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				"userId"		: userId,
 				"amount"		: maxAmount,
 				"destinationId"	: destinationId,
-				"token"			: "<?php echo $token; ?>"
+				"token"			: token
 			},
 			type: 'post'
 		});
@@ -300,6 +298,25 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		jQuery(campo).find('span').hide();
 		jQuery(campo).find('input').prop('type', 'text');
 		jQuery(campo).find('input[type="text"]').show();
+	}
+	
+	function getToken(campo, div, funcion){
+		var request = $.ajax({
+			async:true,
+			url: "libraries/trama/js/ajax.php",
+			data: {
+  				"fun"	: 8
+ 			},
+ 			type: 'post'
+		});
+		
+		request.done(function(result){
+			if(funcion == 'guardar'){
+		  		safeUpdate(campo, div, result);
+		  	}else if(funcion == 'borrar'){
+		  		deleteCta(campo, div, result);
+		  	}
+		});
 	}
 </script>
 
@@ -395,7 +412,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	
 	<div>
 		<span><input type="button" class="button" id="Cancelar" value="<?php echo JText::_('LBL_CANCELAR'); ?>" /></span>
-		<span><input type="button" class="button safe" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" onclick="safeUpdate(this)" /></span>
+		<span><input type="button" class="button safe" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" onclick="getToken(this)" /></span>
 	</div>
 </div>
 
