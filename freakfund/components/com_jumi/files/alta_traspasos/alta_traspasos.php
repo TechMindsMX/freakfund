@@ -305,7 +305,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			async:true,
 			url: "libraries/trama/js/ajax.php",
 			data: {
-  				"fun"	: 8
+  				"fun"	: 6
  			},
  			type: 'post'
 		});
