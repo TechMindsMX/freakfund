@@ -59,12 +59,6 @@ $fechasJS = json_encode($arreglodefechas);
 //definicion de campos del formulario
 $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30"; 
 
-$descripcionTx['CREDIT'] 		= JText::_('STATEMENT_DEPOSIT');
-$descripcionTx['TRANSFER']		= JText::_('STATEMENT_TRANSFER');
-$descripcionTx['FUNDING']		= JText::_('STATEMENT_FUNDING');
-$descripcionTx['RETURN_FUNDS']	= JText::_('STATEMENT_REFUND');
-$descripcionTx['INVESTMENT']	= JText::_('STATEMENT_INVESTMENT');
-
 $tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
 $tableHtml 	.= "<tr id='cabezera'>";
 $tableHtml 	.= "<th>". JText::_('FECHA') ."<th />";
@@ -106,7 +100,7 @@ if(!is_null($projectList) && !empty($projectList)){
 			
 			if(count($detailTransaction) > 1){
 				foreach ($detailTransaction as $key => $value) {
-					$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.$descripcionTx[$value->description].'</div>';
+					$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.JText::_('STATEMENT_'.$value->description).'</div>';
 					$detalleReferencia	.= '<div style="display:none; margin-top: 5px;">'.$value->reference.'</div>';
 					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$<span class="number">'.$value->amount.'</span></div>';
 				}
@@ -125,7 +119,7 @@ if(!is_null($projectList) && !empty($projectList)){
 
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '<td>'.$obj->fechaFormat.$agregarmas.'<td />';
-		$tableHtml .= '<td>'.$descripcionTx[$obj->description].$detalleDescripcion.'<td />';
+		$tableHtml .= '<td>'.JText::_('STATEMENT_'.$obj->description).$detalleDescripcion.'<td />';
 		$tableHtml .= '<td>'.$obj->reference.$detalleReferencia.'<td />';
 		$tableHtml .= '<td class="derecha">'.$retiro.$detalleRetiro.'<td />';
 		$tableHtml .= '<td class="derecha">'.$deposito.'<td />';
