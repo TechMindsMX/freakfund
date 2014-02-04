@@ -33,7 +33,7 @@ $periodo				= '';
 $saldoFinalPeriodo		= '0';
 $arreglodefechas		= array();
 $mes_actual 			= explode("-",$fechaInicial);
-$validacionSelect 		= $year==$mes_actual[2]?$month:13;
+$validacionSelect 		= $year == $mes_actual[2] ? $month : 13;
 
 if(!isset($datosUsuarioJoomla)){
 	$datosUsuarioJoomla->nomCalle = "";
@@ -74,7 +74,6 @@ if(!is_null($projectList) && !empty($projectList)){
 	}elseif($projectList[0]->type == 'DEBIT'){
 		$saldoInicialPeriodo = $projectList[0]->balance + $projectList[0]->amount;
 	}
-	
 	foreach ($projectList as $obj) {
 		//operaciones resumen de cuenta
 		if($obj->type == 'DEBIT'){
@@ -117,9 +116,26 @@ if(!is_null($projectList) && !empty($projectList)){
 			$agregarmas			= '';
 		}
 
+		if( $obj->description == 'TRANSFER'){
+			switch ($obj->type) {
+				case 'CREDIT':
+					$retiroAbono = JText::_('STATEMENT_TYPE_CREDIT');
+					break;
+				case 'DEBIT':
+					$retiroAbono = JText::_('STATEMENT_TYPE_DEBIT');
+					break;
+				
+				default:
+					$retiroAbono = '';
+					break;
+			}
+		}else{
+			$retiroAbono = '';
+		}
+					
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '<td>'.$obj->fechaFormat.$agregarmas.'<td />';
-		$tableHtml .= '<td>'.JText::_('STATEMENT_'.$obj->description).$detalleDescripcion.'<td />';
+		$tableHtml .= '<td>'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
 		$tableHtml .= '<td>'.$obj->reference.$detalleReferencia.'<td />';
 		$tableHtml .= '<td class="derecha">'.$retiro.$detalleRetiro.'<td />';
 		$tableHtml .= '<td class="derecha">'.$deposito.'<td />';
@@ -224,7 +240,7 @@ jQuery(document).ready(function(){
 			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
 		}
 		
-		if(fechacampo > fechacampoff){
+		if( (fechacampo > fechaActualInt) ){
 			jQuery(campo).val(jQuery('#fechaFinal').val());
 		}
 	}
@@ -242,6 +258,9 @@ jQuery(document).ready(function(){
 		}
 
 		if( (fechacampoff < fechacampofi) && (datefieldff[2]==i.getFullYear()) ){
+			jQuery(campo).val(jQuery('#fechaInicial').val());
+		}
+		if(fechacampoff < fechacampofi){
 			jQuery(campo).val(jQuery('#fechaInicial').val());
 		}
 	}
@@ -309,20 +328,19 @@ jQuery(document).ready(function(){
 	<div style="width:100%; float:left;">
 	<h1><?php echo JText::_('RANGE_SEARCH'); ?></h1>
 		<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
-		
 			<select id="selectFechas" name="" >
-				<option value="0" <?php echo ($validacionSelect-1)<0?'disabled="disabled"':''; ?>><?php echo JText::_('JANUARY'); ?></option>
-				<option value="1" <?php echo ($validacionSelect-1)<=1?'disabled="disabled"':''; ?>><?php echo JText::_('FEBRUARY'); ?></option>
-				<option value="2" <?php echo ($validacionSelect-1)<=2?'disabled="disabled"':''; ?>><?php echo JText::_('MARCH'); ?></option>
-				<option value="3" <?php echo ($validacionSelect-1)<=3?'disabled="disabled"':''; ?>><?php echo JText::_('APRIL'); ?></option>
-				<option value="4" <?php echo ($validacionSelect-1)<=4?'disabled="disabled"':''; ?>><?php echo JText::_('MAY'); ?></option>
-				<option value="5" <?php echo ($validacionSelect-1)<=5?'disabled="disabled"':''; ?>><?php echo JText::_('JUNE'); ?></option>
-				<option value="6" <?php echo ($validacionSelect-1)<=6?'disabled="disabled"':''; ?>><?php echo JText::_('JULY'); ?></option>
-				<option value="7" <?php echo ($validacionSelect-1)<=7?'disabled="disabled"':''; ?>><?php echo JText::_('AUGUST'); ?></option>
-				<option value="8" <?php echo ($validacionSelect-1)<=8?'disabled="disabled"':''; ?>><?php echo JText::_('SEPTEMBER'); ?></option>
-				<option value="9" <?php echo ($validacionSelect-1)<=9?'disabled="disabled"':''; ?>><?php echo JText::_('OCTOBER'); ?></option>
-				<option value="10" <?php echo ($validacionSelect-1)<=10?'disabled="disabled"':''; ?>><?php echo JText::_('NOVEMBER'); ?></option>
-				<option value="11" <?php echo ($validacionSelect-1)<=11?'disabled="disabled"':''; ?>><?php echo JText::_('DECEMBER'); ?></option>
+				<option value="0" <?php echo ($validacionSelect-1) 	<	0	?'disabled="disabled"':''; ?>><?php echo JText::_('JANUARY'); ?></option>
+				<option value="1" <?php echo ($validacionSelect-1) 	<	1	?'disabled="disabled"':''; ?>><?php echo JText::_('FEBRUARY'); ?></option>
+				<option value="2" <?php echo ($validacionSelect-1) 	<	2	?'disabled="disabled"':''; ?>><?php echo JText::_('MARCH'); ?></option>
+				<option value="3" <?php echo ($validacionSelect-1) 	<	3	?'disabled="disabled"':''; ?>><?php echo JText::_('APRIL'); ?></option>
+				<option value="4" <?php echo ($validacionSelect-1) 	<	4	?'disabled="disabled"':''; ?>><?php echo JText::_('MAY'); ?></option>
+				<option value="5" <?php echo ($validacionSelect-1) 	<	5	?'disabled="disabled"':''; ?>><?php echo JText::_('JUNE'); ?></option>
+				<option value="6" <?php echo ($validacionSelect-1) 	<	6	?'disabled="disabled"':''; ?>><?php echo JText::_('JULY'); ?></option>
+				<option value="7" <?php echo ($validacionSelect-1) 	<	7	?'disabled="disabled"':''; ?>><?php echo JText::_('AUGUST'); ?></option>
+				<option value="8" <?php echo ($validacionSelect-1) 	<	8	?'disabled="disabled"':''; ?>><?php echo JText::_('SEPTEMBER'); ?></option>
+				<option value="9" <?php echo ($validacionSelect-1) 	<	9	?'disabled="disabled"':''; ?>><?php echo JText::_('OCTOBER'); ?></option>
+				<option value="10" <?php echo ($validacionSelect-1) <	10	?'disabled="disabled"':''; ?>><?php echo JText::_('NOVEMBER'); ?></option>
+				<option value="11" <?php echo ($validacionSelect-1)	<	11	?'disabled="disabled"':''; ?>><?php echo JText::_('DECEMBER'); ?></option>
 			</select>
 						
 			<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
