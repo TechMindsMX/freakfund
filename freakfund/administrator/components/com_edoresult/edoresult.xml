@@ -21,7 +21,7 @@
         </files>
  
         <administration>
-                <menu>edoresult</menu>
+                <menu>Estado de resultados</menu>
                 <files folder="admin">
                         <filename>index.html</filename>
                         <filename>edoresult.php</filename>

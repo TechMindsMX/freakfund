@@ -9,7 +9,7 @@ foreach ($this->items as $key => $value) {
 		<td align="absmiddle">
 			<a href="<?php echo $value->ligaEdoResult; ?>"><?php echo $value->name; ?></a>
 		</td>
-		<td align="left">
+		<td align="absmiddle">
 			<?php echo $value->prodName; ?>
 		</td>
 		<td align="right">
