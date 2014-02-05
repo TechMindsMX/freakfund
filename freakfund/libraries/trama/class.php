@@ -394,7 +394,6 @@ class JTrama
 	public static function getTransactions($idMiddleware, $startDate, $endDate) {
 		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getUserStatement/'.$idMiddleware.'/'.$startDate.'/'.$endDate));
 		return $transactionsList;
-		;
 	}
 	
 	public static function getDetailTransactions($bulkId) {
