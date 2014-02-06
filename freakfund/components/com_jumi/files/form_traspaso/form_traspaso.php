@@ -46,7 +46,8 @@ function formTraspaso($params, $app, $usuario) {
 
 	$action = $params->confirmUrl;
 	
-	$optionsHtml = '<select id="receiverId" name="receiverId">'.PHP_EOL.'<option>'.JText::_("Seleccione").'</option>'.PHP_EOL;
+	$optionsHtml = '<select class="validate[required]" id="receiverId" name="receiverId">'.PHP_EOL.
+					'<option value="">'.JText::_("Seleccione").'</option>'.PHP_EOL;
 	if ( empty($params->beneficiarios) ) {
 		$app->enqueueMessage(JText::_('NO_ALTAS'), 'notice');
 	} else {
@@ -96,7 +97,7 @@ function formTraspaso($params, $app, $usuario) {
 			</p>
 			<p>
 				<label for="tag_traspaso"><?php echo JText::_('CANTIDAD_TRASPASO'); ?></label>
-				<input class="input_monto validate[required,custom[number]]" type="number" id="cantidad" name="amount" />
+				<input class="input_monto validate[required,custom[number]]" type="number" step="any" id="cantidad" name="amount" />
 			</p>
 		</div>
 		
@@ -146,12 +147,12 @@ function formConfirm($params, $app, $usuario) {
 				<div><?php echo JText::_('TRASPASO_DINERO'); ?></div>
 			</div>
 			<div class="fila">
-				<div><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></div>
-				<div><?php echo $receiver->name; ?></div>
+				<div><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
+				<div>$ <span class="number"><?php echo $params->datosUsuario->balance; ?></span></div>
 			</div>
 			<div class="fila">
-				<div><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
-				<div><?php echo $params->datosUsuario->balance; ?></div>
+				<div><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></div>
+				<div><?php echo $receiver->name; ?></div>
 			</div>
 			<div class="fila">
 				<div><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
@@ -159,7 +160,7 @@ function formConfirm($params, $app, $usuario) {
 			</div>
 			<div class="fila">
 				<div><?php echo JText::_('CANTIDAD_TRASPASO'); ?></div>
-				<div>$ <?php echo $amount; ?></div>
+				<div>$ <span class="number"><?php echo $amount; ?></span></div>
 			</div>
 		</div>
 		<input type="hidden" name="senderId" value="<?php echo $senderId; ?>"> 
@@ -210,7 +211,7 @@ function formResumen($params) {
 	
 			<p>
 				<label><?php echo JText::_('TRASPASO_AMOUNT'); ?></label>
-				<span><?php echo $params->tx->amount; ?></span>
+				<span>$ <span class="number"><?php echo $params->tx->amount; ?></span></span>
 			</p>
 			<p>
 				<label><?php echo JText::_('TRASPASO_DATE'); ?></label>
