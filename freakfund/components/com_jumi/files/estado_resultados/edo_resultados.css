@@ -1,0 +1,10 @@
+td.tdCantidadesegresos{
+	float: right;
+	color: red;
+}
+td.cantidades{
+	float:right;
+}
+table.contenedores{
+	width: 100%;
+}
