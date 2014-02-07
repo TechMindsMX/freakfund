@@ -5,11 +5,11 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla view library
 jimport('joomla.application.component.view');
 
-class traspasocuentasViewtraspasocuentas extends JView
+class projectStatementViewprojectStatement extends JView
 {
 	function display($tpl = null) {
 	        // Get data from the model
-	        $items = $this->get('listadoCuentas');
+	        $items = $this->get('projectStatement');
 
 	        // Check for errors.
 	        if (count($errors = $this->get('Errors'))) {
@@ -25,8 +25,8 @@ class traspasocuentasViewtraspasocuentas extends JView
 			
 	        parent::display($tpl);
 	}
-    protected function addToolBar()	{
-            JToolBarHelper::title(JText::_('COM_CUENTASADMIN_ADMINCUENTAS_TITLE'));
+    protected function addToolBar($proyecto=null)	{
+            JToolBarHelper::title(JText::_('COM_ESTADO_RESULTADOS_ER_TITLE'));
 			JToolBarHelper::back();
 			
 	}
