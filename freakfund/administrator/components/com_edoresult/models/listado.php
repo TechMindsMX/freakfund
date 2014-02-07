@@ -6,8 +6,7 @@ jimport('joomla.application.component.modellist');
 jimport('trama.class');
 jimport('trama.usuario_class');
 
-class listadoModellistado extends JModelList
-{
+class listadoModellistado extends JModelList{
 	public function getlistadoproyectos() {
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true); 
@@ -20,26 +19,17 @@ class listadoModellistado extends JModelList
 		$db->setQuery($query);
 		$results = $db->loadObjectList();
 
-		$proyectos = JTrama::getProyByStatus(5,10,6,7,8,11);
-		
+		$proyectos = JTrama::getProyByStatus('5,10,6,7,8,11');
+
 		foreach ($proyectos as $key => $value) {
 			foreach ($results as $llave => $valor) {
 				if($value->userId == $valor->idMiddleware){
 					$value->idJoomla 		= $valor->idJoomla;
 					$value->prodName 		= $valor->name;
-					$value->ligaEdoResult 	= 'index.php?option=com_edoresult&task=estadoderesultados&id='.$value->id; 
+					$value->ligaEdoResult 	= 'index.php?option=com_edoresult&task=projectstatement&id='.$value->id; 
 				}
 			}
 		}		
 		return $proyectos;
-	}
-
-	public function producerIdJoomlaANDName($obj,$id=null){
-		if($id == null){
-			$id = $obj->userId;
-		}
-		
-		$obj->idJoomla = UserData::getUserJoomlaId($id);
-		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
 	}
 }

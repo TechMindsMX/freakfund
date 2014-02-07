@@ -27,8 +27,6 @@ class listadoViewlistado extends JView
 	}
     protected function addToolBar()	{
             JToolBarHelper::title(JText::_('COM_ESTADO_RESULTADOS_TITLE'));
-			JToolBarHelper::back();
-			
 	}
 
 }
