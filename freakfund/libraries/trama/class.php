@@ -407,5 +407,126 @@ class JTrama
 		return $transactionsDetail;
 		;
 	}
+	
+	public static function getStateResult($proyId){
+		$dataProyecto 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
+		$dataGral 		= self::getDatos($proyId);
+		$user			= UserData::getUserJoomlaId($dataGral->userId);
+		$usuario		= JFactory::getUser($user);
+		$objagrupado 	= self::agrupaIngresosEgresos($dataProyecto);
+		$objagrupado 	= self::sumatoriaIngresos($objagrupado);
+		$objagrupado	= self::sumatoriaEgresos($objagrupado);
+		
+		$objagrupado['proyectName'] = $dataGral->name;
+		$objagrupado['producerName'] = $usuario->name;
+		$objagrupado['breakeven'] = $dataGral->breakeven;
+		var_dump($dataGral);
+		
+		var_dump($objagrupado);exit;
+	}
+	
+	public static function agrupaIngresosEgresos($dataProyecto){
+		$respuesta 	= array();
+		$respuesta['ingresos'] 	= array();
+		$respuesta['egresos'] 	= array();
+		
+		$respuesta['totalIngresos']	= 0;
+		$respuesta['totalEgresos']	= 0;
+		
+		foreach ($dataProyecto as $key => $value) {
+			switch ($value->type) {
+				case 'CREDIT':
+					$respuesta['ingresos'][] = $value;
+					$respuesta['totalIngresos'] = $respuesta['totalIngresos']+$value->amount;
+					break;
+				case 'DEBIT':
+					$respuesta['egresos'][] = $value;
+					$respuesta['totalEgresos'] = $respuesta['totalEgresos']+$value->amount;
+					break;
+				default:					
+					break;
+			}			
+		}
+		
+		return $respuesta;
+	}
+	
+	public static function sumatoriaIngresos($objAgrupado){
+		//Ingresos
+		$objAgrupado['totFundin'] = 0;
+		$objAgrupado['totInvers'] = 0;
+		$objAgrupado['totVentas'] = 0;
+		$objAgrupado['totPatroc'] = 0;
+		$objAgrupado['toApoDona'] = 0;
+		$objAgrupado['totalOtro'] = 0;
+		$objAgrupado['toAporCap'] = 0;
+		
+		foreach ($objAgrupado['ingresos'] as $key => $value) {
+			switch ($value->description) {
+				case 'FUNDING':
+					$objAgrupado['totFundin'] = $objAgrupado['totFundin']+$value->amount;
+					break;
+				case 'INVESTMENT':
+					$objAgrupado['totInvers'] = $objAgrupado['totInvers']+$value->amount;
+					break;
+				case 'SALES':
+					$objAgrupado['totVentas'] = $objAgrupado['totVentas']+$value->amount;
+					break;
+				case 'SPONSORSHIP':
+					$objAgrupado['totPatroc'] = $objAgrupado['totPatroc']+$value->amount;
+					break;
+				case 'SUPPORTDONATIONS':
+					$objAgrupado['toApoDona'] = $objAgrupado['toApoDona']+$value->amount;
+					break;
+				case 'OTHERS':
+					$objAgrupado['totalOtro'] = $objAgrupado['totalOtro']+$value->amount;
+					break;
+				case 'CAPITALCONTRIBUTIONS':
+					$objAgrupado['toAporCap'] = $objAgrupado['toAporCap']+$value->amount;
+					break;
+				default:
+					break;
+			}
+		}
+		
+		return $objAgrupado;
+	}
+
+	public static function sumatoriaEgresos($objAgrupado){
+		//egresos
+		$objAgrupado['toProveed'] = 0;
+		$objAgrupado['toCapital'] = 0;
+		$objAgrupado['toReemCap'] = 0;
+		$objAgrupado['toProduct'] = 0;
+		$objAgrupado['toCostFij'] = 0;
+		$objAgrupado['toCostVar'] = 0;
+		
+		foreach ($objAgrupado['egresos'] as $key => $value) {
+			switch ($value->description) {
+				case 'PROVIDERS':
+					$objAgrupado['toProveed'] = $objAgrupado['toProveed']+$value->amount;
+					break;
+				case 'CAPITAL':
+					$objAgrupado['toCapital'] = $objAgrupado['toCapital']+$value->amount;
+					break;
+				case 'CAPITALREPAYMENT':
+					$objAgrupado['toReemCap'] = $objAgrupado['toReemCap']+$value->amount;
+					break;
+				case 'PRODUCER_PAYMENT':
+					$objAgrupado['toProduct'] = $objAgrupado['toProduct']+$value->amount;
+					break;
+				case 'FEXEDCOSTS':
+					$objAgrupado['toCostFij'] = $objAgrupado['toCostFij']+$value->amount;
+					break;
+				case 'VARCOSTS':
+					$objAgrupado['toCostVar'] = $objAgrupado['toCostVar']+$value->amount;
+					break;
+				default:
+					break;
+			}
+		}
+		
+		return $objAgrupado;
+	}
 }
 ?>
