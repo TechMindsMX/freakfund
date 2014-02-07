@@ -134,7 +134,7 @@ $value = $this->items;
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TOTAL'); ?>Total</td>
 					<td></td>
-					<td class="tdCantidadesegresos">-$<span class="number"><?php echo $value['totalEgr']; ?></span></td>
+					<td class="tdCantidadesegresos">-$<span class="number"><?php echo $value['totalEgresos']; ?></span></td>
 				</tr>
 			</table>
 		</td>
