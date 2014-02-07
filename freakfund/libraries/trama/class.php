@@ -426,8 +426,8 @@ class JTrama
 		$objagrupado['trf']	 			= $dataGral->trf;
 		$objagrupado['cre'] 			= $dataGral->cre;
 		$objagrupado['resultadoIE'] 	= $objagrupado['totalIngresos']-$objagrupado['totalEgresos'];
-		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/$objagrupado['totalIngresos'];
-		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/$objagrupado['totalIngresos'];
+		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
+		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
 		$objagrupado['fincol3'] 		= $objagrupado['resultadoIE'] * $objagrupado['porcVentas'];
 		$objagrupado['retornos']	 	= $dataGral->tri+$dataGral->trf;
 		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10;
@@ -436,8 +436,8 @@ class JTrama
 		$objagrupado['resultComic']		= 0;
 		$objagrupado['resultOtros']		= 0;
 		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
-		$objagrupado['porcentaTRI']		=$objagrupado['resultadoIE']/$objagrupado['totalIngresos'];
-		$objagrupado['porcentaTRF']		=$objagrupado['resultFinan']/$objagrupado['totalIngresos'];
+		$objagrupado['porcentaTRI']		=$objagrupado['resultadoIE']/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
+		$objagrupado['porcentaTRF']		=$objagrupado['resultFinan']/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
 				
 		return $objagrupado;
 	}
