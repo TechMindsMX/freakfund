@@ -176,11 +176,6 @@ $value = $this->items;
 					<td></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['resultOtros']; ?></span></td>
 				</tr>
-				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>
-					<td></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['toResultado']; ?></span></td>
-				</tr>
 			</table>
 		</td>
 	</tr>
