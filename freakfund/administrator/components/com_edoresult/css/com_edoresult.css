@@ -1,5 +1,3 @@
-/** text/css **/
-
 a.button{
 	color: #002c61 !important;
 	background: #99ccff !important;
@@ -19,4 +17,15 @@ a.button{
 }
 .labels{
 	font-weight: bolder;
+}
+
+td.tdCantidadesegresos{
+	float: right;
+	color: red;
+}
+td.cantidades{
+	float:right;
+}
+table.contenedores{
+	width: 100%;
 }

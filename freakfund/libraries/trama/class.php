@@ -417,12 +417,29 @@ class JTrama
 		$objagrupado 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado	= self::sumatoriaEgresos($objagrupado);
 		
-		$objagrupado['proyectName'] = $dataGral->name;
-		$objagrupado['producerName'] = $usuario->name;
-		$objagrupado['breakeven'] = $dataGral->breakeven;
-		var_dump($dataGral);
-		
-		var_dump($objagrupado);exit;
+		$objagrupado['proyectName'] 	= $dataGral->name;
+		$objagrupado['producerName'] 	= $usuario->name;
+		$objagrupado['breakeven'] 		= $dataGral->breakeven;
+		$objagrupado['presupuesto'] 	= $dataGral->budget;
+		$objagrupado['balance'] 		= $dataGral->balance;
+		$objagrupado['tri'] 			= $dataGral->tri;
+		$objagrupado['trf']	 			= $dataGral->trf;
+		$objagrupado['cre'] 			= $dataGral->cre;
+		$objagrupado['resultadoIE'] 	= $objagrupado['totalIngresos']-$objagrupado['totalEgresos'];
+		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/$objagrupado['totalIngresos'];
+		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/$objagrupado['totalIngresos'];
+		$objagrupado['fincol3'] 		= $objagrupado['resultadoIE'] * $objagrupado['porcVentas'];
+		$objagrupado['retornos']	 	= $dataGral->tri+$dataGral->trf;
+		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10;
+		$objagrupado['resultFinan']		= $objagrupado['fincol3'] - $objagrupado['resultReden'];
+		$objagrupado['resultInver']		= ($objagrupado['resultadoIE'] * $objagrupado['porcInver']);
+		$objagrupado['resultComic']		= 0;
+		$objagrupado['resultOtros']		= 0;
+		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
+		$objagrupado['porcentaTRI']		=$objagrupado['resultadoIE']/$objagrupado['totalIngresos'];
+		$objagrupado['porcentaTRF']		=$objagrupado['resultFinan']/$objagrupado['totalIngresos'];
+				
+		return $objagrupado;
 	}
 	
 	public static function agrupaIngresosEgresos($dataProyecto){
