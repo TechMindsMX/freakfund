@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
  
 /**
- * General Controller of TramaProyectos component
+ * General Controller of freakfund component
  */
 class freakfundController extends JController
 {
