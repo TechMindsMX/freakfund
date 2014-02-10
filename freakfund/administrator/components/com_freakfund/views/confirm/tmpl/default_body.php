@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 					window.location.replace("<?php echo 'index.php?option=com_freakfund&task=proveedores&id='.$envio->projectId; ?>");
 				});
 			} else {
-				jQuery(('#toolbar-box').append(obj.error);
+				jQuery('#toolbar-box').append(obj.error);
 			}
 		});
 	 });
