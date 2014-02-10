@@ -15,6 +15,8 @@ class proveedoresModelproveedores extends JModelList
 			
 			foreach ($datos->providers as $key => $value) {
 				self::producerIdJoomlaANDName($value, $value->providerId);
+				$value->advanceDif = JTrama::dateDiff(date('d-m-Y',$value->advanceDateCode/1000));
+				$value->settlemDif = JTrama::dateDiff(date('d-m-Y',$value->settlementDateCode/1000));
 			}
 				
 			return $datos;

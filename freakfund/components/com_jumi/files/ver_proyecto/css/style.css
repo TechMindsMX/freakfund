@@ -278,16 +278,11 @@ div#banner div.rt-inner a {
 #statusbar, #animacionbg {
 	position: relative;
 	height: 2em;
-	margin-bottom: 0.5em;
+	margin-bottom: 1.5em;
 	width : 0%;
 	border-radius: 10px;
-background: #60cacd; /* Old browsers */
-background: -moz-linear-gradient(bottom,  #60cacd 0%, #30b4d0 36%, #0099d1 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#60cacd), color-stop(36%,#30b4d0), color-stop(100%,#0099d1)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /* W3C */
+background: #99CCFF; /* Old browsers */
+
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60cacd', endColorstr='#0099d1',GradientType=1 ); /* IE6-9 */*/
 }
 #animacionbg {
@@ -297,10 +292,17 @@ background: linear-gradient(to bottom,  #60cacd 0%,#30b4d0 36%,#0099d1 100%); /*
 }
 #animacionbg > span {
 	position: absolute;
-	top: 2em;
+	top: 2.3em;
 }
 #animacionbg span {
 	font-weight: bold;
+}
+#animacionbg .recaudado {
+color: #000000;
+    text-align: center;
+    font-size: 120%;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    margin-top: -18px;
 }
 div#proInfo h1, div#proInfo h2, div#proInfo h3 {
 	line-height: 100%;
@@ -317,6 +319,14 @@ div#proInfo .naranja {
 	color: #ff763f;
 }
 
+#contenido-detalle {
+	margin-bottom: 10px;
+	/*height: 500px;*/
+	/*overflow-y: scroll;*/
+}
+#finanzas #contenido-detalle {
+	height: 355px;
+}
 
 @media screen and (max-width:1200px) {
 	#menu-player {
@@ -364,22 +374,26 @@ div#proInfo .naranja {
 		width: 100%;
 		height: 65px;
 	}
-	.menu-item {
+	#wrapper, #content {
 		width: 100%;
+		height:auto;
+	}
+	#menu {
+		width: 100%;
+		margin: 0;	
+	}
+	.menu-item {
+		width: 22%;
+		margin-right: 3%;
+	}
+	.menu-item:last-of-type {
+		margin-right: 0;
 	}
 }
 
-#contenido-detalle {
-	margin-bottom: 10px;
-	/*height: 500px;*/
-	/*overflow-y: scroll;*/
-}
-#finanzas #contenido-detalle {
-	height: 355px;
-}
 @media screen and (max-width:500px) {
 	.img_avatar {
-	width: 253px;
+		width: 253px;
 	}
 	#map-wrapper {
 		height: 250px;

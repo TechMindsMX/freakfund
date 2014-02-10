@@ -380,17 +380,21 @@ function statusbar($data) {
 					</div>';
 			break;
 		case '6' OR '7' OR '10':
-			$tmpl = '<div id="animacionbg" style="background: linear-gradient(to right, #00ff00 0%,#00ff00 50%,#d6d6d6 50.1%, #d6d6d6 100%);">
-					<span style="left: 22%;">'.JText::_("STATEMENT_FUNDING").'</span>
-					<span style="left: 70%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
-					<span style="left: 0%;">'.$data->fundStartDate.'</span>
-					<span style="left: 47%;">'.$data->fundEndDate.'</span>
-					<span style="left: 94%;">'.$data->premiereEndDate.'</span>
-					<div style="margin-left: 50%;">
-						<div id="statusbar" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
-						<span class="number" style="float: right; margin: .3em .5em 0 0; color: #000;">'.$data->balance.'</span></div>
+			$tmpl = '<div style="position:relative; height: 2em;">
+						<span style="position:absolute; left: 0%;">'.$data->fundStartDate.'</span>
+						<span style="position:absolute; left: 47%;">'.$data->fundEndDate.'</span>
+						<span style="position:absolute; left: 93%;">'.$data->premiereEndDate.'</span>
 					</div>
-					</div>';
+				<div id="animacionbg" style="background: linear-gradient(to right, #009ED3 0%,#009ED3 50%,#d6d6d6 50.1%, #d6d6d6 100%);">
+					<span style="left: 20%;">'.JText::_("STATEMENT_FUNDING").'</span>
+					<span style="left: 73%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
+					<div style="margin-left: 50%;position: relative;">
+						<div id="statusbar" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
+						</div>
+					</div>
+					<div class="recaudado">$ <span class="number">'.$data->balance.'</span></div>
+					</div>'
+					;
 			break;
 	}
 
@@ -398,16 +402,22 @@ function statusbar($data) {
 }
 
 function botonFinanciar($data) {
+	$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$data->id;
+	$disable = '';
 	switch ($data->status) { 
-		case '5':
+		case 5:
 			$string = 'LABEL_FINANCIAR';
+			break;
+		case 6:
+			$string = 'INVERTIR_PROYECTO';
 			break;
 		default:
 			$string = 'INVERTIR_PROYECTO';
+			$disable = 'class="disabled"';
+			$url = '';
 			break;
 	}
-	$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$data->id;
-	$tmpl = '<div><a class="button btn-invertir" href="'.$url.'">'.JText::_($string).'</a></div>';
+	$tmpl = '<div '.$disable.' ><a class="button btn-invertir" href="'.$url.'">'.JText::_($string).'</a></div>';
 	
 	return $tmpl;
 	

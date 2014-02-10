@@ -293,7 +293,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<div class="descText">' + members[i].description + '</div>';
 		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '<div class="boton-wrap">';
-		if( members[i].status == 5 || members[i].status == 6 || members[i].status == 7 ){
+		if( members[i].status == 5 || members[i].status == 6 || members[i].status == 7 || members[i].status == 10 ){
 			newcontent += '<a class="button btn-invertir" href="' + link + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
 		}else{
 			newcontent += '<div class="button btn-invertir disabled" href="">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</div>';

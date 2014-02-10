@@ -20,6 +20,16 @@ foreach ($providers as $key => $value) {
 	}else{
 		$deshabilitaFiniquito = '';
 	}
+	
+	$advBgColor = $value->advanceDif->invert == 0 ? 'red' : '';
+	if ($value->advanceDif->invert == 1 && $value->advanceDif->days <= 15) {
+		$advBgColor ='green';
+	}
+	var_dump($value->settlemDif);
+	$setBgColor = $value->settlemDif->invert == 0 ? 'red' : '';
+	if ($value->settlemDif->invert == 1 && $value->settlemDif->days <= 15){
+		$setBgColor = 'green';
+	}
 
 ?>
 	<tr>
@@ -31,7 +41,7 @@ foreach ($providers as $key => $value) {
 			$<span class="number"><?php echo $value->advanceQuantity+$value->settlementQuantity; ?></span>
 		</td>
 		
-		<td align="absmiddle">
+		<td align="absmiddle" style="color: <?php echo $advBgColor; ?>;">
 			<?php echo $value->advanceDate; ?>
 		</td>
 		
@@ -49,7 +59,7 @@ foreach ($providers as $key => $value) {
 			<input type="hidden" value="<?php echo $value->advanceQuantity; ?>" />
 		</td>
 		
-		<td align="absmiddle">
+		<td align="absmiddle" style="color: <?php echo $setBgColor; ?>;">
 			<?php echo $value->settlementDate; ?>
 		</td>
 		

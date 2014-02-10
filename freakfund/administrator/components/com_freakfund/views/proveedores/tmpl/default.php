@@ -15,9 +15,6 @@ $document->addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 ?>
 <script language="JavaScript">
 	
-	function envio() {
-		return false;
-	}
 	jQuery(document).ready(function (){
 		 jQuery('span.number').number( true, 2, '.',',' );
 		 
