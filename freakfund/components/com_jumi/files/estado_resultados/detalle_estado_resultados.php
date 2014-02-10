@@ -21,20 +21,16 @@ $value 		= JTrama::getStateResult($proyId);
 $pathJumi 	= JUri::base().'components/com_jumi/files/estado_resultados/';
 $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 
-if($usuario->id != $value['userIdJoomla']){
-	$app =JFactory::getApplication();
-	$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'message');
-}
-
 ?>
 <table class="table">
 	<tr>
-		<td width="32.5%"></td>
-		<td width="30%">
-			<table class="contenedores">
-				<tr>
-					<td colspan="2" align="absmiddle"><h3><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_T1'); ?></h3></td>
-				</tr>
+		
+		<td colspan="3">
+		<div style="width:50%">
+				<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_T1'); ?></div>
+			</div>	
+			<table class="table-striped" width="50%">
+				
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PROYECTO'); ?></td>
 					<td class="cantidades"><strong><?php echo $value['proyectName']; ?></strong></td>
@@ -42,10 +38,6 @@ if($usuario->id != $value['userIdJoomla']){
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PRODUCTOR'); ?></td>
 					<td class="cantidades"><strong><?php echo $value['producerName']; ?></strong></td>
-				</tr>
-				<tr>
-					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
-					<td class="cantidades">$<span class="number"><?php echo $value['presupuesto']; ?></span></td>
 				</tr>
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_FUNDENDDATE'); ?></td>
@@ -62,6 +54,10 @@ if($usuario->id != $value['userIdJoomla']){
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRIMIERENDDATE'); ?></td>
 					<td class="cantidades"><?php echo $value['fechafin']; ?></td>
+				</tr>
+				<tr>
+					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
+					<td class="cantidades">$<span class="number"><?php echo $value['presupuesto']; ?></span></td>
 				</tr>
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></td>
@@ -85,16 +81,16 @@ if($usuario->id != $value['userIdJoomla']){
 				</tr>
 			</table>
 		</td>
-		<td width="32.5%"></td>
 	</tr>
 	<tr>
-		<td align="absmiddle"><h3><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></h3></td>
-		<td align="absmiddle"><h3><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EGRESOS'); ?></h3></td>
-		<td align="absmiddle"><h3><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_RESULTADOS'); ?></h3></td>
+	
+		<td align="absmiddle"><div class="titulo-tabla"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div></td>
+		<td align="absmiddle"><div class="titulo-tabla"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_EGRESOS'); ?></div></td>
+		<td align="absmiddle"><div class="titulo-tabla"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_RESULTADOS'); ?></div></td>
 	</tr>
 	<tr valign="top">
 		<td>
-			<table class="contenedores">
+			<table class="table table-striped">
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PORFINANCIAMIENTO'); ?></td>
 					<td></td>
@@ -135,13 +131,10 @@ if($usuario->id != $value['userIdJoomla']){
 					<td></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['totalIngresos']; ?></span></td>
 				</tr>
-				<tr>
-					<td></td>
-				</tr>
 			</table>
 		</td>
 		<td>	
-			<table class="contenedores">
+			<table class="table table-striped">
 				<!--Seccion de Egresos-->
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_PROVEEDORES'); ?></td>
@@ -182,7 +175,7 @@ if($usuario->id != $value['userIdJoomla']){
 			</table>
 		</td>
 		<td>	
-			<table class="contenedores">
+			<table class="table table-striped">
 				<!--Resultados-->
 				<tr>
 					<td><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS_EGRESOS'); ?></td>
@@ -223,3 +216,7 @@ if($usuario->id != $value['userIdJoomla']){
 		</td>
 	</tr>
 </table>
+<div>
+	<input type="button" id="cancelar" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
+		javascript:window.history.back();">
+</div>
