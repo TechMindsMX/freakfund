@@ -25,7 +25,6 @@ foreach ($providers as $key => $value) {
 	if ($value->advanceDif->invert == 1 && $value->advanceDif->days <= 15) {
 		$advBgColor ='green';
 	}
-	var_dump($value->settlemDif);
 	$setBgColor = $value->settlemDif->invert == 0 ? 'red' : '';
 	if ($value->settlemDif->invert == 1 && $value->settlemDif->days <= 15){
 		$setBgColor = 'green';
