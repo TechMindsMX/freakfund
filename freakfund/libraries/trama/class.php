@@ -426,6 +426,11 @@ class JTrama
 		$objagrupado['tri'] 			= $dataGral->tri;
 		$objagrupado['trf']	 			= $dataGral->trf;
 		$objagrupado['cre'] 			= $dataGral->cre;
+		$objagrupado['finFunding']			= $dataGral->fundEndDate;
+		$objagrupado['FechaInicioProduc']	= $dataGral->productionStartDate;	
+		$objagrupado['FechaEstreno']		= $dataGral->premiereStartDate;
+		$objagrupado['fechafin']			= $dataGral->premiereEndDate;
+		$objagrupado['ingresosPotenciales']	= $dataGral->revenuePotential;
 				
 		return $objagrupado;
 	}

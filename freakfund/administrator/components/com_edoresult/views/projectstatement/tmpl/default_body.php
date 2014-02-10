@@ -16,6 +16,23 @@ $value = $this->items;
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRODUCTOR'); ?></td>
 					<td class="cantidades"><strong><?php echo $value['producerName']; ?></strong></td>
 				</tr>
+				
+				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_FUNDENDDATE'); ?></td>
+					<td class="cantidades"><?php echo $value['finFunding']; ?></td>
+				</tr>
+				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRODUCTIONSTARTDATE'); ?></td>
+					<td class="cantidades"><?php echo $value['FechaInicioProduc']; ?></td>
+				</tr>
+				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PREMIERSTARTDATE'); ?></td>
+					<td class="cantidades"><?php echo $value['FechaEstreno']; ?></td>
+				</tr>
+				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRIMIERENDDATE'); ?></td>
+					<td class="cantidades"><?php echo $value['fechafin']; ?></td>
+				</tr>
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRESUPUESTO'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['presupuesto']; ?></span></td>
@@ -23,6 +40,10 @@ $value = $this->items;
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_BREAKEVEN'); ?></td>
 					<td class="cantidades">$<span class="number"><?php echo $value['breakeven']; ?></span></td>
+				</tr>
+				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_INGRESO_POTENCIALES'); ?></td>
+					<td class="cantidades">$<span class="number"><?php echo $value['ingresosPotenciales']; ?></span></td>
 				</tr>
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_BALANCE'); ?></td>
