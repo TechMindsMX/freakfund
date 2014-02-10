@@ -417,6 +417,7 @@ class JTrama
 		$objagrupado				 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado					= self::sumatoriaEgresos($objagrupado);
 		$objagrupado					= self::operacionesEstadoResult($objagrupado,$dataGral);
+		$objagrupado['userIdJoomla']	= $user; 
 		$objagrupado['proyectName'] 	= $dataGral->name;
 		$objagrupado['producerName'] 	= $usuario->name;
 		$objagrupado['breakeven'] 		= $dataGral->breakeven;

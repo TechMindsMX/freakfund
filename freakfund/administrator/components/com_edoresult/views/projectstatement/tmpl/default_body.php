@@ -13,10 +13,6 @@ $value = $this->items;
 					<td colspan="2" align="absmiddle"><h3><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_T1'); ?></h3></td>
 				</tr>
 				<tr>
-					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PROYECTO'); ?></td>
-					<td class="cantidades"><strong><?php echo $value['proyectName']; ?></strong></td>
-				</tr>
-				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PRODUCTOR'); ?></td>
 					<td class="cantidades"><strong><?php echo $value['producerName']; ?></strong></td>
 				</tr>

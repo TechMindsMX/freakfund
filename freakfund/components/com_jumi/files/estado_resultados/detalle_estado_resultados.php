@@ -21,6 +21,11 @@ $value 		= JTrama::getStateResult($proyId);
 $pathJumi 	= JUri::base().'components/com_jumi/files/estado_resultados/';
 $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 
+if($usuario->id != $value['userIdJoomla']){
+	$app =JFactory::getApplication();
+	$app->redirect($url, JText::_('ITEM_DOES_NOT_EXIST'), 'message');
+}
+
 ?>
 <table class="table">
 	<tr>
