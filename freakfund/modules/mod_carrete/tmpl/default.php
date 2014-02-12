@@ -59,7 +59,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 </div>
 	<ul id="mycarousel<?php echo $module->id; ?>" class="jcarousel-skin-tango">
   	<?php
-	if(!is_null($datos->items) && $datos->items[0] != ''){
+	if(!is_null($datos->items) && @$datos->items[0] != ''){
 	  	switch ($params->get('tipodepro')) {
 			case 'cerrar':
 		 		foreach ($datos->items as $key => $value) {

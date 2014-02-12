@@ -74,10 +74,6 @@ if($confirm == 0){
 		
 		jQuery('#guardar').prop('disabled', true);
 		
-		function formatoNumero() {
-			jQuery("span.number").number( true, 2 );
-		}
-		
 		function sumaarrecha(){
 			 var precio = 0;
 			 var cant 	= 0;
@@ -89,28 +85,49 @@ if($confirm == 0){
 				 jQuery("#resultadoglobal").text(total);
 			});			
 				 
-			if ( total > 0 && <?php echo $saldo ?> > total ) {
+			jQuery(document).find('.message').remove();
+
+			if ( total > 0 && <?php echo $saldo ?> >= total ) {
 				jQuery('#guardar').prop('disabled', false);
 			} else {
-				jQuery('#guardar').prop('disabled', true);
+				jQuery('#guardar').attr('disabled', 'disabled');
+				var alerta = jQuery(document).find('.alerta').length;
+				if (alerta == 0 && total > 0) {
+					var errMsg = '<dl id="system-message"><dd class="error message"><ul><li>';
+						errMsg += '<?php echo JText::_("CANT_MAYOR_SALDO"); ?>';
+						errMsg += '</li></ul></dd></dl>';
+					jQuery('#guardar').parent().before(errMsg);
+				}
 			}
 		}
 		jQuery(':input').keyup(function(){		
 			var limite = parseInt(jQuery(this).prev().prev().val());
-
-			if ( jQuery(this).val()>limite){
-				jQuery(this).val(0);
-				jQuery(this).next().children().text(0);
-				alert('<?php echo JText::_("CANT_MAYOR_INVENTARIO"); ?>');
 	
 				sumaarrecha();
+
+			if ( jQuery(this).val()>limite){
+				// jQuery(this).val('');
+				var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
+				var resultado = val_uni * jQuery(this).val();
+				jQuery(this).parent().next().children().children().text(resultado);
+				jQuery('#guardar').attr('disabled', 'disabled');
+				// jQuery(this).parent().next().find('#resultados').text(0);
+				var notice = jQuery(document).find('.notice').length;
+				if (notice == 0) {
+					var errMsg = '<div class="notice font-red">';
+							errMsg += '<?php echo JText::_("CANT_MAYOR_INVENTARIO"); ?>';
+							errMsg += '</div>';
+					
+					jQuery(this).after(errMsg);
+				}
 				
 				formatoNumero();
 			}else{
 				var val_uni = parseFloat(jQuery(this).parent().find('#precio').val());
 				var resultado = val_uni * jQuery(this).val();
-	
 				jQuery(this).parent().next().children().children().text(resultado);
+
+				jQuery(this).nextAll('.notice').remove();
 				
 				sumaarrecha();			
 				
@@ -125,15 +142,6 @@ if($confirm == 0){
 			}
 			
 		});
-		function habilitarCompra() {
-			var total = sumaarrecha();
-				
-			if ( total > 0 && <?php echo $saldo ?> > total ) {
-				jQuery('#guardar').prop('disabled', false);
-			} else {
-				jQuery('#guardar').prop('disabled', true);
-			}
-		}
 		
 		jQuery('#guardar').click(function() {
 				jQuery("#form_compra").validationEngine();
