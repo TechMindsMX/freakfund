@@ -340,14 +340,14 @@ function proInfo($data) {
 			$data->finanPorcentaje = (($data->breakeven / $data->revenuePotential)*100);
 			$data->finanPorcentaje2 = $data->finanPorcentaje + 0.1;
 			
-			$data->trf = ($data->trf != null || $data->trf != 0) ? $data->trf.' %' : 'NA';
-			$data->tri = ($data->tri != null || $data->tri != 0) ? $data->tri.' %' : 'NA';
+			$data->trfFormateado = ($data->trfFormateado != null || $data->trfFormateado != 0) ? $data->trfFormateado.' %' : 'NA';
+			$data->triFormateado = ($data->triFormateado != null || $data->triFormateado != 0) ? $data->triFormateado.' %' : 'NA';
 
 			$statusInfo1 = '<span class="bloque" style="border: 0;"></span>';
 			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_FIN').'</div>
-							<h1 class="naranja"><span>'.$data->trf.'</span></h1></div></span>';
+							<h1 class="naranja"><span>'.$data->trfFormateado.'</span></h1></div></span>';
 			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_INV').'</div>
-							<h1 class="naranja"><span>'.$data->tri.'</span></h1></div></span>';
+							<h1 class="naranja"><span>'.$data->triFormateado.'</span></h1></div></span>';
 			$statusInfo4 = '<span class="bloque"><div class="margen"><div>'.botonFinanciar($data).'</div>
 							</div></span>';
 

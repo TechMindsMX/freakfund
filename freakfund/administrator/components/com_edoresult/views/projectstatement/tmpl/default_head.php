@@ -5,7 +5,7 @@ $value = $this->items;
 
 ?>
 <tr>
-	<th colspan="3">
+	<th>
 		<h2><?php echo $value['proyectName']; ?></h2>
 	</th>
 </tr>

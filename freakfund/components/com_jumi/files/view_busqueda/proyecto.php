@@ -236,8 +236,8 @@ function pageselectCallback (page_index, jq) {
 		var recaudado = members[i].balance != null ? members[i].balance : " ";
 		var porcentajeRecaudado = members[i].balance != null ? ((members[i].balance/members[i].breakeven)*100).toFixed(2) : 0;
 		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " "; 
-		var trf = (members[i].trf != null && members[i].trf != 0) ? members[i].trf+"%" : "NA";
-		var tri = (members[i].tri != null && members[i].tri != 0) ? members[i].tri+"%" : "NA";
+		var trfFormateado = (members[i].trfFormateado != null && members[i].trfFormateado != 0) ? members[i].trfFormateado+"%" : "NA";
+		var triFormateado = (members[i].triFormateado != null && members[i].triFormateado != 0) ? members[i].triFormateado+"%" : "NA";
 		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";
 		/************************************************************************************/
 		countCol++;
@@ -280,10 +280,10 @@ function pageselectCallback (page_index, jq) {
 		if( members[i].status == 6 || members[i].status == 7 || members[i].status == 8 || members[i].status == 10 || members[i].status == 11){
 			newcontent += '<div class="productStyle">';
 			newcontent += '<div class="box1 two-cols first"><div class="inside">';
-			newcontent += '<div class="big">'+ trf +' </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
+			newcontent += '<div class="big">'+ trfFormateado +' </div> <div class="small"><?php echo JText::_('LABEL_ROF'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '<div class="box1 two-cols second"><div class="inside">';
-			newcontent += '<div class="big">'+ tri +'</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
+			newcontent += '<div class="big">'+ triFormateado +'</div><div class="small"><?php echo JText::_('LABEL_ROI'); ?></div></div>';
 			newcontent += '</div>';
 			newcontent += '</div>';
 		}

@@ -2,7 +2,6 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-JFactory::getDocument()->addStyleSheet('components/com_edoresult/css/com_edoresult.css');
 JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_slave'.DS.'tables');
 
 $jinput = JFactory::getApplication()->input;

@@ -99,8 +99,8 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 				break;
 			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
-		 			$value->trf = ($value->trf != null || $value->trf != 0) ? $value->trf.'%' : 'NA';
-		 			$value->tri = ($value->tri != null || $value->tri != 0) ? $value->tri.'%' : 'NA';
+		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : 'NA';
+		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : 'NA';
 					echo '<li>
 		    				<div class="contenedor productos">
 								<a href="'.$url.@$value->id.'">
@@ -119,11 +119,11 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 									</div>
 									<div class="datos">
 										<div class="two-cols first">
-										<div class="big">'.@$value->trf.'</div>
+										<div class="big">'.@$value->trfFormateado.'</div>
 										<div class="small">'.JText::_('LABEL_ROF').'</div>
 										</div>
 										<div class="two-cols second">
-										<div class="big">'.@$value->tri.'</div>
+										<div class="big">'.@$value->triFormateado.'</div>
 										<div class="small">'.JText::_('LABEL_ROI').'</div>
 										</div>
 										<div class="clearfix"></div>

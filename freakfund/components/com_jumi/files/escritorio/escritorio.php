@@ -76,7 +76,7 @@ function moreProData($value, $datosgenerales) {
 		
 		JTrama::getEditUrl($value);
 		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';
-		$value->roi = $value->investedAmount * ($value->tri / 100);
+		$value->roi = $value->investedAmount * $value->tri;
 		
 		if ( !is_null($value->fundedAmount) ) {
 			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->fundedAmount;
@@ -97,7 +97,7 @@ function htmlInversionActual($value, $datosgenerales) {
 							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
 							<td class="middle-td derecha">$<span class="number">' . $value->investedAmount . '</span></td>
 							<td class="middle-td derecha">$<span class="number">' . $value->roi . '</span></td>
-							<td class="middle-td">' . $value->tri . ' %</td>
+							<td class="middle-td">' . $value->triFormateado . ' %</td>
 							</tr>';
 	}
 	return $htmlInversionActual;

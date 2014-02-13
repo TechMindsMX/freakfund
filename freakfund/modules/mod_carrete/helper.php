@@ -33,6 +33,8 @@ class modCarreteHelper
 		if (!empty($obj->items)) {
 			foreach ($obj->items as $key => $value) {
 				if (in_array($value->status, $obj->validStatus)) {
+					$longitudName = 36;
+					$value->name = (strlen($value->name) > $longitudName) ? substr($value->name, 0, $longitudName)."..." : $value->name;
 					$dataFilterStatus[] = $value;
 				}
 				if ($tipoDePro == 'cerrar') {

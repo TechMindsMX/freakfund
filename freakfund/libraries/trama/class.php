@@ -260,8 +260,8 @@ class JTrama
 		} else {
 			$value->porcentajeRecaudado = 0; 
 		};
-		$value->tri = (is_null($value->tri)) ? 0 : round(($value->tri * 100), 2);
-		$value->trf = (is_null($value->trf)) ? 0 : round(($value->trf * 100), 2);
+		$value->triFormateado = (is_null($value->tri)) ? 0 : round(($value->tri * 100), 2);
+		$value->trfFormateado = (is_null($value->trf)) ? 0 : round(($value->trf * 100), 2);
 		
 		if (isset($value->fundStartDate)) {
 			$value->fundStartDateCode = $value->fundStartDate;
