@@ -281,9 +281,11 @@ div#banner div.rt-inner a {
 	margin-bottom: 1.5em;
 	width : 0%;
 	border-radius: 10px;
-background: #99CCFF; /* Old browsers */
+	/*background: #009999; /* Old browsers */*/
 
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60cacd', endColorstr='#0099d1',GradientType=1 ); /* IE6-9 */*/
+}
+#statusbar {
 }
 #animacionbg {
 	background: #d6d6d6;
@@ -298,11 +300,12 @@ background: #99CCFF; /* Old browsers */
 	font-weight: bold;
 }
 #animacionbg .recaudado {
-color: #000000;
-    text-align: center;
+	text-align: right;
+	color: #FFFFFF;
+	min-width: 150px;
     font-size: 120%;
-    text-shadow: 1px 1px 1px #FFFFFF;
-    margin-top: -18px;
+    font-weight: bold;
+    padding: 2px 8px 0 0;
 }
 div#proInfo h1, div#proInfo h2, div#proInfo h3 {
 	line-height: 100%;

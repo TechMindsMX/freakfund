@@ -335,8 +335,10 @@ function proInfo($data) {
 							
 			break;
 		case '6' OR '7' OR '10':
-			$data->balancePorcentaje = ((($data->balance - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
-			$data->statusbarPorcentaje = $data->balancePorcentaje;
+			$data->balancePorcentaje = (($data->balance / $data->revenuePotential)*100);
+			$data->statusbarPorcentaje = ((($data->balance - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
+			$data->finanPorcentaje = (($data->breakeven / $data->revenuePotential)*100);
+			$data->finanPorcentaje2 = $data->finanPorcentaje + 0.1;
 			
 			$data->trf = ($data->trf != null || $data->trf != 0) ? $data->trf.' %' : 'NA';
 			$data->tri = ($data->tri != null || $data->tri != 0) ? $data->tri.' %' : 'NA';
@@ -367,8 +369,10 @@ function statusbar($data) {
 	$data->animacion = 	'<script>
 						setTimeout(function () {
 							jQuery("#statusbar").animate({
-								width: [ "'.(($data->statusbarPorcentaje)).'%", "swing" ]
-							}, 2000);
+								width: [ "'.(($data->balancePorcentaje)).'%", "swing" ]
+							}, 2000, function() {
+								jQuery("#statusbar").append("<div class=\"recaudado\">$ '.number_format($data->balance,2).'</div>");
+							});
 						}, 3000);
 					</script>';
 	
@@ -382,17 +386,14 @@ function statusbar($data) {
 		case '6' OR '7' OR '10':
 			$tmpl = '<div style="position:relative; height: 2em;">
 						<span style="position:absolute; left: 0%;">'.$data->fundStartDate.'</span>
-						<span style="position:absolute; left: 47%;">'.$data->fundEndDate.'</span>
+						<span style="position:absolute; left: '.($data->finanPorcentaje-3).'%;">'.$data->fundEndDate.'</span>
 						<span style="position:absolute; left: 93%;">'.$data->premiereEndDate.'</span>
 					</div>
-				<div id="animacionbg" style="background: linear-gradient(to right, #009ED3 0%,#009ED3 50%,#d6d6d6 50.1%, #d6d6d6 100%);">
-					<span style="left: 20%;">'.JText::_("STATEMENT_FUNDING").'</span>
-					<span style="left: 73%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
-					<div style="margin-left: 50%;position: relative;">
-						<div id="statusbar" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
-						</div>
+				<div id="animacionbg">
+					<span style="left: '.(($data->finanPorcentaje/2)-3).'%;">'.JText::_("STATEMENT_FUNDING").'</span>
+					<span style="left: '.((((100-$data->finanPorcentaje)/2)+$data->finanPorcentaje)-3).'%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
+					<div id="statusbar" style="background: linear-gradient(to right, #3399FF 0%,#3399FF '.(($data->breakeven / $data->balance)*100).'%,#009999 '.(($data->breakeven / $data->balance)*100).'%, #009999 100%);">
 					</div>
-					<div class="recaudado">$ <span class="number">'.$data->balance.'</span></div>
 					</div>'
 					;
 			break;
@@ -408,7 +409,7 @@ function botonFinanciar($data) {
 		case 5:
 			$string = 'LABEL_FINANCIAR';
 			break;
-		case 6:
+		case '6' OR '7' OR '10':
 			$string = 'INVERTIR_PROYECTO';
 			break;
 		default:
