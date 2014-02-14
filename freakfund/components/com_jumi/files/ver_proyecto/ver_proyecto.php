@@ -385,9 +385,9 @@ function statusbar($data) {
 			break;
 		case '6' OR '7' OR '10':
 			$tmpl = '<div style="position:relative; height: 2em;">
-						<span style="position:absolute; left: 0%;">'.$data->fundStartDate.'</span>
-						<span style="position:absolute; left: '.($data->finanPorcentaje-3).'%;">'.$data->fundEndDate.'</span>
-						<span style="position:absolute; left: 93%;">'.$data->premiereEndDate.'</span>
+						<span class="statusbarFecha" style="left: 0%;">'.$data->fundStartDate.'</span>
+						<span class="statusbarFecha" style="left: '.($data->finanPorcentaje-3).'%;">'.$data->fundEndDate.'</span>
+						<span class="statusbarFecha" style="right: 0%;">'.$data->premiereEndDate.'</span>
 					</div>
 				<div id="animacionbg">
 					<span style="left: '.(($data->finanPorcentaje/2)-3).'%;">'.JText::_("STATEMENT_FUNDING").'</span>
