@@ -468,9 +468,6 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	#menu-player {
 		max-width: 5%;
 	}
-	.liga[type="button"] {
-		height:;
-	}
 	#reproductor {
 		width: 87%;
 	}
@@ -480,4 +477,32 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	.liga[type="button"] {
 		height: 89px;
 	}
+}
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 1)  { 
+	#wrapper, #slider, #content, #content #info, #reproductor {
+		height:30em;
+	}
+	#menu, #menu > div {
+		height: 8em;
+	} 
+	.menu-item {
+		margin-top: .8em;
+		width: 22.5%;
+		height: 100%;
+		background-size: 100%;
+	} 
+	.over, .active {
+		background-position-y: 0em;
+	}
+	#reproductor {
+		width: 87%;
+	}
+	#menu-player {
+		max-width: 11%;
+	}
+
 }
