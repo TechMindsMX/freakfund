@@ -99,6 +99,7 @@ tr.middle-td .td-img {
 tr.middle-td .td-titulo {
 	text-align: left;
 	text-transform: uppercase;
+	width: 45%;
 }
 table th.th-center-cartera, table td.th-center-cartera {
 	text-align: center;
