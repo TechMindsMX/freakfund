@@ -32,8 +32,8 @@ $datosgenerales 				= UserData::datosGr($idMiddleware->idJoomla);
 $datosgenerales->userBalance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
-$objProyectos					= JTrama::getProjectbyUser($idMiddleware->idMiddleware); 
-$objProductos					= JTrama::getProductbyUser($idMiddleware->idMiddleware);
+$objProyectos					= JTrama::getProjectORProductParnetship($idMiddleware->idMiddleware, 'project'); 
+$objProductos					= JTrama::getProjectORProductParnetship($idMiddleware->idMiddleware, 'product');
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
@@ -55,13 +55,15 @@ if (!empty($objProyectos)) {
 if (!empty($objProductos)) {
 	foreach($objProductos as $key => $value){
 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
-		$suma_inversion = $value->investedAmount + $suma_inversion;
-		$suma_retorno = $value->roi + $suma_retorno;
+		$suma_inversion 	 = $value->fundedAmount+$value->investedAmount + $suma_inversion;
+		$suma_retorno 		 = $value->roi + $suma_retorno;
+		
 		if($suma_inversion != 0){
 			$suma_tri2 = ($suma_retorno * 100)/ $suma_inversion;
 		}else{
 			$suma_tri2 = 0;
 		}
+		
 		$suma_tri = round($suma_tri2 , 2);
 	}
 } else {
@@ -92,12 +94,25 @@ function htmlInversionActual($value, $datosgenerales) {
 	
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);
+		$financiado 		= '';
+		$trf				= '';
+		$montoFinanciado 	= '';
+		if($value->fundedAmount != 0){
+			$financiado 		= '<div>
+						  				Financiado: $<span class="number">' . $value->fundedAmount . '</span>
+						  		   </div>';
+			$montoFinanciado 	= '<div>
+						  				$<span class="number">' . $value->fundedAmount*$value->trf . '</span>
+						  		   </div>';
+			$trf 				= '<div>'.$value->trfFormateado.'%</div>';
+		}
+		
 		$htmlInversionActual = '<tr class="middle-td">
 							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
 							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td class="middle-td derecha">$<span class="number">' . $value->investedAmount . '</span></td>
-							<td class="middle-td derecha">$<span class="number">' . $value->roi . '</span></td>
-							<td class="middle-td">' . $value->triFormateado . ' %</td>
+							<td class="middle-td derecha">'.$financiado.'<div>Invertido: $<span class="number">' . $value->investedAmount . '</span></div></td>
+							<td class="middle-td derecha">'.$montoFinanciado.'<div>$<span class="number">' . $value->roi . '</span></div></td>
+							<td class="middle-td">'.$trf.' <div>' . $value->triFormateado . ' %</div></td>
 							</tr>';
 	}
 	return $htmlInversionActual;
