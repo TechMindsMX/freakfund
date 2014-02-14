@@ -442,3 +442,42 @@ div#proInfo .naranja {
 		overflow-y: scroll;
 	}
 }
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 1)  {
+	#menu {
+		width: 17.66%;
+	}
+	#menu, #menu > div, #wrapper, #slider, #content, #content #info, #reproductor {
+		height:30em;
+	}
+	.menu-item {
+		height: 22.5%;
+		width: 100%;
+		background-size: 100%;
+	} 
+	.over, .active {
+		background-position-y: 0em;
+	}
+	#proInfo .bloque:first-of-type {
+		width: 32%;
+	}
+	#menu-player {
+		max-width: 5%;
+	}
+	.liga[type="button"] {
+		height:;
+	}
+	#reproductor {
+		width: 87%;
+	}
+	#menu-player {
+		max-width: 11%;
+	}
+	.liga[type="button"] {
+		height: 89px;
+	}
+}
