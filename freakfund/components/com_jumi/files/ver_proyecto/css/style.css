@@ -286,6 +286,7 @@ div#banner div.rt-inner a {
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60cacd', endColorstr='#0099d1',GradientType=1 ); /* IE6-9 */*/
 }
 #statusbar {
+	background: #009999;
 }
 .statusbarFecha {
 	position:absolute;
@@ -393,20 +394,20 @@ div#proInfo .naranja {
 	.menu-item {
 		width: 22%;
 		margin-right: 3%;
-		height: 87px;
+		height: 6em;
 		background-size: 200%;
 	}
 	.menu-item:last-of-type {
 		margin-right: 0;
 	}
 	.over, .active {
-		background-position-y: -87px;
+		background-position-y: 0em;
 	}
-	#slider, #reproductor {
-		height: 200px;
+	#slider, #reproductor, #video-player {
+		height: inherit;
+		height: 17em;
 	}
-	#slider, #reproductor {
-		height: 200px;
+	#reproductor {
 		margin-bottom: 10px;
 	}
 	#proInfo > .bloque {
