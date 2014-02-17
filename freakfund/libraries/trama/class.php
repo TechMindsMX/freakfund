@@ -543,7 +543,7 @@ class JTrama
 		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
 		$objagrupado['fincol3'] 		= $objagrupado['resultadoIE'] * $objagrupado['porcVentas'];
 		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10;
-		$objagrupado['resultFinan']		= $objagrupado['totFundin'] * ($dataGral->tri + $dataGral->trf);
+		$objagrupado['resultFinan']		= $objagrupado['totFundin'] * $dataGral->trf;
 		$objagrupado['resultInver']		= $objagrupado['totInvers'] * $dataGral->tri;
 		$objagrupado['retornos']	 	= $objagrupado['resultFinan'] + $objagrupado['resultInver'];
 		$objagrupado['resultComic']		= 0;
