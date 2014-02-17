@@ -558,31 +558,34 @@ class JTrama
 	public static function getProjectORProductParnetship($userIdMiddleware, $ProjectProduct){
 		$dataProyecto= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/partnership/'.$userIdMiddleware));
 		$respuesta = array();
-
-		switch ($ProjectProduct) {
-			case 'project':
-				$array = array('5');
-				foreach ($dataProyecto as $key => $value) {
-					if(in_array($value->status, $array)){
-						self::formatDatosProy($value);
-						$respuesta[] = $value;
-					}
-				}
-				break;
-			case 'product':
-				$array = array('6,7,10');
-				foreach ($dataProyecto as $key => $value) {
-					if(in_array($value->status, $array)){
-						self::formatDatosProy($value);
-						$respuesta[] = $value;
-					}
-				}
-				break;
-			
-			default:
-				break;
-		}
 		
+		if(!is_null($dataProyecto)){
+			switch ($ProjectProduct) {
+				case 'project':
+					$array = array('5');
+					foreach ($dataProyecto as $key => $value) {
+						if(in_array($value->status, $array)){
+							self::formatDatosProy($value);
+							$respuesta[] = $value;
+						}
+					}
+					break;
+				case 'product':
+					$array = array('6,7,10');
+					foreach ($dataProyecto as $key => $value) {
+						if(in_array($value->status, $array)){
+							self::formatDatosProy($value);
+							$respuesta[] = $value;
+						}
+					}
+					break;
+				
+				default:
+					break;
+			}
+		}else{
+			$respuesta = null;
+		}
 		return $respuesta;		
 	}
 }
