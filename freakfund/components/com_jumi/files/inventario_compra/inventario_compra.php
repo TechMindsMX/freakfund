@@ -326,7 +326,7 @@ if($confirm == 0){
 		 	$app->enqueueMessage(JText::_('COMPRA_FINAN_E_INVERSION'), 'notice');
 		 }
 		 
-		 if($total < $usuario->data->balance){
+		 if($total <= $usuario->data->balance){
 		 	$botonGuardar = '<input type="submit" id="guardar" class="button" value="'.JText::_('INVERTIR_PROYECTO').'"  />';
 		 }else{
 		 	$botonGuardar = '<a class="button" href="index.php?option=com_jumi&view=application&fileid=32">'.JText::_('FREAKFUND_JUMI_ABONOSOCIO_ABONAR').
