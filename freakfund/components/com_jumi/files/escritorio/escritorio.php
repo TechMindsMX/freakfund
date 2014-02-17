@@ -56,10 +56,9 @@ if (!empty($objProductos)) {
 	foreach($objProductos as $key => $value){
 		$htmlInversionActual .= htmlInversionActual($value, $datosgenerales);
 		$suma_inversion 	 = $value->fundedAmount+$value->investedAmount + $suma_inversion;
-		$suma_retorno 		 = $value->roi + $suma_retorno;
-		
+
 		if($suma_inversion != 0){
-			$suma_tri2 = ($suma_retorno * 100)/ $suma_inversion;
+			$suma_tri2 = ($datosgenerales->sumRoi * 100)/ $suma_inversion;
 		}else{
 			$suma_tri2 = 0;
 		}
@@ -73,22 +72,26 @@ if (!empty($objProductos)) {
 }
 
 function moreProData($value, $datosgenerales) {
+	JTrama::getEditUrl($value);
+	$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';	
 	
-	if ($value->type != 'REPERTORY' && $value->status != 4) {
-		
-		JTrama::getEditUrl($value);
-		$value->imgAvatar = '<img src="' . AVATAR . '/' . $value->avatar . '" alt="' . $value->name . '" class="table-cartera"/>';
-		$value->roi = $value->investedAmount * $value->tri;
-		
+	if ($value->type != 'REPERTORY' && $value->status != 4 && $value->status != 5) {
 		if ( !is_null($value->fundedAmount) ) {
+			$value->rof = $value->fundedAmount * $value->trf;
 			$datosgenerales->actualFundings = @$datosgenerales->actualFundings + $value->fundedAmount;
-		} elseif ( !is_null($value->investedAmount) ) {
+			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->rof;
+		} 
+		
+		if ( !is_null($value->investedAmount) ) {
+			$value->roi = $value->investedAmount * $value->tri;
 			$datosgenerales->actualInvestments = @$datosgenerales->actualInvestments + $value->investedAmount;
 			$datosgenerales->sumRoi = @$datosgenerales->sumRoi + $value->roi;
 		}
+	}elseif( $value->status == 5){
+		$datosgenerales->sumInFunding = @$datosgenerales->sumInFunding + $value->fundedAmount;
 	}
-	$datosgenerales->portfolioValue = @$datosgenerales->actualFundings + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
 	
+	$datosgenerales->portfolioValue = @$datosgenerales->sumInFunding + @$datosgenerales->sumRoi + $datosgenerales->userBalance;
 }
 function htmlInversionActual($value, $datosgenerales) {
 	
@@ -97,6 +100,10 @@ function htmlInversionActual($value, $datosgenerales) {
 		$financiado 		= '';
 		$trf				= '';
 		$montoFinanciado 	= '';
+		$inversion			= '';
+		$montoInversion		= '';
+		$tri				= '';
+
 		if($value->fundedAmount != 0){
 			$financiado 		= '<div>
 						  				Financiado: $<span class="number">' . $value->fundedAmount . '</span>
@@ -107,12 +114,29 @@ function htmlInversionActual($value, $datosgenerales) {
 			$trf 				= '<div>'.$value->trfFormateado.'%</div>';
 		}
 		
+		if($value->investedAmount != 0){
+			$inversion 			= '<div>Invertido: $<span class="number">' . $value->investedAmount . '</span></div>';
+			
+			$montoInversion 	= '<div>$<span class="number">' . $value->roi . '</span></div>';
+			
+			$tri 				= '<div>' . $value->triFormateado . ' %</div>';
+		}
+		
 		$htmlInversionActual = '<tr class="middle-td">
 							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
 							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td class="middle-td derecha">'.$financiado.'<div>Invertido: $<span class="number">' . $value->investedAmount . '</span></div></td>
-							<td class="middle-td derecha">'.$montoFinanciado.'<div>$<span class="number">' . $value->roi . '</span></div></td>
-							<td class="middle-td">'.$trf.' <div>' . $value->triFormateado . ' %</div></td>
+							<td class="middle-td derecha">'.
+								$financiado.
+								$inversion.
+							'</td>
+							<td class="middle-td derecha">'
+								.$montoFinanciado.
+								$montoInversion.
+							'</td>
+							<td class="middle-td">'
+								.$trf.
+								$tri.
+							'</td>
 							</tr>';
 	}
 	return $htmlInversionActual;
@@ -129,7 +153,7 @@ function htmlFinanActual($value, $datosgenerales){
 								<td class="derecha">$<span class="number">' . $value->breakeven . '</span></td>
 								<td>' . $value->porcentajeRecaudado . ' %</td>
 								<td class="derecha">$<span class="number">' . $value->fundedAmount . '</span></td>
-								</tr>';
+							</tr>';
 		
 	} 
 	return $htmlFinanActual;
@@ -154,7 +178,7 @@ function htmlFinanActual($value, $datosgenerales){
 				<div class="bordesH3">
 					<h3 class="cartera-h3">$
 						<span class="number">
-							<?php echo isset($datosgenerales->actualFundings)? $datosgenerales->actualFundings : 0; ?>
+							<?php echo isset($datosgenerales->sumInFunding)? $datosgenerales->sumInFunding : 0; ?>
 						</span>
 					</h3>
 				</div>
@@ -217,7 +241,7 @@ function htmlFinanActual($value, $datosgenerales){
 							<td class="th-center-cartera"></td>
 							<td class="th-center-cartera derecha"><?php echo JText::_('TOTAL'); ?></td>
 							<td class="th-center-cartera derecha">$<span class="number"><?php echo $suma_inversion; ?></span></td>
-							<td class="th-center-cartera derecha">$<span class="number"><?php echo $suma_retorno; ?></span></td>
+							<td class="th-center-cartera derecha">$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></td>
 							<td class="th-center-cartera"><?php echo $suma_tri; ?>%</td>
 						</tr>
 					</table>
