@@ -2,6 +2,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
+$user = JFactory::getUser();
+$isAdmin = $user->get('isRoot');
+if (!$isAdmin) {
+	$url = 'index.php?option=com_freakfund';
+	JFactory::getApplication()->redirect($url, JText::_('CONTENIDO_PRIVADO'), 'error');
+}
+
 jimport('trama.class');
  
 // load tooltip behavior
