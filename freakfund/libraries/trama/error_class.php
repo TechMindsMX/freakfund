@@ -25,7 +25,19 @@ class errorClass {
 			case 31:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;				
 				break;
+			
+			case 36:
+				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;				
+				break;
 				
+			case 37:
+				if($errorCode == 1 || $errorCode == 4) {
+					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;
+				} elseif( $errorCode == 2) {
+					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid=32';
+				}				
+				break;
+					
 			default:
 				$url = JURI::base().'index.php?option=com_jumi&view=application&fileid=24';
 				break;

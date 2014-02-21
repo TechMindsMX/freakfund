@@ -38,6 +38,8 @@ $objProductos					= JTrama::getProjectORProductParnetship($idMiddleware->idMiddl
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
 
+errorClass::manejoError($errorCode,$from);
+
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
@@ -209,7 +211,7 @@ function htmlFinanActual($value, $datosgenerales){
 			<h2 class="title"><?php echo JText::_('ESCRIT_MOVIMIENTOS'); ?></h2>
 		</div>
 		<div class="cartera-buttons">
-			<a class="button" href="<?php echo $jumiurl; ?>28"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
+			<a class="button" href="<?php echo $jumiurl; ?>37"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
 			<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_ABONO_PAYPAL'); ?></a>
 			<a class="button" href="<?php echo $jumiurl; ?>34"><?php echo JText::_('ESCRIT_ALTA_TRASPASO'); ?></a>
 			<a class="button" href="<?php echo $jumiurl; ?>29"><?php echo JText::_('ESCRIT_TRASPASO'); ?></a>
