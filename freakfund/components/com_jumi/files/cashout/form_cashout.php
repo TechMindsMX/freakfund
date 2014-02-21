@@ -32,7 +32,7 @@ $botonCuenta	= '';
 $accountNumber	= '';
 
 $datosUsuario->accountType		= $input->get('accountType', 1, 'int');
-$datosUsuario->accountNumber 	= '';
+$datosUsuario->accountNumber 	= $input->get('accountnumber', 'null', 'string');
 
 if($datosUsuario->accountNumber != ''){
 	$accountNumber 	= str_pad(substr($datosUsuario->accountNumber, 14, 4), 14, '*',STR_PAD_LEFT);
