@@ -304,23 +304,23 @@ jQuery(document).ready(function(){
 			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
 			<tr>
 				<td><?php echo JText::_('SALDO_INICIAL_PERIODO');?></td>
-				<td class="derecha">$<span class="number"><?php echo $saldoInicialPeriodo?></span></td>
+				<td class="derecha">$<span class="number"><?php echo @$saldoInicialPeriodo?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_DEPOSITOS');?></td>
-				<td class="derecha">$<span class="number"><?php echo $sumaDepositos;?></span></td>
+				<td class="derecha">$<span class="number"><?php echo @$sumaDepositos;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_RETIROS');?></td>
-				<td class="derecha">$<span style="color:red;" class="number"><?php echo $sumaRetiros;?></span></td>
+				<td class="derecha">$<span style="color:red;" class="number"><?php echo @$sumaRetiros;?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO_FINAL_PERIODO');?></td>
-				<td class="derecha">$<span class="number"><?php echo $saldoFinalPeriodo; ?></span></td>
+				<td class="derecha">$<span class="number"><?php echo @$saldoFinalPeriodo; ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('PERIODO_FECHA_INI_FIN');?></td>
-				<td class="derecha"><?php echo $periodo ?></td>
+				<td class="derecha"><?php echo @$periodo ?></td>
 			</tr>
 		</table>
 	</div>

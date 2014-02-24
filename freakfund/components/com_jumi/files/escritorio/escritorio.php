@@ -34,6 +34,8 @@ $promedio 						= UserData::scoreUser($idMiddleware->idJoomla);
 $proyectos 						= JTrama::allProjects();
 $objProyectos					= JTrama::getProjectORProductParnetship($idMiddleware->idMiddleware, 'project'); 
 $objProductos					= JTrama::getProjectORProductParnetship($idMiddleware->idMiddleware, 'product');
+$datosgenerales->sumRoi			= 0;
+$datosgenerales->portfolioValue	= 0;
 
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/style.css');
 $doc->addStyleSheet($base . 'components/com_jumi/files/escritorio/css/escritorio.css');
