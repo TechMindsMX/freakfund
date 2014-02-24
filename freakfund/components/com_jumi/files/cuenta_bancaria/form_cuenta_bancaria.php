@@ -109,8 +109,7 @@ if($confirmacion == 0){
 		<div>
 			<label for="typeAccount"><?php echo JText::_('CUENTA_BANCARIA_TIPO_CUENTA'); ?></label>
 			<select name="typeAccount"  class="validate[required]" id="typeAccount">
-				<option><?php echo JText::_('CUENTA_BANCARIA_SELECT_TYPE') ?></option>
-				<option value="001"><?php echo JText::_('CUENTA_BANCARIA_CUENTA_BANORTE'); ?></option>
+				<option value="001" selected="selected"><?php echo JText::_('CUENTA_BANCARIA_CUENTA_BANORTE'); ?></option>
 				<option value="040"><?php echo JText::_('CUENTA_BANCARIA_CLABE'); ?></option>
 				<option value="003"><?php echo JText::_('CUENTA_BANCARIA_TARJETADEBITO'); ?></option>
 				<option value="100"><?php echo JText::_('CUENTA_BANCARIA_BANORTE_TERCEROS'); ?></option>
@@ -122,7 +121,7 @@ if($confirmacion == 0){
 		<div>
 			<label for="bank"><?php echo JText::_('CUENTA_BANCARIA_BANCO'); ?></label>
 			<select name="bank" id="bank"  class="validate[required]">
-				<option><?php echo JText::_('CUENTA_BANCARIA_SELECT_BANK') ?></option>
+				<option value="072" selected="selected"><?php echo JText::_('BANORTE') ?></option>
 				<option value="002"><?php echo JText::_('BANAMEX') ?></option>
 				<option value="012"><?php echo JText::_('BBVA_BANCOMER') ?></option> 
 				<option value="014"><?php echo JText::_('BANCO_SANTANDER') ?></option> 
@@ -138,7 +137,6 @@ if($confirmacion == 0){
 				<option value="059"><?php echo JText::_('BANCO_INVEX') ?></option>
 				<option value="060"><?php echo JText::_('BANSI') ?></option>
 				<option value="062"><?php echo JText::_('BANCA_AFIRME') ?></option>
-				<option value="072"><?php echo JText::_('BANORTE') ?></option> 
 				<option value="103"><?php echo JText::_('AMERICAN_EXPRESS_BANK') ?></option>
 				<option value="106"><?php echo JText::_('BANK_AMERICA_MEXICO') ?></option>
 				<option value="127"><?php echo JText::_('BANCO_AZTECA') ?></option>
