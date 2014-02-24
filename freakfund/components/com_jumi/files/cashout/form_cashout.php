@@ -32,10 +32,11 @@ $botonCuenta	= '';
 $accountNumber	= '';
 
 $datosUsuario->accountType		= $input->get('accountType', 1, 'int');
-$datosUsuario->accountNumber 	= $input->get('accountnumber', 'null', 'string');
+$datosUsuario->accountNumber 	= $input->get('accountnumber', '', 'string');
+$total = strlen($datosUsuario->accountNumber);
 
 if($datosUsuario->accountNumber != ''){
-	$accountNumber 	= str_pad(substr($datosUsuario->accountNumber, 14, 4), 14, '*',STR_PAD_LEFT);
+	$accountNumber 	= str_pad(substr($datosUsuario->accountNumber, $total-4, 4), $total-4, '*',STR_PAD_LEFT);
 	$botonCuenta 	= JText::_('CASHOUT_MODIFICARCUENTA');
 }else{
 	$app->redirect(JURI::base().'index.php?option=com_jumi&view=application&fileid=36', JText::_('CASHOUT_MENSAJE'), 'message');
