@@ -373,7 +373,10 @@ function statusbar($data) {
 							}, 2000, function() {
 								var status = '.$data->status.'; 
 								if (status != 5){
-									jQuery("#statusbar").append("<div class=\"recaudado\">$ '.number_format($data->balance,2).'</div>");
+									jQuery("#statusbar").append("<div class=\"recaudado\">$ '.number_format($data->balance,0).'</div>");
+								}
+								if (status == 5){
+									jQuery("#statusbar").append("<div class=\"recaudado\">'.number_format($data->statusbarPorcentaje,2).' %</div>");
 								}
 							});
 						}, 3000);
@@ -383,7 +386,6 @@ function statusbar($data) {
 		case '5':
 			$tmpl = '<div id="animacionbg">
 						<div id="statusbar"></div>
-					<span style="left: 47%; top: .3em; color: #000;">'.round($data->statusbarPorcentaje, 2).'%</span>
 					</div>';
 			break;
 		case '6' OR '7' OR '10':
@@ -395,7 +397,13 @@ function statusbar($data) {
 				<div id="animacionbg">
 					<span style="left: '.(($data->finanPorcentaje/2)-3).'%;">'.JText::_("STATEMENT_FUNDING").'</span>
 					<span style="left: '.((((100-$data->finanPorcentaje)/2)+$data->finanPorcentaje)-3).'%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
-					<div id="statusbar" style="background: linear-gradient(to right, #3399FF 0%,#3399FF '.(($data->breakeven / $data->balance)*100).'%,#009999 '.(($data->breakeven / $data->balance)*100).'%, #009999 100%);">
+					<div id="statusbar" style="background: linear-gradient(to right, 
+											#73cee4 0%,
+											#73cee4 '.(($data->breakeven / $data->balance)*100).'%,
+											transparent '.(($data->breakeven / $data->balance)*100).'%,
+											transparent '.((($data->breakeven / $data->balance)*100)+1).'%,
+											#9CF '.((($data->breakeven / $data->balance)*100)+1).'%, 
+											#9CF 100%);">
 					</div>
 				</div>'
 					;

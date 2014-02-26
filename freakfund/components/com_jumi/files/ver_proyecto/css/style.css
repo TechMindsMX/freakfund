@@ -286,7 +286,7 @@ div#banner div.rt-inner a {
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60cacd', endColorstr='#0099d1',GradientType=1 ); /* IE6-9 */*/
 }
 #statusbar {
-	background: #009999;
+	background: #73cee4;
 }
 .statusbarFecha {
 	position:absolute;
@@ -305,11 +305,11 @@ div#banner div.rt-inner a {
 }
 #animacionbg .recaudado {
 	text-align: right;
-	color: #FFFFFF;
+	color: #000;
 	min-width: 150px;
     font-size: 120%;
     font-weight: bold;
-    padding: 2px 8px 0 0;
+    padding: 3px 8px 0 0;
 }
 div#proInfo h1, div#proInfo h2, div#proInfo h3 {
 	line-height: 100%;
