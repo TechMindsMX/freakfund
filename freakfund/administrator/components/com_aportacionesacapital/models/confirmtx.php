@@ -17,7 +17,7 @@ class confirmtxModelconfirmtx extends JModelList
 		$settlement			= $input->get('liquidacion', null, 'str');
 		$detalleProveedor 	= JTrama::getDatos($projectId);
 		$nombreProducto 	= $detalleProveedor->name;
-		
+
 		foreach ($detalleProveedor->providers as $key => $value) {
 			if($value->providerId == $providerId){
 				self::producerIdJoomlaANDName($value, $providerId);
@@ -40,8 +40,7 @@ class confirmtxModelconfirmtx extends JModelList
 		}
 		
 		$detalleProveedor->token		= JTrama::token();
-		$detalleProveedor->callback		= JURI::base().'index.php?option=com_aportacionesacapital&task=errors&proyId='
-										.$projectId;
+		$detalleProveedor->callback		= JURI::base().'index.php?option=com_aportacionesacapital&task=errors&proyId='.$projectId;
 		$detalleProveedor->ProductName	= $nombreProducto;
 		
 		return $detalleProveedor;

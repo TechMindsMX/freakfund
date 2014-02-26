@@ -229,7 +229,7 @@ function pageselectCallback (page_index, jq) {
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 		
-		var link = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		var link = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=' + members[i].id;
 
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";

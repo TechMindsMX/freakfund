@@ -39,11 +39,7 @@ if($confirmacion==0){
 	$textBotton = JText::_('LABEL_CONFIRMAR');
 	
 	$tipoCuenta = array("001"=>JText::_('CUENTA_BANCARIA_CUENTA_BANORTE'),
-						"040"=>JText::_('CUENTA_BANCARIA_CLABE'),
-						"003"=>JText::_('CUENTA_BANCARIA_TARJETADEBITO'),
-						"100"=>JText::_('CUENTA_BANCARIA_BANORTE_TERCEROS'),
-						"110"=>JText::_('CUENTA_BANCARIA_TDC_OTROS'),
-						"120"=>JText::_('CUENTA_BANCARIA_TDC_AMEX'));
+						"040"=>JText::_('CUENTA_BANCARIA_CLABE'));
 
 	
 	$bancos = array("002"=>JText::_('BANAMEX'),
@@ -111,10 +107,6 @@ if($confirmacion == 0){
 			<select name="typeAccount"  class="validate[required]" id="typeAccount">
 				<option value="001" selected="selected"><?php echo JText::_('CUENTA_BANCARIA_CUENTA_BANORTE'); ?></option>
 				<option value="040"><?php echo JText::_('CUENTA_BANCARIA_CLABE'); ?></option>
-				<option value="003"><?php echo JText::_('CUENTA_BANCARIA_TARJETADEBITO'); ?></option>
-				<option value="100"><?php echo JText::_('CUENTA_BANCARIA_BANORTE_TERCEROS'); ?></option>
-				<option value="110"><?php echo JText::_('CUENTA_BANCARIA_TDC_OTROS'); ?></option>
-				<option value="120"><?php echo JText::_('CUENTA_BANCARIA_TDC_AMEX'); ?></option>
 			</select>
 		</div>
 		

@@ -5,7 +5,7 @@ $document = JFactory::getDocument();
 $modPath = 'modules/mod_carrete';
 $document->addStyleSheet($modPath.'/css/mod_carrete.css');
 
-$url = 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
+$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 
 ?>
 

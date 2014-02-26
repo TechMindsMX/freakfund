@@ -18,13 +18,14 @@ class errorsController extends JController
         function display($cachable = false, $urlparams = false) {
         	$app = JFactory::getApplication()->input;
 			$proyId = $app->get('proyId');
+			$error	= $app->get('error',null,'int');
 			
-			if($enviarA){
+			if(is_null($error)){
 				$errors = JFactory::getApplication();
-	        	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&proyId='.$proyId, $msg=JText::_('COM_FREAKFUND_ERRORS_MSG'), $msgType='warning');
+	        	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&id='.$proyId, $msg=JText::_('COM_APORTACIONESCAPITAL_SAVE'), $msgType='message');
 			}else{
 	        	$errors = JFactory::getApplication();
-	        	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&proyId='.$proyId, $msg=JText::_('COM_FREAKFUND_ERRORS_MSG'), $msgType='warning');
+	        	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&id='.$proyId, $msg=JText::_('COM_FREAKFUND_ERRORS_MSG'), $msgType='warning');
 			}
 			
         }
