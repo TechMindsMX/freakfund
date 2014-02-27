@@ -27,8 +27,6 @@ class admincuentasViewadmincuentas extends JView
 	}
     protected function addToolBar()	{
             JToolBarHelper::title(JText::_('COM_CUENTASADMIN_ADMINCUENTAS_TITLE'));
-			JToolBarHelper::back();
-			
 	}
 
 }

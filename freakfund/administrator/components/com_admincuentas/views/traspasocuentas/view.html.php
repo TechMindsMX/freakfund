@@ -27,7 +27,7 @@ class traspasocuentasViewtraspasocuentas extends JView
 	}
     protected function addToolBar()	{
             JToolBarHelper::title(JText::_('COM_CUENTASADMIN_ADMINCUENTAS_TITLE'));
-			JToolBarHelper::back();
+			JToolBarHelper::back('Listado', 'index.php?option=com_admincuentas');
 			
 	}
 
