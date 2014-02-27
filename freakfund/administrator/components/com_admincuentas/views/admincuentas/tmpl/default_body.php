@@ -16,9 +16,7 @@ foreach ($this->items as $key => $value) {
 			$<span class="number"><?php echo $value->balance; ?></span>
 		</td>
 		<td align="middle">
-			<input type="hidden" name="numCuenta" value="<?php echo $value->account; ?>" />
-			<input type="hidden" name="balance" value="<?php echo $value->balance; ?>" />
-			<input type="submit" class="button" value="<?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRASPASO'); ?>" />
+			<?php echo $value->url; ?>
 		</td>
 	</tr>
 <?php

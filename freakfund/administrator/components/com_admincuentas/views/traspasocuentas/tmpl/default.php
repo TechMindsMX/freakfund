@@ -69,10 +69,10 @@ if( $datos['resumen'] === 'true' && !is_null($datos['error']) ){
 		jQuery('#confirmButton').click(function(){
 			var nombre 			= jQuery('.proyecto')[0];
 			var cuentaDestino 	= jQuery('#cuentaDestino').val();
+			var cuentaTraspaso	= '<?php echo $datos['idCuenta']; ?>';
 			var montoTraspaso 	= jQuery('#montoTraspaso').val();
 			var nombre			= jQuery(nombre).text();
-			var balanceOrigen 	= jQuery('#balanceOrigen').val();
-			var callback 		= '<?php echo $datos['callback']; ?>&cuentaDestino='+cuentaDestino+'&amount='+montoTraspaso+'&name='+nombre+'&balance='+balanceOrigen;
+			var callback 		= '<?php echo $datos['callback']; ?>&cuentaDestino='+cuentaDestino+'&amount='+montoTraspaso+'&name='+nombre+'&idAccount='+cuentaTraspaso;
 			
 			jQuery('#system-message-container').remove();
 			jQuery('#formulario').hide();

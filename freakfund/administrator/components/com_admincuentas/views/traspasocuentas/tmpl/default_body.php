@@ -93,6 +93,10 @@ $value = $this->items;
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_MONTO') ?>: </span>
 					$<span class="number"><?php echo $value['amount']; ?></span>
 				</div>
+				
+				<div class="datos">
+					<a href="index.php?option=com_admincuentas" class="button"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_GOBACK'); ?></a>
+				</div>
 			</div>
 		</td>
 	</tr>
