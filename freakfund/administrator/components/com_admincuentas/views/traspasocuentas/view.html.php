@@ -19,14 +19,14 @@ class traspasocuentasViewtraspasocuentas extends JView
 			
 	        // Assign data to the view
 	        $this->items = $items;
-		
+
 	        // Display the template
-	        $this->addToolBar();
+	        $this->addToolBar($items['tipo']);
 			
 	        parent::display($tpl);
 	}
-    protected function addToolBar()	{
-            JToolBarHelper::title(JText::_('COM_CUENTASADMIN_ADMINCUENTAS_TITLE'));
+    protected function addToolBar($tipo)	{
+            JToolBarHelper::title(JText::_('COM_ADMINCUENTAS_TRASPASO_TITLE_'.$tipo));
 			JToolBarHelper::back('Listado', 'index.php?option=com_admincuentas');
 			
 	}

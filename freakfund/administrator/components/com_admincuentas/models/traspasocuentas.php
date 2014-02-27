@@ -18,6 +18,7 @@ class traspasocuentasModeltraspasocuentas extends JModelList
 			if($value->id == $datos['idCuenta']){
 				$datos['cuentaOrigen'] 	= $value->account;
 				$datos['balance']		= $value->balance;
+				$datos['tipo']			= $value->type;
 			}
 		}
 		
