@@ -24,6 +24,8 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 
 <script>
 	jQuery(document).ready(function(){
+		jQuery("#formAltaTraspaso").validationEngine();
+		
 		jQuery('#clabe').change(function(){
 			var clabe = this.value;
 			var salir = false;
@@ -377,7 +379,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		<!--Campos para dar de alta un numero de cuenta-->
 		<div class="fila" id="autocompletado">
 			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation" placeholder="Monto maximo"/></div>
-			<div><input type="text" name="clabe" id="clabe"  class="altavalidation" maxlength="10" /></div>
+			<div><input type="text" name="clabe" id="clabe"  class="altavalidation validate[custom[numcuenta]]" maxlength="11" /></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
 			<div style="width: 170px;">

@@ -121,6 +121,13 @@ switch ($fun) {
 		$token = @file_get_contents(MIDDLE.'/trama-middleware/rest/security/getKey');
 		echo $token;
 		break;
+	
+	case 7: //Obtiene el nombre de a quien pertenece un numero de cuenta dado
+		$account = $_POST['numCuenta'];
+		
+		$name = @file_get_contents(MIDDLE.'/trama-middleware/rest/account/get/'.$account);
+		echo $name;
+		break;
 		
 	default:
 		echo 'error';

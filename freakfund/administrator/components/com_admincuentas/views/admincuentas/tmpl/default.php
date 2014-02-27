@@ -18,7 +18,7 @@ $datos 		= $this->items;
 	});
 </script>
 
-<form id="formstatus" action="" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="index.php?option=com_admincuentas&task=traspasocuentas" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
                 <thead><?php echo $this->loadTemplate('head');?></thead>

@@ -1,6 +1,4 @@
-/** text/css **/
-
-a.button{
+input.button{
 	color: #002c61 !important;
 	background: #99ccff !important;
 	border: 0 !important;
@@ -19,4 +17,13 @@ a.button{
 }
 .labels{
 	font-weight: bolder;
+}
+div.datosCuenta{
+	display:none;
+}
+div#confirmacion{
+	display:none;
+}
+div#resumen{
+	display:none;
 }

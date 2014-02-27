@@ -7,16 +7,18 @@ foreach ($this->items as $key => $value) {
 ?>
 	<tr>
 		<td align="absmiddle">
-			<?php echo $value->numCuenta; ?>
+			<?php echo $value->account; ?>
 		</td>
 		<td align="left">
-			<?php echo $value->name; ?>
+			<?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_'.$value->type); ?>
 		</td>
 		<td align="right">
 			$<span class="number"><?php echo $value->balance; ?></span>
 		</td>
 		<td align="middle">
-			<a class="button" href="index.php?option=com_admincuentas&task=traspasocuentas&id=<?php echo $value->idMiddleware; ?>"><?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRASPASO'); ?></a>
+			<input type="hidden" name="numCuenta" value="<?php echo $value->account; ?>" />
+			<input type="hidden" name="balance" value="<?php echo $value->balance; ?>" />
+			<input type="submit" class="button" value="<?php echo JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRASPASO'); ?>" />
 		</td>
 	</tr>
 <?php

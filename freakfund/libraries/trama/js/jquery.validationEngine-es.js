@@ -5,6 +5,10 @@
     $.validationEngineLanguage = {
         newLang: function(){
             $.validationEngineLanguage.allRules = {
+            	"numcuenta":{
+            		"regex": /^[u|p]{1}|[0-9]{10}$/,
+            		"alertText": 'numero de cuenta no valido',
+            	},
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
                     "alertText": "* Este campo es obligatorio",

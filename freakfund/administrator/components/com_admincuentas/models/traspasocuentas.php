@@ -9,34 +9,23 @@ jimport('trama.usuario_class');
 class traspasocuentasModeltraspasocuentas extends JModelList
 {
 	public function getlistadoCuentas() {
-		$temporal = JFactory::getApplication()->input;
-		$temporal = $temporal->get('id');
+		$datos					= array();
+		$app					= JFactory::getApplication()->input;
+		$datos['cuentaOrigen']	= $app->get('numCuenta',		null, 'string');
+		$datos['balance']		= $app->get('balance',			null, 'string');
+		$datos['accountDest']	= $app->get('cuentaDestino',	null, 'string');
+		$datos['amount']		= $app->get('amount', 			null, 'string');
+		$datos['name']			= $app->get('name', 			null, 'string');
+		$datos['error']			= $app->get('error', 			null, 'string');
+		$datos['callback']		= JURI::base().'index.php?option=com_admincuentas&task=traspasocuentas&numCuenta='.$datos['cuentaOrigen'];
 		
-		$db 	= JFactory::getDbo();
-		$query 	= $db->getQuery(true); 
+		if( is_null($datos['accountDest']) && is_null($datos['amount']) ){
+			$datos['resumen'] = 'false';
+		}else{
+			$datos['resumen'] = 'true';
+		}
 		
-		$query->select ('c3rn2_users.name, c3rn2_users_middleware.idJoomla, c3rn2_users_middleware.idMiddleware')
-			  ->from ('c3rn2_users')
-			  ->join('INNER', 'c3rn2_users_middleware ON c3rn2_users_middleware.idJoomla = c3rn2_users.id')
-			  ->where('c3rn2_users_middleware.idMiddleware = '.$temporal);
-		
-		$db->setQuery($query);
-		
-		$results = $db->loadObject();
-		
-		$balance = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$results->idMiddleware));
-		$results->balance = $balance->balance;
-		
-		$num = microtime();
-		$test = str_replace(' ', '', $num);
-		$test2 = str_replace('.', '', $test);
-		$num = (int) $test2;
-				
-		$results->numCuenta = $num;
-		$results->cuentaOrigen = 783016001383946222;
-		//Fin simulacion de numeros de cuenta
-		
-		return $results;
+		return $datos;
 	}
 
 	public function producerIdJoomlaANDName($obj,$id=null){
