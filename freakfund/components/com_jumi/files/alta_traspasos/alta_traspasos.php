@@ -29,54 +29,66 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		jQuery('#clabe').change(function(){
 			var clabe = this.value;
 			var salir = false;
+			clabe = clabe.toUpperCase();
+			var identificador = clabe.substring(0,1);
+			var caracteresClabe = clabe.length;
 			
-			jQuery('.fila').each(function(){
-			    if( parseInt(jQuery(this).find('.numCuenta').html()) == parseInt(clabe) ){
-			    	alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_ALREADY_SAVED"); ?>');
-			    	salir = true;
-			    }
-			});
 			
-			if( salir ){
-				jQuery('#socio').val('');
-				jQuery('#email').val('');
-				jQuery('#clabe').val('');
-				jQuery('#guardar').attr('disabled', 'disabled');
-				return false;
-			}
+			jQuery(this).val(clabe.toUpperCase());
 			
-			var request = $.ajax({
-				url: "libraries/trama/js/ajax.php",
-				data: {
-  					"clabe"	: clabe,
-  					"fun"	: 5
- 				},
- 				type: 'post'
-			});
-			
-			request.done(function(result){
-				if(result != ''){
-					var obj = eval('(' + result + ')');
-					
-					if(!obj.error){
-						jQuery('#socio').val(obj.name);
-						jQuery('#email').val(obj.email);
-						jQuery('#destinationId').val(obj.id);
-					} else {
-						alert('<?php echo JText::_("LBL_MAL"); ?>');
-					}
-				}else{
-					alert('<?php echo JText::_("LBL_NO_EXISTE_CUENTA"); ?>');
+			if(identificador == 'U' && caracteresClabe == 11){
+				jQuery('.fila').each(function(){
+				    if( parseInt(jQuery(this).find('.numCuenta').html()) == parseInt(clabe) ){
+				    	alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_ALREADY_SAVED"); ?>');
+				    	salir = true;
+				    }
+				});
+				
+				if( salir ){
 					jQuery('#socio').val('');
 					jQuery('#email').val('');
 					jQuery('#clabe').val('');
 					jQuery('#guardar').attr('disabled', 'disabled');
+					return false;
 				}
-			});
-			
-			request.fail(function (jqXHR, textStatus) {
-				console.log(jqXHR, textStatus);
-			});
+				
+				var request = $.ajax({
+					url: "libraries/trama/js/ajax.php",
+					data: {
+	  					"clabe"	: clabe,
+	  					"fun"	: 5
+	 				},
+	 				type: 'post'
+				});
+				
+				request.done(function(result){
+					if(result != ''){
+						var obj = eval('(' + result + ')');
+						
+						if(!obj.error){
+							jQuery('#socio').val(obj.name);
+							jQuery('#email').val(obj.email);
+							jQuery('#destinationId').val(obj.id);
+							jQuery('#guardar').attr('disabled', false);
+						} else {
+							alert('<?php echo JText::_("LBL_MAL"); ?>');
+						}
+					}else{
+						alert('<?php echo JText::_("LBL_NO_EXISTE_CUENTA"); ?>');
+						jQuery('#socio').val('');
+						jQuery('#email').val('');
+						jQuery('#clabe').val('');
+						jQuery('#guardar').attr('disabled', 'disabled');
+					}
+				});
+				
+				request.fail(function (jqXHR, textStatus) {
+					console.log(jqXHR, textStatus);
+				});
+			}else{
+				alert('<?php echo JText::_("LBL_NO_EXISTE_CUENTA"); ?>');
+				jQuery('#guardar').attr('disabled', 'disabled');
+			}
 		});
 		
 		jQuery('.altavalidation').focusout(function(){
