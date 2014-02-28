@@ -1,3 +1,4 @@
+
 .esconder {
 	position: absolute;
 	left: 3000px;
@@ -6,7 +7,7 @@
 	text-align: right;
 }
 
-#form_compra table th:last-of-type {
+/* #form_compra table th:last-of-type { */
 	width: 30%;
 	min-width: 200px; 
 }
@@ -101,26 +102,68 @@ div.compacto {
 .font-red{
 	color: red;
 }
+@media screen and (max-width: 1200px)  {
+	.busq {
+		position: relative;
+		left: 5px;
+	}
+	.busqueda_tag {
+		display:none;
+	}
+}
 @media screen and (max-width: 1024px)  {
 	  .videoHead{
 	  	height: 458px;
 		width: 520px;
 		float: left;
 	}
+	.busqueda_tag {
+		display: none;
+	}
+	.jcarousel-skin-tango .jcarousel-container-horizontal {
+		width: 807px;
+	}
+	
+	.busq {
+		position: relative;
+		left: 2px;
+		margin-bottom: 50px;
+	}
+	#rt-mainbody-surround h2, #rt-mainbody-surround .title{
+		font-size:14px;
+	}
 }
-@media screen and (max-width: 767px)  {
+@media screen and (max-width: 768px)  {
 	.videoHead{
 	  	height: 300px;
 		width: 360px;
+		float: left; 
+	}
+	.busq {
+		position: relative;
+		left: 0px;
+		top: 35px;
+		margin-bottom: 50px;
+	}
+	.videoHead {
+		height: 400px;
+		width: 670px;
 		float: left;
+	}
+	
+	.avatar, .mask {
+		margin: 0 auto;
 	}
 }
 @media screen and (max-width: 600px)  {
-	.videoHead{
-	  	height: 210px;
-		width: 282px;
+	.videoHead {
+		height: 210px;
+		width: 320px;
 		float: left;
-		
+		margin-left: 12px;
+	}
+	.busqueda_tag {
+		display: none;
 	}
 	.tituloHead{
 		float: left;
@@ -129,7 +172,7 @@ div.compacto {
 		max-width: 300px;
 		text-shadow: 2px 1px #000000;
 		margin-left: 20px;
-		margin-top: 10px;
+		margin-top: 40px;
 	}
 	.subTituloHead{
 		float: left;
@@ -153,7 +196,81 @@ div.compacto {
 	}
 	.sprocket-headlines-navigation .next {
 		right: 10px; top:20px;
+	}
+	#rt-mainbody-surround .box1 .title .box1 h1, #rt-mainbody-surround .box1 h2{
+		font-size: 16px;
 	}	
+	#wrap .vertodoscarrusel {
+		height: 24px;
+		width: 45%;
+	}
+	.avatar, .mask {
+		height: 290px;
+		width: 290px;
+	}
+	/********  Jomsocial **********/
+
+	#community-wrap .cStream-Content {
+		margin: 0 0 0 0;
+	}
+	.cStream-Avatar.cFloat-L.status-author {
+		display: none;
+	}
+	#community-wrap .cSearch-Input .cButton {
+		width: 35%;
+	}
+	#community-wrap textarea {
+		width: 260px;
+	}
+	#community-wrap .cFormList.cFormHorizontal .form-label {
+		width: 65px;
+	}
+	#community-wrap .cFormList.cFormHorizontal .form-field {
+		margin: 0 0 0 0;
+	}
+	#community-wrap .cToolBox-Options {
+		margin: 5px 0 0;
+	}
+	#community-wrap .cToolBar .cMenu-Text{
+		width: 122px;
+		float:right;
+	}
+	#community-wrap .cToolBar .cMenu-Icon {
+		margin: 10px 0 0 0;
+		width: 58px;
+		float:left;
+	}
+	#community-wrap .cToolBar .cMenu-Icon:first-of-type {
+		width: 290px;
+		float:left;
+		margin-top:0px;
+	}
+	#community-wrap .cToolBar .cMenu-Icon+.cMenu-Icon {
+		margin: 10px 0 0 4px;
+	}
+	#community-wrap .cToolBar .cMenu-Text+.cMenu-Icon {
+		margin: 10px 0 0 4px;	
+	}
+	#community-wrap .cToolBar .cMenu-Icon+.cMenu-Text {
+		margin: 0 0 0 3px;
+	}
+	#community-wrap .componentheading {
+		font-size: 18px;
+		margin-bottom: 12px;
+	}
+	#cwin_logo {
+		margin-left: 110px;
+	}
+	#cwin_close_btn {
+		margin-right: 65px;
+	}
+	#cWindowContentOuter {
+		width: 300px !important;
+		margin-left: 94px;
+		height: 376px;
+	}
+	/********  fin Jomsocial **********/
+	
 }
 
 input[type=checkbox] {
@@ -217,4 +334,31 @@ input#cantidad {
 
 div.ui-datepicker {
 	font-size: 1em;
+}
+@media screen and (max-width : 960px) and (max-height : 640px) and (orientation: landscape) {  
+	.videoHead {
+		height: 216px;
+		width: 400px;
+		margin-left: 50px;
+	}
+	.textoHead {
+		max-width: 435px;
+	}
+	.avatar, .mask {
+		height: 360px;
+		width: 360px;
+		margin-left: 0px;
+	}
+	.menu-item {
+		width: 21%;
+		margin-right: 4%;
+		height: 6em;
+		background-size: 157%;
+	}
+	
+}
+@media screen and (max-width : 960px) and (max-height : 640px) and (orientation: portrait) {
+	.gf-menu-toggle {
+		margin-top: 40px;
+	}
 }
