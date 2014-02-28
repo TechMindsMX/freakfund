@@ -429,6 +429,7 @@ class JTrama
 		$objagrupado['FechaEstreno']		= $dataGral->premiereStartDate;
 		$objagrupado['fechafin']			= $dataGral->premiereEndDate;
 		$objagrupado['ingresosPotenciales']	= $dataGral->revenuePotential;
+		$objagrupado['account']				= $dataGral->account;
 				
 		return $objagrupado;
 	}

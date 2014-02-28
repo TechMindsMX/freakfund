@@ -2,14 +2,10 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.usuario_class');
-
 $value = $this->items;
 ?>
 	<tr>
 		<td align="absmiddle">
-			<input type="hidden" id="callback" name="callback" />
-			<input type="hidden" id="balanceOrigen" value="<?php echo $value['balance']; ?>" />
-			
 			<div id="formulario">
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_CUENTAORIGEN') ?>: </span><?php echo $value['cuentaOrigen']; ?>
@@ -22,7 +18,7 @@ $value = $this->items;
 				
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_CUENTA_DESTINO') ?>: </span>
-					<input type="text" class="numCuenta" name="cuentaDestino" id="cuentaDestino" maxlength="11" />
+					<input type="text" class="numCuenta" name="account" id="cuentaDestino" maxlength="11" />
 				</div>
 				
 				<div class="datosCuenta">
@@ -43,6 +39,8 @@ $value = $this->items;
 			</div>
 			
 			<div id="confirmacion">
+				<div class="datos"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_ESTA_SEGURO'); ?></div>
+				
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_CUENTAORIGEN') ?>: </span><?php echo $value['cuentaOrigen']; ?>
 				</div>
@@ -69,14 +67,14 @@ $value = $this->items;
 				
 				<div class="datos">
 					<input type="button" class="button" id="cancelConfirm" value="<?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_BUTTON_CANCEL_CONFIRM') ?>" />
-					<input type="button" class="button" id="submit" value="<?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_BUTTON_CONFIRM') ?>" />
+					<input type="submit" class="button" id="submit" value="<?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_BUTTON_CONFIRM') ?>" />
 				</div>
 			</div>
 		
 			<div id="resumen">
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_TRAS_PROY') ?>: </span>
-					<?php echo $value['name']; ?>
+					<?php echo utf8_encode($value['name']); ?>
 				</div>
 				
 				<div class="datos">

@@ -22,8 +22,10 @@ $pathJumi 	= JUri::base().'components/com_jumi/files/estado_resultados/';
 $document	->addStyleSheet($pathJumi.'edo_resultados.css');
 
 ?>
-<h1><?php echo $value['proyectName']; ?></h1>
-<h2><?php echo JText::_('LBL_EDO_RESULT'); ?></h2>
+<h1><?php echo JText::_('LBL_EDO_RESULT'); ?></h1>
+<h2><?php echo $value['proyectName']; ?></h2>
+<h2><?php echo JText::_('LBL_EDO_RESULT_ACCOUNT').$value['account']; ?></h2>
+
 		<div style="width:50%">
 	
 			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('ESTADO_RESULTADOS_DETALLE_INGRESOS'); ?></div>

@@ -72,7 +72,7 @@ if( $datos['resumen'] === 'true' && !is_null($datos['error']) ){
 			var cuentaTraspaso	= '<?php echo $datos['idCuenta']; ?>';
 			var montoTraspaso 	= jQuery('#montoTraspaso').val();
 			var nombre			= jQuery(nombre).text();
-			var callback 		= '<?php echo $datos['callback']; ?>&cuentaDestino='+cuentaDestino+'&amount='+montoTraspaso+'&name='+nombre+'&idAccount='+cuentaTraspaso;
+			var callback 		= '<?php echo $datos['callback']; ?>&cuentaDestino='+cuentaDestino+'&amount='+montoTraspaso+'&name='+escape(nombre)+'&idAccount='+cuentaTraspaso;
 			
 			jQuery('#system-message-container').remove();
 			jQuery('#formulario').hide();
@@ -93,7 +93,9 @@ if( $datos['resumen'] === 'true' && !is_null($datos['error']) ){
 	});
 </script>
 
-<form id="formstatus" action="" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/account/transferFundsFromTrama'; ?>" method="POST" enctype="application/x-www-form-urlencoded">
+	<input type="hidden" id="callback" name="callback" />
+	<input type="hidden" name="token" value="<?php echo $token; ?>">
 	<table id="tablaGral" class="adminlist">
 	    <thead><?php echo $this->loadTemplate('head');?></thead>
 	    <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>
