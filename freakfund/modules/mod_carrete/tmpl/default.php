@@ -5,7 +5,8 @@ $document = JFactory::getDocument();
 $modPath = 'modules/mod_carrete';
 $document->addStyleSheet($modPath.'/css/mod_carrete.css');
 
-$url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
+$url 			= 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
+$urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 
 ?>
 
@@ -89,7 +90,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 									</div>
 									<div class="cat texto-proyectos">'.JText::sprintf('LAPSED_DAYS', $value->dateDiff->days).'</div>
 									<div class="boton-wrap">
-										<a class="button btn-invertir" href="'.$url.@$value->id.'">
+										<a class="button btn-invertir" href="'.$urlinvertir.@$value->id.'">
 											'.JText::_('INVERTIR_PROYECTO').'</a>
 		    						</div>
 		    					</div>
@@ -129,7 +130,7 @@ $url = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 										<div class="clearfix"></div>
 									</div>
 									<div class="boton-wrap">
-										<a class="button btn-invertir" href="'.$url.@$value->id.'">
+										<a class="button btn-invertir" href="'.$urlinvertir.@$value->id.'">
 											'.JText::_('INVERTIR_PROYECTO').'</a>
 		    						</div>
 		    					</div>
