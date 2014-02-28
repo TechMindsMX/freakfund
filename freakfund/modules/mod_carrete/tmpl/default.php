@@ -7,7 +7,6 @@ $document->addStyleSheet($modPath.'/css/mod_carrete.css');
 
 $url 			= 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 $urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
-
 ?>
 
 <link href="<?php echo $modPath;?>/css/style.css" rel="stylesheet" type="text/css" />
