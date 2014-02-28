@@ -229,8 +229,8 @@ function pageselectCallback (page_index, jq) {
 
 	for ( var i = page_index * items_per_page; i < max_elem; i++ ) {
 		
-		var link = 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=' + members[i].id;
-
+		var link 			= 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=' + members[i].id;
+		var linkinvertir	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=' + members[i].id;
 		/*Cambiar los atributos del objeto segun el JSON*/
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
 		var recaudado = members[i].balance != null ? members[i].balance : " ";
@@ -262,7 +262,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].avatar+'\');">';
-		newcontent += '	<a href="' + link + '">';
+		newcontent += '	<a href="' + linkinvertir + '">';
 		newcontent += '		<span class="mask"></span>';
 		newcontent += '	</a>';
 		newcontent += '</div>';
@@ -294,7 +294,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '<span class="productor">' + members[i].producer+'</span>';
 		newcontent += '<div class="boton-wrap">';
 		if( members[i].status == 5 || members[i].status == 6 || members[i].status == 7 || members[i].status == 10 ){
-			newcontent += '<a class="button btn-invertir" href="' + link + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
+			newcontent += '<a class="button btn-invertir" href="' + linkinvertir + '">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</a>';
 		}else{
 			newcontent += '<div class="button btn-invertir disabled" href="">' + "<?php echo JText::_('INVERTIR_PROYECTO'); ?>"+'</div>';
 		}
