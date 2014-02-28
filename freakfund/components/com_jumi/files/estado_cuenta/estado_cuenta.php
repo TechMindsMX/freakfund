@@ -62,11 +62,10 @@ $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30";
 $tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
 $tableHtml 	.= "<tr id='cabezera'>";
 $tableHtml 	.= "<th>". JText::_('FECHA') ."<th />";
-$tableHtml 	.= "<th style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
+$tableHtml 	.= "<th class='magic_seal'' style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
 $tableHtml 	.= "<th>". JText::_('STATEMENT_REFERENCE') ."<th />";
-$tableHtml 	.= "<th style='text-align: right;'>". JText::_('STATEMENT_WITHDRAW') ."<th />";
-$tableHtml 	.= "<th style='text-align: right;'>". JText::_('STATEMENT_DEPOSIT') ."<th />";
-$tableHtml 	.= "<th style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
+$tableHtml 	.= "<th style='text-align: right;'>". JText::_('STATEMENT_AMOUNT') ."<th />";
+$tableHtml 	.= "<th class='magic_seal' style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
 $tableHtml 	.= "</tr>";
 if(!is_null($projectList) && !empty($projectList)){
 	if($projectList[0]->type == 'CREDIT'){
@@ -78,7 +77,7 @@ if(!is_null($projectList) && !empty($projectList)){
 		//operaciones resumen de cuenta
 		if($obj->type == 'DEBIT'){
 			$sumaRetiros = $obj->amount + $sumaRetiros;
-			$retiro =  '$<span style="color:red;" class="number">'.$obj->amount.'</span>';
+			$retiro =  '<span style="color:red;">$-</span><span style="color:red;" class="number">'.$obj->amount.'</span>';
 			$deposito = '';
 		}elseif(($obj->type == 'CREDIT')){
 			$sumaDepositos = $obj->amount + $sumaDepositos;
@@ -135,11 +134,10 @@ if(!is_null($projectList) && !empty($projectList)){
 					
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '<td>'.$obj->fechaFormat.$agregarmas.'<td />';
-		$tableHtml .= '<td>'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
+		$tableHtml .= '<td class="magic_seal">'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
 		$tableHtml .= '<td>'.$obj->reference.$detalleReferencia.'<td />';
-		$tableHtml .= '<td class="derecha">'.$retiro.$detalleRetiro.'<td />';
-		$tableHtml .= '<td class="derecha">'.$deposito.'<td />';
-		$tableHtml .= '<td class="derecha">$<span class="number">'.$obj->balance.'</span><td />';
+		$tableHtml .= '<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
+		$tableHtml .= '<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';
 		$tableHtml .= '</tr>';
 	}
 	
@@ -268,7 +266,7 @@ jQuery(document).ready(function(){
 });
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
-<div>
+<div id="detalles_busq">
 	<div style="float:left; width:40%;" >
 		<table  id="datos_usuario">
 			<tr>
@@ -299,7 +297,7 @@ jQuery(document).ready(function(){
 		</table>
 	</div>
 	
-	<div style="float:right; width:40%;">
+	<div id="resumen_cuentas">
 		<table class='table '>
 			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
 			<tr>
@@ -325,7 +323,7 @@ jQuery(document).ready(function(){
 		</table>
 	</div>
 	
-	<div style="width:100%; float:left;">
+	<div  style="width:100%; float:left;">
 	<h1><?php echo JText::_('RANGE_SEARCH'); ?></h1>
 		<form id="form_cuenta" action="<?php echo $action; ?>" method="post">
 			<select id="selectFechas" name="" >
