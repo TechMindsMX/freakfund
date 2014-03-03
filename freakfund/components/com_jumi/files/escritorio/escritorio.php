@@ -52,9 +52,9 @@ if (!empty($objProyectos)) {
 		$suma_fund = $value->fundedAmount + $suma_fund;
 	}
 } else {
-		$htmlFinanActual = '<tr class="middle-td">
-							<td colspan="5" align="center">'.JText::_('SIN_FINAN').'</td>
-							</tr>';
+		$htmlFinanActual = '<div class="clase-tr" >
+							<div class="clase-td" >'.JText::_('SIN_FINAN').'</div>
+							</div>';
 }
 if (!empty($objProductos)) {
 	foreach($objProductos as $key => $value){
@@ -70,9 +70,9 @@ if (!empty($objProductos)) {
 		$suma_tri = round($suma_tri2 , 2);
 	}
 } else {
-		$htmlInversionActual = '<tr class="middle-td">
-								<td colspan="6" align="center">'.JText::_('SIN_INVER').'</td>
-								</tr>';
+		$htmlInversionActual = '<div class="clase-tr" class="middle-td">
+								<div class="clase-td" colspan="6" align="center">'.JText::_('SIN_INVER').'</div>
+								</div>';
 }
 
 function moreProData($value, $datosgenerales) {
@@ -126,22 +126,27 @@ function htmlInversionActual($value, $datosgenerales) {
 			$tri 				= '<div>' . $value->triFormateado . ' %</div>';
 		}
 		
-		$htmlInversionActual = '<tr class="middle-td">
-							<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-							<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-							<td class="middle-td derecha">'.
+		$htmlInversionActual = '<div class="clase-tr" >
+							<div class="clase-td" >
+								<div class="td-avatar"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a>
+								</div>
+								<strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong>
+							</div>
+							<div class="clase-td" >'.
 								$financiado.
 								$inversion.
-							'</td>
-							<td class="middle-td derecha">'
+							'</div>
+							<div class="clase-td" >'
 								.$montoFinanciado.
 								$montoInversion.
-							'</td>
-							<td class="middle-td">'
+							'</div>
+							<div class="clase-td" >'
 								.$trf.
 								$tri.
-							'</td>
-							</tr>';
+							'</div>
+							<div class="clearfix">
+									</div>
+							</div>';
 	}
 	return $htmlInversionActual;
 }
@@ -150,14 +155,18 @@ function htmlFinanActual($value, $datosgenerales){
 	if( !is_null($value) && !is_null($datosgenerales) ) {
 		moreProData($value, $datosgenerales);
 
-		$htmlFinanActual = '<tr class="middle-td">
-								<td class="td-img"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a></td>
-								<td class="td-titulo"><strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong></td>
-								<td>' . $value->fundEndDate . '</td>
-								<td class="derecha">$<span class="number">' . $value->breakeven . '</span></td>
-								<td>' . $value->porcentajeRecaudado . ' %</td>
-								<td class="derecha">$<span class="number">' . $value->fundedAmount . '</span></td>
-							</tr>';
+		$htmlFinanActual = '<div class="clase-tr" >
+								<div class="clase-td" >
+									<div class="td-avatar"><a href="' . $value->viewUrl . '" >' . $value->imgAvatar . '</a>
+									</div>
+									<strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong>
+								</div>
+								<div class="clase-td">' . $value->fundEndDate . '</div>
+								<div class="clase-td" >$<span class="number">' . $value->breakeven . '</span></div>
+								<div class="clase-td">' . $value->porcentajeRecaudado . ' %</div>
+								<div class="clase-td">$<span class="number">' . $value->fundedAmount . '</span></div>
+								<div class="clearfix"></div>
+							</div>';
 		
 	} 
 	return $htmlFinanActual;
@@ -231,24 +240,23 @@ function htmlFinanActual($value, $datosgenerales){
 				<input id="ac-3a" name="accordion-2" type="radio" checked />
 				<label for="ac-3a"><?php echo JText::_('ESCRIT_PROD_FINAN'); ?></label>
 				<article class="ac-large">
-					<table class="table table-striped cartera">
-						<tr>
-							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_INVESTMENT'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_ROI'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_TRI'); ?></th>
-						</tr>
+					<div id="productos-tabla" class="clase-tabla">
+						<div class="clase-tr">
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_NOMBRE'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_INVESTMENT'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_ROI'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_TRI'); ?></div>
+						</div>
 						<?php
 							echo $htmlInversionActual;
 						?>	
-						<tr>
-							<td class="th-center-cartera"></td>
-							<td class="th-center-cartera derecha"><?php echo JText::_('TOTAL'); ?></td>
-							<td class="th-center-cartera derecha">$<span class="number"><?php echo $suma_inversion; ?></span></td>
-							<td class="th-center-cartera derecha">$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></td>
-							<td class="th-center-cartera"><?php echo $suma_tri; ?>%</td>
-						</tr>
-					</table>
+						<div class="clase-tr">
+							<div class="clase-td" ><?php echo JText::_('TOTAL'); ?></div>
+							<div class="clase-td" >$<span class="number"><?php echo $suma_inversion; ?></span></div>
+							<div class="clase-td" >$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></div>
+							<div class="clase-td" ><?php echo $suma_tri; ?>%</div>
+						</div>
+					</div>
 				</article>
 			</div>
 		
@@ -256,23 +264,25 @@ function htmlFinanActual($value, $datosgenerales){
 				<input id="ac-2a" name="accordion-2" type="radio" />
 				<label for="ac-2a"><?php echo JText::_('ESCRIT_PROY_INVER'); ?></label>
 				<article class="ac-medium">
-					<table class="table table-striped cartera" >
-						<tr>
-							<th class="th-center-cartera" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></th>
-							<th class="th-center-cartera derecha"><?php echo JText::_('ESCRIT_CIERRE'); ?></th>
-							<th class="th-center-cartera derecha"><?php echo JText::_('BREAKEVEN'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></th>
-							<th class="th-center-cartera"><?php echo JText::_('ESCRIT_FINANCIADO'); ?></th>
-						</tr>
+					<div id="proyectos-tabla" class="clase-tabla">
+						<div class="clase-tr">
+							<div class="clase-th" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_CIERRE'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('BREAKEVEN'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></div>
+							<div class="clase-th" ><?php echo JText::_('ESCRIT_FINANCIADO'); ?></div>
+						</div>
 						<?php
 							echo $htmlFinanActual;
 						?>	
-						<tr>
-							<td class="th-center-cartera"></td>
-							<td class="derecha" colspan="4"><?php echo JText::_('TOTAL'); ?></td>
-							<td class="th-center-cartera derecha">$<span class="number"><?php echo $suma_fund ?></span></td>
-						</tr>						
-					</table>
+						<div class="clase-tr">
+							<div class="clase-td" ></div>
+							<div class="clase-td" ></div>
+							<div class="clase-td" ></div>
+							<div class="clase-td" ><?php echo JText::_('TOTAL'); ?></div>
+							<div class="clase-td" >$<span class="number"><?php echo $suma_fund ?></span></div>
+						</div>						
+					</div>
 				</article>
 			</div>
 			
