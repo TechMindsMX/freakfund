@@ -40,6 +40,10 @@ $value = $this->items;
 			
 			<div id="confirmacion">
 				<div class="datos">
+					<h1><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_CONFIRMACION'); ?></h1>
+				</div>
+				
+				<div class="datos">
 					<h2><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_ESTA_SEGURO'); ?></h2>
 				</div>
 				
@@ -74,6 +78,10 @@ $value = $this->items;
 			</div>
 		
 			<div id="resumen">
+				<div class="datos">
+					<h1><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_RESUMEN'); ?></h1>
+				</div>
+				
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_TRAS_PROY') ?>: </span>
 					<?php echo utf8_encode($value['name']); ?>
