@@ -39,7 +39,9 @@ $value = $this->items;
 			</div>
 			
 			<div id="confirmacion">
-				<div class="datos"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_ESTA_SEGURO'); ?></div>
+				<div class="datos">
+					<h2><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_ESTA_SEGURO'); ?></h2>
+				</div>
 				
 				<div class="datos">
 					<span class="labels"><?php echo JText::_('COM_ADMINCUENTAS_TRASPASO_CUENTAORIGEN') ?>: </span><?php echo $value['cuentaOrigen']; ?>
