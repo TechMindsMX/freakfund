@@ -136,12 +136,12 @@ function htmlInversionActual($value, $datosgenerales) {
 								$financiado.
 								$inversion.
 							'</div>
-							<div class="clase-td" >'
-								.$montoFinanciado.
+							<div class="clase-td" >'.
+								'<span class="foca-magica">Montos de Retorno:</span>'.$montoFinanciado.
 								$montoInversion.
 							'</div>
-							<div class="clase-td" >'
-								.$trf.
+							<div class="clase-td" >'.
+								'<span class="foca-magica">Tasas de Retorno:</span>'.$trf.
 								$tri.
 							'</div>
 							<div class="clearfix">
@@ -161,10 +161,10 @@ function htmlFinanActual($value, $datosgenerales){
 									</div>
 									<strong><a href="' . $value->viewUrl . '" >' . $value->name . '</a></strong>
 								</div>
-								<div class="clase-td">' . $value->fundEndDate . '</div>
-								<div class="clase-td" >$<span class="number">' . $value->breakeven . '</span></div>
-								<div class="clase-td">' . $value->porcentajeRecaudado . ' %</div>
-								<div class="clase-td">$<span class="number">' . $value->fundedAmount . '</span></div>
+								<div id="fecha-mini" class="clase-td"><span class="foca-magica">Cierre:</span>' . $value->fundEndDate . '</div>
+								<div class="clase-td" ><span class="foca-magica">Punto equilibrio:</span>$<span class="number">' . $value->breakeven . '</span></div>
+								<div class="clase-td"><span class="foca-magica">Porcentaje recaudado:</span>' . $value->porcentajeRecaudado . ' %</div>
+								<div class="clase-td"><span class="foca-magica">Monto Financiado:</span>$<span class="number">' . $value->fundedAmount . '</span></div>
 								<div class="clearfix"></div>
 							</div>';
 		
@@ -221,7 +221,7 @@ function htmlFinanActual($value, $datosgenerales){
 		<div class="module-title">
 			<h2 class="title"><?php echo JText::_('ESCRIT_MOVIMIENTOS'); ?></h2>
 		</div>
-		<div class="cartera-buttons">
+		<div id="cartera-buttons" class="cartera-buttons">
 			<a class="button" href="<?php echo $jumiurl; ?>37"><?php echo JText::_('ESCRIT_CASHOUT'); ?></a>
 			<a class="button" href="<?php echo $jumiurl; ?>32"><?php echo JText::_('ESCRIT_ABONO_PAYPAL'); ?></a>
 			<a class="button" href="<?php echo $jumiurl; ?>34"><?php echo JText::_('ESCRIT_ALTA_TRASPASO'); ?></a>
@@ -252,9 +252,9 @@ function htmlFinanActual($value, $datosgenerales){
 						?>	
 						<div class="clase-tr">
 							<div class="clase-td" ><?php echo JText::_('TOTAL'); ?></div>
-							<div class="clase-td" >$<span class="number"><?php echo $suma_inversion; ?></span></div>
-							<div class="clase-td" >$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></div>
-							<div class="clase-td" ><?php echo $suma_tri; ?>%</div>
+							<div class="clase-td" ><span class="foca-magica">Inversión realizada:</span>$</span><span class="number"><?php echo $suma_inversion; ?></span></div>
+							<div class="clase-td" ><span class="foca-magica">Montos de Retorno:</span>$<span class="number"><?php echo $datosgenerales->sumRoi; ?></span></div>
+							<div class="clase-td" ><span class="foca-magica">Tasas de Retorno:</span>   <?php echo $suma_tri; ?>%</div>
 						</div>
 					</div>
 				</article>
@@ -267,7 +267,7 @@ function htmlFinanActual($value, $datosgenerales){
 					<div id="proyectos-tabla" class="clase-tabla">
 						<div class="clase-tr">
 							<div class="clase-th" colspan="2"><?php echo JText::_('ESCRIT_NOMBRE'); ?></div>
-							<div class="clase-th" ><?php echo JText::_('ESCRIT_CIERRE'); ?></div>
+							<div id="fecha-mini" class="clase-th" ><?php echo JText::_('ESCRIT_CIERRE'); ?></div>
 							<div class="clase-th" ><?php echo JText::_('BREAKEVEN'); ?></div>
 							<div class="clase-th" ><?php echo JText::_('ESCRIT_PORCENTAJE'); ?></div>
 							<div class="clase-th" ><?php echo JText::_('ESCRIT_FINANCIADO'); ?></div>
@@ -276,7 +276,7 @@ function htmlFinanActual($value, $datosgenerales){
 							echo $htmlFinanActual;
 						?>	
 						<div class="clase-tr">
-							<div class="clase-td" ></div>
+							<div class="clase-td magica2" ></div>
 							<div class="clase-td" ></div>
 							<div class="clase-td" ></div>
 							<div class="clase-td" ><?php echo JText::_('TOTAL'); ?></div>
