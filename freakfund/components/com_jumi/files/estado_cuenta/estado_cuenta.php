@@ -23,7 +23,7 @@ $token 					= JTrama::token();
 $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
-$txList 			= JTrama::getTransactions($idMiddleware->idMiddleware, $fechaInicial, $fechaFinal);
+$txList 				= JTrama::getTransactions($idMiddleware->idMiddleware, $fechaInicial, $fechaFinal);
 $descripcionTx			= array();
 $sumaDepositos			= 0;
 $sumaRetiros			= 0;
@@ -147,6 +147,8 @@ if(!is_null($txList) && !empty($txList)){
 	
 	$saldoFinalPeriodo = end($txList)->balance;
 	
+} else {
+	$tableHtml .= '<tr><td>'.JText::_('NO_RESULTADOS').'</td></tr>';
 }
 $tableHtml .= "</table>";
 
