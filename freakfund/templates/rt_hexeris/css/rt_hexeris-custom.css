@@ -394,7 +394,7 @@ div.compacto {
 		float:left;
 	}
 	#community-wrap .cToolBar .cMenu-Icon:first-of-type {
-		width: 290px;
+		width: 320px;
 		float:left;
 		margin-top:0px;
 	}
@@ -588,6 +588,9 @@ div.ui-datepicker {
 	#proyectos-tabla .clase-td {
 		text-align: left;
 		width: 85%;
+	}
+	.gf-menu-toggle {
+		top: 85px;
 	}
 	/*fin lo arrecho*/
 }

@@ -340,12 +340,18 @@ jQuery(document).ready(function(){
 				<option value="10" <?php echo ($validacionSelect-1) <	10	?'disabled="disabled"':''; ?>><?php echo JText::_('NOVEMBER'); ?></option>
 				<option value="11" <?php echo ($validacionSelect-1)	<	11	?'disabled="disabled"':''; ?>><?php echo JText::_('DECEMBER'); ?></option>
 			</select>
-						
+			<div>			
 			<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
+			</div>
+			<div>
 			<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
+	  		</div>
+	  		<div>
 	  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
+	  		</div>
+	  		<div>
 	  		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
-			
+			</div>
 			<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
 		</form>
 	</div>
