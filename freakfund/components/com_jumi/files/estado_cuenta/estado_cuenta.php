@@ -23,7 +23,7 @@ $token 					= JTrama::token();
 $idMiddleware			= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuarioMiddleware = UserData::getUserBalance($idMiddleware->idMiddleware);
 $datosUsuarioJoomla 	= UserData::datosGr($idMiddleware->idJoomla);
-$projectList 			= JTrama::getTransactions($idMiddleware->idMiddleware, $fechaInicial, $fechaFinal);
+$txList 			= JTrama::getTransactions($idMiddleware->idMiddleware, $fechaInicial, $fechaFinal);
 $descripcionTx			= array();
 $sumaDepositos			= 0;
 $sumaRetiros			= 0;
@@ -67,13 +67,17 @@ $tableHtml 	.= "<th>". JText::_('STATEMENT_REFERENCE') ."<th />";
 $tableHtml 	.= "<th style='text-align: right;'>". JText::_('STATEMENT_AMOUNT') ."<th />";
 $tableHtml 	.= "<th class='magic_seal' style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
 $tableHtml 	.= "</tr>";
-if(!is_null($projectList) && !empty($projectList)){
-	if($projectList[0]->type == 'CREDIT'){
-		$saldoInicialPeriodo = $projectList[0]->balance - $projectList[0]->amount;
-	}elseif($projectList[0]->type == 'DEBIT'){
-		$saldoInicialPeriodo = $projectList[0]->balance + $projectList[0]->amount;
+if(!is_null($txList) && !empty($txList)){
+	if($txList[0]->type == 'CREDIT'){
+		$saldoInicialPeriodo = $txList[0]->balance - $txList[0]->amount;
+	}elseif($txList[0]->type == 'DEBIT'){
+		$saldoInicialPeriodo = $txList[0]->balance + $txList[0]->amount;
 	}
-	foreach ($projectList as $obj) {
+	foreach ($txList as $obj) {
+		 if (!in_array($obj->description, $descripcionTx)) {
+		 	array_push($descripcionTx, $obj->description);
+		 }
+		
 		//operaciones resumen de cuenta
 		if($obj->type == 'DEBIT'){
 			$sumaRetiros = $obj->amount + $sumaRetiros;
@@ -141,7 +145,7 @@ if(!is_null($projectList) && !empty($projectList)){
 		$tableHtml .= '</tr>';
 	}
 	
-	$saldoFinalPeriodo = end($projectList)->balance;
+	$saldoFinalPeriodo = end($txList)->balance;
 	
 }
 $tableHtml .= "</table>";
@@ -149,7 +153,7 @@ $tableHtml .= "</table>";
 $selectTipo = '<select name="tipo" id="filtroTipo">';
 $selectTipo .=	"<option value='nada' selected>".JText::_('MOVEMENT_FILTER')."</option>";
 foreach ($descripcionTx as $key => $value) {
-	$selectTipo .=	"<option value='" .$key . "'>" .$value . "</option>";
+	$selectTipo .=	"<option value='" .$value . "'>" . JText::_('STATEMENT_'.$value) . "</option>";
 }
 $selectTipo .='</select>';
 
@@ -160,6 +164,7 @@ $periodo = $fechaInicial.' al '.$fechaFinal;
 var objFechas = <?php echo $fechasJS; ?>;
 
 jQuery(document).ready(function(){
+	
 	jQuery("#form_cuenta").validationEngine();
 	
 	jQuery('#selectFechas').val('<?php echo $mes_actual[1]-1; ?>');//pone al select de los meses el mes corriente
