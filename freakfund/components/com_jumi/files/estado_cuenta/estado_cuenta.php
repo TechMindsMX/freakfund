@@ -62,8 +62,7 @@ $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30";
 $tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
 $tableHtml 	.= "	<tr id='cabezera'>";
 $tableHtml 	.= "		<th>". JText::_('FECHA') ."<th />";
-$tableHtml 	.= "		<th class='magic_seal' style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
-$tableHtml 	.= "		<th class='magic_seal' style='width:170px;'><th />";
+$tableHtml 	.= "		<th style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
 $tableHtml 	.= "		<th class='magic_seal'>". JText::_('STATEMENT_REFERENCE') ."<th />";
 $tableHtml 	.= "		<th style='text-align: right;'>". JText::_('STATEMENT_AMOUNT') ."<th />";
 $tableHtml 	.= "		<th class='magic_seal' style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
@@ -138,11 +137,12 @@ if(!is_null($txList) && !empty($txList)){
 		}else{
 			$retiroAbono = '';
 		}
-					
+		$projectName = substr($obj->projectName, 0, 20);
+				
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '	<td>'.$obj->fechaFormat.$agregarmas.'<td />';
-		$tableHtml .= '	<td class="magic_seal">'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
-		$tableHtml .= '	<td>'.$obj->projectName.'<td />';
+		$tableHtml .= '	<td>'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion;
+		$tableHtml .= '	<div class="projectName">'.$projectName.'</div><td />';
 		$tableHtml .= '	<td class="magic_seal">'.$obj->reference.$detalleReferencia.'<td />';
 		$tableHtml .= '	<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
 		$tableHtml .= '	<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';
