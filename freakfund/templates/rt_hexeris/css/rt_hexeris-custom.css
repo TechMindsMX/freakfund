@@ -195,7 +195,7 @@ div.compacto {
 	}
 }
 @media screen and (max-width: 1024px)  {
-	  .videoHead{
+	.videoHead{
 	  	height: 458px;
 		width: 520px;
 		float: left;
@@ -206,7 +206,6 @@ div.compacto {
 	.jcarousel-skin-tango .jcarousel-container-horizontal {
 		width: 807px;
 	}
-	
 	.busq {
 		position: relative;
 		left: 2px;
@@ -237,18 +236,38 @@ div.compacto {
 		width: 16%;
 	}
 	#proyectos-tabla .clase-td:first-of-type {
-	width: 19.1%;
+		width: 19.1%;
 	}
 	#proyectos-tabla .clase-td {
 		width: 15%;
 	}
 	#proyectos-tabla .td-avatar {
-	display: none;
+		display: none;
 	}
 	/*fin lo arrecho*/
 	
 }
+@media screen and (max-width: 1024px) and (orientation:landscape) {
+	div.inline-menu, div.menu-block {
+		float: none;
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	div.inline-menu {
+		margin-top: 2em;
+	}
+}
 @media screen and (max-width: 768px)  {
+	div.inline-menu, div.menu-block {
+		float: none;
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	div.inline-menu {
+		margin-top: 2em;
+	}
 	/*lo arrecho*/
 	#productos-tabla .clase-th:first-of-type {
 		width: 22.8%;
@@ -309,6 +328,9 @@ div.compacto {
 	}
 }
 @media screen and (max-width: 600px)  {
+	div.inline-menu {
+		margin-top: 0;
+	}
 	.videoHead {
 		height: 210px;
 		width: 320px;
