@@ -140,7 +140,7 @@ if(!is_null($txList) && !empty($txList)){
 		$projectName = substr($obj->projectName, 0, 20);
 				
 		$tableHtml .= '<tr id="'.$obj->description.'">';
-		$tableHtml .= '	<td>'.$obj->fechaFormat.$agregarmas.'<td />';
+		$tableHtml .= '	<td class="mas-grandota">'.$obj->fechaFormat.$agregarmas.'<td />';
 		$tableHtml .= '	<td>'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion;
 		$tableHtml .= '	<div class="projectName">'.$projectName.'</div><td />';
 		$tableHtml .= '	<td class="magic_seal">'.$obj->reference.$detalleReferencia.'<td />';
