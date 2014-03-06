@@ -137,11 +137,11 @@ function htmlInversionActual($value, $datosgenerales) {
 								$inversion.
 							'</div>
 							<div class="clase-td" >'.
-								'<span class="foca-magica">Montos de Retorno:</span>'.$montoFinanciado.
+								'<div class="blank-space">&nbsp;</div><span class="foca-magica">Montos de Retorno:</span>'.$montoFinanciado.'<div class="blank-space">&nbsp;</div>'.
 								$montoInversion.
 							'</div>
 							<div class="clase-td" >'.
-								'<span class="foca-magica">Tasas de Retorno:</span>'.$trf.
+								'<div class="blank-space">&nbsp;</div><span class="foca-magica">Tasas de Retorno:</span>'.$trf.'<div class="blank-space">&nbsp;</div>'.
 								$tri.
 							'</div>
 							<div class="clearfix">
