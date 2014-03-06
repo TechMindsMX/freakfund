@@ -520,6 +520,10 @@ div.ui-datepicker {
 	font-size: 1em;
 }
 @media screen and (max-width : 960px) and (max-height : 640px) and (orientation: landscape) {  
+	div.inline-menu {
+margin-top: -25px;
+margin-bottom: 35px;
+}
 	.videoHead {
 		height: 216px;
 		width: 400px;
@@ -621,7 +625,7 @@ div.ui-datepicker {
 		width: 85%;
 	}
 	.gf-menu-toggle {
-		top: 85px;
+		top: 90px;
 	}
 	/*fin lo arrecho*/
 	.rt-container {
@@ -634,7 +638,10 @@ div.ui-datepicker {
 	}
 }
 @media screen and (max-width : 960px) and (max-height : 640px) and (orientation: portrait) {
-	
+	div.inline-menu {
+		margin-top: -20px;
+		margin-bottom: 25px;
+	}
 	.gf-menu-toggle {
 		margin-top: 40px;
 	}
