@@ -2,6 +2,10 @@ div.div_cuentas{
 	display: inline;
 }
 
-div.label_valor{
-	margin-left: 5%
+span.label_valor{
+	margin-left: 5%;
+	font-weight: bolder;
+}
+#bank{
+	margin-left: 9%;
 }
