@@ -625,7 +625,7 @@ div.ui-datepicker {
 	}
 	/*fin lo arrecho*/
 	.rt-container {
-		margin: 5px 12px;
+		margin: 0 auto;
 		width: 95%;
 	}
 	#rt-mainbody-surround h2, #rt-mainbody-surround .title {
@@ -721,7 +721,7 @@ div.ui-datepicker {
 	}
 	/*fin lo arrecho*/
 	.rt-container {
-		margin: 5px 11px;
+		margin: 0 auto;
 		width: 93%;
 	}
 	#rt-mainbody-surround h2, #rt-mainbody-surround .title {
