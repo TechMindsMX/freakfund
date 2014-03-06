@@ -14,7 +14,7 @@
 }
 #productos-tabla .clase-th {
 	float: left;
-/* 	padding: 16px; */
+	padding: 16px; 
 	background-color: #DBEDF7;
 	text-align: center;
 	color: #2C9AD9;
