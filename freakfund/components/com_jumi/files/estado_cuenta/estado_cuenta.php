@@ -60,19 +60,22 @@ $fechasJS = json_encode($arreglodefechas);
 $action 	= JURI::BASE()."index.php?option=com_jumi&view=application&fileid=30"; 
 
 $tableHtml 	= "<table class='table table-striped' id='edocta_table'>";
-$tableHtml 	.= "<tr id='cabezera'>";
-$tableHtml 	.= "<th>". JText::_('FECHA') ."<th />";
-$tableHtml 	.= "<th class='magic_seal'' style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
-$tableHtml 	.= "<th>". JText::_('STATEMENT_REFERENCE') ."<th />";
-$tableHtml 	.= "<th style='text-align: right;'>". JText::_('STATEMENT_AMOUNT') ."<th />";
-$tableHtml 	.= "<th class='magic_seal' style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
-$tableHtml 	.= "</tr>";
+$tableHtml 	.= "	<tr id='cabezera'>";
+$tableHtml 	.= "		<th>". JText::_('FECHA') ."<th />";
+$tableHtml 	.= "		<th class='magic_seal' style='width:170px;'>". JText::_('STATEMENT_DESC') ."<th />";
+$tableHtml 	.= "		<th class='magic_seal' style='width:170px;'><th />";
+$tableHtml 	.= "		<th class='magic_seal'>". JText::_('STATEMENT_REFERENCE') ."<th />";
+$tableHtml 	.= "		<th style='text-align: right;'>". JText::_('STATEMENT_AMOUNT') ."<th />";
+$tableHtml 	.= "		<th class='magic_seal' style='text-align: right;'>". JText::_('SALDO_FF') ."<th />";
+$tableHtml 	.= "	</tr>";
+
 if(!is_null($txList) && !empty($txList)){
 	if($txList[0]->type == 'CREDIT'){
 		$saldoInicialPeriodo = $txList[0]->balance - $txList[0]->amount;
 	}elseif($txList[0]->type == 'DEBIT'){
 		$saldoInicialPeriodo = $txList[0]->balance + $txList[0]->amount;
 	}
+	
 	foreach ($txList as $obj) {
 		 if (!in_array($obj->description, $descripcionTx)) {
 		 	array_push($descripcionTx, $obj->description);
@@ -137,11 +140,12 @@ if(!is_null($txList) && !empty($txList)){
 		}
 					
 		$tableHtml .= '<tr id="'.$obj->description.'">';
-		$tableHtml .= '<td>'.$obj->fechaFormat.$agregarmas.'<td />';
-		$tableHtml .= '<td class="magic_seal">'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
-		$tableHtml .= '<td>'.$obj->reference.$detalleReferencia.'<td />';
-		$tableHtml .= '<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
-		$tableHtml .= '<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';
+		$tableHtml .= '	<td>'.$obj->fechaFormat.$agregarmas.'<td />';
+		$tableHtml .= '	<td class="magic_seal">'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion.'<td />';
+		$tableHtml .= '	<td>'.$obj->projectName.'<td />';
+		$tableHtml .= '	<td class="magic_seal">'.$obj->reference.$detalleReferencia.'<td />';
+		$tableHtml .= '	<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
+		$tableHtml .= '	<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';
 		$tableHtml .= '</tr>';
 	}
 	
@@ -348,18 +352,18 @@ jQuery(document).ready(function(){
 				<option value="11" <?php echo ($validacionSelect-1)	<	11	?'disabled="disabled"':''; ?>><?php echo JText::_('DECEMBER'); ?></option>
 			</select>
 			<div>			
-			<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
+				<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
 			</div>
 			<div>
-			<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
+				<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
 	  		</div>
 	  		<div>
-	  		<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
+	  			<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
 	  		</div>
 	  		<div>
-	  		<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
+	  			<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
 			</div>
-			<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
+				<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
 		</form>
 	</div>
 	
