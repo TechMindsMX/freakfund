@@ -152,7 +152,7 @@ if(!is_null($txList) && !empty($txList)){
 	$saldoFinalPeriodo = end($txList)->balance;
 	
 } else {
-	$tableHtml .= '<tr><td>'.JText::_('NO_RESULTADOS').'</td></tr>';
+	$tableHtml .= '<tr><td>'.JText::_('BUSQUEDA_SIN_RESULTADOS').'</td></tr>';
 }
 $tableHtml .= "</table>";
 
