@@ -558,15 +558,24 @@ function botonFinanciar($data) {
 					var geocoder;
 					var map;
 					function initialize() {
-					  geocoder = new google.maps.Geocoder();
-					  var latlng = new google.maps.LatLng(19.432684,-99.133359);
-					  var mapOptions = {
-					    zoom: 14,
-					    center: latlng,
-					    mapTypeId: google.maps.MapTypeId.ROADMAP
-					  }
-					  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-					  codeAddress();
+						var useragent = navigator.userAgent;
+						var mapdiv = document.getElementById("map-canvas");
+						
+						if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+							mapdiv.style.width = '100%';
+							mapdiv.style.height = '100%';
+							variables = {zoom: 14, center: latlng, disableDefaultUI: true, draggable: false, disableDoubleClickZoom: false, zoomControl: true, mapTypeId: google.maps.MapTypeId.ROADMAP};
+						} else {
+						    mapdiv.style.width = '455px';
+						    mapdiv.style.height = '300px';
+						    variables = {zoom: 14, center: latlng, disableDefaultUI: false, mapTypeId: google.maps.MapTypeId.ROADMAP};
+						}
+						
+						geocoder = new google.maps.Geocoder();
+						var latlng = new google.maps.LatLng(19.432684,-99.133359);
+						var mapOptions = variables;
+						map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+						codeAddress();
 					}
 					
 					function codeAddress() {
