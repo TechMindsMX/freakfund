@@ -226,7 +226,7 @@ function encabezado($data) {
 }
 
 function informacionTmpl($data, $params) {
-	 $mapa= '<div id="map-wrapper" style="height: 300px; width: 120%; margin-top: 30px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
+	 $mapa= '<div id="map-wrapper" style="margin-top: 30px;"><div id="map-canvas" style="height: 100%; width:100%; margin-top:25px;"></div></div>			
   	 <p style="max-width:300px;">'.$data->showground.'</p>';
 	 $botonContactar= JText::_('SOLICITA_PARTICIPAR');
  	require_once 'solicitud_participar.php';
@@ -565,8 +565,9 @@ function botonFinanciar($data) {
 							mapdiv.style.width = '100%';
 							mapdiv.style.height = '100%';
 							variables = {zoom: 14, center: latlng, disableDefaultUI: true, draggable: false, disableDoubleClickZoom: false, zoomControl: true, mapTypeId: google.maps.MapTypeId.ROADMAP};
+							console.log(mapdiv.style.width);
 						} else {
-						    mapdiv.style.width = '455px';
+						    mapdiv.style.width = '372px';
 						    mapdiv.style.height = '300px';
 						    variables = {zoom: 14, center: latlng, disableDefaultUI: false, mapTypeId: google.maps.MapTypeId.ROADMAP};
 						}

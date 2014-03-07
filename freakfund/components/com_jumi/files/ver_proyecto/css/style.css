@@ -454,14 +454,17 @@ div#proInfo .naranja {
 		width: 100px;
 		cursor: pointer;
 	}
-	#contenido-detalle {
-		margin-bottom: 10px;
-		width:270px;
-		height: 300px;
-		overflow-y: scroll;
-	}
 	#proInfo > .bloque {
 		border: 0;
+	}
+	#contenido-detalle {
+		margin-bottom: 10px;
+		width: 270px;
+		height: auto;
+	}
+	#content #info, #contenido-detalle {
+		overflow-y: visible;
+		height: auto;	
 	}
 }
 
