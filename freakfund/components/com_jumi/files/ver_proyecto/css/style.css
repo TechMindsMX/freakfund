@@ -84,6 +84,9 @@ div#rt-mainbody-surround div#rt-mainbody {
 .cerrar a{
 	color: #FFF !important;
 }
+#menu > div {
+	position: relative;
+}
 .menu-item {
 	width: 207px;
 	height: 123px;
@@ -147,7 +150,6 @@ div#rt-mainbody-surround div#rt-mainbody {
 #banner {
 	position: relative;
 }
-
 .fechacreacion {
 	margin-top: -10px;
 }
@@ -155,31 +157,26 @@ div#banner div.rt-inner {
 	color: #FFF;
 	line-height: 15px;
 }
-
 div#banner div.rt-inner h2 {
 	color: #FFF;
 	margin: 0px;
 	line-height: 30px;
 	font-weight:bolder;
 }
-
 div#banner div.rt-inner h4 {
 	color: #FFF;
 	margin: 0px;
 	line-height: 20px;
 	text-transform:uppercase;
 }
-
 div#banner div.rt-inner a {
 	color: #FFF;
 	font-size:14px;
 }
-
 #video-player {
 	margin: auto;
 	height: 600px;
 }
-
 #menu-player {
 	float: left;
 	max-width: 150px;
@@ -199,7 +196,6 @@ div#banner div.rt-inner a {
 	width: 100%;
 	height: 100%;
 }
-
 .liga[type="button"] {
 	float: left;
 	max-width: 130px;
@@ -345,8 +341,13 @@ div#proInfo .naranja {
 		max-width: 182px;
 		width: 100%;
 	}
+	#proInfo .bloque:first-of-type {
+		width: 100%;
+	}
+	#proInfo .btn-invertir {
+		width: 70%;
+	}
 }
-
 @media screen and (max-width:960px) {
 	#menu-player {
 		max-width: 100%;
@@ -370,6 +371,27 @@ div#proInfo .naranja {
 	#banner .content-banner .info-banner p {
 		font-size: 15px;
 	}
+	.menu-item {
+		position:absolute;
+	}
+	.gallery {
+		left: 27%;
+	}
+	.audios {
+		left: 53%;
+	}
+	.info {
+		left: 79%;
+	}
+	.menu-item {
+		width: 21%;
+		margin-right: 4%;
+		height: 6em;
+		background-size: 133%;
+	}
+	.menu-item, #menu {
+		height: 7em;
+	}
 }
 
 @media screen and (max-width:770px) {
@@ -390,12 +412,6 @@ div#proInfo .naranja {
 	#menu {
 		width: 100%;
 		margin: 0;	
-	}
-	.menu-item {
-		width: 22%;
-		margin-right: 3%;
-		height: 6em;
-		background-size: 200%;
 	}
 	.menu-item:last-of-type {
 		margin-right: 0;
@@ -421,6 +437,9 @@ div#proInfo .naranja {
 }
 
 @media screen and (max-width:500px) {
+	.menu-item, #menu {
+		height: 3.4em;
+	}
 	.img_avatar {
 		width: 253px;
 	}
@@ -440,6 +459,9 @@ div#proInfo .naranja {
 		width:270px;
 		height: 300px;
 		overflow-y: scroll;
+	}
+	#proInfo > .bloque {
+		border: 0;
 	}
 }
 
@@ -464,6 +486,10 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	}
 	#proInfo .bloque:first-of-type {
 		width: 32%;
+		padding-top: 8px;
+	}
+	#proInfo .bloque:last-of-type {
+		padding-top: 62px;
 	}
 	#menu-player {
 		max-width: 5%;
@@ -476,6 +502,12 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	}
 	.liga[type="button"] {
 		height: 89px;
+	}
+	div#proInfo h3 {
+		font-size: 110%;
+	}
+	div#proInfo .naranja {
+		font-size: 18px;
 	}
 }
 @media only screen 
@@ -491,8 +523,6 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	} 
 	.menu-item {
 		margin-top: .8em;
-		width: 22.5%;
-		height: 100%;
 		background-size: 100%;
 	} 
 	.over, .active {
@@ -504,5 +534,26 @@ and (-webkit-min-device-pixel-ratio: 1)  {
 	#menu-player {
 		max-width: 11%;
 	}
-
+	#proInfo {
+		border: 0;
+	}
+	#proInfo > .bloque {
+		width: 25%;
+		display: inline-block;
+		border-left: 0;
+	}
+	div#rt-mainbody-surround div#rt-mainbody {
+		padding: 10px;
+		margin: 0 10px;
+	}
+	#rt-copyright .rt-container {
+		width: 100%;
+	}
+}
+@media only screen and (max-device-width : 768px) and (orientation : landscape) {
+	#proInfo > .bloque {
+		width: 50%;
+		display: inline-block;
+		border: 0;
+	}
 }
