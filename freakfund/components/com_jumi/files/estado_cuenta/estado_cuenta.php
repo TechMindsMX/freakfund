@@ -106,7 +106,7 @@ if(!is_null($txList) && !empty($txList)){
 				foreach ($detailTransaction as $key => $value) {
 					$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.JText::_('STATEMENT_'.$value->description).'</div>';
 					$detalleReferencia	.= '<div style="display:none; margin-top: 5px;">'.$value->reference.'</div>';
-					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$<span class="number">'.$value->amount.'</span></div>';
+					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$-<span class="number">'.$value->amount.'</span></div>';
 				}
 			}else{
 				$detalleDescripcion	= '';
@@ -142,7 +142,7 @@ if(!is_null($txList) && !empty($txList)){
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '	<td class="mas-grandota">'.$obj->fechaFormat.$agregarmas.'<td />';
 		$tableHtml .= '	<td>'.JText::_('STATEMENT_'.$obj->description).$retiroAbono.$detalleDescripcion;
-		$tableHtml .= '	<div class="projectName">'.$projectName.'</div><td />';
+		$tableHtml .= '	<h4 class="projectName">'.$projectName.'</h4><td />';
 		$tableHtml .= '	<td class="magic_seal">'.$obj->reference.$detalleReferencia.'<td />';
 		$tableHtml .= '	<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
 		$tableHtml .= '	<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';

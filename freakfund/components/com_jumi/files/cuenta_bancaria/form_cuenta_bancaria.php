@@ -60,6 +60,16 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 	jQuery(document).ready(function(){
 		jQuery("#form_cashout").validationEngine();
 		
+		jQuery('#type').change(function(){
+			if(this.value == '001'){
+				jQuery('#bankCode').val('072');
+				jQuery('#bankCode').prop('disabled', 'disabled');
+			}else{
+				jQuery('#bankCode').prop('disabled', '');
+			}
+			
+		})
+		
 		jQuery('.guarda').click(function(){
 			jQuery('.formulario').hide();
 			jQuery('#typeAccount').html(jQuery('#type option:selected').html());
@@ -109,7 +119,6 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 				<select name="type" id="type" class="validate[required]">
 					<?php
 					foreach ($tipoCuenta as $key => $value) {
-						var_dump($key, $value);
 						$selected = $key=='001'?'selected="selected"':'';
 						echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
 					}
@@ -119,7 +128,7 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 			
 			<div>
 				<label for="bank"><?php echo JText::_('CUENTA_BANCARIA_BANCO'); ?></label>
-				<select name="bankCode" id="bankCode"  class="validate[required]">
+				<select name="bankCode" id="bankCode"  class="validate[required]" disabled="disabled">
 					<?php
 					foreach ($bancos as $key => $value) {
 						$selected = $key=='072'?'selected="selected"':'';
