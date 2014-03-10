@@ -262,7 +262,7 @@ function pageselectCallback (page_index, jq) {
 		newcontent += '</div>';
 		newcontent += '</div>';
 		newcontent += '<div class="avatar" style="background-image:url(\'<?php echo AVATAR; ?>\/'+members[i].avatar+'\');">';
-		newcontent += '	<a href="' + linkinvertir + '">';
+		newcontent += '	<a href="' + link + '">';
 		newcontent += '		<span class="mask"></span>';
 		newcontent += '	</a>';
 		newcontent += '</div>';
