@@ -1,9 +1,9 @@
 <?php
-if ($_SERVER['SERVER_NAME'] != 'localhost') {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7272');
+if ($_SERVER['SERVER_ADDR'] != 'localhost' && $_SERVER['SERVER_ADDR'] != '::1' ) {
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
 } else {
 	define('MIDDLE', 'http://192.168.0.122:7272');
-} 
+}
 include('../../../configuration.php');
 
 $fun 			= is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
@@ -12,7 +12,7 @@ $bd 			= new mysqli($configuracion->host, $configuracion->user ,$configuracion->
 date_default_timezone_set('America/Mexico_City');
 
 switch ($fun) {
-	case 1: //Graba la calificacion del usuario
+	case 1://Graba la calificacion del usuario
 		$calificador 	= is_numeric($_POST['calificador']) ? $_POST['calificador'] : 0;
 		$calificado  	= is_numeric($_POST['calificado']) ? $_POST['calificado'] : 0;
 		$score 		 	= is_numeric($_POST['score']) ? $_POST['score'] : 0;
@@ -89,7 +89,7 @@ switch ($fun) {
 		echo json_encode($respuesta);
 		break;
 		
-	case 4: //Recaptcha Código de redención
+	case 4://Recaptcha Código de redención
 		require_once('recaptchalib.php');
 		$privatekey = "6LeDLOgSAAAAADUei7zA8aJPKbOyUVzDH5kMbJGh";
 		$codigo 	= array();
@@ -117,12 +117,12 @@ switch ($fun) {
 		echo $respuesta;
 		break;
 	
-	case 6: //Obtiene un token nuevo
+	case 6://Obtiene un token nuevo
 		$token = @file_get_contents(MIDDLE.'/trama-middleware/rest/security/getKey');
 		echo $token;
 		break;
 	
-	case 7: //Obtiene el nombre de a quien pertenece un numero de cuenta dado
+	case 7://Obtiene el nombre de a quien pertenece un numero de cuenta dado
 		$account = $_POST['numCuenta'];
 		
 		$name = @file_get_contents(MIDDLE.'/trama-middleware/rest/account/get/'.$account);
