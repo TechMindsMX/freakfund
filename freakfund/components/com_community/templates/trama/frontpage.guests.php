@@ -7,7 +7,12 @@
  *
  */
 defined('_JEXEC') or die();
+$app = JFactory::getApplication();
+$url = JRoute::_('index.php?option=com_users&view=login');
+$app->redirect($url);
+
 ?>
+
 <div class="cGuest clearfix">
 
 	<!-- Start the Login Form -->
@@ -77,7 +82,7 @@ defined('_JEXEC') or die();
 
 	<!-- Start the Intro text -->
 	<div class="cGuest-Intro">
-		<h2 class="cGuest-Head cResetH"><?php echo JText::_('COM_COMMUNITY_GET_CONNECTED_TITLE'); ?></h2>
+		<h2 class="cGuest-Head cResetH"><?php echo JText::_('COM_COMMUNITY_GET_CONNECTED_TITLE'); ?>ssssssssss</h2>
 		<ul class="cGuest-Story cResetList">
 			<li>
 				<i class="com-icon-tick cFloat-L"></i>
