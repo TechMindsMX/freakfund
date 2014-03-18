@@ -305,7 +305,7 @@ class JTrama
 	
 	public static function getClosestEnd()
 	{
-		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEnd'));
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEndFunding'));
 		if(isset($data)) {
 			foreach ($data as $key => $value) {
 				$value = JTrama::formatDatosProy($value);

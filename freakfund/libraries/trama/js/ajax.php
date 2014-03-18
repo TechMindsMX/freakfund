@@ -1,8 +1,9 @@
 <?php
-if ($_SERVER['SERVER_ADDR'] != 'localhost' && $_SERVER['SERVER_ADDR'] != '::1' ) {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070');
+$address = str_replace('.', '', $_SERVER['HTTP_HOST']);
+if (!is_numeric($address) && $address != 'localhost') {
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070'); // direccion produccion
 } else {
-	define('MIDDLE', 'http://192.168.0.122:7272');
+	define('MIDDLE', 'http://192.168.0.122:7272'); // direccion staging
 }
 include('../../../configuration.php');
 
