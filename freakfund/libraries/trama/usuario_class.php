@@ -185,6 +185,12 @@ class UserData {
 		
 		return $txData;
 	}
+	
+	public static function getBankAccount($middlewareId){
+		$accountObj = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/account/get/account/'.$middlewareId));
+		
+		return $accountObj;
+	}
 }
 
 ?>

@@ -29,10 +29,11 @@ $error			= $input->get('errorCode', null, 'int');
 $amountWithdraw	= $input->get('amountWithdraw', null, 'int');
 $mensaje		= '';
 $botonCuenta	= '';
-$accountNumber	= '';
+$accountNumber	= UserData::getBankAccount($idMiddleware->idMiddleware);
 
-$datosUsuario->accountType		= $input->get('accountType', 1, 'int');
-$datosUsuario->accountNumber 	= $input->get('accountnumber', '', 'string');
+$datosUsuario->accountType		= $accountNumber->type;
+$datosUsuario->accountNumber 	= $accountNumber->account;
+
 $total = strlen($datosUsuario->accountNumber);
 
 if($datosUsuario->accountNumber != ''){

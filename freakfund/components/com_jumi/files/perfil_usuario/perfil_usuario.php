@@ -4,6 +4,8 @@ defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed
 $count = 0;
 $usuario = JFactory::getUser();
 $app = JFactory::getApplication();
+$app->redirect('index.php?option=com_jumi&view=application&fileid=24&Itemid=218');
+
 if ($usuario->guest == 1) {
 	$return = JURI::getInstance()->toString();
 	$url    = 'index.php?option=com_users&view=login';

@@ -24,11 +24,8 @@ $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $callback		= JURI::base().'index.php?option=com_jumi&view=application&fileid=24&from=36';
 $action			= MIDDLE.PUERTO.'/trama-middleware/rest/account/createAccount';
 $confirmacion	= $input->get('confirmacion', 0, 'int');
-$typeAccount	= $input->get('typeAccount', '', 'string');
-$bank			= $input->get('bank', '', 'string');
-$account		= $input->get('account', 0, 'string');
 $error			= $input->get('errorCode', null, 'int');
-$accountNumber	= $input->get('numCuenta', '', 'string');
+$datosAccount	= UserData::getBankAccount($idMiddleware->idMiddleware);
 
 errorClass::manejoError($error, '36');
 
@@ -60,6 +57,17 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 	jQuery(document).ready(function(){
 		jQuery("#form_cashout").validationEngine();
 		
+		<?php
+			if(!is_null($datosAccount)){
+				echo 'jQuery("#type").val("'.$datosAccount->type.'");';
+				echo 'jQuery("#bankCode").val("'.$datosAccount->bankCode.'");';
+				if($datosAccount->type != '001'){
+					echo 'jQuery("#bankCode").prop("disabled", false);';
+				}
+				echo 'jQuery("#account").val("'.$datosAccount->account.'");';
+			}
+		?>
+		
 		jQuery('#type').change(function(){
 			if(this.value == '001'){
 				jQuery('#bankCode').val('072');
@@ -72,6 +80,7 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 		
 		jQuery('.guarda').click(function(){
 			jQuery('.formulario').hide();
+			jQuery('#bankCode').prop('disabled', false);
 			jQuery('#typeAccount').html(jQuery('#type option:selected').html());
 			jQuery('#bank').html(jQuery('#bankCode option:selected').html());
 			jQuery('#clabeNum').html(jQuery('#account').val());
@@ -80,9 +89,9 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 		
 		jQuery('.cancelButton').click(function(){
 			jQuery('.formulario').show();
-			jQuery('#type').val('');
-			jQuery('#bankCode').val('');
-			jQuery('#account').val('')
+			jQuery('#type').val();
+			jQuery('#bankCode').val();
+			jQuery('#account').val()
 			jQuery('.confirmacion').hide();
 		});
 		
@@ -100,8 +109,8 @@ $bancos = array("002"=>JText::_('BANAMEX'),
 				jQuery('#bank').val('');
 			}
 		});
+		
 	});
-	
 	function btnCancel(){
 		if( confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>') )
 			javascript:window.history.back();
