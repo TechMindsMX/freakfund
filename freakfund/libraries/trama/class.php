@@ -80,7 +80,7 @@ class JTrama
 		else {
 			$producer = JFactory::getUser($data)->name;
 		}
-		$html = '<a href="'.$link.'" mce_href="'.$link.'">'.$producer.'</a>';
+		$html = $producer;
 		return $html;
 	}
 	
