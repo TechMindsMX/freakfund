@@ -370,15 +370,15 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			<div class="fila" id="<?php echo $value->id; ?>">
 				<input type="hidden" id="destinationIdEdicion" value="<?php echo $value->destinationId; ?>" />
 
-				<div class="editable" onclick="editar(this)" >
+				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></span><div class="editable" onclick="editar(this)" >
 					<input type="hidden" value="<?php echo $value->amount; ?>" />
 					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
 				</div>
-				<div class="numCuenta">
+				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?></span><div class="numCuenta">
 					<?php echo $value->account; ?>
 				</div>
-				<div class="nomBeneficiario"><?php echo $value->name; ?></div>
-				<div class="mailBeneficiario"><?php echo $value->email; ?></div>
+				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_NOMSOCIO'); ?></span><div class="nomBeneficiario"><?php echo $value->name; ?></div>
+				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></span><div class="mailBeneficiario"><?php echo $value->email; ?></div>
 				<div style="width: 170px;">
 					<input type="button" class="button safe" value="<?php echo JText::_('ALTA_TRASPASOS_UPDATE'); ?>" onclick="confirmacionUpdate(this)" disabled="disabled" />
 					<input type="button" class="button" value="<?php echo JText::_('ALTA_TRASPASOS_BORRAR'); ?>" onclick="confirmaciondelete(this)" />
@@ -389,11 +389,12 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		?>
 		
 		<!--Campos para dar de alta un numero de cuenta-->
+		<div class="foca-magica"><h3>Dar de alta Nuevo numero de cuenta:</h3></div>
 		<div class="fila" id="autocompletado">
 			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation" placeholder="Monto maximo"/></div>
-			<div><input type="text" name="clabe" id="clabe"  class="altavalidation validate[custom[numcuenta]]" maxlength="11" /></div>
-			<div><input type="text" name="socio" id="socio" readonly="readonly" /></div>
-			<div><input type="text" name="email" id="email" readonly="readonly" /></div>
+			<div><input type="text" name="clabe" id="clabe"  class="altavalidation validate[custom[numcuenta]]" maxlength="11" placeholder="Número de cuenta"/></div>
+			<div><input type="text" name="socio" id="socio" readonly="readonly" placeholder="Nombre del socio" /></div>
+			<div><input type="text" name="email" id="email" readonly="readonly" placeholder="Email"/></div>
 			<div style="width: 170px;">
 				<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>" disabled="disabled" />
 			</div>
@@ -424,7 +425,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		<span class="datosconfirmacion" id="showemail"></span>
 	</div>
 	
-	<div>
+	<div class="botones-confirmar">
 		<span><input type="button" class="button" id="Cancelar" value="<?php echo JText::_('LBL_CANCELAR'); ?>" /></span>
 		<span><input type="button" class="button safe" value="<?php echo JText::_('LABEL_CONFIRMAR'); ?>" onclick="getToken(this)" /></span>
 	</div>

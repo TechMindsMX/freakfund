@@ -483,19 +483,6 @@ input[disabled="disabled"] {
 
 /********* fin estado de cuenta **********/
 
-/********* pantallas de confirmación *******/
-.fila > div {
-	display:inline-block;
-	width:20%;
-}
-.encabezado > div {
-	text-align:center;
-}
-.editable {
-	cursor: pointer;
-}
-/********* fin pantallas de confirmación *******/
-
 input#cantidad {
 	max-width: 100px;
 }
