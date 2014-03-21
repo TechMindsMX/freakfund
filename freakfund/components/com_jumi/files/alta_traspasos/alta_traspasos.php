@@ -246,13 +246,13 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 					
 					html += '<div class="fila" id="'+obj.response+'">';
 					html += '	<input type="hidden" id="destinationIdEdicion" value="' +destinationId+ '" />';
+					html += '	<div class="numCuenta">'+jQuery('#clabe').val()+'</div>';
+					html += '	<div class="nomBeneficiario">'+jQuery('#socio').val()+'</div>';
+					html += '	<div class="mailBeneficiario">'+jQuery('#email').val()+'</div>';
 					html += '	<div class="editable" onclick="editar(this)">';
 					html += '		<input type="hidden" value="'+maxAmount+'" />';
 					html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
 					html += '	</div>';
-					html += '	<div class="numCuenta">'+jQuery('#clabe').val()+'</div>';
-					html += '	<div class="nomBeneficiario">'+jQuery('#socio').val()+'</div>';
-					html += '	<div class="mailBeneficiario">'+jQuery('#email').val()+'</div>';
 					html += '	<div style="width: 170px;">';
 					html += '		<input type="button" class="button safe" value="<?php echo JText::_('ALTA_TRASPASOS_UPDATE'); ?>" onclick="confirmacionUpdate(this)" disabled="disabled" />';
 					html += '		<input type="button" class="button" value="<?php echo JText::_('ALTA_TRASPASOS_BORRAR'); ?>" onclick="confirmaciondelete(this)" />';
@@ -303,7 +303,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		jQuery('#formAltaTraspaso').find('.fila').each(function(){
 			if( jQuery.isNumeric(this.id) ){
 				jQuery(this).find('.safe').attr('disabled', 'disabled');
-				jQuery(this).find('span').show();
+				jQuery(this).find('span[class!="foca-magica"]').show();
 				jQuery(this).find('input[type="text"]').hide();
 			}
 		});
@@ -357,10 +357,10 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		<input type="hidden" name="userId" id="destinationId" />
 		
 		<div class="fila encabezado">
-			<div><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></div>
 			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?></div>
 			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_NOMSOCIO'); ?></div>
 			<div><?php echo JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></div>
+			<div><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></div>
 		</div>
 		
 		<?php
@@ -369,16 +369,16 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		?>
 			<div class="fila" id="<?php echo $value->id; ?>">
 				<input type="hidden" id="destinationIdEdicion" value="<?php echo $value->destinationId; ?>" />
-
-				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></span><div class="editable" onclick="editar(this)" >
-					<input type="hidden" value="<?php echo $value->amount; ?>" />
-					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
-				</div>
 				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_CLABEFF'); ?></span><div class="numCuenta">
 					<?php echo $value->account; ?>
 				</div>
 				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_NOMSOCIO'); ?></span><div class="nomBeneficiario"><?php echo $value->name; ?></div>
 				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></span><div class="mailBeneficiario"><?php echo $value->email; ?></div>
+				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></span>
+				<div class="editable" onclick="editar(this)" >
+					<input type="hidden" value="<?php echo $value->amount; ?>" />
+					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
+				</div>
 				<div style="width: 170px;">
 					<input type="button" class="button safe" value="<?php echo JText::_('ALTA_TRASPASOS_UPDATE'); ?>" onclick="confirmacionUpdate(this)" disabled="disabled" />
 					<input type="button" class="button" value="<?php echo JText::_('ALTA_TRASPASOS_BORRAR'); ?>" onclick="confirmaciondelete(this)" />
@@ -391,10 +391,10 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		<!--Campos para dar de alta un numero de cuenta-->
 		<div class="foca-magica"><h3>Dar de alta Nuevo numero de cuenta:</h3></div>
 		<div class="fila" id="autocompletado">
-			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation" placeholder="Monto maximo"/></div>
 			<div><input type="text" name="clabe" id="clabe"  class="altavalidation validate[custom[numcuenta]]" maxlength="11" placeholder="Número de cuenta"/></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" placeholder="Nombre del socio" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" placeholder="Email"/></div>
+			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation" placeholder="Monto maximo"/></div>
 			<div style="width: 170px;">
 				<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>" disabled="disabled" />
 			</div>
