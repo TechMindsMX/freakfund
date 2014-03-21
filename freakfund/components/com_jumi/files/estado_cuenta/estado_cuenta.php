@@ -164,9 +164,58 @@ foreach ($descripcionTx as $key => $value) {
 $selectTipo .='</select>';
 
 $periodo = $fechaInicial.' al '.$fechaFinal;
+
+$document->addScript('libraries/trama/js/jquery-ui.min.js', 'text/javascript', true, false);
+$document->addScript("libraries/trama/js/jquery.ui.datepicker-es.js", 'text/javascript', true, false);
+$document->addStyleSheet('libraries/trama/css/jquery-ui.css');
+
+$fInicial	= explode('-', $fechaInicial);
+$fFinal		= explode('-', $fechaFinal);
+$fInicial	= $fInicial[2].','.(intval($fInicial[1])-1).','.$fInicial[0];
+$fFinal		= $fFinal[2].','.(intval($fFinal[1])-1).','.$fFinal[0];;
 ?>
 
-<script>
+<script type="text/javascript">
+	jQuery(function() {
+		var fechaIni = new Date(<?php echo $fInicial;?>);
+		
+		jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "es" ] );
+		
+	 	jQuery( "#fechaInicial" ).datepicker({
+	    	dateFormat: "dd-mm-yy",
+	 		minDate: "-1y",
+	 		maxDate: 0,
+	 		defaultDate: fechaIni,
+	 		setDate: fechaIni,
+			onSelect: function(selectedDate) {
+				var fecha 	= jQuery(this).datepicker("getDate");
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() +1 )
+				jQuery( "#fechaFinal" ).datepicker("option", "minDate", fecha1 );
+				jQuery( "#fechaFinal").prop('disabled', false);
+				jQuery(this).validationEngine('validate');
+			}
+		});
+		
+	 	jQuery( "#fechaFinal" ).datepicker({
+	    	dateFormat: "dd-mm-yy",
+	 		minDate: "-1y",
+	 		maxDate: 0,
+	 		altField: "#fechaFinal",
+			onSelect: function(selectedDate) {
+				var fecha 	= jQuery(this).datepicker("getDate");
+				var fecha1	= new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() -1 )
+				jQuery( "#fechaInicial" ).datepicker("option", "maxDate", fecha1 );
+				jQuery( "#fechaInicial").prop('disabled', false);
+				jQuery(this).validationEngine('validate');
+			}
+		});
+		
+		jQuery( "#fechaInicial" ).datepicker('setDate', fechaIni);
+		jQuery( "#fechaFinal" ).datepicker('setDate', new Date(<?php echo $fFinal; ?>));
+
+    	jQuery( "#fechaInicial, #fechaFinal" ).prop('readonly', 'readonly');
+	});
+
 var objFechas = <?php echo $fechasJS; ?>;
 
 jQuery(document).ready(function(){
@@ -174,9 +223,6 @@ jQuery(document).ready(function(){
 	jQuery("#form_cuenta").validationEngine();
 	
 	jQuery('#selectFechas').val('<?php echo $mes_actual[1]-1; ?>');//pone al select de los meses el mes corriente
-	jQuery('#fechaInicial').val('<?php echo $fechaInicial; ?>');//pone el primer dia del mes que este seleccionado
-	jQuery('#fechaFinal').val('<?php echo $fechaFinal; ?>'); // pone el ultimo dia del periodo (la primera ves pone el dia corriente, y cuando se seleccione un mes mostrara todo el mes)
-	
 	
 	//Filtra el contenido segun el select
 	jQuery('#filtroTipo').change(function(){
@@ -191,20 +237,6 @@ jQuery(document).ready(function(){
 	       	jQuery('#edocta_table tr#'+variable).show();	
 	    	jQuery('#edocta_table tr#cabezera').show();		    
 		}	
-	});
-	
-	//Muetsra las fechas del periodo del mes seleccionado
-	jQuery('#selectFechas').change(function(){
-		if(jQuery(this).val() != 'a'){
-			jQuery('#fechaInicial').val(objFechas[jQuery(this).val()].fechaini);
-			jQuery('#fechaFinal').val(objFechas[jQuery(this).val()].fechafin);
-			
-			functionFechaInicial(jQuery('#fechaInicial'));
-			functionFechaFinal(jQuery('#fechaFinal'));
-		}else{
-			jQuery('#fechaInicial').val('');
-			jQuery('#fechaFinal').val('');
-		}
 	});
 	
 	//Muestra el detalle de la fila 
@@ -225,55 +257,6 @@ jQuery(document).ready(function(){
 		jQuery(this).prev().show()
 	});
 
-	//valida que la fecha inicial que se ingrese no sea mucho a la fecha actual
-	jQuery('#fechaInicial').change(function(){
-		functionFechaInicial(this)
-	});
-	
-	//valida que la fecha  final que se ingrese no sea mucho a la fecha actual
-	jQuery('#fechaFinal').change(function(){
-		functionFechaFinal(this);
-	});
-	
-	function functionFechaInicial(campo){
-		var i 				= new Date();
-		var datefieldff		= jQuery('#fechaFinal').val().split('-');
-		var datefieldfi		= jQuery(campo).val().split('-');
-		var fechacampo 		= Math.round(new Date(datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]).getTime() / 1000);
-		var fechacampoff	= Math.round(new Date(datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]).getTime() / 1000);
-		var fechaActualInt 	= Math.round(new Date((i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()).getTime() / 1000);
-		
-		console.log(fechacampo, fechacampoff, fechaActualInt);
-		
-		if(fechacampo > fechaActualInt){
-			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
-		}
-		
-		if( (fechacampo > fechaActualInt) ){
-			jQuery(campo).val(jQuery('#fechaFinal').val());
-		}
-	}
-	
-	function functionFechaFinal(campo){
-		var i 				= new Date();
-		var datefieldfi		= jQuery('#fechaInicial').val().split('-');
-		var datefieldff		= jQuery(campo).val().split('-');
-		var fechacampoff 	= Math.round(new Date(datefieldff[1]+'/'+datefieldff[0]+'/'+datefieldff[2]).getTime() / 1000);
-		var fechacampofi	= Math.round(new Date(datefieldfi[1]+'/'+datefieldfi[0]+'/'+datefieldfi[2]).getTime() / 1000);
-		var fechaActualInt 	= Math.round(new Date((i.getMonth()+1)+'/'+i.getDate()+'/'+i.getFullYear()).getTime() / 1000);
-		
-		if( (fechacampoff > fechaActualInt ) && (datefieldff[2]==i.getFullYear()) ){
-			jQuery(campo).val(i.getDate()+'-'+(i.getMonth()+1)+'-'+i.getFullYear())
-		}
-
-		if( (fechacampoff < fechacampofi) && (datefieldff[2]==i.getFullYear()) ){
-			jQuery(campo).val(jQuery('#fechaInicial').val());
-		}
-		if(fechacampoff < fechacampofi){
-			jQuery(campo).val(jQuery('#fechaInicial').val());
-		}
-	}
-	
 });
 </script>
 <h1><?php echo JText::_('ESTADO_CUENTA');  ?></h1>
@@ -355,13 +338,13 @@ jQuery(document).ready(function(){
 				<?php echo JText::_('RANGO_FECHA_INICIO');  ?>
 			</div>
 			<div>
-				<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaInicial" id="fechaInicial">
+				<input placeholder="DD-MM-AAAA" class="validate[custom[date]] ui-datepicker" type="text" name="fechaInicial" id="fechaInicial">
 	  		</div>
 	  		<div>
 	  			<?php echo JText::_('RANGO_FECHA_FIN');  ?> 
 	  		</div>
 	  		<div>
-	  			<input placeholder="DD-MM-AAAA" class="validate[custom[date]]" type="text" name="fechaFinal" id="fechaFinal">
+	  			<input placeholder="DD-MM-AAAA" class="validate[custom[date]] ui-datepicker" type="text" name="fechaFinal" id="fechaFinal">
 			</div>
 				<input type="submit" class="button" value="<?php echo JText::_('CONSULT_BUTTON'); ?>" />
 		</form>
