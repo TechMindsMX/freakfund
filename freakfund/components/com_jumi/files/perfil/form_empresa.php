@@ -40,7 +40,7 @@
 				echo "jQuery('#doFi_noInterior').val('".$domicioFiscal->noInterior."');\n";
 				echo "jQuery('#doFi_nomColonias').append(new Option('".$domicioFiscal->perfil_colonias_idcolonias."', '".$domicioFiscal->perfil_colonias_idcolonias."'));\n";
 				echo "jQuery('#doFi_nomEstado').append(new Option('".$domicioFiscal->perfil_estado_idestado."', '".$domicioFiscal->perfil_estado_idestado."'));\n";
-				echo "jQuery('#doFi_nomDelegacion').val('".$domicioFiscal->perfil_delegacion_iddelegacion."');\n";
+				echo "jQuery('#doFi_nomDelegacion').append(new Option('".$domicioFiscal->perfil_delegacion_iddelegacion."', '".$domicioFiscal->perfil_delegacion_iddelegacion."'));\n";
 				echo "jQuery('#doFi_iniCodigoPostal').val('".$domicioFiscal->perfil_codigoPostal_idcodigoPostal."');\n";
 				echo "jQuery('#doFi_nomPais').val('".$domicioFiscal->perfil_pais_idpais."');\n";
 				
@@ -127,7 +127,7 @@
                	<label for="doFi_iniCodigoPostal"><?php echo JText::_('LBL_CP'); ?> *:</label>
                	<input 
                		name		="doFi_perfil_codigoPostal_idcodigoPostal" 
-               		class		="validate[required,custom[onlyNumberSp]]"  
+               		class		="validate[required,custom[onlyNumberSp], minSize[5]]"  
                		type		="text" 
                		id			="doFi_iniCodigoPostal" 
                		size		="10" 
@@ -141,12 +141,7 @@
             
             <div class="_50">
             	<label for="doFi_nomDelegacion"><?php echo JText::_('LBL_DELEGACION'); ?> *:</label>
-            	<input 
-            		name="doFi_perfil_delegacion_iddelegacion" 
-            		class="validate[required,custom[onlyLetterSp]]"
-            		type="text"
-            		id="doFi_nomDelegacion"
-            		maxlength="50" />
+            	<select name="doFi_perfil_delegacion_iddelegacion" class="validate[required,custom[onlyLetterSp]]" id="doFi_nomDelegacion"></select>
             </div> 
             
             <div class="_25">
