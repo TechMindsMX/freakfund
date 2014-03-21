@@ -24,7 +24,7 @@
 }
 @media screen and (max-width: 1024px)  {
 	.foca-magica{
-		display:block;
+		display:block !important;
 		font-weight:bold;
 	}
 	#rt-mainbody-surround h3{
@@ -57,7 +57,7 @@
 }
 @media screen and (max-width: 768px)  {
 	.foca-magica{
-		display:block;
+		display:block !important;
 		font-weight:bold;
 	}
 	#rt-mainbody-surround h3{
