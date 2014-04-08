@@ -84,11 +84,9 @@ class JTrama
 		return $html;
 	}
 	
-	public static function getStatusName ($id) {
-		$allNames = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
-		
-		if (!empty($allNames)) {
-			foreach ($allNames as $llave => $valor) {
+	public static function getStatusName ($id, $statusList) {
+		if (!empty($statusList)) {
+			foreach ($statusList as $llave => $valor) {
 				if ( $valor->id == $id ) {
 					$valor->fullName 		= JText::_('TIP_'.strtoupper($valor->name).'_FULLNAME');
 					$valor->tooltipTitle 	= JText::_('TIP_'.strtoupper($valor->name).'_TITLE');
@@ -103,7 +101,16 @@ class JTrama
 	public static function getStatus(){
 		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
 		
-		return $status;
+		foreach ($status as $obj) {
+				$map[] = array($obj->name, $obj);
+			}	
+			sort($map);
+			
+			foreach ($map as $key => $value) {
+				$statusListFinal[] = $value[1];
+			}
+
+		return $statusListFinal;
 	}
 	
 	public static function checkValidStatus($obj, $tipoActual = '') {
@@ -336,8 +343,7 @@ class JTrama
 	
 	public static function getProyByStatus($params='')
 	{
-		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
-		
+		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
 		foreach ($data as $key => $value) {
 			JTrama::formatDatosProy($value);	
 		}
@@ -411,6 +417,7 @@ class JTrama
 	public static function getStateResult($proyId){
 		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
 		$dataGral 							= self::getDatos($proyId);
+		var_dump($dataGral);
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
 		$objagrupado					 	= self::agrupaIngresosEgresos($dataProyecto);
