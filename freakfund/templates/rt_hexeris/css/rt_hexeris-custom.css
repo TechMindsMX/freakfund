@@ -264,6 +264,51 @@ div.compacto {
 		display:block
 	}
 }
+@media screen and (max-width: 800px) and (max-height: 1280px) and (orientation: portrait){
+	.videoHead {
+		width: 675px;
+	}
+	.jcarousel-skin-tango .jcarousel-container-horizontal {
+		width: 540px;
+		margin-left: 55px;
+	}
+	.avatar, .mask {
+		margin: 0 auto;
+	}
+	#productos-tabla .clase-th:first-of-type {
+		width: 25.3%;
+	}
+	#productos-tabla .clase-th {
+		width: 18.3%;
+	}
+	#productos-tabla .clase-td:first-of-type {
+		width: 25.3%;
+	}
+	#productos-tabla .clase-td {
+		width: 18.3%;
+	}
+	#proyectos-tabla .clase-th:first-of-type {
+		width: 16.9%;
+	}
+ 	#proyectos-tabla .clase-th { 
+		width: 21.1%;
+	}
+	#proyectos-tabla .clase-td:first-of-type {
+		width: 19.1%;
+	}
+	#proyectos-tabla .clase-td {
+		width: 20%;
+	}
+	#fecha-mini{
+		display:none;
+	}
+	#rt-mainbody-surround .button{
+		margin-bottom:10px;
+	}
+	.td-avatar {
+		display: none;
+	}
+}
 @media screen and (max-width: 768px)  {
 	.blank-space{
 		display:block;
