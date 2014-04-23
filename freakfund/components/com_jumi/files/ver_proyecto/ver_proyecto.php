@@ -340,8 +340,8 @@ function proInfo($data) {
 			$data->finanPorcentaje = (($data->breakeven / $data->revenuePotential)*100);
 			$data->finanPorcentaje2 = $data->finanPorcentaje + 0.1;
 			
-			$data->trfFormateado = ($data->trfFormateado != null || $data->trfFormateado != 0) ? $data->trfFormateado.' %' : 'NA';
-			$data->triFormateado = ($data->triFormateado != null || $data->triFormateado != 0) ? $data->triFormateado.' %' : 'NA';
+			$data->trfFormateado = ($data->trfFormateado != null || $data->trfFormateado != 0) ? $data->trfFormateado.' %' : '0%';
+			$data->triFormateado = ($data->triFormateado != null || $data->triFormateado != 0) ? $data->triFormateado.' %' : '0%';
 
 			$statusInfo1 = '<span class="bloque" style="border: 0;"></span>';
 			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('ROI_FIN').'</div>

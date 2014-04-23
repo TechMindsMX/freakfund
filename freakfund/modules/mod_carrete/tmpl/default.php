@@ -99,8 +99,8 @@ $urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 				break;
 			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
-		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : 'NA';
-		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : 'NA';
+		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : '0%';
+		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : '0%';
 					echo '<li>
 		    				<div class="contenedor productos">
 								<a href="'.$url.@$value->id.'">
