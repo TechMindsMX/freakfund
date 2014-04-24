@@ -14,10 +14,30 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		jQuery('span.number').number(true,2);
+		
+		jQuery('.button').click(function(){
+			var monto 		 = jQuery(this).parent().prev().children().val();
+			var providerId	 = jQuery(this).next().val();
+			var providerName = jQuery(this).parent().prev().prev().text();
+			
+			jQuery('.monto').html('$<span class="number">'+monto+'</span>');
+			jQuery('.providerName').html(' '+providerName);
+			jQuery('#provId').val(providerId);
+			jQuery('#amount').val(monto);
+			
+			jQuery('span.number').number(true,2);
+			jQuery('#detalle').hide();
+			jQuery('#resumen').show();
+			
+		});
+		
+		jQuery('#send').click(function(){
+			jQuery('#formstatus').submit();
+		});
 	});
 </script>
 
-<form id="formstatus" action="" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="/post.php" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
             <thead><?php echo $this->loadTemplate('head');?></thead>

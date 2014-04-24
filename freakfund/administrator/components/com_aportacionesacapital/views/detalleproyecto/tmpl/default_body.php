@@ -6,52 +6,47 @@ $datos = $this->items;
 ?>
 <tr>
 	<td align="justify">
+		<div id="detalle">
+			<h3><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROYECTO_TRASPASO'); ?></h3>
 			
-		<h3><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROYECTO_PROVEEDORES'); ?></h3>
+			<table>
+				<?php
+				foreach ($datos->providers as $key => $value) {
+				?>
+				<tr>
+					<td><?php echo $value->producerName; ?></td>
+					<td>
+						<?php echo JText::_('COM_APORTACIONESCAPITAL_APORTACION'); ?>: 
+						<input type="text" id="monto" class="montoTrasf<?php echo $key; ?>" > 
+					</td>
+					<td>
+						<input type="button" class="button" id="enviar" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND'); ?>" />
+						<input type="hidden" value="<?php echo $value->providerId; ?>">
+					</td>
+				</tr>
+				<?php				
+				} 
+				?>
+			</table>
+		</div>
+		
+		<div id="resumen" style="display: none;">
+			<input type="hidden" name="proyId" value="<?php echo $datos->id; ?>" />
+			<input type="hidden" name="provId" id="provId" />
+			<input type="hidden" name="amount" id="amount" />
 			
-		<table class="adminlist">
-			<tr>
-				<th><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROYECTO_PROVEEDOR'); ?></th>
-				<th><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_ADVANCEQUANTITY'); ?></th>
-				<th><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SETTLEMENTQUENTITY'); ?></th>
-				<th><?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_NOTAS'); ?></th>
-			</tr>
-			<?php 
-			foreach ($datos->providers as $key => $value) {
-				if ($value->flags < 2 ) {
-					if ($value->isProducer){
-						$htmlProviderName = '<a href="index.php?option=com_aportacionesacapital&task=aporteproveedor&id='.$datos->id.'&providerId='.$value->providerId.'&producer=1">
-						'.$value->producerName.'
-						</a>
-						<p>'.JText::_('COM_APORTACIONESCAPITAL_PRODUCTOR').'</p>';
-					} else {
-						$htmlProviderName = '<a href="index.php?option=com_aportacionesacapital&task=aporteproveedor&id='.$datos->id.'&providerId='.$value->providerId.'&producer=0">
-						'.$value->producerName.'
-						</a>';
-					}
-				} else {
-					$htmlProviderName = $value->producerName;
-				}
-				
-				echo '<tr class="row'.($key % 2).'">
-				<td>
-					'.$htmlProviderName.'						
-				</td>
-				<td>
-					<p><span class="number">'.$value->advanceQuantity.'</span></p>
-					<p>'.$value->advanceDate.'</p>
-				</td>
-				<td>
-					<p><span class="number">'.$value->settlementQuantity.'</span></p>
-					<p>'.$value->settlementDate.'</p>
-				</td>
-				<td>
-					<p>'.$value->flagsTxt.'</p>
-				</td>
-				</tr>';
-			}
-		?>
-		</table>
+			<div>
+				<h3><?php echo strtoupper(JText::_('COM_APORTACIONESCAPITAL_CONFIRM_TITLE')); ?></h3>
+			</div>
+			<div>
+				<?php echo JText::_('COM_APORTACIONESCAPITAL_ESTASEGURO'); ?><span class="providerName"></span>
+				<div class="monto" style="font-weight: bold; margin-top: 10px; margin-bottom: 10px;"></div>
+			</div>
+			
+			<div>
+				<input type="button" id="send" class="button" value="<?php echo JText::_('COM_APORTACIONESCAPITAL_DETALLEPROVEEDOR_SEND'); ?>" />
+			</div>
+		</div>
 	</td>
 </tr>
 <?php
