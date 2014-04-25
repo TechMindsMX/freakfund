@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+        <name>ventasext</name>
+        <creationDate>Sept 2013</creationDate>
+        <author>Luis Magaña</author>
+        <authorEmail>lutek.valhalla@gmail.com</authorEmail>
+        <authorUrl></authorUrl>
+        <copyright>Copyright Info</copyright>
+        <license>License Info</license>
+        <version>1.0</version>
+        <description>Componente para caturar todoas las ventas externas</description>
+ 
+        <install> <!-- Runs on install -->
+        </install>
+        <uninstall> <!-- Runs on uninstall -->
+        </uninstall>
+        <update> <!-- Runs on update; New in 2.5 -->
+        </update>
+ 
+        <files folder="site">
+        </files>
+ 
+        <administration>
+                <menu>ventasext</menu>
+                <files folder="admin">
+                        <filename>index.html</filename>
+                        <filename>ventasext.php</filename>
+                        <filename>controller.php</filename>
+                        <folder>models</folder>
+                        <folder>views</folder>
+                        <folder>controllers</folder>
+                        <folder>language</folder>
+                </files>                
+        </administration>
+</extension>
