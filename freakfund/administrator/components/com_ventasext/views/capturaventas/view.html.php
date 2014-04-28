@@ -18,7 +18,8 @@ class capturaventasViewcapturaventas extends JView{
     }
 	
 	protected function addToolBar()	{
-        JToolBarHelper::title(JText::_('COM_CAPTURAVENTAS_PROJECTLIST_TITLE'));
+        JToolBarHelper::title(JText::_('COM_VENTASEXT_CAPTURAVENTAS_TITLE'));
+		JToolBarHelper::back();
 	}
 
 }

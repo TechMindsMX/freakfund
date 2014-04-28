@@ -1,0 +1,48 @@
+/** text/css **/
+
+div#element-box div.m {
+	font-size: 110%;
+}
+input[type='button'], input[type='submit'] {
+	margin-right: 1em;
+	padding: 0.5em 1em;
+	color: #FFFFFF;
+	background: #089108;
+	font-size: 110%;
+	cursor: pointer;
+}
+.datos{
+	margin-bottom: 15px;
+	text-align: left;
+}
+.labels{
+	font-weight: bolder;
+}
+.textos{
+	display: inline-block;
+	width: 130px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #AAA;
+}
+.derecha{
+	text-align: right;
+}
+.subtitulo{
+	margin-bottom: 15px;
+	font-size: 13px;
+	font-weight: bolder;
+}
+.pie{
+	margin-top: 15px;
+}
+.datosProy {
+	background:#e9e9e9;
+	padding: 10px;
+}
+.datosProy > div {
+	display: inline-block;
+	width: 30%;
+}
+.datosProy h3 {
+	margin-top: 0;
+}
