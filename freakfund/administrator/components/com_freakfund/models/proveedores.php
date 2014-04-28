@@ -11,6 +11,7 @@ class proveedoresModelproveedores extends JModelList
 			$temporal = $temporal->get('id');
 			
 			$datos = JTrama::getDatos($temporal);
+			$datos->status = JTrama::getStatusName($datos->status, JTrama::getStatus());
 			self::producerIdJoomlaANDName($datos);
 			
 			foreach ($datos->providers as $key => $value) {

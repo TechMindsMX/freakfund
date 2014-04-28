@@ -570,7 +570,7 @@ class JTrama
 		if(!is_null($dataProyecto)){
 			switch ($ProjectProduct) {
 				case 'project':
-					$array = array('5');
+					$array = array(5);
 					foreach ($dataProyecto as $key => $value) {
 						if(in_array($value->status, $array)){
 							self::formatDatosProy($value);
@@ -579,7 +579,7 @@ class JTrama
 					}
 					break;
 				case 'product':
-					$array = array('6,7,10');
+					$array = array(6,7,10);
 					foreach ($dataProyecto as $key => $value) {
 						if(in_array($value->status, $array)){
 							self::formatDatosProy($value);

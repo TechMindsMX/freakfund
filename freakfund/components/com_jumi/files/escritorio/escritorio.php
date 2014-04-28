@@ -45,7 +45,6 @@ errorClass::manejoError($errorCode,$from);
 if (is_null($datosgenerales)) {
 	$app->redirect('index.php', JText::_('NO_HAY_DATOS'), 'notice');
 }
-
 if (!empty($objProyectos)) {
 	foreach($objProyectos as $key => $value){
 		$htmlFinanActual .= htmlFinanActual($value, $datosgenerales);

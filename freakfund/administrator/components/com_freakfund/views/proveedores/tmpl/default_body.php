@@ -6,16 +6,25 @@ jimport('trama.usuario_class');
 $providers 		= $this->items->providers;
 $presupuesto 	= $this->items->budget;
 
+$statusListPago	= array(6,7,11);
+$statusNoPagos	= !in_array($this->items->status->id, $statusListPago);
+
 echo '<h2>'.$this->items->name.'</h2>';
 
+if ($statusNoPagos) {
+	echo '<p style="color: red;">'.$this->items->status->name.'</p>';
+} else {
+	echo '<p style="color: green;">'.$this->items->status->name.'</p>';
+}
+
 foreach ($providers as $key => $value) {
-	if($value->advancePaidDate) {
+	if($value->advancePaidDate || $statusNoPagos) {
 		$deshabilitarAnticipo = 'disabled';
 	}else{
 		$deshabilitarAnticipo = '';
 	}
 
-	if($value->settlementPaidDate || !$value->advancePaidDate) {
+	if($value->settlementPaidDate || !$value->advancePaidDate || $statusNoPagos) {
 		$deshabilitaFiniquito = 'disabled';
 	}else{
 		$deshabilitaFiniquito = '';
