@@ -54,7 +54,7 @@ $callback = 'index.php?option=com_ventasext&task=capturaventas&id='.$data->id.'&
 				</tr>
 			</table>
 			
-			<div><input type="button" class="button" id="ingresarventa" value="Ingresar Venta" /></div>
+			<div><input type="button" class="button" id="ingresarventa" value="Ingresar Venta" disabled="disabled" /></div>
 		</div>
 		
 		<div class="detalle" style="display: none;">
@@ -84,7 +84,7 @@ $callback = 'index.php?option=com_ventasext&task=capturaventas&id='.$data->id.'&
 						
 						<td>$<span class="number"><?php echo $value->unitSale; ?></span></td>
 						
-						<td><?php echo $value->unit; ?></td>
+						<td><div id="disponiblesDetalle<?php echo $value->id; ?>"><?php echo $value->unit; ?></div></td>
 						
 						<td><div class="<?php echo $value->id; ?>"></div></td>
 						

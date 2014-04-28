@@ -20,9 +20,9 @@ $action = '/post.php';
 			var precio 		= parseFloat(jQuery(this).parent().parent().find('#precio').val());
 			var subtotal 	= cantidad * precio;
 			var total		= 0;
-			var disponibles	= parseFloat(jQuery('#totales'+this.name).val());
-
-			if( !isNaN(cantidad) ){
+			var disponibles	= parseFloat(jQuery('#totales'+this.name).val());			
+			
+			if( !isNaN(cantidad*1) ){
 				jQuery(this).parent().parent().find('.sub').html(subtotal);
 				jQuery(this).parent().parent().find('.subinput').val(subtotal);
 				
@@ -34,6 +34,12 @@ $action = '/post.php';
 				
 				jQuery('.total').text(total);
 				
+				if(total != 0){
+					jQuery('#ingresarventa').attr('disabled', false);
+				}else{
+					jQuery('#ingresarventa').attr('disabled', true);
+				}
+				
 				//Detalle de operación
 				var cantidadDetalle = jQuery('form').find('.'+this.name);
 				var subtotalDetalle	= jQuery(cantidadDetalle).parent().next().children();
@@ -41,9 +47,11 @@ $action = '/post.php';
 				jQuery('.totaldetalle').text(total);  
 				cantidadDetalle.html(cantidad);
 				subtotalDetalle.html(subtotal);
-				console.log(disponibles - cantidad);
+
 				jQuery('#uniDisponibles'+this.name).text(disponibles - cantidad);
+				jQuery('#disponiblesDetalle'+this.name).text(disponibles - cantidad);
 			}
+			
 			jQuery('span.number').number(true,2);
 		});
 		
