@@ -25,9 +25,9 @@ $callback = 'index.php?option=com_ventasext&task=capturaventas&id='.$data->id.'&
 						$disabled = 'disabled="disabled"';	
 					}
 				?>
-					<input type="hidden" id="totales<?php echo $value->id; ?>" value="<?php echo $value->unit; ?>" />
 					<tr class="wrapper">
 						<td>
+							<input type="hidden" id="totales<?php echo $value->id; ?>" value="<?php echo $value->unit; ?>" />
 							<?php echo $value->section; ?>
 							
 						</td>
