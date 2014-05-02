@@ -23,33 +23,60 @@ $action = '/post.php';
 			var disponibles	= parseFloat(jQuery('#totales'+this.name).val());			
 			
 			if( !isNaN(cantidad*1) ){
-				jQuery(this).parent().parent().find('.sub').html(subtotal);
-				jQuery(this).parent().parent().find('.subinput').val(subtotal);
+				if(disponibles >= cantidad){
+					jQuery(this).parent().parent().find('.sub').html(subtotal);
+					jQuery(this).parent().parent().find('.subinput').val(subtotal);
 				
-				jQuery.each($('.subinput'),function(key,value){
-				    if( !isNaN(parseInt(jQuery(value).val())) ){
-				    	total += parseInt(jQuery(value).val());
-				    }
-				});
+					jQuery.each($('.subinput'),function(key,value){
+					    if( !isNaN(parseInt(jQuery(value).val())) ){
+					    	total += parseInt(jQuery(value).val());
+					    }
+					});
+					
+					jQuery('.total').text(total);
 				
-				jQuery('.total').text(total);
-				
-				if(total != 0){
-					jQuery('#ingresarventa').attr('disabled', false);
+					if( (total > 0) ){
+						jQuery('#ingresarventa').attr('disabled', false);
+					}else{
+						jQuery('#ingresarventa').attr('disabled', true);
+					}
+					
+					//Detalle de operación
+					var cantidadDetalle = jQuery('form').find('.'+this.name);
+					var subtotalDetalle	= jQuery(cantidadDetalle).parent().next().children();
+					
+					jQuery('.totaldetalle').text(total);  
+					cantidadDetalle.html(cantidad);
+					subtotalDetalle.html(subtotal);
+	
+					jQuery('#uniDisponibles'+this.name).text(disponibles - cantidad);
+					jQuery('#disponiblesDetalle'+this.name).text(disponibles - cantidad);
 				}else{
-					jQuery('#ingresarventa').attr('disabled', true);
+					alert('No puede Ingresar un número mayor a: '+disponibles);
+					jQuery(this).val('0');
+					
+					jQuery(this).parent().parent().find('.sub').html(0);
+					jQuery(this).parent().parent().find('.subinput').val(0);
+					
+					jQuery.each($('.subinput'),function(key,value){
+					    if( !isNaN(parseInt(jQuery(value).val())) ){
+					    	total += parseInt(jQuery(value).val());
+					    }
+					});
+					
+					jQuery('.total').text(total);
+					
+					//Detalle de operación
+					var cantidadDetalle = jQuery('form').find('.'+this.name);
+					var subtotalDetalle	= jQuery(cantidadDetalle).parent().next().children();
+					
+					jQuery('.totaldetalle').text(0);  
+					cantidadDetalle.html(0);
+					subtotalDetalle.html(0);
+	
+					jQuery('#uniDisponibles'+this.name).text(disponibles);
+					jQuery('#disponiblesDetalle'+this.name).text(disponibles);
 				}
-				
-				//Detalle de operación
-				var cantidadDetalle = jQuery('form').find('.'+this.name);
-				var subtotalDetalle	= jQuery(cantidadDetalle).parent().next().children();
-				
-				jQuery('.totaldetalle').text(total);  
-				cantidadDetalle.html(cantidad);
-				subtotalDetalle.html(subtotal);
-
-				jQuery('#uniDisponibles'+this.name).text(disponibles - cantidad);
-				jQuery('#disponiblesDetalle'+this.name).text(disponibles - cantidad);
 			}
 			
 			jQuery('span.number').number(true,2);
