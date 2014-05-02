@@ -284,6 +284,13 @@ div#banner div.rt-inner a {
 #statusbar {
 	background: #73cee4;
 }
+div#animacionbg #markBE {
+	background: none repeat scroll 0 0 #FBB000;
+    height: 41px;
+    position: absolute;
+    top: -7px;
+    width: 2px;
+}
 .statusbarFecha {
 	position:absolute;
 }

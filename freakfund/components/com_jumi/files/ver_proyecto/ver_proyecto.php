@@ -400,11 +400,10 @@ function statusbar($data) {
 					<div id="statusbar" style="background: linear-gradient(to right, 
 											#73cee4 0%,
 											#73cee4 '.(($data->breakeven / $data->balance)*100).'%,
-											transparent '.(($data->breakeven / $data->balance)*100).'%,
-											transparent '.((($data->breakeven / $data->balance)*100)+1).'%,
-											#9CF '.((($data->breakeven / $data->balance)*100)+1).'%, 
+											#9CF '.((($data->breakeven / $data->balance)*100)).'%, 
 											#9CF 100%);">
 					</div>
+					<span id="markBE" style="left:'.$data->finanPorcentaje.'%;"></span>
 				</div>'
 					;
 			break;
