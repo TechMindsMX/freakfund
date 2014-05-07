@@ -4,7 +4,8 @@ defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
 $document = JFactory::getDocument();
 $data = $this->items;
-$callback = 'index.php?option=com_ventasext&task=capturaventas&id='.$data->id.'&resumen=1'
+$callback = JURI::base().'index.php?option=com_ventasext';
+$token = JTrama::token();
 ?>
 <tr>
 	<td>
@@ -58,7 +59,7 @@ $callback = 'index.php?option=com_ventasext&task=capturaventas&id='.$data->id.'&
 		</div>
 		
 		<div class="detalle" style="display: none;">
-			<input type="hidden" name="proyId" value="<?php echo $data->id; ?>" />
+			<input type="hidden" name="token" value="<?php echo $token; ?>" />
 			<input type="hidden" name="callback" value="<?php echo $callback; ?>" />
 			<div>
 				Esta seguro de realizar la siguiente venta externa

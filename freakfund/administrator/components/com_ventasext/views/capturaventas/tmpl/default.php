@@ -8,8 +8,8 @@ $document = JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
-$action = JRoute::_('index.php?option=com_tramaproyectos');
-$action = '/post.php';
+$action = MIDDLE.PUERTO.'/trama-middleware/rest/project/boxOfficeSales';
+//$action = '/post.php';
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
