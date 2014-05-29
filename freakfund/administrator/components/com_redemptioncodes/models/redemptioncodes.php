@@ -4,6 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
+jimport('trama.usuario_class');
 
 class RedemptioncodesModelRedemptioncodes extends JModelList {
 
@@ -13,10 +14,12 @@ class RedemptioncodesModelRedemptioncodes extends JModelList {
 		$statuses = '5,6'; 
 		$proy = JTrama::getProyByStatus($statuses);
 		
-		foreach ($proy as $key => $value) {
-			$value->statusName = JTrama::getStatusName($value->status);
-			$value->redemptioncodes = JTrama::getRedemptionCodes($value->id);
-		}
+		$proy = UserData::getusersData($proy, 'redemptionCodes');
+		
+		// foreach ($proy as $key => $value) {
+			// $value->statusName = JTrama::getStatusName($value->status);
+			// $value->redemptioncodes = JTrama::getRedemptionCodes($value->id);
+		// }
 
 		$resultado = $proy;
 

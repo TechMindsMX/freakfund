@@ -29,12 +29,6 @@ JHtml::_('behavior.tooltip');
 		</thead>
         <tbody>
 			<?php 
-			
-			$front = str_replace('administrator/', '', JURI::base());
-			$linkPro = $front.'index.php?option=com_jumi&view=application&fileid=11&proyid=';
-			
-			$linkCodes = 'index.php?option=com_redemptioncodes&view=uploadcodes&proyid=';
-			
 			foreach($this->items as $i => $item):
 				$img = $item->redemptioncodes? JURI::base().'templates/bluestork/images/admin/tick.png':JURI::base().'templates/bluestork/images/admin/publish_x.png';
 			 	
@@ -44,16 +38,13 @@ JHtml::_('behavior.tooltip');
 						<?php echo $item->id; ?>
 					</td>
 					<td>
-						<?php echo $item->name; ?>
-						<span style="margin-left: 50px;">
-							<a target="_blank" href="<?php echo $linkPro. $item->id; ?>"><?php echo JText::_('VER_PROY'); ?></a>
-						</span>
+						<?php echo $item->name.$item->verProyecto; ?>
 					</td>
 					<td>
 						<?php echo JHTML::tooltip($item->statusName->tooltipText,$item->statusName->tooltipTitle,'',$item->statusName->fullName); ?>
 					</td>
 					<td>
-						<a href="<?php echo $linkCodes. $item->id; ?>"><?php echo JText::_('ADD_REDEMP_CODES'); ?></a>
+						<?php echo $item->linkCodes ?>
 					</td>
 					<td align="middle">
 						<img src="<?php echo $img; ?>" />
