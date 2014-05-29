@@ -1,3 +1,22 @@
+<style>
+.fila > div {
+	display: inline-block;
+	width: 15%;
+	text-align: center;
+}
+.encabezado > div {
+	text-align: center;
+	color: #2C9AD9;
+	font-weight: bolder;
+}
+.encabezado{
+	padding-top: 5px;
+	background-color: #DBEDF7;
+	border-bottom: 1px solid #009999;
+	border-radius: 20px; 
+}
+
+</style>
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario 	= JFactory::getUser();
@@ -17,6 +36,7 @@ require_once 'libraries/trama/libreriasPP.php';
 $input 			= JFactory::getApplication()->input;
 $usuario		= JFactory::getUser();
 $confirm		= $input->get("confirm",0,"int");
+$document		= JFactory::getDocument();
 
 $params = new stdClass;
 $params->token			= JTrama::token();
@@ -56,7 +76,6 @@ function formTraspaso($params, $app, $usuario) {
 		}
 	}
 	$optionsHtml .= '</select>'.PHP_EOL;
-
 	?>
 	
 	<script>
@@ -142,24 +161,18 @@ function formConfirm($params, $app, $usuario) {
 	<form id="form_traspaso" action="<?php echo $action; ?>" method="post">
 		<h3><?php echo JText::_('TRASPASO_CONFIRMA'); ?></h3>
 		<div class="bloque">
-			<div class="fila">
+			<div class="fila encabezado">
 				<div><?php echo JText::_('LABEL_CONCEPTO'); ?></div>
-				<div><?php echo JText::_('TRASPASO_DINERO'); ?></div>
-			</div>
-			<div class="fila">
 				<div><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
-				<div>$ <span class="number"><?php echo $params->datosUsuario->balance; ?></span></div>
-			</div>
-			<div class="fila">
 				<div><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></div>
-				<div><?php echo $receiver->name; ?></div>
-			</div>
-			<div class="fila">
 				<div><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
-				<div><?php echo $receiver->account; ?></div>
+				<div><?php echo JText::_('CANTIDAD_TRASPASO'); ?></div>
 			</div>
 			<div class="fila">
-				<div><?php echo JText::_('CANTIDAD_TRASPASO'); ?></div>
+				<div><?php echo JText::_('TRASPASO_DINERO'); ?></div>
+				<div>$ <span class="number"><?php echo $params->datosUsuario->balance; ?></span></div>
+				<div><?php echo $receiver->name; ?></div>
+				<div><?php echo $receiver->account; ?></div>
 				<div>$ <span class="number"><?php echo $amount; ?></span></div>
 			</div>
 		</div>
@@ -191,32 +204,23 @@ function formResumen($params) {
 
 	?>
 	<h2><?php echo JText::_('RESUMEN_TRASPASO'); ?></h2>
-			<p>
-				<label><?php echo JText::_('TRASPASO_SENDER_NAME'); ?></label>
-				<span><?php echo $params->tx->senderData->name; ?></span>
-			</p>
-			<p>
-				<label><?php echo JText::_('NO_CUENTA_RETIRO'); ?></label>
-				<span><?php echo $params->tx->senderData->account; ?></span>
-			</p>
-	
-			<p>
-				<label><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></label>
-				<span><?php echo $params->tx->receiverData->name; ?></span>
-			</p>
-			<p>
-				<label><?php echo JText::_('NO_CUENTA_BENEFI'); ?></label>
-				<span><?php echo $params->tx->receiverData->account; ?></span>
-			</p>
-	
-			<p>
-				<label><?php echo JText::_('TRASPASO_AMOUNT'); ?></label>
-				<span>$ <span class="number"><?php echo $params->tx->amount; ?></span></span>
-			</p>
-			<p>
-				<label><?php echo JText::_('TRASPASO_DATE'); ?></label>
-				<span><?php echo date( 'd-m-Y h:m:s', $params->tx->timestamp/1000); ?></span>
-			</p>
+		<div class="fila encabezado">
+			<div><?php echo JText::_('TRASPASO_SENDER_NAME'); ?></div>
+			<div><?php echo JText::_('NO_CUENTA_RETIRO'); ?></div>
+			<div><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></div>
+			<div><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
+			<div><?php echo JText::_('TRASPASO_AMOUNT'); ?></div>
+			<div><?php echo JText::_('TRASPASO_DATE'); ?></div>
+		</div>
+		<div class="fila">
+			<div><span><?php echo $params->tx->senderData->name; ?></span></div>
+			<div><span><?php echo $params->tx->senderData->account; ?></span></div>
+			<div><span><?php echo $params->tx->receiverData->name; ?></span></div>
+			<div><span><?php echo $params->tx->receiverData->account; ?></span></div>
+			<div><span>$ <span class="number"><?php echo $params->tx->amount; ?></span></span></div>
+			<div><span><?php echo date( 'd-m-Y h:m:s', $params->tx->timestamp/1000); ?></span></div>
+		</div>
+			
 			<a class="button" href="<?php echo $params->cartera; ?>"><?php echo JText::_('ESCRIT'); ?></a>
 	<?php
 }

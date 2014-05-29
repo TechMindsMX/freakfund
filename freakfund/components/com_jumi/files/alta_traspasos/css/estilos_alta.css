@@ -1,10 +1,19 @@
 .fila > div {
 	display: inline-block;
-	width: 20%;
-	margin-bottom: 10px;
+	width: 19%;
+	margin: 5px 0 5px 15px;
 }
+.encabezado{
+	padding-top: 5px;
+	background-color: #DBEDF7;
+	border-bottom: 1px solid #009999;
+	border-radius: 20px; 
+}
+
 .encabezado > div {
 	text-align: center;
+	color: #2C9AD9;
+	font-weight: bolder;
 }
 
 .editable {

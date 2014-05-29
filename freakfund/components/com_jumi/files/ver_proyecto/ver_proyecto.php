@@ -321,11 +321,11 @@ function proInfo($data) {
 	switch ($data->status) { 
 		case '5':
 			$data->dateDiff = JTrama::dateDiff($data->fundEndDate);
-			$data->balancePorcentaje = (($data->balance * 100) / $data->breakeven);
+			$data->balancePorcentaje = (($data->totalIngresos * 100) / $data->breakeven);
 			$data->statusbarPorcentaje = $data->balancePorcentaje;
 
 			$statusInfo1 = '<span class="bloque"><div class="margen"><div>'.JText::_('LABEL_RECAUDADO').'</div>
-							<h1 class="naranja">$ <span class="number">'.$data->balance.'</span></h1></div></span>';
+							<h1 class="naranja">$ <span class="number">'.$data->totalIngresos.'</span></h1></div></span>';
 			$statusInfo2 = '<span class="bloque"><div class="margen"><div>'.JText::_('PUNTO_EQUILIBRIO').'</div>
 							<h1 class="naranja">$ <span class="number">'.$data->breakeven.'</span></h1></div></span>';
 			$statusInfo3 = '<span class="bloque"><div class="margen"><div>'.JText::_('DIAS_RESTANTES').'</div>
@@ -335,8 +335,8 @@ function proInfo($data) {
 							
 			break;
 		case '6' OR '7' OR '10':
-			$data->balancePorcentaje = (($data->balance / $data->revenuePotential)*100);
-			$data->statusbarPorcentaje = ((($data->balance - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
+			$data->balancePorcentaje = (($data->totalIngresos / $data->revenuePotential)*100);
+			$data->statusbarPorcentaje = ((($data->totalIngresos - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
 			$data->finanPorcentaje = (($data->breakeven / $data->revenuePotential)*100);
 			$data->finanPorcentaje2 = $data->finanPorcentaje + 0.1;
 			
@@ -373,7 +373,7 @@ function statusbar($data) {
 							}, 2000, function() {
 								var status = '.$data->status.'; 
 								if (status != 5){
-									jQuery("#statusbar").append("<div class=\"recaudado\">$ '.number_format($data->balance,0).'</div>");
+									jQuery("#statusbar").append("<div class=\"recaudado\">$ '.number_format($data->totalIngresos,0).'</div>");
 								}
 								if (status == 5){
 									jQuery("#statusbar").append("<div class=\"recaudado\">'.number_format($data->statusbarPorcentaje,2).' %</div>");
@@ -399,8 +399,8 @@ function statusbar($data) {
 					<span style="left: '.((((100-$data->finanPorcentaje)/2)+$data->finanPorcentaje)-3).'%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
 					<div id="statusbar" style="background: linear-gradient(to right, 
 											#73cee4 0%,
-											#73cee4 '.(($data->breakeven / $data->balance)*100).'%,
-											#9CF '.((($data->breakeven / $data->balance)*100)).'%, 
+											#73cee4 '.(($data->breakeven / $data->totalIngresos)*100).'%,
+											#9CF '.((($data->breakeven / $data->totalIngresos)*100)).'%, 
 											#9CF 100%);">
 					</div>
 					<span id="markBE" style="left:'.$data->finanPorcentaje.'%;"></span>

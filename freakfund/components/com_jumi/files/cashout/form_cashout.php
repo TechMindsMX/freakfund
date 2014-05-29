@@ -72,12 +72,12 @@ if($confirmacion==0){
 		jQuery("#form_cashout").validationEngine();
 		jQuery('span.number').number(true,2);
 		jQuery('.guarda').val('<?php echo $textBotton; ?>');
+		
+		jQuery("#btnCancel").click(function(){
+			if( confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>') )
+				javascript:window.history.back();
+		});
 	});
-	
-	function btnCancel(){
-		if( confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>') )
-			javascript:window.history.back();
-	}
 </script>
 
 <div>
@@ -142,7 +142,7 @@ if($confirmacion == 0){
 }
 ?>
 		<div style="margin: 10px;">
-			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="btnCancel">
+			<input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" id="btnCancel">
 			<input type="submit" class="button guarda" value="<?php echo JText::_('LBL_GUARDAR'); ?>" />
 		</div>
 	</form>
