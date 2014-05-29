@@ -37,6 +37,102 @@ class UserData {
 		return $resultado;
 	}
 	
+	public static function getusersData($proyectos, $vista){
+		$db 	= JFactory::getDbo();
+		$query 	= $db->getQuery(true); 
+		
+		$query->select ('c3rn2_users.name, c3rn2_users_middleware.idJoomla, c3rn2_users_middleware.idMiddleware')
+			  ->from ('c3rn2_users')
+			  ->join('INNER', 'c3rn2_users_middleware ON c3rn2_users_middleware.idJoomla = c3rn2_users.id')
+			  ->where('idJoomla != 378');
+
+		$db->setQuery($query);
+		$results = $db->loadObjectList();
+		
+		foreach ($results as $key => $value) {
+			$usuarios[] = $value->idMiddleware;
+		}
+		
+		foreach ($proyectos as $key => $value) {
+			self::armaObjeto($value, $usuarios, $vista);
+		}
+		
+		return $proyectos;
+	}
+	
+	protected static function armaObjeto($obj, $array, $vista){
+		
+		switch ($vista) {
+			case 'edoResult':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 		= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 		= JFactory::getUser($obj->idJoomla)->name;
+					$obj->ligaEdoResult = '<a href="index.php?option=com_edoresult&task=projectstatement&id='.$obj->id.'">'.$obj->name.'</a>';
+				}else{
+					$obj->idJoomla 		= '';
+					$obj->prodName 		= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->ligaEdoResult = $obj->name;			
+				}
+				break;
+			case 'freakfundPagos':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 		= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 		= JFactory::getUser($obj->idJoomla)->name;
+					$obj->htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$obj->id.'" >'.$obj->prodName.'</a>';
+					
+					if ( empty($obj->providers) ) {
+						$obj->htmlProveedores = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
+					} else {
+						$obj->htmlProveedores = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$obj->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
+					}
+				}else{
+					$obj->idJoomla 			= '';
+					$obj->prodName 			= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->htmlProveedores 	= JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
+					$obj->htmlProductor 	= $obj->prodName;
+				}
+				break;
+			case 'projectListFreakfund':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 			= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 			= JFactory::getUser($obj->idJoomla)->name;
+					$statusNoModificables 	= array(4,8);
+					$obj->htmlChange 		= !in_array($obj->status,$statusNoModificables) ? '<a href="index.php?option=com_freakfund&task=statusPro&proyid='.$obj->id.'" />Modificar</a>':'';
+				}else{
+					$obj->idJoomla 		= '';
+					$obj->prodName 		= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->htmlChange 	= JText::_('PRODUCTOR_INEXISTENTE_HTMLCHANGE');
+				}
+				break;
+			case 'ventasExternas':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 	= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 	= JFactory::getUser($obj->idJoomla)->name;
+					$obj->name 		= '<a href="index.php?option=com_ventasext&task=capturaventas&id='.$obj->id.'">'.$obj->name.'</a>';
+				}else{
+					$obj->idJoomla 	= '';
+					$obj->prodName 	= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->name 		= $obj->name;
+				}
+				break;
+			case 'aporteCapital':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 	= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 	= JFactory::getUser($obj->idJoomla)->name;
+					$obj->urlcambio = '<a href="index.php?option=com_aportacionesacapital&task=detalleproyecto&id='.$obj->id.'">'.JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_CHANGESTATUS').'</a>';
+				}else{
+					$obj->idJoomla 	= '';
+					$obj->prodName 	= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->urlcambio = JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_NOCHANGESTATUS');
+				}
+				break;
+			default:
+				
+				break;
+		}
+		
+	}
+	
 	public static function respuestasPerfilx ($campo,$userid){
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);

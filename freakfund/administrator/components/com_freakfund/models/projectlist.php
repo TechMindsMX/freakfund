@@ -49,6 +49,8 @@ class projectListModelprojectList extends JModelList
 		$queryResp[0]->vName = 'listproduct';
 		$queryResp[0]->statusList = JTrama::getStatus();
 
+$queryResp = UserData::getusersData($queryResp, 'projectListFreakfund');
+
 		//agregar el nombre del usuario y el idJoomla
 		foreach ($queryResp as $key => $value) {
 			self::producerIdJoomlaANDName($value,$value->userId);

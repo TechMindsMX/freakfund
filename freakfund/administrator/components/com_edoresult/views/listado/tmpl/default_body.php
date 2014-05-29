@@ -7,7 +7,7 @@ foreach ($this->items as $key => $value) {
 ?>
 	<tr>
 		<td align="absmiddle">
-			<a href="<?php echo $value->ligaEdoResult; ?>"><?php echo $value->name; ?></a>
+			<?php echo $value->ligaEdoResult; ?>
 		</td>
 		<td align="absmiddle">
 			<?php echo $value->prodName; ?>

@@ -8,23 +8,16 @@ $urls = new JTrama;
 if( !empty($this->items) ) {
 	foreach($this->items as $i => $item):
 		if ( $item->type != 'REPERTORY' ) {
-			if ( empty($item->providers) ) {
-				$htmlProveedores = JText::_('COM_FREAKFUND_FREAKFUND_BODY_NOPROVIDERS');
-			} else {
-				$htmlProveedores = '<a href="index.php?option=com_freakfund&task=proveedores&id='.$item->id.'">'.JText::_('COM_FREAKFUND_FREAKFUND_BODY_SHOWPROVIDERS').'</a>';
-			}
-			
-			$htmlProductor = '<a href="index.php?option=com_freakfund&task=liquidacionprod&id='.$item->id.'" >'.$item->producerName.'</a>';
 	?>
 	        <tr class="row<?php echo $i % 2; ?>" id="status_<?php echo $item->status; ?>">
 		        <td>
 		    		<?php echo $item->name; ?>
 		        </td>
 		        <td>
-		        	<?php echo $htmlProductor; ?>
+		        	<?php echo $item->htmlProductor; ?>
 		        </td>
 		        <td>
-		        	<?php echo $htmlProveedores; ?>
+		        	<?php echo $item->htmlProveedores; ?>
 		        </td>
 	        </tr>
 	<?php 
