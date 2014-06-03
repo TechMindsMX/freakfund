@@ -39,7 +39,7 @@ $token = JTrama::token();
 						<td>
 							<div id="uniDisponibles<?php echo $value->id; ?>"><?php echo $value->unit; ?></div>
 						</td>
-						<td><input type="text" name="<?php echo $value->id; ?>" id="cantidad" <?php echo $disabled; ?> /></td>
+						<td><input type="text" name="<?php echo $value->id; ?>" value="0" id="cantidad" <?php echo $disabled; ?> /></td>
 						<td align="right">
 							$<span class="number sub">0</span>
 							<input type="hidden" class="subinput" />

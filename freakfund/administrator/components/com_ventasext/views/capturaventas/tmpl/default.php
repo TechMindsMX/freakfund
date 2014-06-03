@@ -9,8 +9,6 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
 $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/boxOfficeSales';
-echo $action;
-//$action = '/post.php';
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
