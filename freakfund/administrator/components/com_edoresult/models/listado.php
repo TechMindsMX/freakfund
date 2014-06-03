@@ -1,16 +1,22 @@
 <?php
-// No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-// import the Joomla modellist library
 jimport('joomla.application.component.modellist');
 jimport('trama.class');
 jimport('trama.usuario_class');
 
 class listadoModellistado extends JModelList{
 	public function getlistadoproyectos() {
-		$proyectos 	= JTrama::getProyByStatus('5,10,6,7,8,11');
-		$proyectos 	= UserData::getusersData($proyectos, 'edoResult');
-
-		return $proyectos;
+		$proyectos = JTrama::allProjects();
+		$status = array(5,10,6,7,8,11);
+		
+		foreach ($proyectos as $key => $value) {
+			if(in_array($value->status, $status)){
+				$proyectosfiltrados[] = $value;
+			}
+		}
+		
+		$proyectosfiltrados = UserData::getusersData($proyectosfiltrados, 'edoResult');
+		
+		return $proyectosfiltrados;
 	}
 }
