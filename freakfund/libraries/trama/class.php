@@ -430,7 +430,9 @@ class JTrama
 		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
-		$objagrupado['userIdJoomla']		= $user; 
+		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId));
+		$objagrupado['userIdJoomla']		= $user;
+		$objagrupado['userIdMiddleware']	= $dataGral->userId;
 		$objagrupado['proyectName'] 		= $dataGral->name;
 		$objagrupado['producerName'] 		= $usuario->name;
 		$objagrupado['breakeven'] 			= $dataGral->breakeven;
@@ -442,8 +444,19 @@ class JTrama
 		$objagrupado['FechaEstreno']		= $dataGral->premiereStartDate;
 		$objagrupado['fechafin']			= $dataGral->premiereEndDate;
 		$objagrupado['ingresosPotenciales']	= $dataGral->revenuePotential;
-		$objagrupado['account']				= $dataGral->account;
-				
+		$objagrupado['account']				= $dataGral->account;		
+		$objagrupado['porBreakeven']		= ($dataGral->breakeven/$dataGral->revenuePotential)*100;
+		
+		foreach ($dataGral->projectUnitSales as $key => $value) {
+			foreach ($objagrupado['sections'] as $llave => $valor) {
+				if($value->section == $valor->name){
+					$valor->unitSales 	= $valor->total - $valor->units;
+					$valor->price 		= $value->unitSale;					
+				}
+			}
+		}
+		
+		
 		return $objagrupado;
 	}
 	
@@ -475,13 +488,17 @@ class JTrama
 	
 	public static function sumatoriaIngresos($objAgrupado){
 		//Ingresos
-		$objAgrupado['totFundin'] = 0;
-		$objAgrupado['totInvers'] = 0;
-		$objAgrupado['totVentas'] = 0;
-		$objAgrupado['totPatroc'] = 0;
-		$objAgrupado['toApoDona'] = 0;
-		$objAgrupado['totalOtro'] = 0;
-		$objAgrupado['toAporCap'] = 0;
+		$objAgrupado['totFundin'] 		= 0;
+		$objAgrupado['porFundin'] 		= 0;
+		$objAgrupado['totInvers'] 		= 0;
+		$objAgrupado['porInvers'] 		= 0;
+		$objAgrupado['totVentas'] 		= 0;
+		$objAgrupado['porVentas'] 		= 0;
+		$objAgrupado['totPatroc'] 		= 0;
+		$objAgrupado['toApoDona'] 		= 0;
+		$objAgrupado['totalOtro']		= 0;
+		$objAgrupado['toAporCap'] 		= 0;
+		$objAgrupado['totalPorVentas'] 	= 0;
 		
 		foreach ($objAgrupado['ingresos'] as $key => $value) {
 			switch ($value->description) {
@@ -503,12 +520,19 @@ class JTrama
 				case 'OTHERS':
 					$objAgrupado['totalOtro'] = $objAgrupado['totalOtro']+$value->amount;
 					break;
-				case 'CAPITALCONTRIBUTIONS':
+				case 'PROVIDER_PARTNERSHIP':
 					$objAgrupado['toAporCap'] = $objAgrupado['toAporCap']+$value->amount;
 					break;
 				default:
 					break;
 			}
+		}
+		$objAgrupado['totalPorVentas'] = $objAgrupado['totFundin'] + $objAgrupado['totInvers'] + $objAgrupado['totVentas'];
+		
+		if($objAgrupado['totalPorVentas'] != 0){
+			$objAgrupado['porFundin'] = ($objAgrupado['totFundin'] / $objAgrupado['totalPorVentas'])*100;
+			$objAgrupado['porInvers'] = ($objAgrupado['totInvers'] / $objAgrupado['totalPorVentas'])*100;
+			$objAgrupado['porVentas'] = ($objAgrupado['totVentas'] / $objAgrupado['totalPorVentas'])*100;
 		}
 		
 		return $objAgrupado;
@@ -521,7 +545,6 @@ class JTrama
 		$objAgrupado['toReemCap'] = 0;
 		$objAgrupado['toProduct'] = 0;
 		$objAgrupado['toCostFij'] = 0;
-		$objAgrupado['toCostVar'] = 0;
 		
 		foreach ($objAgrupado['egresos'] as $key => $value) {
 			switch ($value->description) {
@@ -540,14 +563,14 @@ class JTrama
 				case 'FEXEDCOSTS':
 					$objAgrupado['toCostFij'] = $objAgrupado['toCostFij']+$value->amount;
 					break;
-				case 'VARCOSTS':
-					$objAgrupado['toCostVar'] = $objAgrupado['toCostVar']+$value->amount;
+				case 'PROVIDER_PAYMENT';
+					$objAgrupado['toProveed'] = $objAgrupado['toProveed'] + $value->amount;
 					break;
 				default:
 					break;
 			}
 		}
-		
+
 		return $objAgrupado;
 	}
 
@@ -565,7 +588,21 @@ class JTrama
 		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
 		$objagrupado['porcentaTRI']		= $dataGral->tri*100;
 		$objagrupado['porcentaTRF']		= $dataGral->trf*100;
+		$objagrupado['toCostVar']		= 0;
 		
+
+		foreach ($dataGral->variableCosts as $key => $value) {
+			$detalle = new stdClass();
+			$detalle->nombre = $value->name;
+			$detalle->porcentaje = $value->value.'%';
+			$detalle->mount = ($value->value/100) * $dataGral->balance;
+			
+			$objagrupado['toCostVar'] = $objagrupado['toCostVar'] + (($value->value/100) * $objagrupado['totalIngresos']);
+			$detalleOperacion[] = $detalle;
+		}
+		
+		$objagrupado['detalleoperacion'] = $detalleOperacion;
+
 		return $objagrupado;
 	}
 

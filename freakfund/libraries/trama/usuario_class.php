@@ -112,7 +112,7 @@ class UserData {
 				}else{
 					$obj->idJoomla 	= '';
 					$obj->prodName 	= JText::_('PRODUCTOR_INEXISTENTE');
-					$obj->name 		= $obj->name;
+					$obj->name 		= $obj->name.JText::_('PRODUCTOR_INEXISTENTE_HTMLCHANGE');
 				}
 				break;
 			case 'aporteCapital':
@@ -124,6 +124,30 @@ class UserData {
 					$obj->idJoomla 	= '';
 					$obj->prodName 	= JText::_('PRODUCTOR_INEXISTENTE');
 					$obj->urlcambio = JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_NOCHANGESTATUS');
+				}
+				break;
+			case 'redemptionCodes':
+				$front = str_replace('administrator/', '', JURI::base());
+				$linkPro = $front.'index.php?option=com_jumi&view=application&fileid=11&proyid=';
+				
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 			= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 			= JFactory::getUser($obj->idJoomla)->name;
+					$obj->statusName 		= JTrama::getStatusName($obj->status);
+					$obj->redemptioncodes 	= JTrama::getRedemptionCodes($obj->id);
+					$obj->verProyecto		='<div>'.
+											 	'<a target="_blank" href="'.$linkPro. $obj->id.'">'.JText::_('VER_PROY').'</a>'.
+											 '</div>';
+					$obj->linkCodes 		= '<a href="index.php?option=com_redemptioncodes&view=uploadcodes&proyid='.$obj->id.'">'.JText::_('ADD_REDEMP_CODES').'</a>';
+				}else{
+					$obj->idJoomla 			= '';
+					$obj->prodName 			= '';
+					$obj->statusName 		= JTrama::getStatusName($obj->status);
+					$obj->redemptioncodes 	= JTrama::getRedemptionCodes($obj->id);
+					$obj->verProyecto		='<div >'.
+											 	'<a target="_blank" href="'.$linkPro. $obj->id.'">'.JText::_('VER_PROY').'</a>'.
+											 '</div>';
+					$obj->linkCodes 		= JText::_('ADD_REDEMP_CODES_NOEDIT');
 				}
 				break;
 			default:
