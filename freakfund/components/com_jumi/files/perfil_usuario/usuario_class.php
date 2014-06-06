@@ -118,7 +118,6 @@ class UserData {
 	}
 
 	public function getUserBalance ( $userid ) {
-	
 		if( isset($userid) ) {
 			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
 			$json = @file_get_contents($url);

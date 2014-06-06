@@ -79,7 +79,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterC
 		<label for="projectId"><?php echo JText::_('CODIGO_PROYECTOS'); ?></label>
 		<select name="projectId">
 		<?php
-			$proyectos = JTrama::getProyByStatus('5,6,7');
+			$proyectos = JTrama::getProyByStatus('6,7');
 			foreach($proyectos as $key => $value){
 				echo '<option value="'.$value->id.'">'.$value->name.'</option>';
 			}

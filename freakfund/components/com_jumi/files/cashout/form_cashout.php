@@ -30,9 +30,7 @@ $amountWithdraw	= $input->get('amountWithdraw', null, 'int');
 $mensaje		= '';
 $botonCuenta	= '';
 $accountNumber	= UserData::getBankAccount($idMiddleware->idMiddleware);
-
-$datosUsuario->accountType		= $accountNumber->type;
-$datosUsuario->accountNumber 	= $accountNumber->account;
+$datosUsuario->accountNumber 	= $accountNumber->clabe;
 
 $total = strlen($datosUsuario->accountNumber);
 
@@ -43,27 +41,14 @@ if($datosUsuario->accountNumber != ''){
 	$app->redirect(JURI::base().'index.php?option=com_jumi&view=application&fileid=36', JText::_('CASHOUT_MENSAJE'), 'message');
 }
 
-errorClass::manejoError($error, '36');
+errorClass::manejoError($error, '37');
 
 if($confirmacion==0){
 	$action	= JURI::base().'index.php?option=com_jumi&view=application&fileid=37';
 	$textBotton = JText::_('LBL_GUARDAR');
 }else{
-	$action	= JURI::base().'index.php?option=com_jumi&view=application&fileid=24&error=2&from=37';
+	$action	= MIDDLE.PUERTO.'/trama-middleware/rest/stp/registraOrden';
 	$textBotton = JText::_('LABEL_CONFIRMAR');
-	
-	switch ($datosUsuario->accountType) {
-		case 1:
-			$mensaje = JText::_('CASHOUT_ALERT_'.$datosUsuario->accountType);
-			break;
-		case 2:
-			$mensaje = JText::_('CASHOUT_ALERT_'.$datosUsuario->accountType);
-			break;
-		
-		default:
-			
-			break;
-	}
 }
 
 ?>
@@ -82,7 +67,7 @@ if($confirmacion==0){
 
 <div>
 
-	<form id="form_cashout" action="<?php echo $action; ?>" method="POST">
+	<form id="form_cashout" action="<?php echo $action; ?>" method="post">
 <?php
 if($confirmacion == 0){
 ?>
@@ -117,7 +102,7 @@ if($confirmacion == 0){
 		<h1><?php echo JText::_('CASHOUT_TITULO_CONFIRMACION');  ?></h1>
 		
 		<h2 style="color:#99ccff"><?php echo $mensaje; ?></h2>
-		
+
 		<div>
 			<?php echo JText::_('CASHOUT_CONFIRMACION'); ?>
 		</div>
@@ -137,6 +122,11 @@ if($confirmacion == 0){
 		<div>
 			<?php echo JText::_('CASHOUT_MONTO').': <strong>$<span class="number">'.$amountWithdraw.'<span></strong>'; ?>
 		</div>
+		
+		<input type="hidden" name="userId" value="<?php echo $idMiddleware->idMiddleware; ?>">
+		<input type="hidden" name="amount" value="<?php echo $amountWithdraw; ?>">
+		<input type="hidden" name="token" value="<?php echo $token; ?>">
+		<input type="hidden" name="callback" value="<?php echo $callback; ?>">
 		
 <?php
 }

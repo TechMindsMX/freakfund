@@ -25,7 +25,7 @@ $action = MIDDLE.PUERTO.'/trama-middleware/rest/project/boxOfficeSales';
 				if(disponibles >= cantidad){
 					jQuery(this).parent().parent().find('.sub').html(subtotal);
 					jQuery(this).parent().parent().find('.subinput').val(subtotal);
-				
+					
 					jQuery.each($('.subinput'),function(key,value){
 					    if( !isNaN(parseInt(jQuery(value).val())) ){
 					    	total += parseInt(jQuery(value).val());

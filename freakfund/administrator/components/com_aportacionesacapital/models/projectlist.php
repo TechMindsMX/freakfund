@@ -6,7 +6,7 @@ jimport('trama.usuario_class');
 
 class projectListModelprojectList extends JModelList{
 	public function getDatos() {
-		$queryResp = JTrama::getProyByStatus('6,7,11');
+		$queryResp = JTrama::getProyByStatus('5');
 
 		$queryResp[0]->statusList = JTrama::getStatus();
 		
