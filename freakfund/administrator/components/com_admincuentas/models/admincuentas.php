@@ -19,7 +19,7 @@ class admincuentasModeladmincuentas extends JModelList
 						 		 '</a>';		
 					break;
 				case 'BRIDGE':
-					$value->url ='<a href="#" class="button">'.
+					$value->url ='<a href="index.php?option=com_admincuentas&task=traspaso" class="button">'.
 						  			JText::_('COM_ADMINCUENTAS_LISTADOCUENTAS_TRANSFERENCIA').
 						 		 '</a>';		
 					break;
