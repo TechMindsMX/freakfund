@@ -17,8 +17,8 @@ jimport('trama.error_class');
 require_once 'libraries/trama/libreriasPP.php';
 
 $token 			= JTrama::token();
-$input 			= JFactory::getApplication()->input;
-$usuario		= JFactory::getUser();
+
+$input 			= $app->input;
 $idMiddleware	= UserData::getUserMiddlewareId($usuario->id);
 $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $callback		= JURI::base().'index.php?option=com_jumi&view=application&fileid=24&from=36';

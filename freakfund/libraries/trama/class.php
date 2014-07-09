@@ -21,7 +21,22 @@ class JTrama
 		
 		return $cats;
 	}
-
+	
+	public function catalogoBancos(){
+		$catalogo = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/stp/listBankCodes'));
+		
+		foreach ($catalogo as $key => $value) {
+			$objeto = new stdClass;
+			
+			$objeto->banco = $value->name;
+			$objeto->clave = $value->bankCode;
+			$objeto->claveClabe = substr($value->bankCode, -3);
+			
+			$cat[] = $objeto;
+		}
+		return $cat;
+	}
+	
 	public function fetchAllCats()	{
 		$cats = JTrama::getAllSubCats();
 		$subcats = JTrama::getAllCatsPadre();
@@ -423,6 +438,7 @@ class JTrama
 	
 	public static function getStateResult($proyId){
 		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
+		//echo MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId;
 		$dataGral 							= self::getDatos($proyId);
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
@@ -522,6 +538,9 @@ class JTrama
 					break;
 				case 'PROVIDER_PARTNERSHIP':
 					$objAgrupado['toAporCap'] = $objAgrupado['toAporCap']+$value->amount;
+					break;
+				case 'BOX_OFFICE_SALES':
+					$objAgrupado['totVentas'] = $objAgrupado['totVentas']+$value->amount;
 					break;
 				default:
 					break;
