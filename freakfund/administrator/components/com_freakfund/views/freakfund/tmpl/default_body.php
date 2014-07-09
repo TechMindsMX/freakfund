@@ -3,7 +3,17 @@
 defined('_JEXEC') or die('Restricted Access');
 jimport('trama.class');
 jimport('trama.usuario_class');
+JHtml::_('behavior.tooltip');
 $urls = new JTrama;
+
+$statusIds = explode(',', $this->_models['freakfund']->statusIds);
+foreach ($statusIds as $key => $value) {
+	$statusIds[$key] = JTrama::getStatusName($value);
+	$statusNames[] = JHTML::tooltip($statusIds[$key]->tooltipText,$statusIds[$key]->tooltipTitle,'',$statusIds[$key]->fullName)."(".$statusIds[$key]->id.")";
+}
+$statusNames = implode(', ', $statusNames);
+
+echo '<p>Se muestran los proyectos en estatus = '.$statusNames.'</p>';
 
 if( !empty($this->items) ) {
 	foreach($this->items as $i => $item):
