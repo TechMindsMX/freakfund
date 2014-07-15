@@ -17,19 +17,18 @@ require_once 'libraries/trama/libreriasPP.php';
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
 $input 			= JFactory::getApplication()->input;
-$usuario		= JFactory::getUser();
 $idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
 $usuario->data	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $proyid			= $input->get("proyid",0,"int");
 $pro			= JTrama::getDatos($proyid);
+
 
 if(!JTrama::checkValidStatus($pro)) {
 	$returnUrl = $_SERVER['HTTP_REFERER'];
 	$app->redirect($returnUrl, JText::sprintf('JGLOBAL_NO_ACEPTA_COMPRAS', $pro->name), 'error');
 }
 
-$datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
-$saldo 			= $datosUsuario->balance == null ? 0: $datosUsuario->balance;
+$saldo 			= $usuario->data->balance == null ? 0: $usuario->data->balance;
 $uri 			=& JFactory::getURI();
 $callback 		= $uri->toString().'&appId=27';
 $response		= $input->get("response",0,"int"); // RESPUESTA EXITO
