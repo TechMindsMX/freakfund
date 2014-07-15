@@ -19,7 +19,7 @@ require_once 'components/com_jumi/files/perfil_usuario/usuario_class.php';
 
 $botonContactar= JText::_('SOLICITA_CONTACTO');
 require_once 'components/com_jumi/files/ver_proyecto/solicitud_participar.php';
-$input = JFactory::getApplication()->input;
+$input = $app->input;
 $userid = $input->get("userid",0,"int");
 
 $objuserdata = new UserData;

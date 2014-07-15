@@ -85,6 +85,7 @@ $existenDatos = $datos->existingUser($usuario->id);
 					type		= "file"
 					onchange	= 'loadImage(this)' />
 			</div>
+			<p class="warning"><?php echo JText::_('TAMANO_IMAGEN_PERFIL');?></p>
 			
             <div>
             <input type="button" class="button" value="<?php echo JText::_('LBL_CANCELAR');  ?>" onClick="if(confirm('<?php echo JText::_('CONFIRMAR_CANCELAR');  ?>'))
