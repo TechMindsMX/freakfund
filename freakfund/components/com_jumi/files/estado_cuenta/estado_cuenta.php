@@ -83,11 +83,11 @@ if(!is_null($txList) && !empty($txList)){
 		//operaciones resumen de cuenta
 		if($obj->type == 'DEBIT'){
 			$sumaRetiros = $obj->amount + $sumaRetiros;
-			$retiro =  '<span style="color:red;">$-</span><span style="color:red;" class="number">'.$obj->amount.'</span>';
+			$retiro =  '<span style="color:red;">$-'.number_format($obj->amount,2).'</span>';
 			$deposito = '';
 		}elseif(($obj->type == 'CREDIT')){
 			$sumaDepositos = $obj->amount + $sumaDepositos;
-			$deposito = '$<span class="number">'.$obj->amount.'</span>';
+			$deposito = '$<span>'.number_format($obj->amount,2).'</span>';
 			$retiro = '';
 		}
 		//fin operaciones
@@ -106,7 +106,7 @@ if(!is_null($txList) && !empty($txList)){
 				foreach ($detailTransaction as $key => $value) {
 					$detalleDescripcion .= '<div style="display:none; margin-top: 5px;">'.JText::_('STATEMENT_'.$value->description).'</div>';
 					$detalleReferencia	.= '<div style="display:none; margin-top: 5px;">'.$value->reference.'</div>';
-					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$-<span class="number">'.$value->amount.'</span></div>';
+					$detalleRetiro		.= '<div style="display:none; margin-top: 5px;">$-<span>'.number_format($value->amount,2).'</span></div>';
 				}
 			}else{
 				$detalleDescripcion	= '';
@@ -138,6 +138,8 @@ if(!is_null($txList) && !empty($txList)){
 			$retiroAbono = '';
 		}
 		$projectName = substr($obj->projectName, 0, 20);
+		
+		
 				
 		$tableHtml .= '<tr id="'.$obj->description.'">';
 		$tableHtml .= '	<td class="mas-grandota">'.$obj->fechaFormat.$agregarmas.'<td />';
@@ -145,7 +147,7 @@ if(!is_null($txList) && !empty($txList)){
 		$tableHtml .= '	<h4 class="projectName">'.$projectName.'</h4><td />';
 		$tableHtml .= '	<td class="magic_seal">'.$obj->reference.$detalleReferencia.'<td />';
 		$tableHtml .= '	<td class="derecha">'.$retiro.$detalleRetiro.$deposito.'<td />';
-		$tableHtml .= '	<td class="magic_seal derecha">$<span class="number">'.$obj->balance.'</span><td />';
+		$tableHtml .= '	<td class="magic_seal derecha">$'.number_format($obj->balance, 2).'<td />';
 		$tableHtml .= '</tr>';
 	}
 	
@@ -296,19 +298,19 @@ jQuery(document).ready(function(){
 			<th colspan="2" style="text-align: center;"><?php echo JText::_('RESUMEN_CUENTAS');?></th>
 			<tr>
 				<td><?php echo JText::_('SALDO_INICIAL_PERIODO');?></td>
-				<td class="derecha">$<span class="number"><?php echo @$saldoInicialPeriodo?></span></td>
+				<td class="derecha">$<?php echo number_format(@$saldoInicialPeriodo,2); ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_DEPOSITOS');?></td>
-				<td class="derecha">$<span class="number"><?php echo @$sumaDepositos;?></span></td>
+				<td class="derecha">$<?php echo number_format(@$sumaDepositos, 2); ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SUMATORIA_RETIROS');?></td>
-				<td class="derecha">$<span style="color:red;" class="number"><?php echo @$sumaRetiros;?></span></td>
+				<td class="derecha">$<span style="color:red;"><?php echo number_format(@$sumaRetiros,2); ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('SALDO_FINAL_PERIODO');?></td>
-				<td class="derecha">$<span class="number"><?php echo @$saldoFinalPeriodo; ?></span></td>
+				<td class="derecha">$<?php echo number_format(@$saldoFinalPeriodo,2); ?></span></td>
 			</tr>
 			<tr>
 				<td><?php echo JText::_('PERIODO_FECHA_INI_FIN');?></td>
