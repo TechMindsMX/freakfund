@@ -111,6 +111,13 @@ class procesamiento extends manejoImagenes {
 		
 		$fileid = $this->redireccion($tabladb);
 		$allDone = JFactory::getApplication();
+		
+	// Force reload from database
+	$user = JFactory::getUser();
+	$session = JFactory::getSession();
+	$session->set('user', new JUser($user->id));
+	$usuario = JFactory::getUser();
+		
 		$allDone->redirect($fileid, JText::_('DATOS_GUARDADOS'));		
 	}
 	
