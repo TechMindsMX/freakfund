@@ -244,4 +244,10 @@ class plgUserFFAccount extends JPlugin
 		return $instance;
 	}
 	
+	function onUserBeforeDelete($user)
+	{
+		$url = 'index.php?'.$_SERVER['QUERY_STRING'];
+		$mensaje = 'Ni siquiera Thor debe poder eliminar un usuario.';
+		JFactory::getApplication()->redirect($url, $mensaje, 'error');
+	}
 }
