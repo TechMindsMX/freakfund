@@ -65,6 +65,12 @@ if($verificacion and $verificabanco){
 	$app->redirect($action, $message, 'message');
 }
 ?>
+<script>
+	function btnCancel(){
+		if( confirm('<?php echo JText::_('CONFIRMAR_CANCELAR'); ?>') )
+			javascript:window.history.back();
+	}
+</script>
 <form action="<?php echo $action; ?>" method="post">
 	<div class="confirmacion">
 			<h1><?php echo JText::_('CUENTA_BANCARIA_TITULO_CONFIRMACION');  ?></h1>
@@ -84,7 +90,7 @@ if($verificacion and $verificabanco){
 			</div>
 			
 			<div style="margin: 10px;">
-				<input type="button" class="button cancelButton" value="<?php echo JText::_('LBL_CANCELAR');  ?>">
+				<input type="button" class="button" onclick="btnCancel()" value="<?php echo JText::_('LBL_CANCELAR');  ?>">
 				<input type="submit" class="button" value="<?php echo JText::_('LBL_GUARDAR'); ?>" />
 			</div>
 		</div>

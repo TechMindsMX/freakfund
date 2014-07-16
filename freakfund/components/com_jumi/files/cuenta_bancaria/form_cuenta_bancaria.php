@@ -25,17 +25,18 @@ $callback		= JURI::base().'index.php?option=com_jumi&view=application&fileid=24&
 $action			= JURI::base().'index.php?option=com_jumi&view=application&fileid=38';
 $confirmacion	= $input->get('confirmacion', 0, 'int');
 $error			= $input->get('errorCode', null, 'int');
-$bankcode		= $input->get('bankCode', 0, 'string');
 $clabe			= $input->get('clabe', null, 'string');
+$bankcode		= $input->get('bankCode', substr($clabe, 0,3), 'string');
 $datosAccount	= UserData::getBankAccount($idMiddleware->idMiddleware);
 $bancos		 	= JTrama::catalogoBancos();
 $selected 		= '';
 $options		= '<option value="000">Seleccione su opción</option>';
+$selectBanco	= substr($clabe, 0,3);
 
 foreach ($bancos as $key => $value) {
 	$arrayJsBancos[]	= $value->claveClabe;
 
-	if($bankcode == $value->clave){
+	if($bankcode == $value->claveClabe){
 		$selected = 'selected="selected"';
 	}else{
 		$selected = '';
@@ -55,12 +56,7 @@ errorClass::manejoError($error, '36');
 		?> 
 		jQuery("#form_cabankCodeshout").validationEngine();
 		
-		<?php
-			if(!is_null($datosAccount)){
-				echo 'jQuery("#bankCode").val("'.$datosAccount->bankCode.'");';
-				echo 'jQuery("#account").val("'.$datosAccount->account.'");';
-			}
-		?>
+		
 		
 		jQuery('#account').val('<?php echo $clabe; ?>');
 		
@@ -98,11 +94,11 @@ errorClass::manejoError($error, '36');
 			
 			<div>
 				<label for="account"><?php echo JText::_('CUENTA_BANCARIA_CUENTA_CLABE'); ?></label>
-				<input type="text" id="account" name="clabe" maxlength="18" class="validate[required,custom[onlyNumberSp]]" value="" />
+				<input type="text" id="account" name="clabe" maxlength="18" class="validate[required,custom[onlyNumberSp]]" value="<?php echo $clabe; ?> " />
 			</div>
 			
 			<div style="margin: 10px;">
-				<input type="button" class="button cancelButton" value="<?php echo JText::_('LBL_CANCELAR');  ?>">
+				<input type="button" class="button" onclick="btnCancel()" value="<?php echo JText::_('LBL_CANCELAR');  ?>">
 				<input type="submit" class="button guarda" value="<?php echo JText::_('LBL_GUARDAR'); ?>" />
 			</div>
 		</div>

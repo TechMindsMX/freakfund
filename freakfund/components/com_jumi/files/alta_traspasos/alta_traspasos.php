@@ -152,14 +152,16 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	function confirmacionUpdate(campo){
 		
 		var montoMaximo 		= jQuery(campo).parent().parent().find('.editable').find('input').val();
-		var numCuenta 			= parseInt(jQuery(campo).parent().parent().find('.numCuenta').html());
+		var numCuenta 			= jQuery(campo).parent().parent().find('.numCuenta').html();
 		var nombreBeneficiario	= jQuery(campo).parent().parent().find('.nomBeneficiario').html();
 		var mailBeneficiario	= jQuery(campo).parent().parent().find('.mailBeneficiario').html();
 		var action				= 'update';
 		var message				= '<?php echo JText::_('ALTA_TRASPASOS_MSG_UPDATE'); ?>';
 		var div 				= jQuery(campo).parent().parent();
 
-		pintadivConfirmacion(nombreBeneficiario, montoMaximo, mailBeneficiario, numCuenta, action, message, div);
+		if( jQuery("#formAltaTraspaso").validationEngine('validate') ){
+			pintadivConfirmacion(nombreBeneficiario, montoMaximo, mailBeneficiario, numCuenta, action, message, div);
+		}
 	}
 	
 	function pintadivConfirmacion(nombre, monto, email, numCta, action, message, div){
@@ -215,8 +217,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 	function safeUpdate(campo, div, token){
 		var action				= jQuery('#'+div);
 		var userId 				= jQuery('#userId').val();
-		
-		
+				
 		if(action.prop('id') == "autocompletado"){
 			 var maxAmount 		= jQuery('#maxMount').val();
 			 var destinationId	= jQuery('#destinationId').val();
@@ -250,7 +251,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 					html += '	<div class="nomBeneficiario">'+jQuery('#socio').val()+'</div>';
 					html += '	<div class="mailBeneficiario">'+jQuery('#email').val()+'</div>';
 					html += '	<div class="editable" onclick="editar(this)">';
-					html += '		<input type="hidden" value="'+maxAmount+'" />';
+					html += '		<input type="hidden" class="validate[custom[number]]" value="'+maxAmount+'" />';
 					html += '		<span>$<span class="number">'+maxAmount+'</span></span>';
 					html += '	</div>';
 					html += '	<div style="width: 170px;">';
@@ -279,15 +280,15 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				}else if( jQuery.isNumeric(action.prop('id')) ) {
 					action.find('.safe').attr('disabled', 'disabled');
 					
-					action.find('span').text('');
-					action.find('span').html('$<span class="number">' + action.find('input[type="text"]').val() + '</span>');
+					action.find('div.editable span').text('');
+					action.find('div.editable span').html('$<span class="number">' + action.find('input[type="text"]').val() + '</span>');
 					
 					action.find('input[type="text"]').prop('type', 'hidden');
 					
 					jQuery("span.number").number( true, 2 );
 					
 					jQuery('#divConfirmacion').hide();
-					action.find('span').show();
+					action.find('div.editable span').show();
 				}
 			}else{
 				alert('<?php echo JText::_('FORM_ALTA_TRASPASOS_ERROR_MISMONUM')  ?>');
@@ -376,7 +377,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_TRASPASOS_EMAIL'); ?></span><div class="mailBeneficiario"><?php echo $value->email; ?></div>
 				<span class="foca-magica"><?php echo JText::_('FORM_ALTA_ASPASOS_MONTOMAXIMO'); ?></span>
 				<div class="editable" onclick="editar(this)" >
-					<input type="hidden" value="<?php echo $value->amount; ?>" />
+					<input type="hidden" class="validate[custom[number]]" value="<?php echo $value->amount; ?>" />
 					<span>$<span class="number"><?php echo $value->amount; ?></span></span>
 				</div>
 				<div style="width: 170px;">

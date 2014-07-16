@@ -438,13 +438,13 @@ class JTrama
 	
 	public static function getStateResult($proyId){
 		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
-		//echo MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId;
 		$dataGral 							= self::getDatos($proyId);
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
 		$objagrupado					 	= self::agrupaIngresosEgresos($dataProyecto);
 		$objagrupado					 	= self::sumatoriaIngresos($objagrupado);
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
+
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
 		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId));
 		$objagrupado['userIdJoomla']		= $user;
@@ -515,6 +515,7 @@ class JTrama
 		$objAgrupado['totalOtro']		= 0;
 		$objAgrupado['toAporCap'] 		= 0;
 		$objAgrupado['totalPorVentas'] 	= 0;
+		$objAgrupado['totTransTrama']	= 0;
 		
 		foreach ($objAgrupado['ingresos'] as $key => $value) {
 			switch ($value->description) {
@@ -542,6 +543,9 @@ class JTrama
 				case 'BOX_OFFICE_SALES':
 					$objAgrupado['totVentas'] = $objAgrupado['totVentas']+$value->amount;
 					break;
+				case 'TRANSFER_FROM_TRAMA':
+					$objAgrupado['totTransTrama'] = $objAgrupado['totTransTrama'] + $value->amount;
+					break; 
 				default:
 					break;
 			}
@@ -567,9 +571,6 @@ class JTrama
 		
 		foreach ($objAgrupado['egresos'] as $key => $value) {
 			switch ($value->description) {
-				case 'PROVIDERS':
-					$objAgrupado['toProveed'] = $objAgrupado['toProveed']+$value->amount;
-					break;
 				case 'CAPITAL':
 					$objAgrupado['toCapital'] = $objAgrupado['toCapital']+$value->amount;
 					break;
@@ -582,7 +583,7 @@ class JTrama
 				case 'FEXEDCOSTS':
 					$objAgrupado['toCostFij'] = $objAgrupado['toCostFij']+$value->amount;
 					break;
-				case 'PROVIDER_PAYMENT';
+				case 'PROVIDER_PAYMENT':
 					$objAgrupado['toProveed'] = $objAgrupado['toProveed'] + $value->amount;
 					break;
 				default:
