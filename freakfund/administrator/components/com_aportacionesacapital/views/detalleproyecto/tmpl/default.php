@@ -14,16 +14,18 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 <script language="JavaScript">
 	jQuery(document).ready(function() {
 		jQuery('span.number').number(true,2);
-		
-		jQuery('.button').click(function(){
-			var monto 		 = jQuery(this).parent().prev().children().val();
-			var providerId	 = jQuery(this).next().val();
-			var providerName = jQuery(this).parent().prev().prev().text();
+
+		jQuery('#detalle input:button.button').click(function(){
+			console.log(this);
+			var trUsed			= jQuery(this).parents('tr')[0];
+			var monto 			= jQuery(trUsed).find('input:text').val();
+			var providerId		= jQuery(trUsed).find('input:hidden').val();
+			var providerName 	= jQuery(trUsed).find('span.producerName').text();
 			
 			jQuery('.monto').html('$<span class="number">'+monto+'</span>');
 			jQuery('.providerName').html(' '+providerName);
 			jQuery('#provId').val(providerId);
-			jQuery('#amount').val(monto);
+			jQuery('#mount').val(monto);
 			
 			jQuery('span.number').number(true,2);
 			jQuery('#detalle').hide();
@@ -34,10 +36,15 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 		jQuery('#send').click(function(){
 			jQuery('#formstatus').submit();
 		});
+		
+		jQuery('#cancel').click(function(){
+			jQuery('#resumen').hide();
+			jQuery('#detalle').show();
+		})
 	});
 </script>
 
-<form id="formstatus" action="/post.php" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/returnOfCapitalInjection" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
             <thead><?php echo $this->loadTemplate('head');?></thead>

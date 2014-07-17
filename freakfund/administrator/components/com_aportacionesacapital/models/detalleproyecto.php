@@ -46,7 +46,25 @@ class detalleProyectoModeldetalleProyecto extends JModelList
 		$obj->isProducer = ( $id == $producerid) ? true : false;
 		
 		$obj->idJoomla = UserData::getUserJoomlaId($id);
-		$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
+		
+		$db 	= JFactory::getDbo();
+		$query 	= $db->getQuery(true); 
+		
+		$query->select ('c3rn2_users.name, c3rn2_users_middleware.idJoomla, c3rn2_users_middleware.idMiddleware')
+			  ->from ('c3rn2_users')
+			  ->join('INNER', 'c3rn2_users_middleware ON c3rn2_users_middleware.idJoomla = c3rn2_users.id')
+			  ->where('idJoomla = '.$obj->idJoomla);
+
+		$db->setQuery($query);
+		$results = $db->loadObjectList();
+		
+		
+		if( !empty($results) ){
+			$obj->producerName = JFactory::getUser($obj->idJoomla)->name;
+		}else{
+			$obj->producerName = '';
+		}
+		
 	}
 	
 	public function flags($obj, $proyecto)	{

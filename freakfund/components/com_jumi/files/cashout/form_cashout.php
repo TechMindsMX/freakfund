@@ -94,7 +94,7 @@ if($confirmacion == 0){
 		
 		<div class="cashoutDatos">
 			<label for="amountWithdraw"><?php echo JText::_('CASHOUT_MONTO'); ?>: </label>
-			<input type="text" class="validate[requiere, custom[onlyNumberSp]]" name="amountWithdraw" />
+			<input type="text" class="validate[required, custom[onlyNumberSp]]" name="amountWithdraw" />
 		</div>
 <?php
 }else{

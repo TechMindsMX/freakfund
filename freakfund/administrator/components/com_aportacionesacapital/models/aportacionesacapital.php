@@ -21,7 +21,7 @@ class aportacionesacapitalModelaportacionesacapital extends JModelList
 			
 			self::producerIdJoomlaANDName($value);
 		}
-		
+		var_dump($proyectos[0]->providers);
 		return $proyectos;
 	}
 
