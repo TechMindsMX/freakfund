@@ -1,7 +1,7 @@
 <style>
 .fila > div {
 	display: inline-block;
-	width: 15%;
+	width: 19%;
 	text-align: center;
 }
 .encabezado > div {
