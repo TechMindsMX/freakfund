@@ -7,6 +7,7 @@ $document->addStyleSheet($modPath.'/css/mod_carrete.css');
 
 $url 			= 'index.php?option=com_jumi&view=appliction&fileid=11&proyid=';
 $urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
+
 ?>
 
 <link href="<?php echo $modPath;?>/css/style.css" rel="stylesheet" type="text/css" />
@@ -22,34 +23,49 @@ $urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 <![endif]-->
 
 <script type="text/javascript">
+function mycarousel_initCallback(carousel) {
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.startAuto(0);
+    });
 
-	function mycarousel_initCallback(carousel) {
-	    // Disable autoscrolling if the user clicks the prev or next button.
-	    carousel.buttonNext.bind('click', function() {
-	        carousel.startAuto(0);
-	    });
+    carousel.buttonPrev.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+};
+
+jQuery(document).ready(function() {
+	var scrollvar = 4;
 	
-	    carousel.buttonPrev.bind('click', function() {
-	        carousel.startAuto(0);
-	    });
-	
-	    // Pause autoscrolling if the user moves with the cursor over the clip.
-	    carousel.clip.hover(function() {
-	        carousel.stopAuto();
-	    }, function() {
-	        carousel.startAuto();
-	    });
+	var isMobile = {
+	    Android: function() { return navigator.userAgent.match(/Android/i); },
+	    BlackBerry: function() { return navigator.userAgent.match(/BlackBerry/i); },
+	    iOS: function() { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, 
+	    Opera: function() { return navigator.userAgent.match(/Opera Mini/i); }, 
+	    Windows: function() { return navigator.userAgent.match(/IEMobile/i);},
 	};
 	
-	jQuery(document).ready(function() {
-	    jQuery('#mycarousel<?php echo $module->id; ?>').jcarousel({
-	        auto: 100,
-	        wrap: 'last',
-	        initCallback: mycarousel_initCallback,
-	        scroll: 4
-	    });
-	});
-
+	if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows() ) {
+		scrollvar = 1;
+	} else{
+		scrollvar = 4;
+	}
+	
+	console.log(isMobile);
+    jQuery('#mycarousel<?php echo $module->id; ?>').jcarousel({
+        auto: 100,
+        wrap: 'last',
+        initCallback: mycarousel_initCallback,
+        scroll: scrollvar
+    });
+});
 </script>
 
 <div id="wrap">
@@ -99,8 +115,8 @@ $urlinvertir 	= 'index.php?option=com_jumi&view=appliction&fileid=27&proyid=';
 				break;
 			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
-		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : '0%';
-		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : '0%';
+		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : 'NA';
+		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : 'NA';
 					echo '<li>
 		    				<div class="contenedor productos">
 								<a href="'.$url.@$value->id.'">

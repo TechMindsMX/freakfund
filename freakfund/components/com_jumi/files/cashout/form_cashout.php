@@ -26,7 +26,7 @@ $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $callback		= JURI::base().'index.php?option=com_jumi&view=application&fileid=24&from=37';
 $confirmacion	= $input->get('confirmacion', 0, 'int');
 $error			= $input->get('errorCode', null, 'int');
-$amountWithdraw	= $input->get('amountWithdraw', null, 'int');
+$amountWithdraw	= $input->get('amountWithdraw', null, 'float');
 $mensaje		= '';
 $botonCuenta	= '';
 $accountNumber	= UserData::getBankAccount($idMiddleware->idMiddleware);
@@ -94,7 +94,7 @@ if($confirmacion == 0){
 		
 		<div class="cashoutDatos">
 			<label for="amountWithdraw"><?php echo JText::_('CASHOUT_MONTO'); ?>: </label>
-			<input type="text" class="validate[required, custom[onlyNumberSp]]" name="amountWithdraw" />
+			<input type="text" class="validate[required, custom[number]]" name="amountWithdraw" />
 		</div>
 <?php
 }else{
