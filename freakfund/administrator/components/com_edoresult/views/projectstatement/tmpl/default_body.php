@@ -100,9 +100,9 @@ $value = $this->items;
 				</tr>
 			</table>
 
+				<!--Seccion de Egresos-->
 			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_EGRESOS'); ?></div>
 			<table class="table table-striped">
-				<!--Seccion de Egresos-->
 				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PROVEEDORES'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProveed']; ?></span></td>
@@ -126,6 +126,10 @@ $value = $this->items;
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toProduct']; ?></span></td>
 				</tr>
 				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_FEE_TRAMA'); ?></td>
+					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toFeeTrama']; ?></span></td>
+				</tr>
+				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES').JText::_('COM_ESTADO_RESULTADOS_DETALLE_LVL_PROYECTADOS'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostVar']; ?></span></td>
 				</tr>
@@ -135,9 +139,10 @@ $value = $this->items;
 				</tr>
 			</table>
 
+<!--Resultados-->
 			<div class="titulo-tabla espacio-bajo"><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_RESULTADOS'); ?></div>
 			<table class="table table-striped">
-				<!--Resultados-->
+				
 				<tr class="total">
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_INGRESOS_EGRESOS'); ?></td>
 					<td class="cantidades">$<?php echo number_format($value['resultadoIE'], 2); ?></td>

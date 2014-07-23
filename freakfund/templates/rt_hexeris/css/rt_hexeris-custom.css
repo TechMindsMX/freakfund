@@ -551,7 +551,23 @@ input#cantidad {
 div.ui-datepicker {
 	font-size: 1em;
 }
-@media screen and (max-width : 960px) and (max-height : 640px) and (orientation: landscape) {  
+.fila > div {
+	display: inline-block;
+	width: 19%;
+	text-align: center;
+}
+.encabezado > div {
+	text-align: center;
+	color: #2C9AD9;
+	font-weight: bolder;
+}
+.encabezado{
+	padding-top: 5px;
+	background-color: #DBEDF7;
+	border-bottom: 1px solid #009999;
+	border-radius: 20px; 
+}
+@media screen and (max-width : 960px) and (max-height : 640px) and (orientation: landscape) {
 	div.inline-menu {
 		margin-top: -25px;
 		margin-bottom: 35px;
@@ -624,6 +640,7 @@ div.ui-datepicker {
 		margin-bottom: 0px;
 	}
 	/*fin cartera*/
+	
 	/*lo arrecho*/
 	.foca-magica{
 		display:block;
@@ -760,5 +777,13 @@ div.ui-datepicker {
 	#rt-mainbody-surround h2, #rt-mainbody-surround .title {
 		font-size: 15px;
 		padding-top: 4px;
+	}
+	.fila div {
+		display: inline-block;
+		width: 32%;
+		text-align: center;
+	}
+	.fila div.magic_seal2{
+		display: none;
 	}
 }

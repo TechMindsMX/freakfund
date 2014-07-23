@@ -563,11 +563,12 @@ class JTrama
 
 	public static function sumatoriaEgresos($objAgrupado){
 		//egresos
-		$objAgrupado['toProveed'] = 0;
-		$objAgrupado['toCapital'] = 0;
-		$objAgrupado['toReemCap'] = 0;
-		$objAgrupado['toProduct'] = 0;
-		$objAgrupado['toCostFij'] = 0;
+		$objAgrupado['toProveed'] 	= 0;
+		$objAgrupado['toCapital'] 	= 0;
+		$objAgrupado['toReemCap']	= 0;
+		$objAgrupado['toProduct'] 	= 0;
+		$objAgrupado['toCostFij'] 	= 0;
+		$objAgrupado['toFeeTrama'] 	= 0;
 		
 		foreach ($objAgrupado['egresos'] as $key => $value) {
 			switch ($value->description) {
@@ -586,6 +587,8 @@ class JTrama
 				case 'PROVIDER_PAYMENT':
 					$objAgrupado['toProveed'] = $objAgrupado['toProveed'] + $value->amount;
 					break;
+				case 'TRAMA_FEE':
+					$objAgrupado['toFeeTrama'] = $objAgrupado['toFeeTrama']+ $value->amount;
 				default:
 					break;
 			}

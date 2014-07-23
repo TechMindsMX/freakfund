@@ -30,12 +30,12 @@ define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_BASE . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
-define("MIDDLE", "http://162.209.56.86");
-define("PUERTO", ":7070");
-define("AVATAR", "avatar");
-define("BANNER", "banner");
+define("MIDDLE", "http://192.168.0.122");
+define("PUERTO", ":7272");
+define("AVATAR", MIDDLE."/avatar");
+define("BANNER", MIDDLE."/banner");
 define("BCASE", "businesscase");
-define("PHOTO", "photo");
+define("PHOTO", MIDDLE."/photo");
 define("SOUNDCLOUD_CLIENT_ID","52bdfab59cb4719ea8d5ea626efae0da");
 define("SOUNDCLOUD_CLIENT_SECRET","7688bd528138b2de5daf52edffc091c5");
 

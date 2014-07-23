@@ -1,22 +1,3 @@
-<style>
-.fila > div {
-	display: inline-block;
-	width: 19%;
-	text-align: center;
-}
-.encabezado > div {
-	text-align: center;
-	color: #2C9AD9;
-	font-weight: bolder;
-}
-.encabezado{
-	padding-top: 5px;
-	background-color: #DBEDF7;
-	border-bottom: 1px solid #009999;
-	border-radius: 20px; 
-}
-
-</style>
 <?php 
 defined('_JEXEC') OR defined('_VALID_MOS') OR die( "Direct Access Is Not Allowed" );
 $usuario 	= JFactory::getUser();
@@ -163,16 +144,16 @@ function formConfirm($params, $app, $usuario) {
 		<div class="bloque">
 			<div class="fila encabezado">
 				<div><?php echo JText::_('LABEL_CONCEPTO'); ?></div>
-				<div><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
+				<div class="magic_seal2"><?php echo JText::_('TRASPASO_BALANCE'); ?></div>
 				<div><?php echo JText::_('TRASPASO_BENEFICIARIO'); ?></div>
-				<div><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
+				<div class="magic_seal2"><?php echo JText::_('NO_CUENTA_BENEFI'); ?></div>
 				<div><?php echo JText::_('CANTIDAD_TRASPASO'); ?></div>
 			</div>
 			<div class="fila">
 				<div><?php echo JText::_('TRASPASO_DINERO'); ?></div>
-				<div>$ <span class="number"><?php echo $params->datosUsuario->balance; ?></span></div>
+				<div class="magic_seal2">$ <span class="number"><?php echo $params->datosUsuario->balance; ?></span></div>
 				<div><?php echo $receiver->name; ?></div>
-				<div><?php echo $receiver->account; ?></div>
+				<div class="magic_seal2"><?php echo $receiver->account; ?></div>
 				<div>$ <span class="number"><?php echo $amount; ?></span></div>
 			</div>
 		</div>
