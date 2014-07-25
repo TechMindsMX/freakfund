@@ -92,8 +92,11 @@ if( $datos['resumen'] === 'true' && !is_null($datos['error']) ){
 		});
 	});
 </script>
-
-<form id="formstatus" action="<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/account/transferFundsFromTrama'; ?>" method="POST" enctype="application/x-www-form-urlencoded">
+<?php
+//$url = MIDDLE.PUERTO.'/trama-middleware/rest/account/transferFundsFromTrama';
+$url  = 'http://192.168.0.122:8081/timone/services/account/transferFundsFromTrama';
+?>
+<form id="formstatus" action="<?php echo $url; ?>" method="POST" enctype="application/x-www-form-urlencoded">
 	<input type="hidden" id="callback" name="callback" />
 	<input type="hidden" name="token" value="<?php echo $token; ?>">
 	<table id="tablaGral" class="adminlist">
