@@ -606,7 +606,7 @@ class JTrama
 		$objagrupado['resultFinan']		= $objagrupado['totFundin'] * $dataGral->trf;
 		$objagrupado['resultInver']		= $objagrupado['totInvers'] * $dataGral->tri;
 		$objagrupado['retornos']	 	= $objagrupado['resultFinan'] + $objagrupado['resultInver'];
-		$objagrupado['resultComic']		= 0;
+		$objagrupado['resultComic']		= $objagrupado['toFeeTrama'];
 		$objagrupado['resultOtros']		= 0;
 		$objagrupado['toResultado']		= $objagrupado['resultReden'] + $objagrupado['resultFinan'] + $objagrupado['resultInver'] + $objagrupado['resultComic'] + $objagrupado['resultOtros'];
 		$objagrupado['porcentaTRI']		= $dataGral->tri*100;
