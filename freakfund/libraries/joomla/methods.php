@@ -317,7 +317,7 @@ class JText
 			{
 				$args[0] = $lang->_($string);
 			}
-			return call_user_func_array('sprintf', $args);
+			return @call_user_func_array('sprintf', $args);
 		}
 		return '';
 	}
