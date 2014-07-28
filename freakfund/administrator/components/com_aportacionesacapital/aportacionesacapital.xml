@@ -30,7 +30,6 @@
 	                <folder>views</folder>
 	                <folder>controllers</folder>
 	                <folder>language</folder>
-	        </files>
-	        
+	        </files>                
         </administration>
 </extension>

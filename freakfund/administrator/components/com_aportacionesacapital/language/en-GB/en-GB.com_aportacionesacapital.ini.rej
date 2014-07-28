@@ -1,0 +1,10 @@
+diff a/freakfund/administrator/components/com_aportacionesacapital/language/en-GB/en-GB.com_aportacionesacapital.ini b/freakfund/administrator/components/com_aportacionesacapital/language/en-GB/en-GB.com_aportacionesacapital.ini	(rejected hunks)
+@@ -11,7 +11,7 @@
+ COM_APORTACIONESCAPITAL_DETALLEPROYECTO_TITLE					= 'Aportaciones a capital - Detalle del proyecto'
+ COM_APORTACIONESCAPITAL_DETALLEPROYECTO_PROVEEDORES				= 'Listado de proveedores'
+ COM_APORTACIONESCAPITAL_DETALLEPROYECTO_PROVEEDOR				= 'Nombre de proveedor'
+-COM_APORTACIONESCAPITAL_DETALLEPROYECTO_CREACION				= 'Fecha de creación'
++COM_APORTACIONESCAPITAL_DETALLEPROYECTO_FUNDENDDATE				= 'Cierre financiamiento'
+ COM_APORTACIONESCAPITAL_DETALLEPROYECTO_RECAUDADO				= 'Recaudado'
+ COM_APORTACIONESCAPITAL_DETALLEPROYECTO_FALTANTE				= 'Por recaudar'
+ 
