@@ -126,6 +126,17 @@ class UserData {
 					$obj->urlcambio = JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_NOCHANGESTATUS');
 				}
 				break;
+			case 'listadoaporte':
+				if(in_array($obj->userId, $array)){
+					$obj->idJoomla 	= UserData::getUserJoomlaId($obj->userId);
+					$obj->prodName 	= JFactory::getUser($obj->idJoomla)->name;
+					$obj->urlcambio = '<a href="index.php?option=com_aportacionesacapital&task=detalleproyectoaporteprov&id='.$obj->id.'">'.JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_APORTEPROV').'</a>';
+				}else{
+					$obj->idJoomla 	= '';
+					$obj->prodName 	= JText::_('PRODUCTOR_INEXISTENTE');
+					$obj->urlcambio = JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_NOCHANGESTATUS');
+				}
+				break;
 			case 'redemptionCodes':
 				$front = str_replace('administrator/', '', JURI::base());
 				$linkPro = $front.'index.php?option=com_jumi&view=application&fileid=11&proyid=';
