@@ -6,8 +6,7 @@ jimport('joomla.application.component.modellist');
 jimport('trama.class');
 jimport('trama.usuario_class');
 
-class detalleProyectoaporteprovModeldetalleProyectoaporteprov extends JModelList
-{
+class detalleProyectoaporteprovModeldetalleProyectoaporteprov extends JModelList{
 	public function getdetalleProy() {
 		$app = JFactory::getApplication();
 		$input = $app->input;

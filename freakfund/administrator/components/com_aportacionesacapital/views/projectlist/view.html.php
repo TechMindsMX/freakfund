@@ -19,6 +19,7 @@ class projectListViewprojectList extends JView{
 	
 	protected function addToolBar()	{
         JToolBarHelper::title(JText::_('COM_APORTACIONESCAPITAL_PROJECTLIST_TITLE'));
+		JToolBarHelper::preferences('com_aportacionescapital');
 	}
 
 }

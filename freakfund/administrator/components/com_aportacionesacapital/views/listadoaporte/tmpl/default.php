@@ -8,7 +8,7 @@ $document = JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
-$vName = ( isset($this->items[0]->vName))?$this->items[0]->vName :'pagodeaportaciones';
+$vName = ( isset($this->items[0]->vName))?$this->items[0]->vName :'aportecapital';
 
 JSubMenuHelper::addEntry(
 	JText::_('COM_FREAKFUND_FREAKFUND_PAGODEAPORTACIONES'),

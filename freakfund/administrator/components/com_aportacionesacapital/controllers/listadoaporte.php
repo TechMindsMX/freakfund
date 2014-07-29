@@ -2,10 +2,10 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
  
-class projectListController extends JController{
+class listadoaporteController extends JController{
 	function display($cachable = false, $urlparams = false) {
         $input = JFactory::getApplication()->input;
-		$input->set('view', $input->getCmd('view', 'projectList'));
+		$input->set('view', $input->getCmd('view', 'listadoaporte'));
 		
         parent::display($cachable);
 	}
