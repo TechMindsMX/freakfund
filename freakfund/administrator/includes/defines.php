@@ -27,8 +27,9 @@ define('JPATH_CACHE',			JPATH_ROOT . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
 define("MIDDLE", "http://192.168.0.122");
-define("PUERTO", ":7272");
-define("AVATAR", "avatar");
-define("BANNER", "banner");
+define("PUERTO", ":8081");
+define("TIMONE", "/timone/services/");
+define("AVATAR", "media/trama_files/avatar");
+define("BANNER", "media/trama_files/banner");
+define("PHOTO", "media/trama_files/photo");
 define("BCASE", "businesscase");
-define("PHOTO", "photo");

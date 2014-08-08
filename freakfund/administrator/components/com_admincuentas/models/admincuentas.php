@@ -9,7 +9,7 @@ jimport('trama.usuario_class');
 class admincuentasModeladmincuentas extends JModelList
 {
 	public function getlistadoCuentas() {
-		$cuentasAdmin = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/bank/listAdministrativeAccounts'));
+		$cuentasAdmin = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'bank/listAdministrativeAccounts'));
 		
 		foreach ($cuentasAdmin as $key => $value) {
 			switch ($value->type) {

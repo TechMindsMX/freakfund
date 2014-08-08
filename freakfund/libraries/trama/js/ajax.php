@@ -115,19 +115,19 @@ switch ($fun) {
 		
 	case 5://Obtiene los datos del usuario para la alta de número de cuenta
 		$respuesta = file_get_contents('http://192.168.0.122:8081/timone/services/user/getByAccount/'.$_POST['clabe']);
-		//$respuesta = file_get_contents(MIDDLE.'/trama-middleware/rest/user/getByAccount/'.$_POST['clabe']);
+		//$respuesta = file_get_contents(MIDDLE.TIMONE.'user/getByAccount/'.$_POST['clabe']);
 		echo $respuesta;
 		break;
 	
 	case 6://Obtiene un token nuevo
-		$token = @file_get_contents(MIDDLE.'/trama-middleware/rest/security/getKey');
+		$token = @file_get_contents(MIDDLE.TIMONE.'security/getKey');
 		echo $token;
 		break;
 	
 	case 7://Obtiene el nombre de a quien pertenece un numero de cuenta dado
 		$account = $_POST['numCuenta'];
 		
-		$name = @file_get_contents(MIDDLE.'/trama-middleware/rest/account/get/'.$account);
+		$name = @file_get_contents(MIDDLE.TIMONE.'account/get/'.$account);
 		echo $name;
 		break;
 		

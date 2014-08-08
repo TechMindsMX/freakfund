@@ -10,7 +10,7 @@ $token = JTrama::token();
 
 $datos = $this->items;
 
-$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/saveProviderPayment';
+$url = MIDDLE.PUERTO.TIMONE.'project/saveProviderPayment';
 
 if (!isset($datos['envio'])) {
 	$app = JFactory::getApplication();

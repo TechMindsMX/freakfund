@@ -26,7 +26,7 @@ $params->datosUsuario	= UserData::getUserBalance($params->ids->idMiddleware);
 $params->errorCode	 	= $input->get("error",0,"int");
 $params->from			= $input->get("from",0,"int");
 $params->confirmUrl		= 'index.php?option=com_jumi&view=appliction&fileid=29&confirm=1';
-$params->action 		= MIDDLE.PUERTO.'/trama-middleware/rest/tx/transferFunds';
+$params->action 		= MIDDLE.PUERTO.TIMONE.'tx/transferFunds';
 $params->resumeUrl		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=29';
 $params->cartera 		= JURI::base().'index.php?option=com_jumi&view=appliction&from=29&fileid=24';
 $params->arregloEnvio   = '';

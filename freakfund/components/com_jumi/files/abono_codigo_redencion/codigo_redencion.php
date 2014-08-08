@@ -30,7 +30,7 @@ if(!is_null($error)){
 	$app->redirect(JURI::base().'index.php?option=com_jumi&view=application&fileid=24', JText::_('DATOS_GUARDADOS'), 'message');
 }
 //definicion de campos del formulario
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/verifyTicketmasterCode';
+$action = MIDDLE.PUERTO.TIMONE.'ticketmaster/verifyTicketmasterCode';
 ?>
 
 <script>

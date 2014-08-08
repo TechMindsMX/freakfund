@@ -9,21 +9,21 @@ class JTrama
 	public $nomCatPadre = null;
 
 	public function	getAllSubCats() {
-		$url = MIDDLE . PUERTO . '/trama-middleware/rest/category/subcategories/all';
+		$url = MIDDLE . PUERTO . TIMONE.'category/subcategories/all';
 		$subcats = json_decode(@file_get_contents($url));
 		
 		return $subcats;
 	}	
 
 	public function	getAllCatsPadre() {
-	  	$url = MIDDLE.PUERTO.'/trama-middleware/rest/category/categories';
+	  	$url = MIDDLE.PUERTO.TIMONE.'category/categories';
 		$cats = json_decode(@file_get_contents($url));
 		
 		return $cats;
 	}
 	
 	public function catalogoBancos(){
-		$catalogo = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/stp/listBankCodes'));
+		$catalogo = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'stp/listBankCodes'));
 		
 		foreach ($catalogo as $key => $value) {
 			$objeto = new stdClass;
@@ -118,7 +118,7 @@ class JTrama
 	}
 	
 	public static function getStatus(){
-		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/status/list'));
+		$status = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'status/list'));
 		
 		foreach ($status as $obj) {
 				$map[] = array($obj->name, $obj);
@@ -151,7 +151,7 @@ class JTrama
 	}
 	
 	public function getProjectsByUser ($userid) {
-		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByUser/'.$userid));
+		$projectList = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getByUser/'.$userid));
 		
 		return $projectList;
 	}
@@ -229,7 +229,7 @@ class JTrama
 	
 	public static function token(){
 		
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/security/getKey';
+		$url = MIDDLE.PUERTO.TIMONE.'security/getKey';
 		$token = @file_get_contents($url);
 
 		return $token;
@@ -237,7 +237,7 @@ class JTrama
 	
 	public static function allProjects(){
 		
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/all';
+		$url = MIDDLE.PUERTO.TIMONE.'project/all';
 		$jsonAllProjects = @file_get_contents($url);
 		$json = json_decode($jsonAllProjects);
 		
@@ -251,10 +251,10 @@ class JTrama
 	}
 
 	public static function getDatos ( $id ) {
-		$url 			= MIDDLE.PUERTO.'/trama-middleware/rest/project/get/'.$id;
+		$url 			= MIDDLE.PUERTO.TIMONE.'project/get/'.$id;
 		$json 			= @file_get_contents($url);
 		$respuesta 		= json_decode($json); 
-		$dataProyecto	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$id));
+		$dataProyecto	= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getProjectStatement/'.$id));
 		$objagrupado	= self::agrupaIngresosEgresos($dataProyecto);
 		$respuesta->totalIngresos = $objagrupado['totalIngresos'];
 		JTrama::checkValidId($respuesta);
@@ -333,7 +333,7 @@ class JTrama
 	
 	public static function getClosestEnd()
 	{
-		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByClosestToEndFunding'));
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getByClosestToEndFunding'));
 		if(isset($data)) {
 			foreach ($data as $key => $value) {
 				$value = JTrama::formatDatosProy($value);
@@ -352,7 +352,7 @@ class JTrama
 	
 	public static function getMostProfitables()
 	{
-		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getByHigherBalance'));
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getByHigherBalance'));
 		if(isset($data)) {
 			foreach ($data as $key => $value) {
 				$value = JTrama::formatDatosProy($value);
@@ -364,7 +364,7 @@ class JTrama
 	
 	public static function getProyByStatus($params='')
 	{
-		$data = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params));
+		$data = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'project/status/'.$params));
 		
 		foreach ($data as $key => $value) {
 			JTrama::formatDatosProy($value);	
@@ -374,13 +374,13 @@ class JTrama
 	}
 	
 	public function getMotivosDeBaja () {
-		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/catalog/closedReasons'));
+		$data = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'catalog/closedReasons'));
 		
 		return $data;
 	}
 	
 	public static function getRedemptionCodes($proyId)	{
-		$redemptionCodeExist = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/isTicketmasterLayout/'.$proyId));
+		$redemptionCodeExist = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'project/isTicketmasterLayout/'.$proyId));
 		
 		return $redemptionCodeExist;
 	}
@@ -400,7 +400,7 @@ class JTrama
 	}
 	
 	public static function getProjectbyUser ($middlewareId){
-		$jsonobj= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/projects/'.$middlewareId));
+		$jsonobj= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/get/projects/'.$middlewareId));
 		if(isset($jsonobj)) {
 			foreach ($jsonobj as $key => $value) {
 				JTrama::formatDatosProy($value);
@@ -410,7 +410,7 @@ class JTrama
 	}
 	
 	public static function getProductbyUser ($middlewareId){
-		$jsonobj2= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/products/'.$middlewareId));
+		$jsonobj2= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/get/products/'.$middlewareId));
 		if(isset($jsonobj2)) {
 			foreach ($jsonobj2 as $key => $value) {
 				JTrama::formatDatosProy($value);
@@ -420,24 +420,24 @@ class JTrama
 	}
 	
 	public static function getTransactions($idMiddleware, $startDate, $endDate) {
-		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getUserStatement/'.$idMiddleware.'/'.$startDate.'/'.$endDate));
+		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getUserStatement/'.$idMiddleware.'/'.$startDate.'/'.$endDate));
 		return $transactionsList;
 	}
 	
 	public static function getDetailTransactions($bulkId) {
-		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getBulkTransactions/'.$bulkId));
+		$transactionsList = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getBulkTransactions/'.$bulkId));
 		return $transactionsList;
 		;
 	}
 	
 	public static function getInvestmentDetail($transactionId) {
-		$transactionsDetail = json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/get/transaction/'.$transactionId));
+		$transactionsDetail = json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/get/transaction/'.$transactionId));
 		return $transactionsDetail;
 		;
 	}
 	
 	public static function getStateResult($proyId){
-		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getProjectStatement/'.$proyId));
+		$dataProyecto					 	= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getProjectStatement/'.$proyId));
 		$dataGral 							= self::getDatos($proyId);
 		$user								= UserData::getUserJoomlaId($dataGral->userId);
 		$usuario							= JFactory::getUser($user);
@@ -446,7 +446,7 @@ class JTrama
 		$objagrupado						= self::sumatoriaEgresos($objagrupado);
 
 		$objagrupado						= self::operacionesEstadoResult($objagrupado,$dataGral);
-		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/getSections/'.$proyId));
+		$objagrupado['sections']			= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/getSections/'.$proyId));
 		$objagrupado['userIdJoomla']		= $user;
 		$objagrupado['userIdMiddleware']	= $dataGral->userId;
 		$objagrupado['proyectName'] 		= $dataGral->name;
@@ -630,7 +630,7 @@ class JTrama
 	}
 
 	public static function getProjectORProductParnetship($userIdMiddleware, $ProjectProduct){
-		$dataProyecto= json_decode(@file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/get/partnership/'.$userIdMiddleware));
+		$dataProyecto= json_decode(@file_get_contents(MIDDLE.PUERTO.TIMONE.'project/get/partnership/'.$userIdMiddleware));
 		$respuesta = array();
 		
 		if(!is_null($dataProyecto)){

@@ -37,13 +37,13 @@ function prodProy ($tipo, $params) {
 	if( !empty($_POST) ) {
 		if (!is_null($params->tags)) {
 			$tagLimpia = array_shift(tagLimpia($params->tags));
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/getByKeyword/'.$tagLimpia;
+			$url = MIDDLE.PUERTO.TIMONE.'project/getByKeyword/'.$tagLimpia;
 		}
 	} else {
 		if ( $params->categoria == "all" ) {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$params->estatus;
+			$url = MIDDLE.PUERTO.TIMONE.'project/status/'.$params->estatus;
 		} else {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/project/category/'.$params->categoria.'/'.$params->estatus;
+			$url = MIDDLE.PUERTO.TIMONE.'project/category/'.$params->categoria.'/'.$params->estatus;
 		}
 	}
 

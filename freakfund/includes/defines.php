@@ -31,11 +31,11 @@ define('JPATH_CACHE',			JPATH_BASE . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
 define("MIDDLE", "http://192.168.0.122");
-define("PUERTO", ":7272");
-define("AVATAR", MIDDLE."/avatar");
-define("BANNER", MIDDLE."/banner");
+define("PUERTO", ":8081");
+define("TIMONE", "/timone/services/");
+define("AVATAR", "/development/media/trama_files/avatar");
+define("BANNER", "/development/media/trama_files/banner");
+define("PHOTO", "/development/media/trama_files/photo");
 define("BCASE", "businesscase");
-define("PHOTO", MIDDLE."/photo");
 define("SOUNDCLOUD_CLIENT_ID","52bdfab59cb4719ea8d5ea626efae0da");
 define("SOUNDCLOUD_CLIENT_SECRET","7688bd528138b2de5daf52edffc091c5");
-

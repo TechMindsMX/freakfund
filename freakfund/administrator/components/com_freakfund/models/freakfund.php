@@ -9,7 +9,7 @@ class freakfundModelfreakfund extends JModelList{
 	public $statusIds = '6';
 	
 	public function getDatos(){
-		$query = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/project/status/'.$this->statusIds));
+		$query = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'project/status/'.$this->statusIds));
 		$query =UserData::getusersData($query, 'freakfundPagos');
 		
 		return $query;

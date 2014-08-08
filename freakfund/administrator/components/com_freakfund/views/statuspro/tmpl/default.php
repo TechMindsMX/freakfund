@@ -188,7 +188,7 @@ switch($datos->status){
 	});
 </script>
 
-<form id="formstatus" action="<?php echo MIDDLE.PUERTO.'/trama-middleware/rest/project/changeStatus'; ?>" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO.TIMONE.'project/changeStatus'; ?>" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
                 <thead><?php echo $this->loadTemplate('head');?></thead>

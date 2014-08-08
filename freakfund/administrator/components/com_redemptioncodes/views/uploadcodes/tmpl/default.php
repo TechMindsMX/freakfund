@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted Access');
 
 JHtml::_('behavior.tooltip');
 
-$accion = MIDDLE.PUERTO.'/trama-middleware/rest/ticketmaster/uploadTicketmasterLayout';
+$accion = MIDDLE.PUERTO.TIMONE.'ticketmaster/uploadTicketmasterLayout';
 $html = $this->items->redemptioncode?'<tr><th><p><img src="'.JURI::base().'templates/bluestork/images/admin/tick.png" />'.JText::_('REDEMPTIONCODE_UPLOAD_CODE_READY').'</p></th></tr>':'';
 ?>
 

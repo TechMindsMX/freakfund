@@ -58,7 +58,7 @@ $verificacion	= $paso6==$codigoVerificador;
 $verificabanco	= $claveBanco == $claveBancoClabe;
 
 if($verificacion and $verificabanco){
-	$action	= MIDDLE.PUERTO.'/trama-middleware/rest/account/createAccount';
+	$action	= MIDDLE.PUERTO.TIMONE.'account/createAccount';
 }else{
 	$action	 = JURI::base().'index.php?option=com_jumi&view=application&fileid=36&bankCode='.$claveBanco.'&clabe='.$clabe;
 	$message = JText::_('CUENTACLABE_INCORRECTA');

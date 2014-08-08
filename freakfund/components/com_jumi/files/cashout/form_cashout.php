@@ -47,7 +47,7 @@ if($confirmacion==0){
 	$action	= JURI::base().'index.php?option=com_jumi&view=application&fileid=37';
 	$textBotton = JText::_('LBL_GUARDAR');
 }else{
-	$action	= MIDDLE.PUERTO.'/trama-middleware/rest/stp/registraOrden';
+	$action	= MIDDLE.PUERTO.TIMONE.'stp/registraOrden';
 	$textBotton = JText::_('LABEL_CONFIRMAR');
 }
 

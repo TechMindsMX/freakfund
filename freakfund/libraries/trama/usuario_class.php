@@ -250,7 +250,7 @@ class UserData {
 	public static function getUserBalance ( $userid ) {
 	
 		if( isset($userid) ) {
-			$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
+			$url = MIDDLE.PUERTO.TIMONE.'user/get/'.$userid;
 			$json = @file_get_contents($url);
 			$respuesta = json_decode($json);
 		} else {
@@ -306,19 +306,19 @@ class UserData {
 	}
 	
 	public static function getBeneficiarios($idMiddleware) {
-		$listado = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/getLimitAmountsToTransfer/'.$idMiddleware));
+		$listado = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/getLimitAmountsToTransfer/'.$idMiddleware));
 		
 		return $listado;
 	}
 	
 	public static function getTxData($txId) {
-		$txData = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/tx/get/userTransaction/'.$txId));
+		$txData = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'tx/get/userTransaction/'.$txId));
 		
 		return $txData;
 	}
 	
 	public static function getBankAccount($middlewareId){
-		$accountObj = json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/account/get/account/'.$middlewareId));
+		$accountObj = json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'account/get/account/'.$middlewareId));
 		
 		return $accountObj;
 	}

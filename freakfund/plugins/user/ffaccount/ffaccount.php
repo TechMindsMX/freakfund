@@ -12,7 +12,7 @@ class plgUserFFAccount extends JPlugin
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 		
-		$this->url = MIDDLE.PUERTO.'/trama-middleware/rest/user/saveUser';
+		$this->url = MIDDLE.PUERTO.TIMONE.'user/saveUser';
 		$this->token = JTrama::token();
 	}
 
@@ -163,7 +163,7 @@ class plgUserFFAccount extends JPlugin
 	}
 	
 	protected function checkMiddle($userid, $usuario) {
-		$url = MIDDLE.PUERTO.'/trama-middleware/rest/user/get/'.$userid;
+		$url = MIDDLE.PUERTO.TIMONE.'user/get/'.$userid;
 		$json = @file_get_contents($url);
 		$respuesta = json_decode($json);
 		

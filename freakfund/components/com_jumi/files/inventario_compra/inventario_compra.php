@@ -39,7 +39,7 @@ $confirm		= $input->get("confirm", 0, "int");
 if($confirm == 0){
 	$action		= JURI::base().'index.php?option=com_jumi&view=appliction&fileid=27&proyid='.$proyid.'&confirm=1';
 }else{
-	$action		= MIDDLE.PUERTO.'/trama-middleware/rest/project/consumeUnits';
+	$action		= MIDDLE.PUERTO.TIMONE.'project/consumeUnits';
 }
 
 $detalleInversion =  JTrama::getInvestmentDetail($response);

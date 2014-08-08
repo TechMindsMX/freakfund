@@ -22,7 +22,7 @@ $app 				= JFactory::getApplication();
 $idMiddleware		= UserData::getUserMiddlewareId($usuario->id);
 $callback 			= $base.'index.php?option=com_jumi&view=application&fileid=32&from=32';
 $pathJumi 			= $base.'components/com_jumi/files/classIncludes/';
-$accion				= MIDDLE.PUERTO.'/trama-middleware/rest/paypal/payment';
+$accion				= MIDDLE.PUERTO.TIMONE.'paypal/payment';
 $usuario->balance 	= UserData::getUserBalance($idMiddleware->idMiddleware)->balance;
 $cuenta				= UserData::getUserBalance($idMiddleware->idMiddleware);
 $jinput 			= $app->input;

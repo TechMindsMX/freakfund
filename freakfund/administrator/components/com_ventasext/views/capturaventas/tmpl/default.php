@@ -8,7 +8,7 @@ $document = JFactory::getDocument();
 $document	-> addScript('../templates/rt_hexeris/js/jquery-1.9.1.js');
 $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 
-$action = MIDDLE.PUERTO.'/trama-middleware/rest/project/boxOfficeSales';
+$action = MIDDLE.PUERTO.TIMONE.'project/boxOfficeSales';
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {

@@ -12,7 +12,7 @@ class traspasocuentasModeltraspasocuentas extends JModelList
 		$datos					= array();
 		$app					= JFactory::getApplication()->input;
 		$datos['idCuenta']		= $app->get('idAccount',		null, 'string');
-		$cuentasAdmin 			= json_decode(file_get_contents(MIDDLE.PUERTO.'/trama-middleware/rest/bank/listAdministrativeAccounts'));
+		$cuentasAdmin 			= json_decode(file_get_contents(MIDDLE.PUERTO.TIMONE.'bank/listAdministrativeAccounts'));
 		
 		foreach ($cuentasAdmin as $key => $value) {
 			if($value->id == $datos['idCuenta']){
