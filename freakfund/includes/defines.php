@@ -30,9 +30,21 @@ define('JPATH_THEMES',			JPATH_BASE . '/templates');
 define('JPATH_CACHE',			JPATH_BASE . '/cache');
 define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
-define("MIDDLE", "http://192.168.0.122");
-define("PUERTO", ":8081");
-define("TIMONE", "/timone/services/");
+$middle = "192.168.0.122";
+$puertoTimOne =  ":8081";
+$controllerTimOne =  "/timone/services/";
+
+$connection = @fsockopen($middle, $puertoTimOne);
+
+if (!is_resource($connection)){
+	$puertoTimOne =  ":7272";	
+	$controllerTimOne =  "/trama-middleware/rest/";
+}
+
+define("MIDDLE", 'http://'.$middle);
+define("PUERTO", $puertoTimOne);
+define("TIMONE", $controllerTimOne);
+
 define("AVATAR", "/development/media/trama_files/avatar");
 define("BANNER", "/development/media/trama_files/banner");
 define("PHOTO", "/development/media/trama_files/photo");
