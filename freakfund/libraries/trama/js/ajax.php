@@ -1,13 +1,21 @@
 <?php
+// Incluimos el framework
+define('_JEXEC', 1);
+define('JPATH_BASE', realpath(dirname(__FILE__).'/../../..'));
+require_once ( JPATH_BASE .'/includes/defines.php' );
+require_once ( JPATH_BASE .'/includes/framework.php' );
+require_once ( JPATH_BASE .'/libraries/joomla/factory.php' );
+
 $address = str_replace('.', '', $_SERVER['HTTP_HOST']);
 if (!is_numeric($address) && $address != 'localhost') {
-	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR'].':7070'); // direccion produccion
+	define('MIDDLE', 'http://'.$_SERVER['SERVER_ADDR']); // direccion produccion
+	define('PUERTO', ':7070'); // direccion produccion
 } else {
-	define('MIDDLE', 'http://192.168.0.122:7272'); // direccion staging
+	define('MIDDLE', MIDDLE); // direccion staging
+	define('PUERTO', PUERTO); // direccion staging
 }
-include('../../../configuration.php');
 
-$fun 			= is_numeric($_POST['fun']) ? $_POST['fun'] : 0;
+$fun 			= is_numeric($_REQUEST['fun']) ? $_REQUEST['fun'] : 0;
 $configuracion 	= new JConfig;
 $bd 			= new mysqli($configuracion->host, $configuracion->user ,$configuracion->password, $configuracion->db);
 date_default_timezone_set('America/Mexico_City');
@@ -49,7 +57,7 @@ switch ($fun) {
 		break;
 		
 	case 2://Sepomex Trae los datos dado un código postal
-		$url = MIDDLE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		$url = MIDDLE.PUERTO.TIMONE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
 		echo file_get_contents($url);
 		break;
 		
@@ -115,19 +123,20 @@ switch ($fun) {
 		
 	case 5://Obtiene los datos del usuario para la alta de número de cuenta
 		$respuesta = file_get_contents('http://192.168.0.122:8081/timone/services/user/getByAccount/'.$_POST['clabe']);
-		//$respuesta = file_get_contents(MIDDLE.TIMONE.'user/getByAccount/'.$_POST['clabe']);
+		//$respuesta = file_get_contents(MIDDLE.PUERTO.TIMONE.'user/getByAccount/'.$_POST['clabe']);
 		echo $respuesta;
 		break;
 	
 	case 6://Obtiene un token nuevo
-		$token = @file_get_contents(MIDDLE.TIMONE.'security/getKey');
+	$url = MIDDLE.PUERTO.TIMONE.'security/getKey';
+		$token = @file_get_contents($url);
 		echo $token;
 		break;
 	
 	case 7://Obtiene el nombre de a quien pertenece un numero de cuenta dado
 		$account = $_POST['numCuenta'];
 		
-		$name = @file_get_contents(MIDDLE.TIMONE.'account/get/'.$account);
+		$name = @file_get_contents(MIDDLE.PUERTO.TIMONE.'account/get/'.$account);
 		echo $name;
 		break;
 		

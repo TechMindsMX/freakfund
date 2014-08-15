@@ -195,7 +195,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		var destinationId	= jQuery('#'+div).parent().parent().find('#destinationIdEdicion').val();
 		
 		var request = $.ajax({
-			url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/deleteLimitAmountToTransfer",
+			url: "<?php echo MIDDLE.PUERTO.TIMONE; ?>tx/deleteLimitAmountToTransfer",
 			data: {
 				"userId"		: userId,
 				"destinationId"	: destinationId,
@@ -227,7 +227,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		}
 		
 		var request = $.ajax({
-			url: "<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/maxAmountToTransfer",
+			url: "<?php echo MIDDLE.PUERTO.TIMONE; ?>tx/maxAmountToTransfer",
 			data: {
 				"userId"		: userId,
 				"amount"		: maxAmount,
