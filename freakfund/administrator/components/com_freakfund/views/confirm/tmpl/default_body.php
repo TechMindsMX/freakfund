@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 				"providerId"	: "<?php echo $envio->providerId; ?>",
 				"type"			: "<?php echo $envio->type; ?>",
 				"projectId" 	: "<?php echo $envio->projectId; ?>",
-				"token"			: "<?php echo $token; ?>"
+				"token"			: "<?php echo $token; ?>___MALO"
 			},
 			type: 'post'
 		});
@@ -46,17 +46,22 @@ jQuery(document).ready(function() {
 		request.done(function(result){
 			var obj = eval('(' + result + ')');
 			
-			console.log(obj, obj.response);
 			if (!obj.error){
 				var mensaje = '<dl id="system-message"><dt class="message"></dt>';
 				mensaje += '<dd class="message"><ul><li><?php echo JText::_('CONFIRMAR_PAGO_PROVEEDOR_EXITO'); ?></ul></dd></dl>';
 				
 				jQuery(elem).attr('disabled', 'disabled');
-				jQuery('#toolbar-box').append(mensaje).fadeOut(5000, function(){
+				jQuery('#toolbar-box').append(mensaje).delay(5000).fadeOut(1000, function(){
 					window.location.replace("<?php echo 'index.php?option=com_freakfund&task=proveedores&id='.$envio->projectId; ?>");
 				});
 			} else {
-				jQuery('#toolbar-box').append(obj.error);
+				var mensaje = '<dl id="system-message"><dt class="error"></dt>';
+				mensaje += '<dd class="error"><ul><li><?php echo JText::_('COM_FREAKFUND_ERROR_OPERACION'); ?></ul></dd></dl>';
+
+				jQuery(elem).attr('disabled', 'disabled');
+				jQuery('#toolbar-box').append(mensaje).delay(5000).fadeOut(1000, function(){
+					window.location.replace("<?php echo 'index.php?option=com_freakfund&task=proveedores&id='.$envio->projectId; ?>");
+				});
 			}
 		});
 	 });
