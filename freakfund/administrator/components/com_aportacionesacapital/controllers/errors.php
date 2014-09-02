@@ -4,15 +4,15 @@ jimport('joomla.application.component.controller');
 class errorsController extends JController{
 	function display($cachable = false, $urlparams = false) {
 		$app = JFactory::getApplication()->input;
-		$proyId = $app->get('id');
+		$proyId = $app->get('proyId');
 		$error	= $app->get('error', null, 'int');
 		
 		if( is_null($error) ){
 			$noErrors = JFactory::getApplication();
-	    	$noErrors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&id='.$proyId, $msg=JText::_('COM_APORTACIONESCAPITAL_SAVE'), $msgType='message');
+	    	$noErrors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyectoaporteprov&id='.$proyId, $msg=JText::_('COM_APORTACIONESCAPITAL_SAVE'), $msgType='message');
 		}else{
 	    	$errors = JFactory::getApplication();
-	    	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyecto&id='.$proyId, $msg=JText::_('ERROR_CODE'.$error), $msgType='warning');
+	    	$errors->redirect('index.php?option=com_aportacionesacapital&task=detalleproyectoaporteprov&id='.$proyId, $msg=JText::_('ERROR_CODE'.$error), $msgType='warning');
 		}
 		
 	}

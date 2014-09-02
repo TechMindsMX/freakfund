@@ -34,8 +34,8 @@ class aporteproveedorModelaporteproveedor extends JModelList
 		$data->proyecto->balanceToBE	= $data->proyecto->breakeven - $data->proyecto->balance;
 
 		$data->disabled = ($data->advancePaidDate OR $data->advanceFundingDate) ? true : false;
-		$data->disabledAdvance = ($data->advanceQuantity > $data->proyecto->balanceToBE ) ? true : false;
-		$data->disabledSettlement = ($data->settlementQuantity > $data->proyecto->balanceToBE ) ? true : false;
+		$data->disabledAdvance = ($data->advanceFundingDate OR $data->advanceQuantity > $data->proyecto->balanceToBE ) ? true : false;
+		$data->disabledSettlement = ($data->settlementFundingDate OR $data->settlementQuantity > $data->proyecto->balanceToBE ) ? true : false;
 		
 		return $data;
 	}

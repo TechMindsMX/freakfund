@@ -82,7 +82,7 @@ class DetalleproyectoaporteprovModelDetalleproyectoaporteprov extends JModelList
 				if(isset($obj->settlementFundingDate)) $obj->flagsTxt .= '<p>'.JText::_('COM_APORTACIONESCAPITAL_SETTLEMENT_WAIVED').'</p>';
 				$obj->flags++;
 			}
-			if ($obj->isProducer AND $obj->flags >= 1) {
+			if ($obj->isProducer AND $obj->flags >= 2) {
 				$this->ProductorAporto = true;
 			}
 		} else {
