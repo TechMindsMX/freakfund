@@ -44,7 +44,7 @@ $document	-> addScript('../templates/rt_hexeris/js/jquery.number.min.js');
 	});
 </script>
 
-<form id="formstatus" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/tx/returnOfCapitalInjection" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO.TIMONE; ?>tx/returnOfCapitalInjection" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
             <thead><?php echo $this->loadTemplate('head');?></thead>

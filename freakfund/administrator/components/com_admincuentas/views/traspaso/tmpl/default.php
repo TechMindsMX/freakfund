@@ -87,7 +87,7 @@ $monto			= $input->get('monto');
 	});
 </script>
 
-<form id="formstatus" action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/stp/transferFundsBridgeToTrama" method="POST" enctype="application/x-www-form-urlencoded">
+<form id="formstatus" action="<?php echo MIDDLE.PUERTO.TIMONE; ?>stp/transferFundsBridgeToTrama" method="POST" enctype="application/x-www-form-urlencoded">
 	
         <table id="tablaGral" class="adminlist">
         	<thead><tr><th></th></tr></thead>

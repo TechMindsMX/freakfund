@@ -65,7 +65,7 @@ $document->addScript('../libraries/trama/js/jquery.validationEngine-es.js');
 	    z-index: 996;
 	}
 </style>
-<form action="<?php echo MIDDLE.PUERTO; ?>/trama-middleware/rest/project/saveProducerPayment" method="post" name="adminForm" id="formID">
+<form action="<?php echo MIDDLE.PUERTO.TIMONE; ?>project/saveProducerPayment" method="post" name="adminForm" id="formID">
         <table id="tablaGral" class="adminlist">
                 <thead><?php echo $this->loadTemplate('head');?></thead>
                 <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>
