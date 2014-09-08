@@ -12,10 +12,10 @@ class errorClass {
 				break;
 		
 			case 29:
-				if($errorCode == 1 || $errorCode == 4) {
-					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;
-				} elseif( $errorCode == 2) {
+				if( $errorCode == 2) {
 					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid=32';
+				} else {
+					$url = JURI::base().'index.php?option=com_jumi&view=application&fileid='.$origen;
 				}
 				break;
 			case 27:
@@ -70,6 +70,10 @@ class errorClass {
 				break;
 			case 13:
 				$msg = JText::_('ERROR_REDEPTIONCODE_SECTION_NOEXITS');
+				$redirect = true;
+				break;
+			case 24:
+				$msg = JText::_('ERROR_MONTO_TRASPASO_EXEDIDO');
 				$redirect = true;
 				break;
 				
