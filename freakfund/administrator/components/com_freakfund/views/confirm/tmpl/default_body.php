@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 				"providerId"	: "<?php echo $envio->providerId; ?>",
 				"type"			: "<?php echo $envio->type; ?>",
 				"projectId" 	: "<?php echo $envio->projectId; ?>",
-				"token"			: "<?php echo $token; ?>___MALO"
+				"token"			: "<?php echo $token; ?>"
 			},
 			type: 'post'
 		});
