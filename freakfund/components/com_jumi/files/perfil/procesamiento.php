@@ -37,9 +37,6 @@ class procesamiento extends manejoImagenes {
 			case 'perfil_persona':
 				$data = $generales;
 				$data['Foto'] = $this->cargar_imagen($usuario->id, 400, 300, $_POST['daGr_Foto_guardada']);
-				if $data['Foto'] == false) {
-					
-				}
 				$data['users_id'] = $usuario->id;
 				$data['perfil_tipoContacto_idtipoContacto'] = 1;
 				$data['existe'] = $getDatosGuardados->existingUser($usuario->id);
