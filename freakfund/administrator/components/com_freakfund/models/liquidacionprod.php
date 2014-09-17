@@ -17,7 +17,6 @@ class liquidacionprodModelliquidacionprod extends JModelList
 		$query->token = JTrama::token();
 		$query->callback = JURI::base().'index.php?option=com_freakfund';
 		$query->errorCallback = JURI::base().'index.php?option=com_freakfund&task=errors';
-		$query->CPR = '2000000';
 		
 		$query->productorName = self::getProductorName($query->userId);
 

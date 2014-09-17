@@ -21,12 +21,12 @@ $datos = $this->items;
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SALDOPROD').': $<span class="number">'.($datos->CPR-$datos->cre).'</span>'; ?>
+			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_PROY_BALANCE').': $'.number_format($datos->balance,2); ?>
 		</td>
 	</tr>
 	<tr>
 		<td align="absmiddle">
-			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_SALDOPROY').': $<span class="number">'.$datos->budget.'</span>'; ?>
+			<?php echo JText::_('COM_FREAKFUND_LIQUIDACIONPROD_BODY_PROY_BUDGET').': $'.number_format($datos->budget,2); ?>
 		</td>
 	</tr>
 	
