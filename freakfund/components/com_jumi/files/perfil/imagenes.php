@@ -5,7 +5,7 @@ class manejoImagenes {
 		if($_FILES["daGr_Foto"]['error'] == 0) {
 			
 			$tipo = $_FILES["daGr_Foto"]['type'];
-			$validaciones = ( ($tipo === 'image/jpeg') || ($tipo === 'image/gif') || ($tipo === 'image/png') );
+			$validaciones = (($tipo === 'image/jpeg') || ($tipo === 'image/gif') || ($tipo === 'image/png'));
 			
 			if($validaciones && getimagesize($_FILES["daGr_Foto"]["tmp_name"])) {
 				move_uploaded_file( $_FILES["daGr_Foto"]["tmp_name"], "images/fotoPerfil/".$usuario.".jpg");
@@ -16,6 +16,7 @@ class manejoImagenes {
 				
 			} else {
 				$respuesta = "images/fotoPerfil/default.jpg";
+				JFactory::getApplication()->enqueueMessage(JText::_('LBL_NO_ES_IMAGEN_QUEDA_DEFAULT'), 'notice');
 			}
 			
 		} elseif($_FILES["daGr_Foto"]['error'] == 4 && $existeFoto == '') {
