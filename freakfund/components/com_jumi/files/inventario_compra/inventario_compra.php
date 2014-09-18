@@ -16,7 +16,7 @@ jimport("trama.error_class");
 require_once 'libraries/trama/libreriasPP.php';
 //si proyid no esta vacio traigo los datos del Producto del servicio del middleware
 $token 			= JTrama::token();
-$input 			= JFactory::getApplication()->input;
+$input 			= $app->input;
 $idMiddleware   = UserData::getUserMiddlewareId($usuario->id);
 $usuario->data	= UserData::getUserBalance($idMiddleware->idMiddleware);
 $proyid			= $input->get("proyid",0,"int");
@@ -42,7 +42,9 @@ if($confirm == 0){
 	$action		= MIDDLE.PUERTO.TIMONE.'project/consumeUnits';
 }
 
-$detalleInversion =  JTrama::getInvestmentDetail($response);
+if($response != 0){
+	$detalleInversion =  JTrama::getInvestmentDetail($response);
+}
 errorClass::manejoError($error, $from, $proyid);
 ?>
 <script>
