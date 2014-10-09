@@ -338,7 +338,7 @@ class JTrama
 			foreach ($data as $key => $value) {
 				$value = JTrama::formatDatosProy($value);
 			}
-		} 
+		}
 
 		return $data;
 	}
