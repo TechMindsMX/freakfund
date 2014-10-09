@@ -24,7 +24,7 @@ $datosUsuario	= UserData::getUserBalance($idMiddleware->idMiddleware);
 
 $action 		= '#';
 
-exit;
+
 ?>
 <script language="JavaScript">
 	jQuery(document).ready(function() {
