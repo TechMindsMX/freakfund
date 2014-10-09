@@ -110,7 +110,7 @@ class CUrlHelper
 		// Default avatar
 		if (empty($file) || !JFile::exists(JPATH_ROOT.'/'.$file))
 		{	
-			if($hostr->getHost() == '192.168.0.122') {
+			if($hostr->getHost() == MIDDLE) {
 				$uri = $file;
 				return $uri;
 			} else {

@@ -181,7 +181,12 @@ class plgUserFFAccount extends JPlugin
 			->values($values);
 
 		$db->setQuery( $query );
-		$db->query();
+		$result = $db->query();
+
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,query=>$query,result=>$result));
+		new DebugClass($dData);
+
 	}
 	
 	function sendToMiddle ($email ,$name) {
@@ -202,6 +207,10 @@ class plgUserFFAccount extends JPlugin
 		$server_output = curl_exec ($ch);
 		
 		curl_close ($ch);
+
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,envio=>array($email,$name),response=>$server_output));
+		new DebugClass($dData);
 		
 		return $server_output;
 	}

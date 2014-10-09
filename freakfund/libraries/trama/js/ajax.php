@@ -116,8 +116,7 @@ switch ($fun) {
 		break;
 		
 	case 5://Obtiene los datos del usuario para la alta de número de cuenta
-		$respuesta = file_get_contents('http://192.168.0.122:8081/timone/services/user/getByAccount/'.$_POST['clabe']);
-		//$respuesta = file_get_contents(MIDDLE.PUERTO.TIMONE.'user/getByAccount/'.$_POST['clabe']);
+		$respuesta = file_get_contents(MIDDLE.PUERTO.TIMONE.'user/getByAccount/'.$_POST['clabe']);
 		echo $respuesta;
 		break;
 	

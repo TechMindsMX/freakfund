@@ -93,8 +93,7 @@ if( $datos['resumen'] === 'true' && !is_null($datos['error']) ){
 	});
 </script>
 <?php
-//$url = MIDDLE.PUERTO.TIMONE.'account/transferFundsFromTrama';
-$url  = 'http://192.168.0.122:8081/timone/services/account/transferFundsFromTrama';
+$url = MIDDLE.PUERTO.TIMONE.'account/transferFundsFromTrama';
 ?>
 <form id="formstatus" action="<?php echo $url; ?>" method="POST" enctype="application/x-www-form-urlencoded">
 	<input type="hidden" id="callback" name="callback" />
