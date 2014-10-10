@@ -32,8 +32,6 @@ define('JPATH_MANIFESTS',		JPATH_ADMINISTRATOR . '/manifests');
 
 $middle = "api-stage.timone.mx";
 $puertoTimOne =  "";
-$middle = "127.0.0.1";
-$puertoTimOne =  ":8009";
 
 $controllerTimOne =  "/timone/services/";
 
