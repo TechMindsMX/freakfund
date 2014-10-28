@@ -506,16 +506,24 @@ class JTrama
 		//Ingresos
 		$objAgrupado['totFundin'] 		= 0;
 		$objAgrupado['porFundin'] 		= 0;
+
 		$objAgrupado['totInvers'] 		= 0;
 		$objAgrupado['porInvers'] 		= 0;
-		$objAgrupado['totVentas'] 		= 0;
+
+        $objAgrupado['totVentas'] 		= 0;
 		$objAgrupado['porVentas'] 		= 0;
-		$objAgrupado['totPatroc'] 		= 0;
-		$objAgrupado['toApoDona'] 		= 0;
-		$objAgrupado['totalOtro']		= 0;
-		$objAgrupado['toAporCap'] 		= 0;
-		$objAgrupado['totalPorVentas'] 	= 0;
-		$objAgrupado['totTransTrama']	= 0;
+
+        $objAgrupado['totPatroc'] 		= 0;
+
+        $objAgrupado['toApoDona'] 		= 0;
+
+        $objAgrupado['totalOtro']		= 0;
+
+        $objAgrupado['toAporCap'] 		= 0;
+
+        $objAgrupado['totalPorVentas'] 	= 0;
+
+        $objAgrupado['totTransTrama']	= 0;
 		
 		foreach ($objAgrupado['ingresos'] as $key => $value) {
 			switch ($value->description) {

@@ -93,6 +93,14 @@ $value = $this->items;
 				</tr>
 				<?php
 				}
+                if($value['totTransTrama'] != 0){
+                    ?>
+                    <tr>
+                        <td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_PORTRANSFERENCIATRAMA'); ?></td>
+                        <td class="cantidades">$<span class="number"><?php echo $value['totTransTrama']; ?></span></td>
+                    </tr>
+                <?php
+                }
 				?>
 				<tr class="total">
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_TOTAL'); ?></td>

@@ -29,23 +29,38 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 		jQuery('#clabe').change(function(){
 			var clabe = this.value;
 			var salir = false;
-			clabe = clabe.toUpperCase();
+
+            clabe = clabe.toUpperCase();
+
 			var identificador = clabe.substring(0,1);
 			var caracteresClabe = clabe.length;
-			
-			
+
+            var clabe = jQuery('#clabe').val();
+            var numerosdecuneta = jQuery('#clabe').parents('form').find('div.numCuenta');
+
+            jQuery.each(numerosdecuneta,function(k,v){
+                texto = jQuery(v).html();
+                texto2 = texto.split('					');
+                texto3 = texto2[1].split('				');
+                console.log(texto3[0] == clabe);
+            });
+
 			jQuery(this).val(clabe.toUpperCase());
-			
 			if(identificador == 'U' && caracteresClabe == 11){
-				jQuery('.fila').each(function(){
-				    if( parseInt(jQuery(this).find('.numCuenta').html()) == parseInt(clabe) ){
-				    	alert('<?php echo JText::_("ALTA_TRASPASOS_MSG_ALREADY_SAVED"); ?>');
-				    	salir = true;
-				    }
-				});
+                var numerosdecuneta = jQuery('#clabe').parents('form').find('div.numCuenta');
+
+                jQuery.each(numerosdecuneta,function(k,v){
+                    texto = jQuery(v).html();
+                    texto2 = texto.split('					');
+                    texto3 = texto2[1].split('				');
+                    if(texto3[0] == clabe){
+                        salir = true;
+                    }
+                });
 				
 				if( salir ){
-					jQuery('#socio').val('');
+                    alert('El número de cuenta ya existe');
+                    jQuery('#socio').val('');
 					jQuery('#email').val('');
 					jQuery('#clabe').val('');
 					jQuery('#guardar').attr('disabled', 'disabled');
@@ -116,8 +131,13 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			var action 	= 'guardar';
 			var message = '<?php echo JText::_('ALTA_TRASPASOS_MSG_GUARDAR'); ?>';
 			var div		= jQuery(this).parent().parent();
-			
-			pintadivConfirmacion(nombre, monto, email, numCta, action, message, div);
+            var numericReg = /^\d*[0-9](|.\d*[0-9]|,\d*[0-9])?$/;
+
+            if(monto == '' || monto == 0 || !numericReg.test(monto)){
+                alert('Verifica el valor del monto');
+            }else{
+                pintadivConfirmacion(nombre, monto, email, numCta, action, message, div);
+            }
 		});
 		
 		jQuery('#Cancelar').click(function(){
@@ -395,7 +415,7 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
 			<div><input type="text" name="clabe" id="clabe"  class="altavalidation validate[custom[numcuenta]]" maxlength="11" placeholder="Número de cuenta"/></div>
 			<div><input type="text" name="socio" id="socio" readonly="readonly" placeholder="Nombre del socio" /></div>
 			<div><input type="text" name="email" id="email" readonly="readonly" placeholder="Email"/></div>
-			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation" placeholder="Monto maximo"/></div>
+			<div><input type="text" name="maxMount" id="maxMount" class="altavalidation validate[required, custom[number]]" placeholder="Monto maximo"/></div>
 			<div style="width: 170px;">
 				<input type="button" class="button" id="guardar" value="<?php echo JText::_('LBL_GUARDAR'); ?>" disabled="disabled" />
 			</div>
