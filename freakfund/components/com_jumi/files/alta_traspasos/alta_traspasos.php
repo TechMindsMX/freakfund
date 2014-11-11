@@ -46,14 +46,17 @@ $userdata		= UserData::getUserBalance($userId->idMiddleware);
             });
 
 			jQuery(this).val(clabe.toUpperCase());
+
 			if(identificador == 'U' && caracteresClabe == 11){
                 var numerosdecuneta = jQuery('#clabe').parents('form').find('div.numCuenta');
+                var validacionClabe = jQuery('#clabe').val();
 
                 jQuery.each(numerosdecuneta,function(k,v){
                     texto = jQuery(v).html();
                     texto2 = texto.split('					');
                     texto3 = texto2[1].split('				');
-                    if(texto3[0] == clabe){
+
+                    if(texto3[0] == validacionClabe){
                         salir = true;
                     }
                 });
