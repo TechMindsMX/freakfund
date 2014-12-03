@@ -50,8 +50,8 @@ switch ($fun) {
 		break;
 		
 	case 2://Sepomex Trae los datos dado un código postal
-		// $url = MIDDLE.PUERTO.TIMONE."/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
-		$url = MIDDLE.":7272/sepomex-middleware/rest/sepomex/get/".$_POST["cp"];
+		$url = SEPOMEX.$_POST["cp"];
+
 		echo file_get_contents($url);
 		break;
 		

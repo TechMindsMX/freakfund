@@ -4,6 +4,7 @@ defined('_JEXEC') or die;
 
 jimport('trama.class');
 jimport('trama.usuario_class');
+jimport('trama.debug');
 
 class plgUserFFAccount extends JPlugin
 {
@@ -110,7 +111,11 @@ class plgUserFFAccount extends JPlugin
 			// chequea que el usuario este activado y no este bloqueado y envia al middleware
 			if(!is_null($user->name)){
 				$this->savePerfilPersona($user);
-				$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked"; 
+				// Debug
+				$dData = implode("|", array('fecha'=>date('d-m-Y h:i:s'),'metodo'=>__METHOD__,'user'=>$user));
+				new DebugClass($dData);
+
+				$respuesta = (empty($user->activation) && ($user->block == 0)) ? $this->sendToMiddle($user->email,$user->name) : "blocked";
 				$this->saveUserMiddle(json_decode($respuesta),$user);
 			}
 		}
@@ -140,7 +145,11 @@ class plgUserFFAccount extends JPlugin
 			->insert($db->quoteName('perfil_persona'))
 			->columns($db->quoteName($columnas))
 			->values(implode(',',$values));
-			
+
+		// Debug
+		$dData = implode("|", array(fecha=>date('d-m-Y h:i:s'),metodo=>__METHOD__,query=>$query,result=>$datosUsuario->id));
+		new DebugClass($dData);
+
 		$db->setQuery( $query );
 		$db->query();
 

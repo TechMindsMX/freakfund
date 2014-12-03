@@ -33,6 +33,7 @@ $controllerTimOne =  "/timone/services/";
 define("MIDDLE", 'http://'.$middle);
 define("PUERTO", $puertoTimOne);
 define("TIMONE", $controllerTimOne);
+define("SEPOMEX", 'http://sepomex.trama.mx/sepomexes/');
 
 define("AVATAR", "media/trama_files/avatar");
 define("BANNER", "media/trama_files/banner");
