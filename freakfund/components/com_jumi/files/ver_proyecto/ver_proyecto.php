@@ -29,7 +29,7 @@
 	$document->addStyleSheet($pathJumi.'css/style.css');
 
 	$token = JTrama::token();
-?> 
+?>
 
 <script type="text/javascript" src="components/com_jumi/files/ver_proyecto/js/jquery.nivo.slider.js"></script>
 <script type="text/javascript" src="libraries/trama/js/raty/jquery.raty.js"></script>
@@ -389,6 +389,7 @@ function statusbar($data) {
 					</div>';
 			break;
 		case '6' OR '7' OR '10':
+				$calculo = ($data->totalIngresos == 0) ? 0 :($data->breakeven / $data->totalIngresos)*100;
 			$tmpl = '<div style="position:relative; height: 2em;">
 						<span class="statusbarFecha" style="left: 0%;">'.$data->fundStartDate.'</span>
 						<span class="statusbarFecha" style="left: '.($data->finanPorcentaje-3).'%;">'.$data->fundEndDate.'</span>
@@ -399,8 +400,8 @@ function statusbar($data) {
 					<span style="left: '.((((100-$data->finanPorcentaje)/2)+$data->finanPorcentaje)-3).'%;">'.JText::_("STATEMENT_INVESTMENT").'</span>
 					<div id="statusbar" style="background: linear-gradient(to right, 
 											#73cee4 0%,
-											#73cee4 '.(($data->breakeven / $data->totalIngresos)*100).'%,
-											#9CF '.((($data->breakeven / $data->totalIngresos)*100)).'%, 
+											#73cee4 '.$calculo.'%,
+											#9CF '.$calculo.'%,
 											#9CF 100%);">
 					</div>
 					<span id="markBE" style="left:'.$data->finanPorcentaje.'%;"></span>
