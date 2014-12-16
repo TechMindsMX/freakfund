@@ -138,6 +138,10 @@ $value = $this->items;
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toFeeTrama']; ?></span></td>
 				</tr>
 				<tr>
+					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_RETORNOS'); ?></td>
+					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toRetornos']; ?></span></td>
+				</tr>
+				<tr>
 					<td><?php echo JText::_('COM_ESTADO_RESULTADOS_DETALLE_COSTOS_VARIABLES').JText::_('COM_ESTADO_RESULTADOS_DETALLE_LVL_PROYECTADOS'); ?></td>
 					<td class="cantidades egresos">-$<span class="number"><?php echo $value['toCostVar']; ?></span></td>
 				</tr>

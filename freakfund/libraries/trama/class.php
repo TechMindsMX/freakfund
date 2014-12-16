@@ -498,7 +498,7 @@ class JTrama
 					break;
 			}			
 		}
-		
+
 		return $respuesta;
 	}
 	
@@ -577,7 +577,8 @@ class JTrama
 		$objAgrupado['toProduct'] 	= 0;
 		$objAgrupado['toCostFij'] 	= 0;
 		$objAgrupado['toFeeTrama'] 	= 0;
-		
+		$objAgrupado['toRetornos'] 	= 0;
+
 		foreach ($objAgrupado['egresos'] as $key => $value) {
 			switch ($value->description) {
 				case 'CAPITAL':
@@ -597,6 +598,13 @@ class JTrama
 					break;
 				case 'TRAMA_FEE':
 					$objAgrupado['toFeeTrama'] = $objAgrupado['toFeeTrama']+ $value->amount;
+					break;
+				case 'RDI':
+					$objAgrupado['toRetornos'] = $objAgrupado['toRetornos']+ $value->amount;
+					break;
+				case 'RDF':
+					$objAgrupado['toRetornos'] = $objAgrupado['toRetornos']+ $value->amount;
+					break;
 				default:
 					break;
 			}
@@ -607,10 +615,11 @@ class JTrama
 
 	public static function operacionesEstadoresult($objagrupado, $dataGral){
 		$objagrupado['resultadoIE'] 	= $objagrupado['totalIngresos']-$objagrupado['totalEgresos'];
-		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
-		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/($objagrupado['totalIngresos']==0?1:$objagrupado['totalIngresos']);
+		$objagrupado['porcVentas'] 		= ($objagrupado['totVentas'] + $objagrupado['toAporCap'])/($objagrupado['totalIngresos']== 0 ? 1 : $objagrupado['totalIngresos']);
+		$objagrupado['porcInver'] 		= ($objagrupado['totInvers'] + $objagrupado['totFundin'])/($objagrupado['totalIngresos']== 0 ? 1 : $objagrupado['totalIngresos']);
 		$objagrupado['fincol3'] 		= $objagrupado['resultadoIE'] * $objagrupado['porcVentas'];
-		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10;
+		$objagrupado['resultReden']		= $objagrupado['fincol3'] * 0.10; //TODO Revisar que significa este 0.1
+
 		$objagrupado['resultFinan']		= $objagrupado['totFundin'] * $dataGral->trf;
 		$objagrupado['resultInver']		= $objagrupado['totInvers'] * $dataGral->tri;
 		$objagrupado['retornos']	 	= $objagrupado['resultFinan'] + $objagrupado['resultInver'];
