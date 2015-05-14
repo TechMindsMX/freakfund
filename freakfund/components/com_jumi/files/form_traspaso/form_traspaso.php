@@ -40,7 +40,7 @@ if (isset($tx)) {
 	$params->tx			= UserData::getTxData($tx);
 }
 if ($params->from == 0 && $confirm == 0) formTraspaso($params, $app, $usuario);
-if ($confirm == 1) 					formConfirm($params, $app, $usuario);
+if ($confirm == 1) 					formConfirm($params, $app);
 if ($params->from == 29) 			formResumen($params);
 
 function formTraspaso($params, $app, $usuario) {
@@ -119,7 +119,7 @@ function formTraspaso($params, $app, $usuario) {
 <?php
 }
 
-function formConfirm($params, $app, $usuario) {
+function formConfirm($params, $app) {
 	
 	$action = $params->action;
 	
@@ -174,14 +174,8 @@ function formConfirm($params, $app, $usuario) {
 }
 
 function formResumen($params) {
-	$params->tx->id;
-	$idJoomlaSender = UserData::getUserJoomlaId($params->tx->sender);
-	$params->tx->senderData = UserData::getUserBalance($params->tx->sender);
-	$idJoomlaReceiver = UserData::getUserJoomlaId($params->tx->receiver);
-	$params->tx->receiverData = UserData::getUserBalance($params->tx->receiver);
-	$params->tx->receiver;
-	$params->tx->timestamp;
-	$params->tx->amount;
+	$params->tx->senderData = UserData::getUserBalance($params->tx->senderId);
+	$params->tx->receiverData = UserData::getUserBalance($params->tx->receiverId);
 
 	?>
 	<h2><?php echo JText::_('RESUMEN_TRASPASO'); ?></h2>
