@@ -8,7 +8,7 @@ $token			= JTrama::token();
 $callback		= JURI::base().'index.php?option=com_freakfund&task=projectlist';
 $errorCallback	= JURI::base().'index.php?option=com_freakfund&task=errors&error=projectlist';
 $datos 			= $this->items;
-$datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware;
+$datos->idMod	= userData::getUserMiddlewareId($usuario->id)->idMiddleware != '' ? userData::getUserMiddlewareId($usuario->id)->idMiddleware : 0;
 
 ?>
 	<tr>
