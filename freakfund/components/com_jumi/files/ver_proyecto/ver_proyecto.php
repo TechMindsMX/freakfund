@@ -339,7 +339,8 @@ function proInfo($data) {
 			$data->statusbarPorcentaje = ((($data->totalIngresos - $data->breakeven) * 100) / ($data->revenuePotential - $data->breakeven));
 			$data->finanPorcentaje = (($data->breakeven / $data->revenuePotential)*100);
 			$data->finanPorcentaje2 = $data->finanPorcentaje + 0.1;
-			
+
+			$data->trfFormateado = $data->trfFormateado + $data->triFormateado;
 			$data->trfFormateado = ($data->trfFormateado != null || $data->trfFormateado != 0) ? $data->trfFormateado.' %' : '0%';
 			$data->triFormateado = ($data->triFormateado != null || $data->triFormateado != 0) ? $data->triFormateado.' %' : '0%';
 

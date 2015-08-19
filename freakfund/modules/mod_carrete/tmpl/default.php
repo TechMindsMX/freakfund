@@ -115,6 +115,7 @@ jQuery(document).ready(function() {
 				break;
 			case 'apoyados':
 		 		foreach ($datos->items as $key => $value) {
+				    $value->trfFormateado = $value->trfFormateado + $value->triFormateado;
 		 			$value->trfFormateado = ($value->trfFormateado != null || $value->trfFormateado != 0) ? $value->trfFormateado.'%' : 'NA';
 		 			$value->triFormateado = ($value->triFormateado != null || $value->triFormateado != 0) ? $value->triFormateado.'%' : 'NA';
 					echo '<li>

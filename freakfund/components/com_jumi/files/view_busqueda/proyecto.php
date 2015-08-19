@@ -235,7 +235,8 @@ function pageselectCallback (page_index, jq) {
 		var breakeven = members[i].breakeven != null ? members[i].breakeven : " ";
 		var recaudado = members[i].balance != null ? members[i].balance : " ";
 		var porcentajeRecaudado = members[i].balance != null ? ((members[i].balance/members[i].breakeven)*100).toFixed(2) : 0;
-		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " "; 
+		var cierreFinanciamiento = members[i].fundEndDate != null ? members[i].fundEndDate : " ";
+		members[i].trfFormateado = members[i].trfFormateado + members[i].triFormateado;
 		var trfFormateado = (members[i].trfFormateado != null && members[i].trfFormateado != 0) ? members[i].trfFormateado+"%" : "0%";
 		var triFormateado = (members[i].triFormateado != null && members[i].triFormateado != 0) ? members[i].triFormateado+"%" : "0%";
 		var cierrePresentacion = members[i].premierEnd != null ? members[i].premierEnd : " ";
